@@ -1,2 +1,0 @@
-# kdesrc-build-setup
-
