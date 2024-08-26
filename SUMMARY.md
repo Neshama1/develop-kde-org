@@ -1,7 +1,6 @@
 # Table of contents
 
-* [README](README.md)
-* [content](content/README.md)
+* [content](README.md)
   * [Design](content/design.md)
   * [Develop](content/develop.md)
   * [Distribute](content/distribute.md)
@@ -209,6 +208,11 @@
     * [Contribute to the documentation](content/docs/contribute/README.md)
       * [Formatting your tutorial](content/docs/contribute/formatting.md)
       * [Styling your tutorial](content/docs/contribute/style.md)
+    * [About](content/docs/about/README.md)
+      * [Readme](content/docs/about/readme.md)
+      * [License](content/docs/about/license/README.md)
+        * [Creative Commons Attribution-ShareAlike 4.0 International](content/docs/about/license/creative-commons-attribution-sharealike-4.0-international.md)
+        * [GNU General Public License 3.0 or later](content/docs/about/license/gnu-general-public-license-3.0-or-later.md)
   * [frameworks](content/frameworks/README.md)
     * [Breeze Icons](content/frameworks/breeze-icons.md)
     * [Kirigami](content/frameworks/kirigami.md)
