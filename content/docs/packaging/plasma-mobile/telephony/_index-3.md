@@ -1,28 +1,30 @@
 ---
 title: QML declarative plugin layer
-description: KDE Telephony stack
 weight: 4
 SPDX-FileCopyrightText: 2021 Alexey Andreyev <aa13q@ya.ru>
 SPDX-License-Identifier: CC-BY-SA-4.0
 aliases:
   - /docs/plasma-mobile/telephony/qml-declarative-plugin-layer/
+description: KDE Telephony stack
 ---
+
+# QML declarative plugin layer
 
 [kde-telephony-plugin-declarative](https://invent.kde.org/plasma-mobile/plasma-dialer/-/tree/master/kde-telephony-plugin-declarative) — `org.kde.telephony` QML plugin to work with the telephony daemon D-Bus interfaces.
 
-The plugin provides QML interfaces to all the session-level D-BUS telephony daemon interfaces (See also: [D-Bus APIs of the session-side daemons](../session-daemon-userland-dbus-ipc-level#daemons))
+The plugin provides QML interfaces to all the session-level D-BUS telephony daemon interfaces (See also: [D-Bus APIs of the session-side daemons](session-daemon-userland-dbus-ipc-level/#daemons))
 
 There's no need to split it into several parts like Modem Daemon and KDE Telephony Daemon, since the plugin is not KDE-specific and could use any implementation that follows the appropriate XML D-Bus API description.
 
 Work-in-Progress.
 
-### Getting started
+#### Getting started
 
 Minimal iteration could contain these packages:
 
-+ **kde-telephony-meta** (D-Bus API descriptions)
-+ **modem-daemon** (calls and history) — provides d-bus adaptor according to *kde-telephony-meta*
-+ **kde-telephony-plugin-declarative** (QML plugin) — provides d-bus interface to *kde-telephony-meta*
+* **kde-telephony-meta** (D-Bus API descriptions)
+* **modem-daemon** (calls and history) — provides d-bus adaptor according to _kde-telephony-meta_
+* **kde-telephony-plugin-declarative** (QML plugin) — provides d-bus interface to _kde-telephony-meta_
 
 After building these packages and running `/usr/lib/libexec/modem-daemon` via `/etc/xdg/autostart/org.kde.modem.daemon.desktop` you should be able to play with USSD via QML interfaces like this:
 
@@ -64,18 +66,17 @@ Item {
 
 ```
 
-The USSD is probably the simplest part of the API to start with. The same logic could also be found in the *plasma-dialer* project. Feel free to provide feedback via the issues list of the appropriate repositories.
+The USSD is probably the simplest part of the API to start with. The same logic could also be found in the _plasma-dialer_ project. Feel free to provide feedback via the issues list of the appropriate repositories.
 
-### Future Work
+#### Future Work
 
 In theory, it could be added to the Plasma Phone Components repo, since the current ModeManagerQt QML plugin is there right now.
 
 After that, the next things could be ported to these plugins:
 
-+ The part of the Plasma Phone Components called [mmplugin](https://invent.kde.org/plasma/plasma-phone-components/-/tree/master/mmplugin) could be ported to Modem Daemon (after it will be ready; when `SignalIndicator` API will be ported here).
+* The part of the Plasma Phone Components called [mmplugin](https://invent.kde.org/plasma/plasma-phone-components/-/tree/master/mmplugin) could be ported to Modem Daemon (after it will be ready; when `SignalIndicator` API will be ported here).
+* The part of the [SpaceBar](https://invent.kde.org/plasma-mobile/spacebar) (SMS/MMS Application for Plasma Mobile):
+  * Not related to KDE (MMQt-only) could be ported to Modem Daemon
+  * Related to KDE (contacts and avatars) could be ported to KDE Telephony Daemon
 
-+ The part of the [SpaceBar](https://invent.kde.org/plasma-mobile/spacebar) (SMS/MMS Application for Plasma Mobile):
-    + Not related to KDE (MMQt-only) could be ported to Modem Daemon
-    + Related to KDE (contacts and avatars) could be ported to KDE Telephony Daemon
-
-As a result, any [KDE telephony-related application](../kde-application-layer) should be able to reuse the introduced Qt/QML declarative library.
+As a result, any [KDE telephony-related application](kde-application-layer/) should be able to reuse the introduced Qt/QML declarative library.

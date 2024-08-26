@@ -1,2 +1,0 @@
-# qml-declarative-plugin-layer
-
