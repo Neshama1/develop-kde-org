@@ -1,2 +1,2 @@
-# content
+# KDE Developer Platform
 
