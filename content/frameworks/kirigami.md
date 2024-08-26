@@ -1,3 +1,5 @@
+# Kirigami
+
 ---
 layout: single
 scss: "scss/kirigami.scss"
