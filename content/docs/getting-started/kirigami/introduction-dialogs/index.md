@@ -2,13 +2,14 @@
 title: Adding a dialog
 group: introduction
 weight: 5
-description: >
-  Getting to grips with Kirigami dialogs.
 aliases:
   - /docs/getting-started/kirigami/introduction-overlaysheets/
+description: Getting to grips with Kirigami dialogs.
 ---
 
-## Making our app useful
+# Adding a dialog
+
+### Making our app useful
 
 We have a window, we have cards, and we have actions. Yet, we still need to find some way of inputting a name, description, and date of our choice.
 
@@ -18,7 +19,7 @@ Instead, we'll be using a dialog.
 
 ![Dialog appearing in the middle of the application](dialog.webp)
 
-## Opening the dialog
+### Opening the dialog
 
 ```qml
 pageStack.initialPage: Kirigami.ScrollablePage {
@@ -36,7 +37,7 @@ pageStack.initialPage: Kirigami.ScrollablePage {
 
 First we edit the action from the previous tutorial: just a [Kirigami.Action](docs:kirigami2;Action) that triggers the dialog's [open()](docs:qtquickcontrols;QtQuick.Controls.Popup::open) function.
 
-## Countdown-adding dialogs
+### Countdown-adding dialogs
 
 The new component we add is a [Kirigami.Dialog](docs:kirigami2;Dialog). Dialogs appear at the center of the window and can be used to provide extra information relevant to the current content. They can't be moved, but they adapt their own size to the window.
 
@@ -185,24 +186,25 @@ Lastly, we make sure to clear the text fields by setting their [text](https://do
 
 Once we save our files and build our program, we'll be able to add our own custom countdowns! We can make one last touch to improve the interface, namely remove the dummy countdown we had in the previous lessons:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=26 lines=3 >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=26 lines=3 >\}}
 
 Secondly now that we have an actual date to play around with, we can calculate the time until said date:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=47 lines=4 >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=47 lines=4 >\}}
 
 And thirdly increase the window size so that we have more room for our new cards:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=9 lines=2 >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" start=9 lines=2 >\}}
 
 Much nicer.
 
-## Our app so far
+### Our app so far
 
 <details>
-<summary><b>Main.qml:</b></summary>
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" >}}
+<summary>Main.qml:</summary>
+
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" >\}}
 
 </details>
 

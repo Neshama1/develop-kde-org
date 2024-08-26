@@ -5,6 +5,8 @@ authors:
 SPDX-License-Identifier: CC-BY-SA-4.0
 group: windows
 weight: 3
-description: >
-  Learn how to package and publish your applications in the Microsoft Store
+description: Learn how to package and publish your applications in the Microsoft Store
 ---
+
+# Publish your app in the Microsoft Store
+

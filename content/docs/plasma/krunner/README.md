@@ -1,0 +1,2 @@
+# KRunner C++ Plugin
+

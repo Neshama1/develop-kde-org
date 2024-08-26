@@ -1,8 +1,10 @@
 ---
-title: "KDE on Windows"
-linkTitle: "Windows"
+title: KDE on Windows
+linkTitle: Windows
 weight: 3
-group: "packaging"
-description: >
-  Learn how to publish your applications for Windows
+group: packaging
+description: Learn how to publish your applications for Windows
 ---
+
+# KDE on Windows
+

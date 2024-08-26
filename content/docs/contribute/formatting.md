@@ -1,19 +1,20 @@
 ---
 title: Formatting your tutorial
-description: Get to know the tools needed to write your own tutorials.
 weight: 1
 authors:
- - SPDX-FileCopyrightText: 2023 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
+  - SPDX-FileCopyrightText: 2023 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
 SPDX-License-Identifier: CC-BY-SA-4.0
 group: contribute
+description: Get to know the tools needed to write your own tutorials.
 ---
 
-## Creating a new tutorial
+# Formatting your tutorial
+
+### Creating a new tutorial
 
 You accept that your contributions are licensed under the CC-BY-SA-4.0.
 
-Each page of the website is located in `content`, while documentation-specific pages are
-located in `content/docs`.
+Each page of the website is located in `content`, while documentation-specific pages are located in `content/docs`.
 
 To create a new tutorial, we use what the Hugo documentation calls a [branch bundle](https://gohugo.io/content-management/page-bundles/).
 
@@ -21,7 +22,7 @@ You will need to create a folder inside `content/docs`, for example, `content/do
 
 So you would be creating the following, for example:
 
-* **content/docs/getting-started/installation/_index.md**
+* **content/docs/getting-started/installation/\_index.md**
 
 To add new pages to the tutorial, you can then create individual Markdown files containing the name of the tutorial page. For example:
 
@@ -82,10 +83,10 @@ The minimum requirements for a page are:
 
 Other available options are:
 
-* `group:`, which lists sections with the same name under the same group. It can be seen in action in the [Kirigami tutorial](/docs/getting-started/kirigami), with the groups Introduction, Style, Components, and Advanced. The groups need to be listed in the `_index.md` file of the tutorial.
+* `group:`, which lists sections with the same name under the same group. It can be seen in action in the [Kirigami tutorial](../../../docs/getting-started/kirigami/), with the groups Introduction, Style, Components, and Advanced. The groups need to be listed in the `_index.md` file of the tutorial.
 * `aliases:`, which creates aliases that can be used to shorten links. This is useful when linking to that page from elsewhere, or to keep old links working when content is moved.
 
-## Hugo shortcodes
+### Hugo shortcodes
 
 There are some custom [shortcodes](https://gohugo.io/content-management/shortcodes/) that can be used to create more complex content.
 
@@ -93,15 +94,15 @@ They can be identified by their characteristic `{{</* */>}}`, which have HTML ta
 
 For readability, we add spaces between the `{{</* */>}}` and the tag, e.g. `{{</* myshortcode parameter="" */>}}`.
 
-Do *not* add spaces between the `{` and `<`, or between `>` and `}` when using shortcodes. In other words, don't do `{{ <myshortcode parameter=""> }}`.
+Do _not_ add spaces between the `{` and `<`, or between `>` and `}` when using shortcodes. In other words, don't do `{{ <myshortcode parameter=""> }}`.
 
 The most important shortcodes are as follows.
 
-### readfile
+#### readfile
 
 Displays the contents of a file and applies syntax highlighting to it. It has five parameters, two of which are mandatory and three optional:
 
-* `file` (mandatory) is the file to be displayed. If the file is in the [bundle](#creating-a-new-tutorial) of the content file you are writing, you can specify a relative path; otherwise, you need to specify an absolute path starting from the root of your project directory (namely `/content/docs`).
+* `file` (mandatory) is the file to be displayed. If the file is in the [bundle](formatting.md#creating-a-new-tutorial) of the content file you are writing, you can specify a relative path; otherwise, you need to specify an absolute path starting from the root of your project directory (namely `/content/docs`).
 * `highlight` (mandatory) is the language used for syntax highlighting.
 * `start` (optional) is the first line that should be displayed. By default this is 1, which means starting from the first line.
 * `lines` (optional) is how many lines should be displayed. By default this is 0, which displays all lines from **start** to the end of the file.
@@ -115,7 +116,7 @@ For example, in any content file you can write:
 
 which will be rendered as:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting_started/src/qml/Main.qml" highlight="qml" start=17 lines=9 emphasize="1-2 7" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/src/qml/Main.qml" highlight="qml" start=17 lines=9 emphasize="1-2 7" >\}}
 
 Since `/content/docs/getting-started/kirigami/introduction-getting_started/` is a bundle, to show the file `/content/docs/getting-started/kirigami/introduction-getting_started/index.md` you can also write as below and achieve the same result:
 
@@ -133,7 +134,7 @@ Commonly used highlighting options are:
 
 This shortcode is used once to display the file, so no closing tag is used.
 
-### snippet
+#### snippet
 
 Displays the contents of a **remote** file and applies syntax highlighting to it.
 
@@ -148,7 +149,7 @@ For example:
 
 ThreadWeaver belongs to the Frameworks group, so its `repo` value would be `frameworks/threadweaver`.
 
-The `file` *`helloworld.cpp`*, which we want to display, is located in `examples/HelloWorld/HelloWorld.cpp`.
+The `file` _`helloworld.cpp`_, which we want to display, is located in `examples/HelloWorld/HelloWorld.cpp`.
 
 The **part** requires special formatting added to the example code in the remote repository, namely:
 
@@ -167,7 +168,7 @@ The shortcode therefore is written like so:
 
 The last requirement for this shortcode to work is to add `download_file('group-name/repo-name', 'path/to/file.cpp')` to the Python script in `scripts/extract-plasma-applet-config-keys.py`, and then following the instructions in the [KDE Developer Repository](https://invent.kde.org/documentation/develop-kde-org).
 
-### alert
+#### alert
 
 Displays a block of text with optional title and background color.
 
@@ -185,29 +186,18 @@ The available colors are `info`, `success`, `warning`, and `error`.
 
 Usage suggestions:
 
-* Use `info` to display general information or additional content:
+*   Use `info` to display general information or additional content:
 
-  {{< alert title="Note" color="info" >}}
-  Text you want to display in the alert.
-  {{< /alert >}}
+    \{{< alert title="Note" color="info" >\}} Text you want to display in the alert. \{{< /alert >\}}
+*   Use `success` to display advice or important pieces of information, such as tips or best practices:
 
-* Use `success` to display advice or important pieces of information, such as tips or best practices:
+    \{{< alert title="Tip" color="success" >\}} Did you know that you can collapse the contents of an alert? \{{< /alert >\}}
+*   Use `warning` to warn the reader that a certain action can have dangerous results if misused:
 
-  {{< alert title="Tip" color="success" >}}
-  Did you know that you can collapse the contents of an alert?
-  {{< /alert >}}
+    \{{< alert title="Warning" color="warning" >\}} Be careful with what you are doing here! You have been warned! \{{< /alert >\}}
+*   Use `error` to display content that is of very high importance:
 
-* Use `warning` to warn the reader that a certain action can have dangerous results if misused:
-
-  {{< alert title="Warning" color="warning" >}}
-  Be careful with what you are doing here! You have been warned!
-  {{< /alert >}}
-
-* Use `error` to display content that is of very high importance:
-
-  {{< alert title="Important" color="error" >}}
-  This WILL make your machine explode! 💣
-  {{< /alert >}}
+    \{{< alert title="Important" color="error" >\}} This WILL make your machine explode! 💣 \{{< /alert >\}}
 
 In cases where your alert is too long and might disrupt the flow of the text, you can make it collapsible using [Markdown's details summary](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections).
 
@@ -220,14 +210,19 @@ This content was hidden!
 {{</* /alert */>}}
 ```
 
-{{< alert title="Tip" color="success" >}}
-<details>
-<summary>Click here to find more about this feature!</summary>
-This content was hidden!
-</details>
-{{< /alert >}}
+\{{< alert title="Tip" color="success" >\}}
 
-### rel/ref links
+<details>
+
+<summary>Click here to find more about this feature!</summary>
+
+This content was hidden!&#x20;
+
+</details>
+
+\{{< /alert >\}}
+
+#### rel/ref links
 
 Hugo provides the `relref` and `ref` shortcodes. Use them whenever you need to link to other pages or anchors.
 
@@ -237,7 +232,7 @@ These shortcodes allow linking directly to a certain file without needing to pas
 
 This would look like so:
 
-[This links to the Style Guidelines]({{< ref "style.md" >}})
+\[This links to the Style Guidelines]\(\{{< ref "style.md" >\}})
 
 The shortcode also works with anchors. For example, linking to an `anchor` in the `helloworld.md` file would be:
 
@@ -245,23 +240,23 @@ The shortcode also works with anchors. For example, linking to an `anchor` in th
 
 This would look like so:
 
-[This links to the #anchors section of the Style Guidelines]({{< ref "style.md#anchors" >}})
+\[This links to the #anchors section of the Style Guidelines]\(\{{< ref "style.md#anchors" >\}})
 
 Linking to an `anchor` in the current file can be done this way:
 
 `[This links to the #alert section of this page]({{</* #alert */>}})`
 
-[This links to the #alert section of this page]({{< ref "#alert" >}})
+\[This links to the #alert section of this page]\(\{{< ref "#alert" >\}})
 
 They also error out upon finding an invalid link, which protects you from merging broken links.
 
-Do *not* use `rel`/`relref` for the `content/hig/_index.md` and `content/docs/use/kirigami/*.md` pages, because they are translated and do not deal well with these shortcodes.
+Do _not_ use `rel`/`relref` for the `content/hig/_index.md` and `content/docs/use/kirigami/*.md` pages, because they are translated and do not deal well with these shortcodes.
 
 These shortcodes are used once to display the link, so no closing tag is used.
 
 You can read more about `rel`/`relref` in the [Hugo Documentation](https://gohugo.io/content-management/cross-references/).
 
-### installpackage
+#### installpackage
 
 We have a custom shortcode that can be used to list packages or commands that are specific to certain major distributions, the `{{</* installpackage */>}}` shortcode. This can be used at the beginning of a tutorial or page to make it convenient for the user to install the prerequisites for the project.
 
@@ -281,15 +276,9 @@ sudo dnf install cmake extra-cmake-modules qt5-qtbase-devel qt5-qtdeclarative-de
 
 Which looks like so:
 
-{{< installpackage
-  ubuntu="build-essential cmake extra-cmake-modules qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev kirigami2-dev libkf5i18n-dev gettext libkf5coreaddons-dev"
-  arch="base-devel extra-cmake-modules cmake qt5-base qt5-declarative qt5-quickcontrols2 kirigami2 ki18n kcoreaddons breeze"
-  opensuseCommand=`sudo zypper install --type pattern devel_C_C++
-sudo zypper install cmake extra-cmake-modules libQt5Core-devel libqt5-qtdeclarative-devel libQt5QuickControls2-devel kirigami2-devel ki18n-devel kcoreaddons-devel qqc2-breeze-style`
-  fedoraCommand=`sudo dnf groupinstall "Development Tools" "Development Libraries"
-sudo dnf install cmake extra-cmake-modules qt5-qtbase-devel qt5-qtdeclarative-devel qt5-qtquickcontrols2-devel kf5-kirigami2-devel kf5-ki18n-devel kf5-kcoreaddons-devel qqc2-breeze-style` >}}
+\{{< installpackage ubuntu="build-essential cmake extra-cmake-modules qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev kirigami2-dev libkf5i18n-dev gettext libkf5coreaddons-dev" arch="base-devel extra-cmake-modules cmake qt5-base qt5-declarative qt5-quickcontrols2 kirigami2 ki18n kcoreaddons breeze" opensuseCommand=`sudo zypper install --type pattern devel_C_C++ sudo zypper install cmake extra-cmake-modules libQt5Core-devel libqt5-qtdeclarative-devel libQt5QuickControls2-devel kirigami2-devel ki18n-devel kcoreaddons-devel qqc2-breeze-style` fedoraCommand=`sudo dnf groupinstall "Development Tools" "Development Libraries" sudo dnf install cmake extra-cmake-modules qt5-qtbase-devel qt5-qtdeclarative-devel qt5-qtquickcontrols2-devel kf5-kirigami2-devel kf5-ki18n-devel kf5-kcoreaddons-devel qqc2-breeze-style` >\}}
 
-## Add a line between shortcodes
+### Add a line between shortcodes
 
 We have tooling that parses through shortcodes.
 
@@ -315,7 +304,7 @@ This is the second alert. Notice the line between alerts.
 
 As a bonus, this improves readability.
 
-## Adding images
+### Adding images
 
 Images should be placed in a folder that has the same name as the Markdown file without the `.md` extension. This way, it is possible to link to the image without needing to specify its file path.
 
@@ -344,7 +333,7 @@ The available options for positioning the image using `class=` can be found in t
 
 Be careful not to leave empty attributes inside this shortcode, as this can lead to a parsing error by some of our tooling. Example: `{{</* figure src="image.png" caption="" */>}}`.
 
-## Images in separate sections
+### Images in separate sections
 
 Sometimes you'll need to display side-by-side images or images next to text for various reasons, like matching explanatory text to an example, comparing two images, for better use of space, or simply because it looks good. There are two shortcodes for this:
 
@@ -370,7 +359,7 @@ Your fancy text!
 {{</* /sections */>}}
 ```
 
-An example of the sections shortcode can be seen in [Kirigami Tutorial: Controls and interactive elements]({{< ref "components-controls.md" >}}).
+An example of the sections shortcode can be seen in \[Kirigami Tutorial: Controls and interactive elements]\(\{{< ref "components-controls.md" >\}}).
 
 Second, the `{{</* compare */>}}` shortcode. Use this only with images, to showcase bad and good behavior. You'll see this most commonly used in the HIG.
 
@@ -394,18 +383,18 @@ Do this instead!
 {{</* /compare */>}}
 ```
 
-An example of the compare shortcode can be seen in [Kirigami Tutorial: Actions based components]({{< ref "components-actions.md#global-drawer" >}}).
+An example of the compare shortcode can be seen in \[Kirigami Tutorial: Actions based components]\(\{{< ref "components-actions.md#global-drawer" >\}}).
 
-## Code blocks
+### Code blocks
 
 You can specify the language to be used to highlight code blocks written in Markdown by writing the language name after the three backticks, e.g.:
 
-~~~markdown
+````markdown
 ```cmake
 cmake -B build
 cmake --build build
 ```
-~~~
+````
 
 The most commonly used highlighting options are:
 
@@ -415,13 +404,13 @@ The most commonly used highlighting options are:
 * `python`
 * `ini`
 
-## Code formatting
+### Code formatting
 
 Use 4 spaces for source code files.
 
 Do not use tabs.
 
-## API links
+### API links
 
 Links to the [KDE API Documentation](https://api.kde.org) and the [Qt Documentation](https://doc.qt.io) can be generated as follows:
 
@@ -439,22 +428,22 @@ Whenever you need to link to the main page for the documentation of a KDE compon
 
 If the component you want to link to wasn't added to `scripts/doxygen_integration.py` yet, add it to the file and execute `python3 scripts/doxygen_integration.py`. After running the script, make sure to add the generated JSON files in the `_data/` folder and commit them together with your MR.
 
-### Examples
+#### Examples
 
- - ```markdown
-   [AbstractCard](docs:kirigami2;AbstractCard)
-   ```
- - ```markdown
-   [Kirigami.Units.devicePixelRatio](docs:kirigami2;Kirigami::Units::devicePixelRatio)
-   ```
- - ```markdown
-   [KMessageBox](docs:kwidgetsaddons;KMessageBox)
-   ```
- - ```markdown
-   [Label](docs:qtquickcontrols;QtQuick.Controls.Label)
-   ```
+* ```markdown
+  [AbstractCard](docs:kirigami2;AbstractCard)
+  ```
+* ```markdown
+  [Kirigami.Units.devicePixelRatio](docs:kirigami2;Kirigami::Units::devicePixelRatio)
+  ```
+* ```markdown
+  [KMessageBox](docs:kwidgetsaddons;KMessageBox)
+  ```
+* ```markdown
+  [Label](docs:qtquickcontrols;QtQuick.Controls.Label)
+  ```
 
-## White space
+### White space
 
 In the body of the article, separate special blocks (lists, code blocks, alerts, tips, warnings etc.) from normal text with an empty line.
 

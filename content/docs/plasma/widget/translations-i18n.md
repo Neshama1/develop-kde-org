@@ -1,27 +1,26 @@
 ---
-title: "Translations / i18n"
+title: Translations / i18n
 weight: 7
-description: >
-  Translate your widget
 aliases:
   - /docs/plasma/widget/translations-i18n/
+description: Translate your widget
 ---
 
-## ki18n
+# Translations / i18n
 
-[Ki18n](docs:ki18n) (**K**DE **i**nternationalizatio**n**) is the translation library for KDE. It has a [programmer's guide](docs:ki18n;prg_guide.html) which you can read, but we'll cover the basics here.
+### ki18n
 
+[Ki18n](docs:ki18n) (**K**DE **i**nternationalizatio**n**) is the translation library for KDE. It has a [programmer's guide](docs:ki18n;prg\_guide.html) which you can read, but we'll cover the basics here.
 
-## i18n()
+### i18n()
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 Translated strings need to be wrapped in the `i18n(...)` function. Note that single quotes `i18n('Test')` will be ignored by the tool that parses your code for all the translation strings. Always use double quotes `i18n("Test")`.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -35,20 +34,18 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Variables in i18n()
+### Variables in i18n()
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 The `i18n(...)` is an overloaded function which allows you to pass values into the translation `i18n(format, variable1, variable2)`. Just place `%1` where you want the first variable to be substituted, and `%2` where the second should go.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 Item {
@@ -57,17 +54,16 @@ Item {
     Plasmoid.toolTipSubText: i18n("%1 unread emails", unreadEmailCount)
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
-## Plural in i18n()
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< sections >}}
-{{< section-left >}}
+### Plural in i18n()
+
+\{{< sections >\}} \{{< section-left >\}}
 
 In English, a translated sentence is different when there's just 1 item from when there is 2 or more items. `i18np(...)` can be used in such a situation.
 
-An example from the [Ki18n docs](docs:ki18n;prg_guide.html) is:
+An example from the [Ki18n docs](docs:ki18n;prg\_guide.html) is:
 
 ```qml
 i18np("One image in album %2", "%1 images in album %2", numImages, albumName)
@@ -79,9 +75,9 @@ i18np("One image in album %2", "More images in album %2", numImages, albumName)
 
 Using `i18np(...)` can improve our previous example. When `unreadEmailCount` was `1`, the tooltip would have read `"1 unread emails"`.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 Item {
@@ -90,14 +86,12 @@ Item {
     Plasmoid.toolTipSubText: i18np("%1 unread email", "%1 unread emails", unreadEmailCount)
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
-## Translation Folder Structure
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< sections >}}
-{{< section-left >}}
-After we've wrapped all the messages in our code with `i18n(...)` calls, we then need to extract all the messages for our translators into a `template.pot` file which they can then create a `fr.po` for their French translations.
+### Translation Folder Structure
+
+\{{< sections >\}} \{{< section-left >\}} After we've wrapped all the messages in our code with `i18n(...)` calls, we then need to extract all the messages for our translators into a `template.pot` file which they can then create a `fr.po` for their French translations.
 
 We'll place the `template.pot` file under a `translate` folder inside the bundled package so that our users can easily translate our widget when they go poking into our code.
 
@@ -105,19 +99,16 @@ We'll also create a `merge.sh` script which will extract the messages from our c
 
 Lastly, we'll make a `build.sh` script to convert the `fr.po` text files into the binary `.mo` files which are needed for KDE to recognize the translations.
 
-{{< alert color="info" >}}
-The latest copy of my `merge.sh` and `build.sh` can be found here:
+\{{< alert color="info" >\}} The latest copy of my `merge.sh` and `build.sh` can be found here:
 
-* <a class="alert-link" href="https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge"><code>translate/merge.sh</code></a>
-* <a class="alert-link" href="https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build"><code>translate/build.sh</code></a>
-{{< /alert >}}
+* [`translate/merge.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge)
+* [`translate/build.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build) \{{< /alert >\}}
 
 A working example can be seen in the Tiled Menu widget:
 
 * [Zren/plasma-applet-tiledmenu/.../translate/](https://github.com/Zren/plasma-applet-tiledmenu/tree/master/package/translate)
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
 ```txt
 └── ~/Code/plasmoid-helloworld/
@@ -145,39 +136,31 @@ After running `build.sh` we should end up with:
         └── ...
 ```
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< /section-right >}}
-{{< /sections >}}
+### Install GetText
 
-
-## Install GetText
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 After we've wrapped all the messages in our code with `i18n(...)` calls, we then need to extract all the messages for our translators into a `template.pot` file.
 
 To do this, we need to install the `gettext` package.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
+
 ```bash
 sudo apt install gettext
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Generating template.pot
+### Generating template.pot
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 First thing we need to do in our `merge.sh` script, is list all files we wish to get translated in our widgets code.
 
-{{< alert color="info" >}}
-The latest copy of my complete `merge.sh` script <a class="alert-link" href="https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge">can be found here</a>.
-{{< /alert >}}
+\{{< alert color="info" >\}} The latest copy of my complete `merge.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge). \{{< /alert >\}}
 
 `DIR` is the directory (absolute path to `package/translate/`) since we may run the merge script from another directory.
 
@@ -189,9 +172,9 @@ Then we generate a `template.pot.new` using the `xgettext` command. After genera
 
 In [the complete `merge.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge#L32), we also parse the widget name in `metadata.desktop` first with `xgettext --language=Desktop` and `--join-existing` in the 2nd `xgettext` call.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/merge.sh</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+translate/merge.sh
 
 ```bash
 #!/bin/sh
@@ -233,24 +216,20 @@ sed -i 's/"Content-Type: text\/plain; charset=CHARSET\\n"/"Content-Type: text\/p
 sed -i 's/# SOME DESCRIPTIVE TITLE./'"# Translation of ${widgetName} in LANGUAGE"'/' "template.pot.new"
 sed -i 's/# Copyright (C) YEAR THE PACKAGE'"'"'S COPYRIGHT HOLDER/'"# Copyright (C) $(date +%Y)"'/' "template.pot.new"
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Updating template.pot
+### Updating template.pot
 
-{{< sections >}}
-{{< section-left >}}
-Continuing our `merge.sh` script, we then check to see if an older `template.pot` file exists.
+\{{< sections >\}} \{{< section-left >\}} Continuing our `merge.sh` script, we then check to see if an older `template.pot` file exists.
 
 If it does, we'll replace the `POT-Creation-Date` in the new file with the older creation date, then run the `diff` command to detect if there's been any changes. If there has been changes, we fix the `POT-Creation-Date` and overwrite the old `template.pot` file. To make the changes more noticeable, we also list the added/removed translation messages.
 
 If there hasn't been any changes, we simply delete the `template.pot.new` file.
 
-Lastly, we delete the `infiles.list` to clean things up.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/merge.sh</div>
+Lastly, we delete the `infiles.list` to clean things up. \{{< /section-left >\}} \{{< section-right >\}}
+
+translate/merge.sh
 
 ```bash
 if [ -f "template.pot" ]; then
@@ -285,20 +264,16 @@ fi
 rm "${DIR}/infiles.list"
 echo "[merge] Done extracting messages"
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Examining template.pot
+### Examining template.pot
 
-{{< sections >}}
-{{< section-left >}}
-Now that we've got a `template.pot`, let's take a look at it.
+\{{< sections >\}} \{{< section-left >\}} Now that we've got a `template.pot`, let's take a look at it.
 
-The messages we want to translate appear as `msgid "Show Thing"`, with the file it came from appearing in a comment in the line above. Underneath is an empty `msgstr ""` which is where the translator will place the translated messages.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/template.pot</div>
+The messages we want to translate appear as `msgid "Show Thing"`, with the file it came from appearing in a comment in the line above. Underneath is an empty `msgstr ""` which is where the translator will place the translated messages. \{{< /section-left >\}} \{{< section-right >\}}
+
+translate/template.pot
 
 ```python
 # Translation of helloworld in LANGUAGE
@@ -334,39 +309,32 @@ msgid_plural "%1 unread emails"
 msgstr[0] ""
 msgstr[1] ""
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## fr.po
+### fr.po
 
-{{< sections >}}
-{{< section-left >}}
-Now that we've got a `template.pot`, our translators can copy it and rename it to `fr.po`.
+\{{< sections >\}} \{{< section-left >\}} Now that we've got a `template.pot`, our translators can copy it and rename it to `fr.po`.
 
 We use `fr` since it is the locale code for French, which we'll be using later.
 
 A full list of locale codes [can be found on StackOverflow](https://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes#answer-28357857). Make sure you use underscores (`fr_CA`) instead of dashes (`fr-CA`) if the language you are translating is not reusable for the generic `fr` language.
 
-Translators can then start filling out the empty `msgstr ""` with translations.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/fr.po</div>
+Translators can then start filling out the empty `msgstr ""` with translations. \{{< /section-left >\}} \{{< section-right >\}}
+
+translate/fr.po
 
 ```python
 #: ../contents/configGeneral.qml
 msgid "Show notification"
 msgstr "Montrer les notifications"
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Merging updates into fr.po
+### Merging updates into fr.po
 
-{{< sections >}}
-{{< section-left >}}
-Our `merge.sh` currently only extracts messages into `template.pot`. We should next merge any new messages extracted for translation into our `fr.po` file.
+\{{< sections >\}} \{{< section-left >\}} Our `merge.sh` currently only extracts messages into `template.pot`. We should next merge any new messages extracted for translation into our `fr.po` file.
 
 We'll first filter the translate directory for `.po` files.
 
@@ -378,9 +346,9 @@ Afterwards, we use `sed` to replace the `LANGUAGE` placeholder with our current 
 
 When we're done, we overwrite the old `fr.po` with `fr.po.new`.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/merge.sh</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+translate/merge.sh
 
 ```bash
 #---
@@ -404,19 +372,14 @@ done
 
 echo "[merge] Done merging messages"
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Building .mo
+### Building .mo
 
-{{< sections >}}
-{{< section-left >}}
-Once our `fr.po` has been filled out, we can then convert it to a binary `.mo` file. So lets get started on our `build.sh` script.
+\{{< sections >\}} \{{< section-left >\}} Once our `fr.po` has been filled out, we can then convert it to a binary `.mo` file. So lets get started on our `build.sh` script.
 
-{{< alert color="info" >}}
-The latest copy of my complete `build.sh` script <a class="alert-link" href="https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build">can be found here</a>.
-{{< /alert >}}
+\{{< alert color="info" >\}} The latest copy of my complete `build.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build). \{{< /alert >\}}
 
 We start with the same code that we used in our `merge.sh` script to parse our `metadata.desktop` file and get the widget's namespace. We also reuse the same code to iterate the `.po` files.
 
@@ -424,10 +387,9 @@ Then we use another GetText command `msgfmt` to convert the `fr.po` file into a 
 
 We then make sure a `contents/locale/fr/LC_MESSAGES/` folder exists, creating it if it does not.
 
-Then we copy the `fr.mo` to the `LC_MESSAGES` folder, renaming it to `plasma_applet_com.github.zren.helloworld.mo`. Notice that we put `plasma_applet_` in front of the widget's namespace.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">translate/build.sh</div>
+Then we copy the `fr.mo` to the `LC_MESSAGES` folder, renaming it to `plasma_applet_com.github.zren.helloworld.mo`. Notice that we put `plasma_applet_` in front of the widget's namespace. \{{< /section-left >\}} \{{< section-right >\}}
+
+translate/build.sh
 
 ```bash
 #!/bin/sh
@@ -463,15 +425,12 @@ done
 
 echo "[build] Done building messages"
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Testing our translations
+### Testing our translations
 
-{{< sections >}}
-{{< section-left >}}
-First make sure you run our `build.sh` translation script.
+\{{< sections >\}} \{{< section-left >\}} First make sure you run our `build.sh` translation script.
 
 Next we need to install the language pack we want to test. We'll be testing with `fr_CA` (Canadian French).
 
@@ -481,9 +440,8 @@ Next we need to install the language pack we want to test. We'll be testing with
 
 Then we need to override the locale environment variables just for our `plasmoidviewer` instance. If you run the `locale` command, it should list all the environment variables available to override.
 
-In practice, we only need to override `LANG="fr_CA.UTF-8"` and another variable it didn't list `LANGUAGE="fr_CA:fr"`. If your widget is a clock, then you might also need to override `LC_TIME="fr_CA.UTF-8"`.
-{{< /section-left >}}
-{{< section-right >}}
+In practice, we only need to override `LANG="fr_CA.UTF-8"` and another variable it didn't list `LANGUAGE="fr_CA:fr"`. If your widget is a clock, then you might also need to override `LC_TIME="fr_CA.UTF-8"`. \{{< /section-left >\}} \{{< section-right >\}}
+
 ```bash
 sh package/translate/build.sh
 LANGUAGE="fr_CA:fr" LANG="fr_CA.UTF-8" plasmoidviewer -a package
@@ -506,22 +464,19 @@ LC_MEASUREMENT=en_CA.UTF-8
 LC_IDENTIFICATION=en_CA.UTF-8
 LC_ALL=
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Reusing other translations
+### Reusing other translations
 
-{{< sections >}}
-{{< section-left >}}
-While it is bad practice to link to private code, if you know another widget has translated a string, you can use `i18nd(domain, string, ...)` to use translations from that domain. Note that a widget's domain starts with `plasma_applet_`, and ends with the widget's `X-KDE-PluginInfo-Name`.
+\{{< sections >\}} \{{< section-left >\}} While it is bad practice to link to private code, if you know another widget has translated a string, you can use `i18nd(domain, string, ...)` to use translations from that domain. Note that a widget's domain starts with `plasma_applet_`, and ends with the widget's `X-KDE-PluginInfo-Name`.
 
 Eg: `plasma_applet_com.github.zren.helloworld`
 
 An example can be found in `org.kde.image`'s [main.qml](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/wallpapers/image/imagepackage/contents/ui/main.qml) which reuses the same code for the `org.kde.slideshow`.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
+
 ```qml
 CheckBox {
     text: i18nd("plasma_applet_org.kde.plasma.digitalclock", "Show date")
@@ -533,10 +488,7 @@ Button {
     text: i18nd("plasma_wallpaper_org.kde.image", "Open Wallpaper Image")
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

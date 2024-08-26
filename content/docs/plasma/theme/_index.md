@@ -1,8 +1,10 @@
 ---
-title: "Plasma Style tutorial"
+title: Plasma Style tutorial
 weight: 3
-description: >
-  Learn how to create a KDE Plasma Style.
 aliases:
   - /docs/plasma/theme/
+description: Learn how to create a KDE Plasma Style.
 ---
+
+# Plasma Style tutorial
+

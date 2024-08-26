@@ -2,13 +2,16 @@
 title: Using separate files
 group: introduction
 weight: 6
-description: >
-  Separating unwieldy code into different files, and attach signals to your components.
 aliases:
   - /docs/getting-started/kirigami/introduction-separatefiles/
+description: >-
+  Separating unwieldy code into different files, and attach signals to your
+  components.
 ---
 
-## Why and how
+# Using separate files
+
+### Why and how
 
 For the first time, we will be separating some of our components into their own QML files. If we keep adding things to `Main.qml`, it's going to quickly become hard to tell what does what, and we risk muddying our code.
 
@@ -20,9 +23,9 @@ Additionally, even when spreading code between multiple QML files, the amount of
 * storing QML files in a different directory under the same module
 * storing QML files in a different directory under a different module
 
-After the split, we will have [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) between each file, and [implementation details will be abstracted](https://en.wikipedia.org/wiki/Abstraction_(computer_science)), making the code more readable.
+After the split, we will have [separation of concerns](https://en.wikipedia.org/wiki/Separation\_of\_concerns) between each file, and [implementation details will be abstracted](https://en.wikipedia.org/wiki/Abstraction\_\(computer\_science\)), making the code more readable.
 
-### Storing QML files together with C++ files
+#### Storing QML files together with C++ files
 
 This consists of keeping the project's QML files together with C++ files in `src/`. This sort of structure would look like this:
 
@@ -40,7 +43,7 @@ kirigami-tutorial/
 
 This is what we did previously. In the above case, you would just need to keep adding QML files to the existing `kirigami-tutorial/src/CMakeLists.txt`. There's no logical separation at all, and once the project gets more than a couple of QML files (and C++ files that create types to be used in QML), the folder can quickly become crowded.
 
-### Storing QML files in a different directory under the same module
+#### Storing QML files in a different directory under the same module
 
 This consists of keeping all QML files in a separate folder, usually `src/qml/`. This sort of structure would look like this:
 
@@ -63,7 +66,7 @@ In practice, once the project gets more than a dozen QML files, while it won't c
 
 It will also break the concept of locality (localisation of dependency details), where you would keep the description of your dependencies in the same place as the dependencies themselves.
 
-### Storing QML files in a different directory under a different module
+#### Storing QML files in a different directory under a different module
 
 This consists of keeping all QML files in a separate folder with its own CMakeLists.txt and own separate QML module. This sort of structure would look like this:
 
@@ -87,21 +90,21 @@ Later on, it would be possible to create more folders with multiple QML files, a
 
 We will be using this structure in this tutorial.
 
-## Preparing CMake for the new files
+### Preparing CMake for the new files
 
 First, create the file `kirigami-tutorial/src/components/CMakeLists.txt` with the following contents:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/CMakeLists.txt" highlight="cmake" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/CMakeLists.txt" highlight="cmake" >\}}
 
-We create a new target called `kirigami-hello-components` and then turn it into a QML module using [ecm_add_qml_module()](https://api.kde.org/ecm/module/ECMQmlModule.html) under the import name `org.kde.tutorial.components` and add the relevant QML files.
+We create a new target called `kirigami-hello-components` and then turn it into a QML module using [ecm\_add\_qml\_module()](https://api.kde.org/ecm/module/ECMQmlModule.html) under the import name `org.kde.tutorial.components` and add the relevant QML files.
 
-Because the target is different from the executable, it will function as a different QML module, in which case we will need to do two things: make it *generate* code for it to work as a Qt plugin with [GENERATE_PLUGIN_SOURCE](https://api.kde.org/ecm/module/ECMQmlModule.html), and *finalize* it with [ecm_finalize_qml_module()](https://api.kde.org/ecm/module/ECMQmlModule.html). We then install it exactly like in previous lessons.
+Because the target is different from the executable, it will function as a different QML module, in which case we will need to do two things: make it _generate_ code for it to work as a Qt plugin with [GENERATE\_PLUGIN\_SOURCE](https://api.kde.org/ecm/module/ECMQmlModule.html), and _finalize_ it with [ecm\_finalize\_qml\_module()](https://api.kde.org/ecm/module/ECMQmlModule.html). We then install it exactly like in previous lessons.
 
-We needed to use [add_library()](https://cmake.org/cmake/help/latest/command/add_library.html) so that we can link `kirigami-hello-components` to the executable in the [target_link_libraries()](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) call in `kirigami-tutorial/src/CMakeLists.txt`:
+We needed to use [add\_library()](https://cmake.org/cmake/help/latest/command/add\_library.html) so that we can link `kirigami-hello-components` to the executable in the [target\_link\_libraries()](https://cmake.org/cmake/help/latest/command/target\_link\_libraries.html) call in `kirigami-tutorial/src/CMakeLists.txt`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/CMakeLists.txt" highlight="cmake" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/CMakeLists.txt" highlight="cmake" >\}}
 
-We also need to use [add_subdirectory()](https://cmake.org/cmake/help/latest/command/add_subdirectory.html) so CMake will find the `kirigami-tutorial/src/components/` directory.
+We also need to use [add\_subdirectory()](https://cmake.org/cmake/help/latest/command/add\_subdirectory.html) so CMake will find the `kirigami-tutorial/src/components/` directory.
 
 In the previous lessons, we did not need to add the `org.kde.tutorial` import to our `Main.qml` because it was not needed: being the entrypoint for the application, the executable would run the file immediately anyway. Since our components are in a separate QML module, the a new import in `kirigami-tutorial/src/Main.qml` is necessary, the same one defined earlier, `org.kde.tutorial.components`:
 
@@ -117,35 +120,35 @@ import org.kde.tutorial.components
 
 And we are ready to go.
 
-## Splitting Main.qml
+### Splitting Main.qml
 
 Let's take a look once again at the original `Main.qml`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-dialogs/Main.qml" highlight="qml" >\}}
 
 The custom delegate with `id: kountdownDelegate` can be split completely because it is already enveloped in a [QML Component type](docs:qtqml;QtQml.Component). We use a Component to be able to define it without needing to instantiate it; separate QML files work the same way.
 
 If we move the code to a separate files, then, there is no point in leaving it enveloped in a Component: we can split just the [Kirigami.AbstractCard](docs:kirigami2;AbstractCard) in the separate file. Here is the resulting `KountdownDelegate.qml`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/KountdownDelegate.qml" highlight="qml" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/KountdownDelegate.qml" highlight="qml" >\}}
 
 Our dialog with `id: addDialog` is not enveloped in a Component, and it is not a component that is visible by default, so the code can be copied as is into the `AddDialog.qml`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/AddDialog.qml" highlight="qml" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/AddDialog.qml" highlight="qml" >\}}
 
 With the code split, `Main.qml` thus becomes much shorter:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" >\}}
 
-We now have two extra QML files, `AddDialog.qml` and `KountdownDelegate`, and we need to find some way of using them in `Main.qml`. The way to add the contents of the new files to `Main.qml` is by *instantiating* them.
+We now have two extra QML files, `AddDialog.qml` and `KountdownDelegate`, and we need to find some way of using them in `Main.qml`. The way to add the contents of the new files to `Main.qml` is by _instantiating_ them.
 
 `AddDialog.qml` becomes `AddDialog {}`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" start=31 lines=3 >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" start=31 lines=3 >\}}
 
 `KountdownDelegate.qml` becomes `KountdownDelegate {}`:
 
-{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" start=47 lines=5 >}}
+\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/Main.qml" highlight="qml" start=47 lines=5 >\}}
 
 Most cases you have seen of a component started with uppercase and followed by brackets were instantiations of a QML component. This is why our new QML files need to start with an uppercase letter.
 

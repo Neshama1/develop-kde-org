@@ -1,30 +1,30 @@
 ---
-title: "Examples"
+title: Examples
 weight: 8
-description: >
-  Resizable popup, clock, bundle icon and other simple examples
 aliases:
   - /docs/plasma/widget/examples/
+description: Resizable popup, clock, bundle icon and other simple examples
 ---
 
-There are also several examples in the `plasma-framework` repo:  
-<https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets>
+# Examples
 
-## Configurable icon
+There are also several examples in the `plasma-framework` repo:\
+[https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets](https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets)
 
-{{< sections >}}
-{{< section-left >}}
+### Configurable icon
+
+\{{< sections >\}} \{{< section-left >\}}
 
 To get your panel icon to be configurable like the [Application Launcher widget](https://invent.kde.org/plasma/plasma-desktop/-/tree/master/applets/kickoff/package/contents/ui) we need to:
 
 * Create a new string config key (`plasmoid.configuration.icon`)
-* Set [`Plasmoid.icon`]({{< ref "properties.md#plasmoidicon" >}}) to `plasmoid.configuration.icon`
+* Set \[`Plasmoid.icon`]\(\{{< ref "properties.md#plasmoidicon" >\}}) to `plasmoid.configuration.icon`
 * Copy the icon selector control from the Application Launcher widget to a reusable `ConfigIcon.qml` file.
 * Add a `ConfigIcon` button to our `ConfigGeneral.qml` tab, and bind it to a `cfg_icon` property.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/config/main.xml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/config/main.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -39,9 +39,9 @@ To get your panel icon to be configurable like the [Application Launcher widget]
 </kcfg>
 ```
 
------
+***
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -53,9 +53,9 @@ Item {
 }
 ```
 
------
+***
 
-<div class="filepath">contents/ui/ConfigIcon.qml</div>
+contents/ui/ConfigIcon.qml
 
 ```qml
 import QtQuick 2.5
@@ -116,9 +116,9 @@ Button {
 }
 ```
 
------
+***
 
-<div class="filepath">contents/ui/ConfigGeneral.qml</div>
+contents/ui/ConfigGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -144,9 +144,9 @@ Item {
 }
 ```
 
------
+***
 
-<div class="filepath">contents/config/config.qml</div>
+contents/config/config.qml
 
 ```qml
 import QtQuick 2.0
@@ -160,19 +160,16 @@ ConfigModel {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Configurable panel widget width/height
+### Configurable panel widget width/height
 
-{{< sections >}}
-{{< section-left >}}
-While the user can resize the popup window temporarily with `Alt+RightClick+Drag`, it will reset when the user relogs. To allow the user to permanently configure the popup size in a panel widget, or the size of the compact view in the panel, we'll need a store the width/height in the config.
+\{{< sections >\}} \{{< section-left >\}} While the user can resize the popup window temporarily with `Alt+RightClick+Drag`, it will reset when the user relogs. To allow the user to permanently configure the popup size in a panel widget, or the size of the compact view in the panel, we'll need a store the width/height in the config.
 
 So we change to our hardcoded sizes:
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 Item {
@@ -186,7 +183,7 @@ Item {
 
 into this:
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 Item {
@@ -208,10 +205,9 @@ Then create a configuration form in `ui/configGeneral.qml`. We use [`SpinBox`](h
 
 Lastly we register the General config tab in `config/config.qml`.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 Item {
@@ -232,9 +228,9 @@ Item {
 }
 ```
 
------
+***
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -252,9 +248,9 @@ Item {
 </kcfg>
 ```
 
------
+***
 
-<div class="filepath">contents/ui/configGeneral.qml</div>
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -294,9 +290,9 @@ Item {
 }
 ```
 
------
+***
 
-<div class="filepath">contents/config/config.qml</div>
+contents/config/config.qml
 
 ```qml
 // config/config.qml
@@ -311,29 +307,24 @@ ConfigModel {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Time DataSource
+### Time DataSource
 
-{{< sections >}}
-{{< section-left >}}
-An extremely simple example of this can be found in the "fuzzy clock" widget in the `kdeplasma-addons` repo ([link](https://invent.kde.org/plasma/kdeplasma-addons/-/blob/master/applets/fuzzy-clock/package/contents/ui/main.qml)).
+\{{< sections >\}} \{{< section-left >\}} An extremely simple example of this can be found in the "fuzzy clock" widget in the `kdeplasma-addons` repo ([link](https://invent.kde.org/plasma/kdeplasma-addons/-/blob/master/applets/fuzzy-clock/package/contents/ui/main.qml)).
 
 The `new Date()` should be familiar if you come from a javascript background. We could use a Timer with the Date type, but we want to precisely sync all clock widgets so they all show the same time on all screens. This is where Plasma's DataEngines come in. They are used to share data between widgets. There are [various dataengines](https://invent.kde.org/plasma/plasma-workspace/-/tree/master/dataengines) for notifications, plugged in usb drives (hotplug), and event the weather data so it only has to fetch the data once to show it in all widgets on each screen.
 
 To use the "time" data engine, we use [`PlasmaCore.DataSource`](https://invent.kde.org/plasma/plasma5support/-/blob/master/src/declarativeimports/datasource.h) to connect to it. The "time" needs us to connect to our "Local" timezone. Once connected, it gives us a DateTime object we can access using `dataSource.data.Local.DateTime`. This property will update every 60000 milliseconds, or every 1 minute.
 
-<!-- TODO remove AlignmentInterval / Types.NoAlignment -->
-
 We also tell the data engine to align these updates to the next minute. If we want to modify this to update every second, we'd change the interval to `interval: 1000` (1 second), then remove the `intervalAlignment` assignment since there isn't an "AlignToSecond", just a [PlasmaCore.Types.NoAlignment](docs:plasma-framework;Plasma::Types::IntervalAlignment).
 
 A clock can then use Qt's `Qt.formatTime(currentDateTime)` to display the time in a human readable format. You can read more about that function on the Qt documentation for [`Qt.formatDateTime(...)`](http://doc.qt.io/qt-5/qml-qtqml-qt.html#formatDateTime-method).
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -376,56 +367,48 @@ Item {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Solar DataSource
+### Solar DataSource
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 Solar is part of the "time" dataengine. It provides the sun's [Azimuth](https://en.wikipedia.org/wiki/Azimuth), [Zenith](https://en.wikipedia.org/wiki/Zenith), and "Corrected Elevation" for a longitude and latitude at a specific time of day.
 
 * Install `plasma-sdk` then open the Plasma Engine Explorer.
 * Select the `time` dataengine.
-* Enter something like the following into the source name:  
-  `UTC-04:00|Solar|Latitude=43.68|Longitude=79.63|DateTime=2021-03-23T19:00:00`  
+* Enter something like the following into the source name:\
+  `UTC-04:00|Solar|Latitude=43.68|Longitude=79.63|DateTime=2021-03-23T19:00:00`\
   The above example is for Toronto, Canada.
 * Click "Request Source", then scroll down to the bottom to find the new data.
 
-Examples: 
+Examples:
 
-* The [EnvCanada Weather Source uses](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion_envcan.cpp#L733) the Solar dataengine to check if the "Corrected Elevation" [is below zero](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion_envcan.cpp#L1627) to start using nighttime icons.
+* The [EnvCanada Weather Source uses](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion\_envcan.cpp#L733) the Solar dataengine to check if the "Corrected Elevation" [is below zero](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion\_envcan.cpp#L1627) to start using nighttime icons.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
 [![](plasmaengineexplorer-solar.png)](plasmaengineexplorer-solar.png)
 
-| Type | Key | Value |
-|------|-----|-------|
-|`double`|`Azimuth`|69.6342657428925|
-|`double`|`Corrected Elevation`|-18.092120068676486|
-|`QDateTime`|`DateTime`|Tue Mar 23 19:00:00 2021|
-|`int`|`Offset`|UTC-04:00|
-|`QString`|`Timezone`|UTC-04:00|
-|`QString`|`Timezone Abbreviation`|UTC-04:00|
-|`QString`|`Timezone City`|UTC-04:00|
-|`double`|`Zenith`|108.10976492154272|
-{{< /section-right >}}
-{{< /sections >}}
+| Type                     | Key                     | Value                    |
+| ------------------------ | ----------------------- | ------------------------ |
+| `double`                 | `Azimuth`               | 69.6342657428925         |
+| `double`                 | `Corrected Elevation`   | -18.092120068676486      |
+| `QDateTime`              | `DateTime`              | Tue Mar 23 19:00:00 2021 |
+| `int`                    | `Offset`                | UTC-04:00                |
+| `QString`                | `Timezone`              | UTC-04:00                |
+| `QString`                | `Timezone Abbreviation` | UTC-04:00                |
+| `QString`                | `Timezone City`         | UTC-04:00                |
+| `double`                 | `Zenith`                | 108.10976492154272       |
+| \{{< /section-right >\}} |                         |                          |
+| \{{< /sections >\}}      |                         |                          |
 
+### Avoid widget resize on text change
 
+\{{< sections >\}} \{{< section-left >\}} We use [`TextMetrics`](https://doc.qt.io/qt-5/qml-qtquick-textmetrics.html) to calculate the size of the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) label when it is the widest/maximum value of `100%`. \{{< /section-left >\}} \{{< section-right >\}}
 
-## Avoid widget resize on text change
-
-{{< sections >}}
-{{< section-left >}}
-We use [`TextMetrics`](https://doc.qt.io/qt-5/qml-qtquick-textmetrics.html) to calculate the size of the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) label when it is the widest/maximum value of `100%`.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.4
@@ -491,10 +474,7 @@ Item {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

@@ -1,32 +1,28 @@
 ---
-title: "Configuration"
+title: Configuration
 weight: 6
-description: >
-  Adding user configured settings to your widget
 aliases:
   - /docs/plasma/widget/configuration/
+description: Adding user configured settings to your widget
 ---
 
-## Configuration Intro
+# Configuration
 
-{{< sections >}}
-{{< section-left >}}
+### Configuration Intro
+
+\{{< sections >\}} \{{< section-left >\}}
 
 Every widget by default has a configure action when you right click the widget called `MyWidget Settings...`. By default it will contain a form to set a global shortcut to activate your widget.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
 ![](configwindow.png)
 
-{{< /section-right >}}
-{{< /sections >}}
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### contents/config/main.xml
 
-## contents/config/main.xml
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 `main.xml` is where you define the properties that will be serialized into `~/.config/plasma-org.kde.plasma.desktop-appletsrc`. All properties will be accessible with `plasmoid.configuration.variableName` regardless of what group it's in.
 
@@ -39,9 +35,9 @@ Every widget by default has a configure action when you right click the widget c
 * `Path` is a string that is specially treated as a file-path. In particular paths in the home directory are prefixed with `$HOME` when being stored in the configuration file.
 * `StringList` for a comma separated list of Strings
 
-I've listed the more common use cases. More can be found in [KConfigXT's documentation]({{< ref "/docs/features/configuration/kconfig_xt" >}}).
+I've listed the more common use cases. More can be found in \[KConfigXT's documentation]\(\{{< ref "/docs/features/configuration/kconfig\_xt" >\}}).
 
----
+***
 
 I personally don't recommend using `Color` if you want to default to a color from the color scheme (eg: `PlasmaCore.ColorScope.textColor`). I would instead suggest using a `String` that is empty by default. You can then use the following in the QML:
 
@@ -57,9 +53,9 @@ PlasmaComponents.Label {
 }
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/config/main.xml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/config/main.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -93,20 +89,16 @@ PlasmaComponents.Label {
     </group>
 </kcfg>
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## contents/config/config.qml
+### contents/config/config.qml
 
-{{< sections >}}
-{{< section-left >}}
-`config.qml` is where we define the tabs in the configuration window.
+\{{< sections >\}} \{{< section-left >\}} `config.qml` is where we define the tabs in the configuration window.
 
-We import the `ConfigModel` and `ConfigCategory`, and define the tab name, icon, and qml file that will be loaded.
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/config/config.qml</div>
+We import the `ConfigModel` and `ConfigCategory`, and define the tab name, icon, and qml file that will be loaded. \{{< /section-left >\}} \{{< section-right >\}}
+
+contents/config/config.qml
 
 ```qml
 import QtQuick 2.0
@@ -125,15 +117,12 @@ ConfigModel {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## contents/ui/configGeneral.qml
+### contents/ui/configGeneral.qml
 
-{{< sections >}}
-{{< section-left >}}
-`configGeneral.qml` is where we can place all the checkboxes and textboxes.
+\{{< sections >\}} \{{< section-left >\}} `configGeneral.qml` is where we can place all the checkboxes and textboxes.
 
 Please note that your should not use `PlasmaComponents.*` controls in the config window, as those are styled and colored for the panel. The normal `QtQuick.Controls` are styled using your application window style + colors.
 
@@ -141,9 +130,9 @@ Please note that your should not use `PlasmaComponents.*` controls in the config
 
 ![](configgeneral.png)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -173,22 +162,20 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## configPage.cfg_variableName
+### configPage.cfg\_variableName
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 By default, all values are copied to the top level `Item` of the file prefixed with `cfg_` like `page.cfg_variableName`. This is so the user can hit discard or apply the changes. You will need to define each `cfg_` property so you can bind the value with a QML control.
 
 Note that you can use a property [alias](http://doc.qt.io/qt-5/qtqml-syntax-objectattributes.html#property-aliases) to a control's property like `checkBox.checked` or `textField.text`.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -206,18 +193,16 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## CheckBox - Boolean
+### CheckBox - Boolean
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 A [CheckBox](https://doc.qt.io/qt-5/qml-qtquick-controls2-checkbox.html) is used for boolean on/off values.
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="Bool">
@@ -225,9 +210,9 @@ A [CheckBox](https://doc.qt.io/qt-5/qml-qtquick-controls2-checkbox.html) is used
 </entry>
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -243,21 +228,18 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### SpinBox - Integer
 
-## SpinBox - Integer
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 A [SpinBox](https://doc.qt.io/qt-5/qml-qtquick-controls2-spinbox.html) is used for numbers.
 
 If you want decimal places, a [`QtQuick.Controls 1.0` SpinBox](https://doc.qt.io/qt-5/qml-qtquick-controls-spinbox.html) is a little easier to use than the `QtQuick.Controls 2.0` version. `QtQuickControls1` has a `SpinBox.decimals` to easily switch from an Integer `decimals: 0` to `decimals: 3` to represent a Real number (the `Double` data type).
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="Int">
@@ -265,9 +247,9 @@ If you want decimal places, a [`QtQuick.Controls 1.0` SpinBox](https://doc.qt.io
 </entry>
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -283,19 +265,16 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### SpinBox - Double/Real
 
-## SpinBox - Double/Real
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 If you want decimal places, a [`QtQuick.Controls 1.0` SpinBox](https://doc.qt.io/qt-5/qml-qtquick-controls-spinbox.html) is a little easier to use than the `QtQuick.Controls 2.0` version. `QtControls1` has a `SpinBox.decimals` property to easily switch from an Integer `decimals: 0` to `decimals: 3` to represent a Real number (the `Double` config data type).
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="Double">
@@ -305,9 +284,9 @@ If you want decimal places, a [`QtQuick.Controls 1.0` SpinBox](https://doc.qt.io
 
 If you really want to use `QtQuick.Controls 2.0`, look at Zren's [libconfig/SpinBox.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/SpinBox.qml) for an example on implementing the `decimals` property.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -324,19 +303,16 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### TextField - String/Text
 
-## TextField - String/Text
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 A [TextField](https://doc.qt.io/qt-5/qml-qtquick-controls2-textfield.html) is used for a single line of text. It can be used as a base for many other data types as well. You will also want to look at the base [TextInput](https://doc.qt.io/qt-5/qml-qtquick-textinput.html) for more properties.
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="String">
@@ -344,9 +320,9 @@ A [TextField](https://doc.qt.io/qt-5/qml-qtquick-controls2-textfield.html) is us
 </entry>
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -362,19 +338,16 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### TextArea - Multi-Line String/Text
 
-## TextArea - Multi-Line String/Text
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 A [TextArea](https://doc.qt.io/qt-5/qml-qtquick-controls2-textarea.html) is used for paragraphs of text. You will also want to look at the base [TextEdit](https://doc.qt.io/qt-5/qml-qtquick-textedit-members.html) for more properties.
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="String">
@@ -382,9 +355,9 @@ A [TextArea](https://doc.qt.io/qt-5/qml-qtquick-controls2-textarea.html) is used
 </entry>
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -400,19 +373,16 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### ColorButton - Color
 
-## ColorButton - Color
+\{{< sections >\}} \{{< section-left >\}}
 
-{{< sections >}}
-{{< section-left >}}
+KDE Frameworks has [`ColorButton`](https://api.kde.org/frameworks/kdeclarative/html/classorg\_1\_1kde\_1\_1kquickcontrols\_1\_1ColorButton.html) which provides a preview of the selected color and will open QtQuick's [`ColorDialog`](https://doc.qt.io/qt-5/qml-qtquick-dialogs-colordialog.html) for selecting a color.
 
-KDE Frameworks has [`ColorButton`](https://api.kde.org/frameworks/kdeclarative/html/classorg_1_1kde_1_1kquickcontrols_1_1ColorButton.html) which provides a preview of the selected color and will open QtQuick's [`ColorDialog`](https://doc.qt.io/qt-5/qml-qtquick-dialogs-colordialog.html) for selecting a color.
-
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="Color">
@@ -434,11 +404,11 @@ PlasmaComponents.Label {
 }
 ```
 
-Unfortunately KDE Framework's `ColorButton` doesn't easily support this pattern as it stores the value in a QML `color` property which will read the empty string and cast it as the default color `#000000` (black). I worked around this issue in the [No-Apply Control Library]({{< ref "#no-apply-control-library" >}})'s [`libconfig/ColorField.qml`](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/ColorField.qml). I used a `TextField` to store the value as a string, and displayed the default color scheme color as `placeholderText`.
+Unfortunately KDE Framework's `ColorButton` doesn't easily support this pattern as it stores the value in a QML `color` property which will read the empty string and cast it as the default color `#000000` (black). I worked around this issue in the \[No-Apply Control Library]\(\{{< ref "#no-apply-control-library" >\}})'s [`libconfig/ColorField.qml`](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/ColorField.qml). I used a `TextField` to store the value as a string, and displayed the default color scheme color as `placeholderText`.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -455,21 +425,18 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### FileDialog - Path
 
-## FileDialog - Path
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 When we need to store a filepath in the config, we should use the `Path` or `PathList` config type. It will substitute `/home/user/...` with `$HOME/...`. To properly layout the file selector, we need a `RowLayout` with a `TextField` and `Button` which opens a [`FileDialog`](https://doc.qt.io/qt-5/qml-qtquick-dialogs-filedialog.html). We can specify the default folder the dialog opens to with `FileDialog`'s [`shortcuts` property](https://doc.qt.io/qt-5/qml-qtquick-dialogs-filedialog.html#shortcuts-prop) (eg: `shortcuts.pictures`).
 
 Note that we place the `Kirigami.FormData.label` in the `RowLayout` as it is the direct child of `Kirigami.FormLayout`.
 
-<div class="filepath">contents/config/main.xml</div>
+contents/config/main.xml
 
 ```xml
 <entry name="variableName" type="Path">
@@ -477,9 +444,9 @@ Note that we place the `Kirigami.FormData.label` in the `RowLayout` as it is the
 </entry>
 ```
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -529,38 +496,30 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### IconDialog - Icon
 
-## IconDialog - Icon
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 [`KQuickAddons.IconDialog`](https://invent.kde.org/frameworks/kdeclarative/-/blob/master/src/qmlcontrols/kquickcontrolsaddons/icondialog.h) makes it easy to search and preview icons.
 
-See the [configurable icon example]({{< ref "examples.md#configurable-icon" >}}) for an example of [KQuickAddons.IconDialog](https://invent.kde.org/frameworks/kdeclarative/-/blob/master/src/qmlcontrols/kquickcontrolsaddons/icondialog.h) based on the Application Launcher's (aka kickoff) [icon selector code](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/ConfigGeneral.qml#L39-87).
+See the \[configurable icon example]\(\{{< ref "examples.md#configurable-icon" >\}}) for an example of [KQuickAddons.IconDialog](https://invent.kde.org/frameworks/kdeclarative/-/blob/master/src/qmlcontrols/kquickcontrolsaddons/icondialog.h) based on the Application Launcher's (aka kickoff) [icon selector code](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/ConfigGeneral.qml#L39-87).
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
-{{< /section-right >}}
-{{< /sections >}}
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### Assigning to plasmoid.configuration.varName
 
-
-## Assigning to plasmoid.configuration.varName
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 You can also assign directly to `plasmoid.configuration.variableName` if necessary in the configuration window or anywhere else in your widget. If you do this in the configuration page, you will skip the "apply" process and the property will be applied right away. I leave this up to the reader whether this is a pro or con.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/configGeneral.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -578,29 +537,26 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## Configuration Examples
+### Configuration Examples
 
 To learn by example, we can look at a couple widgets:
 
 * Application Launcher
-    * [`contents/config/main.xml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/config/main.xml)
-    * [`contents/config/config.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/config/config.qml)
-    * [`contents/ui/ConfigGeneral.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/ConfigGeneral.qml)
+  * [`contents/config/main.xml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/config/main.xml)
+  * [`contents/config/config.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/config/config.qml)
+  * [`contents/ui/ConfigGeneral.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/ConfigGeneral.qml)
 * Task Manager
-    * [`contents/config/main.xml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/config/main.xml)
-    * [`contents/config/config.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/config/config.qml)
-    * [`contents/ui/ConfigAppearance.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/ui/ConfigAppearance.qml)
-    * [`contents/ui/ConfigBehavior.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/ui/ConfigBehavior.qml)
+  * [`contents/config/main.xml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/config/main.xml)
+  * [`contents/config/config.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/config/config.qml)
+  * [`contents/ui/ConfigAppearance.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/ui/ConfigAppearance.qml)
+  * [`contents/ui/ConfigBehavior.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/taskmanager/package/contents/ui/ConfigBehavior.qml)
 
+### No-Apply Control Library
 
-## No-Apply Control Library
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 Zren has written a few files that apply the above pattern of skipping "Apply" and updating right after you change the value.
 
@@ -609,18 +565,18 @@ Zren has written a few files that apply the above pattern of skipping "Apply" an
 * [libconfig/CheckBox.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/CheckBox.qml) for on/off booleans values.
 * [libconfig/ColorField.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/ColorField.qml) for use with a `String` or `Color` config data type. If you use use a `String` data type, you can treat an empty string as a certain color theme color. Eg:
 * [libconfig/ComboBox.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/ComboBox.qml) is useful for creating enums using the `String` config data type. KConfig comes with a enum datatype as well, but you have to either use hardcoded integers (with comments), or [declare the enum](https://stackoverflow.com/a/48460159/947742) in your QML code and keep it in sync. String comparison is less efficient but is easier to program with.
-    * [FontFamily.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/FontFamily.qml) inherits `ComboBox.qml` and is populated with all available fonts.
+  * [FontFamily.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/FontFamily.qml) inherits `ComboBox.qml` and is populated with all available fonts.
 * [libconfig/IconField.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/IconField.qml) based on the Application Launcher icon selector.
 * [libconfig/RadioButtonGroup.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/RadioButtonGroup.qml) takes a similar model as `ComboBox.qml` but will display the options as [`RadioButton`](https://doc.qt.io/qt-5/qml-qtquick-controls2-radiobutton.html).
 * [libconfig/SpinBox.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/SpinBox.qml) for Integer or Real numbers.
 * [libconfig/TextAlign.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextAlign.qml) for use with an `Int` config data type. It has your typical 4 buttons for left/center/right/justify alignment. It serializes the `Text.AlignHCenter` enum.
-    * [TextFormat.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextFormat.qml) is used to toggle bold, italic, underline, and embeds the text alignment. For use with 3 `Bool` config keys and 1 `Int` config key (used for the embedded `TextAlign.qml`).
+  * [TextFormat.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextFormat.qml) is used to toggle bold, italic, underline, and embeds the text alignment. For use with 3 `Bool` config keys and 1 `Int` config key (used for the embedded `TextAlign.qml`).
 * [libconfig/TextArea.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextArea.qml) for a string with multiple lines of text.
-    * [TextAreaStringList.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextAreaStringList.qml) overloads `TextArea.qml`'s `valueToText(value)` and `textToValue(text)` functions to treat a new line as the separator for the `StringList` type.
+  * [TextAreaStringList.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextAreaStringList.qml) overloads `TextArea.qml`'s `valueToText(value)` and `textToValue(text)` functions to treat a new line as the separator for the `StringList` type.
 * [libconfig/TextField.qml](https://github.com/Zren/plasma-applet-lib/blob/master/package/contents/ui/libconfig/TextField.qml) for a single line of text.
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
+
 ```bash
 cd ~/Code/plasmoid-helloworld/package/contents/ui
 mkdir -p ./libconfig
@@ -630,7 +586,7 @@ unzip -j master.zip plasma-applet-lib-master/package/contents/ui/libconfig/*
 rm master.zip
 ```
 
-<div class="filepath">contents/ui/libconfig/CheckBox.qml</div>
+contents/ui/libconfig/CheckBox.qml
 
 ```qml
 import QtQuick 2.0
@@ -645,7 +601,7 @@ QQC2.CheckBox {
 }
 ```
 
-<div class="filepath">contents/ui/configGeneral.qml</div>
+contents/ui/configGeneral.qml
 
 ```qml
 import QtQuick 2.0
@@ -677,10 +633,7 @@ Kirigami.FormLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

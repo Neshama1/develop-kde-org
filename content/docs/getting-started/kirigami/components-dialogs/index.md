@@ -1,23 +1,25 @@
 ---
 title: Dialog types
 weight: 206
-description: Various ways to serve and input data.
 group: components
 aliases:
   - /docs/getting-started/kirigami/components-overlaysheets/
+description: Various ways to serve and input data.
 ---
+
+# Dialog types
 
 A [Kirigami.Dialog](docs:kirigami2;Dialog) is a simple component that you can use to supplement the content being displayed on an application's page. It can display non-interactive content (only text) and interactive content (forms, listviews and buttons).
 
 They can be dismissed by clicking or tapping outside of their area or by clicking the close button on the header.
 
-### Dialog
+#### Dialog
 
 A standard Kirigami.Dialog is used to create custom dialogs. They are very easy to extend:
 
-{{< sections >}}
+\{{< sections >\}}
 
-{{< section-left >}}
+\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -55,25 +57,26 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
+\{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
 
-<br>
+\
+
 
 ![Simple dialog containing only text](dialog.webp)
 
-{{< /section-right >}}
+\{{< /section-right >\}}
 
-{{< /sections >}}
+\{{< /sections >\}}
 
-As shown in the [introduction tutorial about dialogs](/docs/getting-started/kirigami/introduction-dialogs), it is also possible to capture a `standardButton(button)` to assign some behavior to it, like a binding to enable it only under certain conditions.
+As shown in the [introduction tutorial about dialogs](../../../../../docs/getting-started/kirigami/introduction-dialogs/), it is also possible to capture a `standardButton(button)` to assign some behavior to it, like a binding to enable it only under certain conditions.
 
 This type of dialog is generic and applies to most use cases, and it works well with complex interactive content (especially views):
 
-{{< sections >}}
+\{{< sections >\}}
 
-{{< section-left >}}
+\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -116,30 +119,30 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
+\{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
 
-<br>
+\
+
 
 ![A simple scrollable dialog](scrollabledialog.webp)
 
-{{< /section-right >}}
+\{{< /section-right >\}}
 
-{{< /sections >}}
+\{{< /sections >\}}
 
 In most cases however you will likely want to use one of its derived dialog types, [Kirigami.PromptDialog](docs:kirigami2;PromptDialog) or [Kirigami.MenuDialog](docs:kirigami2;MenuDialog).
 
-### PromptDialog
+#### PromptDialog
 
 A [Kirigami.PromptDialog](docs:kirigami2;PromptDialog) is essentially a dialog with a built-in label and default [contentPadding](docs:kirigami2;PromptDialog::contentPadding) that is used to prompt the user for some information. This type of dialog is supposed to be used only for simple yes/no prompts or brief requests for user input.
 
 Its main property is [Kirigami.Dialog.subtitle](docs:kirigami2;PromptDialog::subtitle), to which you would add text. If any QML component is added as a child of the prompt dialog, that component will take the place of the subtitle instead, and this can be explicitly specified with [Kirigami.Dialog.mainItem](docs:kirigami2;Dialog::mainItem).
 
+\{{< sections >\}}
 
-{{< sections >}}
-
-{{< section-left >}}
+\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -170,21 +173,22 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
+\{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
 
-<br>
+\
+
 
 ![A simple prompt dialog containing only text](promptdialog.webp)
 
-{{< /section-right >}}
+\{{< /section-right >\}}
 
-{{< /sections >}}
+\{{< /sections >\}}
 
-{{< sections >}}
+\{{< sections >\}}
 
-{{< section-left >}}
+\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -237,25 +241,26 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
+\{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
 
-<br>
+\
+
 
 ![A PromptDialog with a custom TextField](promptdialogtextfield.webp)
 
-{{< /section-right >}}
+\{{< /section-right >\}}
 
-{{< /sections >}}
+\{{< /sections >\}}
 
-### MenuDialog
+#### MenuDialog
 
 The [Kirigami.MenuDialog](docs:kirigami2;MenuDialog) is a specialized dialog that is used to list a selection of clickable options for the user using its [actions](docs:kirigami2;MenuDialog::actions) property.
 
-{{< sections >}}
+\{{< sections >\}}
 
-{{< section-left >}}
+\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -312,14 +317,15 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
+\{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
 
-<br>
+\
+
 
 ![A simple MenuDialog listing actions like Play and Pause for media](menudialog.webp)
 
-{{< /section-right >}}
+\{{< /section-right >\}}
 
-{{< /sections >}}
+\{{< /sections >\}}

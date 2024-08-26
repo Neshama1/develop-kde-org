@@ -1,12 +1,13 @@
 ---
 title: List views
 weight: 212
-group: "components"
-description: >
-  A list view can help you easily display many components dynamically.
+group: components
 aliases:
   - /docs/getting-started/kirigami/components-listview/
+description: A list view can help you easily display many components dynamically.
 ---
+
+# List views
 
 [Listviews](docs:qtquick;QtQuick.ListView) can help you display objects from a model in an attractive way. To use a list view, you have to keep track of three things:
 
@@ -16,12 +17,12 @@ aliases:
 
 If you would like further clarification, the Qt documentation has [an informative page](https://doc.qt.io/qt-6/qtquick-modelviewsdata-modelview.html) on the topic.
 
-## Essentials of models and views
+### Essentials of models and views
 
 A list view has two essential properties we must pay attention to:
 
-- [model](https://doc.qt.io/qt-6/qml-qtquick-listview.html#model-prop), which accepts the data or the `id` of the object that holds the data
-- [delegate](https://doc.qt.io/qt-6/qml-qtquick-listview.html#delegate-prop), which accepts the component we will use to display the data in the model
+* [model](https://doc.qt.io/qt-6/qml-qtquick-listview.html#model-prop), which accepts the data or the `id` of the object that holds the data
+* [delegate](https://doc.qt.io/qt-6/qml-qtquick-listview.html#delegate-prop), which accepts the component we will use to display the data in the model
 
 The model is not visible, as it only contains data. Typically the delegate will be wrapped in a Component so that it is reusable: it serves as a blueprint for how to instantiate each delegate.
 
@@ -88,21 +89,20 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-
-### Understanding models
+#### Understanding models
 
 The model contains the data that will be used to populate the list view. Different ways to use models have different ways to access the data:
 
-| WAY TO USE                        | HOW TO ACCESS                                     | WHEN TO USE                     |
-| --------------------------------- | ------------------------------------------------- | ------------------------------- |
-| Qt models with more than one role | model.index, model.somerole                       | In most cases                   |
-| Qt models with one role           | model.index, model.somerole, model.modelData      | In most cases, for prototyping  |
-| JavaScript array model            | model.index, model.modelData                      | For prototyping                 |
-| Integer model                     | model.index, model.modelData                      | For prototyping |
+| WAY TO USE                        | HOW TO ACCESS                                | WHEN TO USE                    |
+| --------------------------------- | -------------------------------------------- | ------------------------------ |
+| Qt models with more than one role | model.index, model.somerole                  | In most cases                  |
+| Qt models with one role           | model.index, model.somerole, model.modelData | In most cases, for prototyping |
+| JavaScript array model            | model.index, model.modelData                 | For prototyping                |
+| Integer model                     | model.index, model.modelData                 | For prototyping                |
 
 You can read about [other ways to use models in the Qt documentation](https://doc.qt.io/qt-6/qtquick-modelviewsdata-modelview.html).
 
-In the table above, "Qt models" refers to both C++-specific models like [QAbstractListModel](https://doc.qt.io/qt-6/qabstractlistmodel.html) and QML-specific models like ListModel. This tutorial page will only focus on QML-specific models. Farther ahead we provide a tutorial for [Connecting C++ models to QML using QAbstractListModel](/docs/getting-started/kirigami/advanced-connect_models).
+In the table above, "Qt models" refers to both C++-specific models like [QAbstractListModel](https://doc.qt.io/qt-6/qabstractlistmodel.html) and QML-specific models like ListModel. This tutorial page will only focus on QML-specific models. Farther ahead we provide a tutorial for [Connecting C++ models to QML using QAbstractListModel](../../../../../docs/getting-started/kirigami/advanced-connect\_models/).
 
 The `model.index` property is made available to every model and contains the index (the position) of each delegate. It can be shortened to `index` for convenience.
 
@@ -183,7 +183,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-For comparison, here is how the above code would look like with a [JavaScript array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), with no role:
+For comparison, here is how the above code would look like with a [JavaScript array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global\_Objects/Array), with no role:
 
 ```qml
 import QtQuick
@@ -241,7 +241,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-### Understanding views and delegates
+#### Understanding views and delegates
 
 Let's go back to the original example:
 
@@ -292,7 +292,7 @@ There are multiple views APIs can be used, some from Qt and some from Kirigami. 
 
 The delegate on the other hand always need to have its dimensions set. Generally its dimensions are set to use only the full width of the view.
 
-{{< alert title="Common mistakes" color="warning">}}
+\{{< alert title="Common mistakes" color="warning">\}}
 
 The above means that delegates should not have bottom anchors, since the delegate doesn't need to have the same height as the view. In other words, you will probably never want to use `anchors.fill: parent`.
 
@@ -315,7 +315,7 @@ Controls.ItemDelegate {
 }
 ```
 
-{{< /alert >}}
+\{{< /alert >\}}
 
 The most common use of a delegate is within a [Component](docs:qtqml;QtQml.Component), which does not instantiate the delegate immediately. When a view is constructed, the delegate is then used as a blueprint to make each item in the view.
 

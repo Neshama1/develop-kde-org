@@ -1,16 +1,15 @@
 ---
-title: "Basic Porting"
-linkTitle: "Basic Porting"
+title: Basic Porting
+linkTitle: Basic Porting
 weight: 1
-description: >
-  Learn how to port your applications to the most widely used mobile platform
+description: Learn how to port your applications to the most widely used mobile platform
 ---
 
-## Porting Applications to Android
+# Porting Applications to Android
 
-### AndroidManifest.xml
+## AndroidManifest.xml
 
-Porting an application to Android requires adding an ```AndroidManifest.xml``` containing basic information about the app.
+Porting an application to Android requires adding an `AndroidManifest.xml` containing basic information about the app.
 
 A basic AndroidManifest.xml may look like this:
 
@@ -74,7 +73,7 @@ A basic AndroidManifest.xml may look like this:
 </manifest>
 ```
 
-### Exporting the main function
+## Exporting the main function
 
 Most of this file is just boilerplate code that can be pasted directly into your application. Every occurrence of the applications name (in this case `alligator` or `Alligator`) and the package (`org.kde.alligator`) must be changed to the name and package of the application being ported. If the application requires any permissions (for example if it accesses the internet, bluetooth or location services), those must be added here.
 
@@ -87,13 +86,13 @@ Q_DECL_EXPORT
 int main(int argc, char *argv[])
 ```
 
-### Icon
+## Icon
 
-The application's icon must be included as an image file. The ```android:icon``` parameter in ```AndroidManifest.xml``` must be set accordingly.
+The application's icon must be included as an image file. The `android:icon` parameter in `AndroidManifest.xml` must be set accordingly.
 
-### Splash screen
+## Splash screen
 
-To create a splash screen for application startup, a ```splash.xml``` file must be created with this content:
+To create a splash screen for application startup, a `splash.xml` file must be created with this content:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -108,8 +107,7 @@ To create a splash screen for application startup, a ```splash.xml``` file must 
 </layer-list>
 ```
 
-The ```android:src``` parameter must be set to the application's icon.
-
+The `android:src` parameter must be set to the application's icon.
 
 The `AndroidManifest.xml`, `splash.xml` and icon files should be stored in the application's source directory like this:
 

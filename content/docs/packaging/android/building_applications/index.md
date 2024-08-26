@@ -1,17 +1,17 @@
 ---
-title: "Building applications for Android"
-linkTitle: "Building applications for Android"
+title: Building applications for Android
+linkTitle: Building applications for Android
 weight: 1
-description: >
-  Learn how to build your applications for Android
+description: Learn how to build your applications for Android
 ---
+
+# Building applications for Android
 
 Building .apk files from Qt Applications requires a cross-compiling toolchain, which is hard to setup. To simplify this, there is a ready-to-use Docker container for building KDE applications.
 
 This only applies to applications that have a Craft blueprint in the [craft-blueprints-kde](https://invent.kde.org/packaging/craft-blueprints-kde) repository. If the application you want does not have such a blueprint yet, have a look at [the documentation](https://community.kde.org/Craft/Blueprints).
 
-
-## Setting up the image
+### Setting up the image
 
 First create a mountable folder used for the image:
 
@@ -31,9 +31,7 @@ If the application is using Qt5, use the `qt515` image:
 docker run -ti --rm -v $PWD/craft-kde-android:/home/user/CraftRoot invent-registry.kde.org/sysadmin/ci-images/android-qt515 bash
 ```
 
-{{< alert color="info" title="Note" >}}
-If this fails with an error similar to "Permission denied", you may need to disable SELinux while using craft by running `sudo setenforce 0`
-{{< /alert >}}
+\{{< alert color="info" title="Note" >\}} If this fails with an error similar to "Permission denied", you may need to disable SELinux while using craft by running `sudo setenforce 0` \{{< /alert >\}}
 
 After the image is done downloading, you should be in a new shell which is running inside of the container. Now it's time to initialize Craft:
 
@@ -53,7 +51,7 @@ Your shell prompt should now look something like this:
 CRAFT: user@830068cd8dca:~/CraftRoot$ 
 ```
 
-## Building applications
+### Building applications
 
 To build an application and it's dependencies, simply run the craft command with the application as the sole argument. For example, to build [KDE Itinerary](https://apps.kde.org/itinerary/):
 
@@ -91,8 +89,7 @@ When compilation is finished, the APK packaging step is not run automatically. I
 craft --package itinerary
 ```
 
-## Signing APKs
-
+### Signing APKs
 
 The `.apk` file can be found at `/home/user/CraftRoot/tmp`. This folder is also available as `craft-kde-android/tmp` on the host system. Craft does not sign the apks, so you need to do that yourself before being able to install it onto a device. For signing an apk, you need to create a signing key first, which can be done using
 
@@ -102,7 +99,7 @@ keytool -genkey -noprompt -keystore key.keystore -keypass 123456  -dname "CN=Non
 
 This key can be reused to sign all of your development apks.
 
-Before signing the apk, it might be needed to align it.  This can be done using
+Before signing the apk, it might be needed to align it. This can be done using
 
 ```bash
 zipalign -p -f -v 4 <app>.apk <app>.signed.apk
@@ -116,7 +113,7 @@ apksigner sign -verbose -ks key.keystore <app>.signed.apk
 
 The `zipalign` and `apksigner` binaries can be found at `/opt/android-sdk/build-tools/<version>/` inside the Craft container environment.
 
-## Iterating on blueprints
+### Iterating on blueprints
 
 Inside the Craft environment, the blueprints can be found by running `cs craft-blueprints-kde` and can be edited there to quickly test changes.
 
@@ -125,4 +122,3 @@ The source folder for an application or library can be found the same way by run
 You can quickly iterate on patches for a project by editing it in the source folder, followed by calling `ninja install` in the build folder and creating an apk file using `craft --package <appname>`.
 
 There are much more Craft commands, take a look at the [Craft documentation](https://community.kde.org/Craft) to learn about them.
-

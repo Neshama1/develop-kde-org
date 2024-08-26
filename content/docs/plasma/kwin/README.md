@@ -1,0 +1,2 @@
+# KWin scripting tutorial
+

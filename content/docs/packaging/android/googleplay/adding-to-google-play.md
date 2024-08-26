@@ -1,22 +1,21 @@
 ---
 title: Adding your app to Google Play
 weight: 2
-description: >
-  Learn how to add your application to Google Play
 authors:
   - SPDX-FileCopyrightText: 2024 Ingo Klöcker <kloecker@kde.org>
 SPDX-License-Identifier: CC-BY-SA-4.0
+description: Learn how to add your application to Google Play
 ---
 
-In this part of the tutorial for publishing an application on [Google Play](https://play.google.com/store/apps)
-you will learn how to add your app to Google Play and how to make a first internal release.
+# Adding your app to Google Play
+
+In this part of the tutorial for publishing an application on [Google Play](https://play.google.com/store/apps) you will learn how to add your app to Google Play and how to make a first internal release.
 
 We assume that you have access to the Google Play Console account of KDE. You can request access by sending a ticket to our [KDE system administrators](https://community.kde.org/Sysadmin).
 
+### Adding your app on Google Play
 
-## Adding your app on Google Play
-
-Sign in on [Google Play Console](https://accounts.google.com/ServiceLogin?service=androiddeveloper&passive=true&continue=https%3A%2F%2Fplay.google.com%2Fconsole%2Fdeveloper%2Fapp-list).
+Sign in on [Google Play Console](https://accounts.google.com/ServiceLogin?service=androiddeveloper\&passive=true\&continue=https%3A%2F%2Fplay.google.com%2Fconsole%2Fdeveloper%2Fapp-list).
 
 After signing in you'll see the KDE apps that are already registered on Google Play.
 
@@ -32,8 +31,7 @@ After creating your app you'll see the dashboard for your app with suggestions f
 
 ![Screenshot showing the Dashboard for KTrip](01-create-app-3.png)
 
-
-## Creating a first internal release of your app
+### Creating a first internal release of your app
 
 We will create a first internal release of KTrip. The dashboard tells us what to do.
 
@@ -49,12 +47,11 @@ Click "Create new release". This opens the page for creating an internal testing
 
 Before we can upload the first app bundle of KTrip we need to take a short detour to set the signing key and the upload key to use for KTrip.
 
+### Setting Signing Key and Upload Key
 
-## Setting Signing Key and Upload Key
+Alternatively to generating the signing key yourself you can ask our [system administrators](https://community.kde.org/Sysadmin) to generate a new signing key and upload it to Google Play. In this case you can skip the first two sections and continue with [Upload the Upload Key Certificate](adding-to-google-play.md#uploading-the-upload-key-certificate-to-google-play).
 
-Alternatively to generating the signing key yourself you can ask our [system administrators](https://community.kde.org/Sysadmin) to generate a new signing key and upload it to Google Play. In this case you can skip the first two sections and continue with [Upload the Upload Key Certificate](#uploading-the-upload-key-certificate-to-google-play).
-
-### Generating a Signing Key
+#### Generating a Signing Key
 
 Click on "Choose signing key". Google Play asks whether we want to use a Google-generated app signing key or our own app signing key.
 
@@ -79,11 +76,9 @@ keytool -genkeypair -alias org.kde.ktrip -keyalg RSA -keysize 2048 \
 
 I have generated the key on the machine the signing service runs on. If you generate the key yourself then you have to ask our [system administrators](https://community.kde.org/Sysadmin) to upload the keystore file and the file with the password to this machine.
 
-{{< alert title="Note" color="info" >}}
-For the releases of KTrip published in our F-Droid repositories we use a different signing key which is also used to sign almost all other apps published in our F-Droid repositories. We decided not to upload this key to Google Play. The minor drawback is that one cannot update a KTrip installed from F-Droid with a KTrip from Google Play and vice versa.
-{{< /alert >}}
+\{{< alert title="Note" color="info" >\}} For the releases of KTrip published in our F-Droid repositories we use a different signing key which is also used to sign almost all other apps published in our F-Droid repositories. We decided not to upload this key to Google Play. The minor drawback is that one cannot update a KTrip installed from F-Droid with a KTrip from Google Play and vice versa. \{{< /alert >\}}
 
-### Uploading the Signing Key to Google Play
+#### Uploading the Signing Key to Google Play
 
 Google Play gives us instructions how to export and upload the signing key. Follow those instructions.
 
@@ -111,7 +106,7 @@ Enter password for key 'org.kde.ktrip':
 
 Click on "Upload generated ZIP" and upload the file `ktrip-signing-key.zip`.
 
-### Uploading the Upload Key Certificate to Google Play
+#### Uploading the Upload Key Certificate to Google Play
 
 Download KDE's [Upload Key Certificate](google-play-upload-certificate.pem).
 
@@ -123,14 +118,13 @@ Since we already have an upload key we skip directly to step c., click on "Uploa
 
 Finally, click "Save" to save and close the "App signing preferences".
 
-
-## Creating a first internal release of your app continued
+### Creating a first internal release of your app continued
 
 After setting the signing key and the upload key we can continue publishing a first internal release of KTrip.
 
 ![Screenshot showing the 'Create internal testing release' form after setting the signing key with possibility to upload an app bundle](04-release-for-internal-testing-1.png)
 
-Click on "Upload" and select the signed app bundle of KTrip we created in the previous part of this tutorial on [packaging an application for Google Play]({{< ref "packaging#signing-the-aab" >}}). When the upload is complete then the app bundle will be listed below the upload drop zone and the release name will be filled in with the version information of the app bundle.
+Click on "Upload" and select the signed app bundle of KTrip we created in the previous part of this tutorial on \[packaging an application for Google Play]\(\{{< ref "packaging#signing-the-aab" >\}}). When the upload is complete then the app bundle will be listed below the upload drop zone and the release name will be filled in with the version information of the app bundle.
 
 Click on "Save as draft" to save the changes.
 
@@ -158,8 +152,7 @@ This concludes the creation of the first internal release of KTrip.
 
 ![Screenshot showing the 'Internal testing' page listing the first release](04-release-for-internal-testing-7.png)
 
-
-## Getting KTrip ready for review by Google
+### Getting KTrip ready for review by Google
 
 To get KTrip ready for review by Google we need to tell Google more about the content of the app and we need to set up how it should be presented on Google Play.
 
@@ -167,9 +160,9 @@ Go to the Dashboard and show the tasks of "Set up your app". We see a long list 
 
 ![Screenshot showing the 'Set up your app' task list on KTrip's dashboard](05-set-up-your-app-00.png)
 
-### Letting Google Play know about the content of KTrip
+#### Letting Google Play know about the content of KTrip
 
-#### Privacy policy
+**Privacy policy**
 
 Click on "Set privacy policy".
 
@@ -183,23 +176,21 @@ Then we click "Save" and go back to the Dashboard.
 
 Yeah! The first task is complete. 11 more tasks to go.
 
-#### App access
+**App access**
 
 Google Play wants to know if some parts of the app can only be accessed after entering login credentials or after fulfilling other requirements. For KTrip that's not the case.
 
 ![Screenshot showing the 'App access' form](05-set-up-your-app-02.png)
 
-{{< alert title="Note" color="info" >}}
-For a chat app like NeoChat which cannot be reviewed without a Matrix account it's more complicated. For the Microsoft Store we provide Microsoft with credentials for a test account they can use to review NeoChat.
-{{< /alert >}}
+\{{< alert title="Note" color="info" >\}} For a chat app like NeoChat which cannot be reviewed without a Matrix account it's more complicated. For the Microsoft Store we provide Microsoft with credentials for a test account they can use to review NeoChat. \{{< /alert >\}}
 
-#### Ads
+**Ads**
 
 That one is easy. KDE apps don't contain ads.
 
 ![Screenshot showing the 'Ads' form](05-set-up-your-app-03.png)
 
-#### Content rating
+**Content rating**
 
 Now it gets a bit more interesting. Although for KTrip it's rather boring.
 
@@ -231,7 +222,7 @@ After saving our answers and clicking "Next" we get to the summary.
 
 The different age ratings for KTrip vary between "for all ages" and "at least 3 years old".
 
-#### Target audience
+**Target audience**
 
 The question about the target audience is again interesting. I checked "18 and over" because KTrip does not specifically target younger persons even if younger persons can certainly use KTrip to look up public transport connections.
 
@@ -245,27 +236,25 @@ After clicking "Next" we get to the summary where we save our answers.
 
 ![Screenshot showing the summary of the 'Target audience and content' questionnaire](05-set-up-your-app-05-5.png)
 
-#### News apps
+**News apps**
 
 No, KTrip isn't a news app.
 
 ![Screenshot showing the question whether KTrip is a news app](05-set-up-your-app-06.png)
 
-#### COVID-19 contact tracing and status apps
+**COVID-19 contact tracing and status apps**
 
 Neither KTrip is a publicly available COVID-19 contact tracing or status app.
 
 ![Screenshot showing the question whether KTrip is a publicly available COVID-19 contact tracing or status app](05-set-up-your-app-07.png)
 
-#### Data safety
+**Data safety**
 
 Next we need to "help users understand how" KTrip "collects and shares their data".
 
 ![Screenshot showing the 'Overview' page of the 'Data safety' questionnaire](05-set-up-your-app-08-1.png)
 
-KTrip shares the search criteria entered by the user with the public transport information providers. Additionally, the providers will see the user's IP address.
-The IP address isn't a user data type that needs to be (and can be) mentioned in Google Play's Data safety section.
-And the search criteria that are sent to the providers don't need to be disclosed as sharing because we can assume that "the user reasonably expects the data to be shared" when they click the "Search" button ("a specific user-initiated action").
+KTrip shares the search criteria entered by the user with the public transport information providers. Additionally, the providers will see the user's IP address. The IP address isn't a user data type that needs to be (and can be) mentioned in Google Play's Data safety section. And the search criteria that are sent to the providers don't need to be disclosed as sharing because we can assume that "the user reasonably expects the data to be shared" when they click the "Search" button ("a specific user-initiated action").
 
 Following these considerations we can safely answer "No" to the question whether KTrip collects or shares any of the required user data types.
 
@@ -275,13 +264,13 @@ The preview shows what will be shown to users on Google Play for KTrip.
 
 ![Screenshot showing the 'Store listing preview' of KTrip's 'Data safety'](05-set-up-your-app-08-5.png)
 
-#### Government apps
+**Government apps**
 
 No, KTrip was not developed by or on behalf of a government.
 
 ![Screenshot showing the question whether KTrip was developed by or on behalf of a government](05-set-up-your-app-09.png)
 
-#### Financial features
+**Financial features**
 
 KTrip doesn't provide any financial features ...
 
@@ -295,11 +284,11 @@ This completes the long list of tasks to let Google Play know about the content 
 
 ![Screenshot showing the 'Set up your app' task list on KTrip's dashboard where now 10 of 12 tasks are complete](05-set-up-your-app-10-3.png)
 
-### Completing the presentation of KTrip on Google Play
+#### Completing the presentation of KTrip on Google Play
 
 Now we set up how KTrip should be presented on Google Play.
 
-#### Store settings
+**Store settings**
 
 We choose "Travel & Local" as category for KTrip and from the long list of available tags we select "Public transport".
 
@@ -313,15 +302,15 @@ Finally, we leave external marketing enabled.
 
 ![Screenshot showing the 'External marketing' choice of the 'Store settings'](05-set-up-your-app-11-3.png)
 
-#### Main store listing
+**Main store listing**
 
 Last but not least, we add some text and some images for KTrip's store listing. As short description and full description we use the summary and the description from KTrip's AppStream data. We add only the English descriptions. The translations provided by our great translation teams will be uploaded automatically by our CI/CD system.
 
 ![Screenshot showing the 'Listing assets' form of the 'Main store listing'](05-set-up-your-app-12-1.png)
 
-As app icon we use the image [ic_launcher-playstore.png](https://invent.kde.org/utilities/ktrip/-/blob/master/android/ic_launcher-playstore.png?ref_type=heads) which is also put into the (fastlane) meta data for publication on F-Droid and Google Play.
+As app icon we use the image [ic\_launcher-playstore.png](https://invent.kde.org/utilities/ktrip/-/blob/master/android/ic\_launcher-playstore.png?ref\_type=heads) which is also put into the (fastlane) meta data for publication on F-Droid and Google Play.
 
-For KTrip no image suitable as feature graphic existed. Inspired by the [feature graphic of Itinerary](https://invent.kde.org/pim/itinerary/-/blob/master/fastlane/metadata/org.kde.itinerary/en-US/images/featureGraphic.png?ref_type=heads) I derived a feature graphic for KTrip from its app icon.
+For KTrip no image suitable as feature graphic existed. Inspired by the [feature graphic of Itinerary](https://invent.kde.org/pim/itinerary/-/blob/master/fastlane/metadata/org.kde.itinerary/en-US/images/featureGraphic.png?ref\_type=heads) I derived a feature graphic for KTrip from its app icon.
 
 ![Screenshot showing the 'Graphics' form of the 'Main store listing'](05-set-up-your-app-12-2.png)
 
@@ -331,12 +320,11 @@ Finally, Google Play asks for at least 2 phone screenshots. In KTrip's repositor
 
 After saving our changes we are done with setting up KTrip to get it ready for review by Google.
 
+### Preparing KTrip for submission of new releases by our CI/CD system
 
-## Preparing KTrip for submission of new releases by our CI/CD system
+To allow our CI/CD system to update KTrip's store listing (e.g. to add the translated descriptions) and to upload new builds we need to create a draft release in the "Open testing" (aka beta) track (which the CI/CD system uploads new builds to) and a draft release in the "Production" track. These (draft) releases are needed to [work around shortcomings in the tools we use](https://invent.kde.org/sysadmin/ci-notary-service/-/blob/master/doc/googleplaypublisher.md?ref\_type=heads#trouble-shooting).
 
-To allow our CI/CD system to update KTrip's store listing (e.g. to add the translated descriptions) and to upload new builds we need to create a draft release in the "Open testing" (aka beta) track (which the CI/CD system uploads new builds to) and a draft release in the "Production" track. These (draft) releases are needed to [work around shortcomings in the tools we use](https://invent.kde.org/sysadmin/ci-notary-service/-/blob/master/doc/googleplaypublisher.md?ref_type=heads#trouble-shooting).
-
-### Creating a draft release in the Open testing track
+#### Creating a draft release in the Open testing track
 
 To create a new (draft) release in the Open testing track we promote the release we created in the Internal testing track to Open testing.
 
@@ -348,7 +336,7 @@ The new release is created immediately. Don't be confused that "Save as draft" i
 
 ![Screenshot showing the 'Create open testing release' form with the promoted internal release](06-create-draft-releases-2.png)
 
-### Creating a draft release in the Production track
+#### Creating a draft release in the Production track
 
 To create a new (draft) release in the Production track we promote the release we created in the Internal testing track to Production.
 
@@ -360,7 +348,6 @@ Again the new release is created immediately and has automatically been saved as
 
 ![Screenshot showing the 'Create production release' form with the promoted internal release](06-create-draft-releases-4.png)
 
-
-## Summary
+### Summary
 
 We learned how to add an application like KTrip to Google Play. We made a first internal release and prepared everything to publish (beta) releases of KTrip on Google Play with the KDE CI/CD system.

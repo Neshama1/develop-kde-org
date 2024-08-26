@@ -1,30 +1,30 @@
 ---
 title: Using actions
 weight: 3
-description: >
-  How to add actions to the menus and toolbars.
 aliases:
   - /docs/getting-started/using_actions/
+description: How to add actions to the menus and toolbars.
 ---
 
-Introduction
-------------
+# Using actions
+
+### Introduction
 
 This tutorial introduces the concept of actions. Actions are a unified way of supplying the user with ways to interact with your program.
 
-For example, if we wanted to let the user of our [main window tutorial]({{< ref "main_window.md" >}}) clear the text box by clicking a button in the toolbar, from an option in the File menu or through a keyboard shortcut, it could all be done with one [QAction](docs:qtwidgets;QAction).
+For example, if we wanted to let the user of our \[main window tutorial]\(\{{< ref "main\_window.md" >\}}) clear the text box by clicking a button in the toolbar, from an option in the File menu or through a keyboard shortcut, it could all be done with one [QAction](docs:qtwidgets;QAction).
 
-![](using_actions.webp)
+![](using\_actions.webp)
 
-## QActions
+### QActions
 
 A [QAction](docs:qtwidgets;QAction) is an object which contains all the information about the icon and shortcuts that are associated with a certain action. With the use of [signals and slots](https://doc.qt.io/qt-6/signalsandslots.html), whenever that action is triggered (like clicking a menu option), a function in a different part of your program is automatically run.
 
 [QActions](docs:qtwidgets;QAction) are most commonly used in [QMenus](docs:qtwidgets;QMenu) shown in a [QMenuBar](docs:qtwidgets;QMenuBar), a [QToolBar](docs:qtwidgets;QToolBar), or in a right click context menu.
 
-## The Code
+### The Code
 
-### main.cpp
+#### main.cpp
 
 We are going to install our UI .rc file under the component `texteditor`, so `main.cpp` should be changed to reflect that change in name.
 
@@ -39,21 +39,21 @@ Don't worry about the .rc file just yet. We will see what it's about by the end 
     // ...
 ```
 
-### mainwindow.h
+#### mainwindow.h
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/using_actions/mainwindow.h" highlight="cpp" emphasize="15" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/mainwindow.h" highlight="cpp" emphasize="15" >\}}
 
 Only a function `void setupActions()` has been added which will do all the work setting up the [QActions](docs:qtwidgets;QAction).
 
-### mainwindow.cpp
+#### mainwindow.cpp
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/using_actions/mainwindow.cpp" highlight="cpp" emphasize="1-2 4-6 13 16-30" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/mainwindow.cpp" highlight="cpp" emphasize="1-2 4-6 13 16-30" >\}}
 
-## Explanation
+### Explanation
 
-This builds upon the [KXmlGuiWindow](docs:kxmlgui;KXmlGuiWindow) code from our previous [main window]({{< ref "main_window.md" >}}). Most of the changes are to `mainwindow.cpp`, an important structural change being that the constructor for MainWindow now calls `setupActions()` instead of `setupGUI()`. `setupActions()` is where the new [QAction](docs:qtwidgets;QAction) code goes before finally calling `setupGUI()` itself.
+This builds upon the [KXmlGuiWindow](docs:kxmlgui;KXmlGuiWindow) code from our previous \[main window]\(\{{< ref "main\_window.md" >\}}). Most of the changes are to `mainwindow.cpp`, an important structural change being that the constructor for MainWindow now calls `setupActions()` instead of `setupGUI()`. `setupActions()` is where the new [QAction](docs:qtwidgets;QAction) code goes before finally calling `setupGUI()` itself.
 
-### Creating the QAction object
+#### Creating the QAction object
 
 The QAction is built up in a number of steps. The first is including the [QAction](docs:qtwidgets;QAction) header and then creating one:
 
@@ -65,7 +65,7 @@ QAction *clearAction = new QAction(this);
 
 This creates a new [QAction](docs:qtwidgets;QAction) called `clearAction`.
 
-### Setting QAction Properties
+#### Setting QAction Properties
 
 Now that we have our [QAction](docs:qtwidgets;QAction) object, we can start setting its properties. With [QAction::setText()](docs:qtwidgets;QAction::setText), we can set the text that will be displayed in the menu and with an optional [QAction::icon()](docs:qtwidgets;QAction::icon) in the toolbar, depending on the widget style (whether beside or below the icon) or setting (whether to display the action text or not).
 
@@ -73,15 +73,15 @@ Now that we have our [QAction](docs:qtwidgets;QAction) object, we can start sett
 clearAction->setText(i18n("&Clear"));
 ```
 
-Note that the text is passed through the `i18n()` function; this is necessary for the UI to be translatable, as mentioned in [Hello World]({{< relref "hello_world/#about-and-internationalization" >}}) (more information on this can be found in the [internationalisation docs](docs:ki18n)).
+Note that the text is passed through the `i18n()` function; this is necessary for the UI to be translatable, as mentioned in \[Hello World]\(\{{< relref "hello\_world/#about-and-internationalization" >\}}) (more information on this can be found in the [internationalisation docs](docs:ki18n)).
 
 The ampersand (&) in the action text denotes which letter will be used as an accelerator for said action. If the user opens a menu and presses the 'Alt' key, this will highlight the first letter of 'Clear' with an underscore, denoting the key they can press to perform said action. In this case, the user would press 'Alt+C' to clear the textbox when the `File` menu is open.
 
-![](using_actions_highlighting.webp)
+![](using\_actions\_highlighting.webp)
 
 The ampersand is also useful for internationalisation: in non-Latin languages such as Japanese (where 'copy' is コピー), using the first letter of that language to accelerate the action could be cumbersome. The ampersand lets translators know whether they should include the Latin character in parentheses, allowing non-English users to use the same accelerator key even if the translated string is completely different.
 
-### Icon
+#### Icon
 
 If the action is going to be displayed in a toolbar, it is nice to have an icon depicting the action. The icon may also be displayed beside the action in the menus, depending on the widget style. We use a [QIcon::fromTheme()](docs:qtgui;QIcon::fromTheme) to grab the system's default icon for "document-new-symbolic" and use [QAction::setIcon()](docs:qtwidgets;QAction::setIcon) to assign it to our `clearAction`.
 
@@ -89,7 +89,7 @@ If the action is going to be displayed in a toolbar, it is nice to have an icon 
 clearAction->setIcon(QIcon::fromTheme(u"document-new-symbolic"_s));
 ```
 
-### Adding to the Collection
+#### Adding to the Collection
 
 In order for the action to be accessed via [KXmlGui](docs:kxmlgui) (explained in depth later) it must be added to the application's action collection.
 
@@ -105,10 +105,9 @@ actionCollection()->addAction("clear", clearAction);
 
 Here, our `clearAction` [QAction](docs:qtwidgets;QAction) is added to the collection and given a name of `clear`. This name (clear) is used by the [KXmlGui](docs:kxmlgui) framework to refer to the action, so it is used internally and will not be localized.
 
-###  Keyboard Shortcuts
+#### Keyboard Shortcuts
 
 We can then use one of the utility functions of our action collection, [KActionCollection::setDefaultShortcut()](docs:kxmlgui;KActionCollection::setDefaultShortcut), to attribute a default keyboard shortcut of `Ctrl+W`:
-
 
 ```c++
 actionCollection()->setDefaultShortcut(clearAction, Qt::CTRL + Qt::Key_W);
@@ -116,7 +115,7 @@ actionCollection()->setDefaultShortcut(clearAction, Qt::CTRL + Qt::Key_W);
 
 The list of available keys can be found in the [Qt namespace Key enum](docs:qtcore;Qt::Key).
 
-### Connecting the action
+#### Connecting the action
 
 Now that the action is fully set up, it needs to be connected to something useful. In this case (because we want to clear the text area), we connect our action to the [KTextEdit::clear()](docs:ktextwidgets;KTextEdit::clear) slot belonging to a [KTextEdit](docs:ktextwidgets;KTextEdit) (which, unsurprisingly, clears the text):
 
@@ -128,11 +127,11 @@ Here we are using a [QObject::connect()](docs:qtcore;QObject::connect), Qt's mos
 
 Refer to Qt's documentation on [Signals and Slots](https://doc.qt.io/qt-6/signalsandslots.html) to understand this better. Signals and slots are essential to make Qt apps, understanding them is highly recommended.
 
-### KStandardAction
+#### KStandardAction
 
 For actions which would likely appear in almost every KDE application such as 'quit', 'save', and 'load' there are pre-created convenience [QActions](docs:qtwidgets;QAction), accessed through [`KStandardAction`](docs:kconfigwidgets;KStandardAction).
 
-They are very simple to use. Once the library has been included (`#include <KStandardAction>`), simply supply it with what you want the function to do and which QActionCollection to add it to. For example: 
+They are very simple to use. Once the library has been included (`#include <KStandardAction>`), simply supply it with what you want the function to do and which QActionCollection to add it to. For example:
 
 ```c++
 KStandardAction::quit(qApp, &QCoreApplication::quit, actionCollection());
@@ -142,55 +141,51 @@ Here we call the [QApplication::quit()](docs:qtwidgets;QApplication::quit) metho
 
 In the end, this creates an action with the correct icon, text and shortcut and even adds it to the File menu.
 
-### Adding the action to menus and toolbars
+#### Adding the action to menus and toolbars
 
 At the moment, the new "Clear" action has been created but it hasn't been associated with any menus or toolbars. We will be using [KXmlGui's](docs:kxmlgui) capabilities for that, as it does nice things like create movable toolbars for you.
 
-### Defining your own help menu
+#### Defining your own help menu
 
 The Help menu has been standardized to ease the lives of both developers and users, which is why all KDE software Help menus look the same. If you want to create your own help menu, you should refer to the explanation provided in the `Using your own "about application" dialog box` section of [KHelpMenu](docs:kxmlgui;KHelpMenu).
 
-### XMLGUI
+#### XMLGUI
 
 The `setupGUI()` function in [KXmlGuiWindow](docs:kxmlgui;KXmlGuiWindow) depends on the [KXmlGui](docs:kxmlgui) system to construct the GUI, which is done by parsing an XML file description of the interface.
 
 The rule for naming this XML file is `appnameui.rc`, where appname is the name you set in [`KAboutData`](docs:kcoreaddons;KAboutData) (in this case, `TextEditor`). So in our example, the file is called `texteditorui.rc`, and is placed in the same folder as our other files. Where the file will ultimately be placed is handled by CMake.
 
-#### appnameui.rc file
+**appnameui.rc file**
 
 Since the description of the UI is defined with XML, the layout must follow strict rules. This tutorial will not go into great depth on this topic.
 
-<!-- TODO: needs a reference material for XML to be linked here. -->
+**texteditorui.rc**
 
-#### texteditorui.rc
-
-{{< readfile file="/content/docs/getting-started/kxmlgui/using_actions/texteditorui.rc" highlight="xml" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/texteditorui.rc" highlight="xml" >\}}
 
 The `<Toolbar>` tag allows you to describe the toolbar, which is the bar across the top of the window normally with icons. Here it is given the unique name `mainToolBar` and its user visible name set to "Main Toolbar" using the `<text>` tag. The `clear` action is added to the toolbar using the `<Action>` tag, the name parameter in this tag being the string that was passed to the action collection with [KActionCollection::addAction()](docs:kxmlgui;KActionCollection::addAction) in `mainwindow.cpp`.
 
-Besides having the action in the toolbar, it can also be added to the menubar. Here the action is being added to the `File` menu of the `MenuBar` the same way it was added to the toolbar. 
+Besides having the action in the toolbar, it can also be added to the menubar. Here the action is being added to the `File` menu of the `MenuBar` the same way it was added to the toolbar.
 
 Change the 'version' attribute of the `<gui>` tag if you changed the .rc file since the last install to force a system cache update. Be sure it is an integer, if you use a decimal value, it will not work, and you will get no warning about it.
 
-{{< alert title="Warning" color="warning" >}}
-The version attribute must always be an integer number.
-{{< /alert >}}
+\{{< alert title="Warning" color="warning" >\}} The version attribute must always be an integer number. \{{< /alert >\}}
 
-Some notes on the interaction between code and the .rc file: menus appear automatically and should have a `<text/>` child tag unless they refer to standard menus. Actions need to be created manually and inserted into the `actionCollection()` using the same name as in the .rc file. Actions can be hidden or disabled, whereas menus can't. 
+Some notes on the interaction between code and the .rc file: menus appear automatically and should have a `<text/>` child tag unless they refer to standard menus. Actions need to be created manually and inserted into the `actionCollection()` using the same name as in the .rc file. Actions can be hidden or disabled, whereas menus can't.
 
-## CMake
+### CMake
 
-Finally, the `texteditorui.rc` needs to go somewhere where the system can find it (you can't just leave it in the source directory!). **This means the project needs to be installed somewhere**, unlike in the previous tutorials. 
+Finally, the `texteditorui.rc` needs to go somewhere where the system can find it (you can't just leave it in the source directory!). **This means the project needs to be installed somewhere**, unlike in the previous tutorials.
 
-### CMakeLists.txt
+#### CMakeLists.txt
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/using_actions/CMakeLists.txt" highlight="cmake" emphasize="3 26 29 31 37 43 46-47" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/CMakeLists.txt" highlight="cmake" emphasize="3 26 29 31 37 43 46-47" >\}}
 
-This file is almost identical to the one for the [previous tutorial]({{< relref "main_window/#cmakeliststxt" >}}), but with two extra lines at the end that describe where the files are to be installed. Firstly, the `texteditor` target is installed to the right place for binaries using `${KDE_INSTALL_TARGETS_DEFAULT_ARGS}`, then the `texteditorui.rc` file that describes the layout of the user interface is installed to the application's data directory, `${KDE_INSTALL_KXMLGUIDIR}`.
+This file is almost identical to the one for the \[previous tutorial]\(\{{< relref "main\_window/#cmakeliststxt" >\}}), but with two extra lines at the end that describe where the files are to be installed. Firstly, the `texteditor` target is installed to the right place for binaries using `${KDE_INSTALL_TARGETS_DEFAULT_ARGS}`, then the `texteditorui.rc` file that describes the layout of the user interface is installed to the application's data directory, `${KDE_INSTALL_KXMLGUIDIR}`.
 
-## Running our application
+### Running our application
 
-You can repeat the same steps provided in {{< ref "hello_world#kxmlgui-running" >}} to build and install the application. You can then run the project with:
+You can repeat the same steps provided in \{{< ref "hello\_world#kxmlgui-running" >\}} to build and install the application. You can then run the project with:
 
 ```bash
 kdesrc-build --run --exec mainwindow kxmlgui-tutorial
@@ -202,7 +197,7 @@ or
 mainwindow
 ```
 
-As you might remember from the [KXmlGui Hello World]{{< ref "hello_world" >}}, when installing the project manually with CMake, we specified the `--prefix` flag:
+As you might remember from the \[KXmlGui Hello World]\{{< ref "hello\_world" >\}}, when installing the project manually with CMake, we specified the `--prefix` flag:
 
 ```bash
 cmake --install build/ --prefix "~/.local"

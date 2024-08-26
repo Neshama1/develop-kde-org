@@ -1,0 +1,2 @@
+# kdesrc-build-tips
+

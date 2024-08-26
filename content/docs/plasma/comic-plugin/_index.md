@@ -1,18 +1,17 @@
 ---
 title: Plasma Comic
 weight: 9
-description: >
-  Learn how to create a Comic provider plugin
-
-# Rewrite of KDE4 version for Plasma 5
 SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
+description: Learn how to create a Comic provider plugin
 ---
+
+# Plasma Comic
 
 This tutorial will describe how to create your own plugin for the comic plasmoid. The comic plasmoid is part of kdeplasma-addons.
 
 For this you can use JavaScript which is evaluated using QJSEngine.
 
-## Type of comics
+### Type of comics
 
 There are three different types of comics that are supported by the comic applet.
 
@@ -26,8 +25,7 @@ Sometimes the website your comic is published on neither have an easy way to get
 
 The idea of this is that the type should be enough to get the comic e.g. "xkcd:100". The first part tells what plugin should be loaded and the last part tells your plugin what comic strip should be loaded. Your plugin won't get more information from the engine on the request than that.
 
-
-## Package Structure
+### Package Structure
 
 The comic plugins are provided as packages that can be uploaded to https://store.kde.org and easily downloaded from that place directly from the applet.
 
@@ -47,9 +45,9 @@ Later you need to zip the files to a ".comic"-package, you can do that with e.g.
 zip -r my_comic.comic contents/code/main.es metadata.json icon.png
 ```
 
-where "my_comic" is the name of the comic you want to add.
+where "my\_comic" is the name of the comic you want to add.
 
-## The metadata.json file
+### The metadata.json file
 
 Every comic plugin needs a metadata.json file like the following:
 
@@ -87,11 +85,11 @@ You only need "Icon" if you have an icon for your comic -- like a favicon. In th
 
 **X-KDE-PlasmaComicProvider-SuffixType** is the type of the comic as discussed the section above (Date, Number, or String).
 
-## The Code
+### The Code
 
 In the first two sections I am discussing what functions and objects are available, if you want you can skip these sections and use them only as reference if needed.
 
-### Available functions
+#### Available functions
 
 There are different functions that you can use or can (have to) add:
 
@@ -106,17 +104,17 @@ Additionally to that there are some date-handling functions similar to [QDate](h
 
 Of course, you can add other functions if you need them.
 
-#### init()
+**init()**
 
 `init()` is called by the engine, so you need to include it. The engine will only load your plugin and thus call init() if the asked for comic strip has not been cached.
 
-#### comic.requestPage(url, id, metadata) {#requestpage}
+**comic.requestPage(url, id, metadata)**
 
 Ask the engine to download `url` for you. `id` specifies of what type the download is. There are three predefined different ids:
+
 * comic.Page
 * comic.User
-* comic.Image
-Both `comic.Page` and `comic.User` (and any integer that is not `comic.Image`) are intended to be used for downloading web-pages (so only text), while `comic.Image` is used for the actual comic image. In
+* comic.Image Both `comic.Page` and `comic.User` (and any integer that is not `comic.Image`) are intended to be used for downloading web-pages (so only text), while `comic.Image` is used for the actual comic image. In
 
 You can also specify `metadata` like the referrer. See [the KIO docs](https://invent.kde.org/frameworks/kio/-/blob/master/docs/metadata.txt) for what types are in general supported.
 
@@ -131,22 +129,20 @@ comic.requestPage("www.example.com/image.jpg", comic.image); // would also work,
 
 If the download was successful the engine will call pageRetrieved.
 
-#### pageRetrieved(id, data)
+**pageRetrieved(id, data)**
 
 `pageRetrieved` is only called if you asked the engine to download something for you.
 
-What data is depends on the id.
-If the id is `comic.Image` then `data` is the image, making any changes to data will change the image being displayed by the comic plugin. In all other cases `data` is the downloaded data in a byte stream converted to unicode -- in some cases not see comic.textCodec at [Available Objects] -- while `id` defines what kind of download it was. You can convert the byte stream to a String if needed:
+What data is depends on the id. If the id is `comic.Image` then `data` is the image, making any changes to data will change the image being displayed by the comic plugin. In all other cases `data` is the downloaded data in a byte stream converted to unicode -- in some cases not see comic.textCodec at \[Available Objects] -- while `id` defines what kind of download it was. You can convert the byte stream to a String if needed:
 
 ```js
 const dataString = data.toString();
 const begin = dataString.indexOf("test"); // would not work without the conversion
 ```
 
-Here you could search in the data for the URL to the comic strip, the title of the comic, the comic's author, the identifier for the next comic, etc.
-So you only need to implement that function if you want to find something in a webpage or if you want to modify the image.
+Here you could search in the data for the URL to the comic strip, the title of the comic, the comic's author, the identifier for the next comic, etc. So you only need to implement that function if you want to find something in a webpage or if you want to modify the image.
 
-#### comic.combine(image, position)
+**comic.combine(image, position)**
 
 As the comic engine can not handle multiple pictures itself you have to combine several pictures to one occasionally.
 
@@ -213,7 +209,7 @@ function pageRetrieved(id, data) {
 
 Another comic plugin that currently uses this feature is [Shit Happens \[ger\]](https://store.kde.org/p/1080445), though in this case an image provided by the comic-package is combined with the comics.
 
-#### date-functions
+**date-functions**
 
 Here I'm showing only two examples of the date-object and its member functions. If you want more information look at the [sourcecode](https://invent.kde.org/plasma/kdeplasma-addons/-/tree/master/applets/comic/engine) and look at the [Qt-documentation](https://doc.qt.io/qt-5/qdate.html) as this object was designed to work similar to QDate. In some cases there might be differences though!
 
@@ -222,20 +218,20 @@ comic.identifier = date.fromString("2008,03,07", "yyyy,MM,dd");
 comic.website += comic.identifier.toString("dd-MM-yyyy");
 ```
 
-#### comic.requestRedirectedUrl(url, id, metadata)
+**comic.requestRedirectedUrl(url, id, metadata)**
 
-Sometimes you only have a relative url, e.g. next would be current url + "/?relid=X&go=+1". This function helps you to get the real url this relative url points to. This is useful for cases where you don't know the next or previous identifier, while this information is embedded in the "real" url.
+Sometimes you only have a relative url, e.g. next would be current url + "/?relid=X\&go=+1". This function helps you to get the real url this relative url points to. This is useful for cases where you don't know the next or previous identifier, while this information is embedded in the "real" url.
 
 Ask the engine to retrieve the real (redirected) url for `url`. `id` specifies of what type the download is. There are some predefined ids:
+
 * comic.PreviousUrl
 * comic.NextUrl
 * comic.CurrentUrl
 * comic.FirstUrl
 * comic.LastUrl
-* comic.UserUrl
-Those are for convenience only, you could use any integer you want.
+* comic.UserUrl Those are for convenience only, you could use any integer you want.
 
-You can also add `metdata` though that is optional. For more information on metadata see [requestpage]({{< relref "#requestpage" >}}).
+You can also add `metdata` though that is optional. For more information on metadata see \[requestpage]\(\{{< relref "#requestpage" >\}}).
 
 This method will always call `redirected(id, url)`. If there was no redirection, then it will be called with the original url.
 
@@ -255,17 +251,13 @@ function redirected(id, url) {
 }
 ```
 
-#### redirected(id, url)
+**redirected(id, url)**
 
+Only called when you called `comic.requestRedirectedUrl`. Will either contain a redirected url or the original url.
 
-Only called when you called `comic.requestRedirectedUrl`.
-Will either contain a redirected url or the original url.
+#### Available objects
 
-### Available objects
-
-In this section the available objects that you can assign something are listed and described.
-Only comic.identifier and some other identifiers in special
-cases -- as discussed below -- have something assigned to them initially.
+In this section the available objects that you can assign something are listed and described. Only comic.identifier and some other identifiers in special cases -- as discussed below -- have something assigned to them initially.
 
 ```js
 comic.comicAuthor = "Randall Munroe";      // the author or authors of the comic strip
@@ -280,7 +272,7 @@ comic.isTopToBottom = false;               // true is the default, only set if t
 
 Refer the Qt documentation for a [list of codecs you can use in comic.textCodec](https://doc.qt.io/qt-5/qtextcodec.html).
 
-#### Identifier
+**Identifier**
 
 There are six "identifier" objects, that react differently depending on the type of the comic.
 
@@ -297,11 +289,11 @@ comic.identifierSpecified // if the engine specified an (bool) identifier.
 
 If `comic.identifierSpecified` is false you should download the most recent comic strip.
 
-For some types what *you* assigned to `comic.identifier`, `comic.lastIdentifier`, or `comic.firstIdentifier` will be checked and comic.identifier will be modified accordingly.
+For some types what _you_ assigned to `comic.identifier`, `comic.lastIdentifier`, or `comic.firstIdentifier` will be checked and comic.identifier will be modified accordingly.
 
 If there is a nextIdentifier then the engine will cache the comic strip, it does not need to be downloaded again in the future.
 
-#### date
+**date**
 
 comic.identifier will always be an actual date that exists, if no exact date has been specified by the engine it will be today.
 
@@ -325,24 +317,22 @@ print(comic.identifier);    //still 2009-01-10
 In any case comic.identifier will be in the specified range you defined.
 
 comic.previousIdentifier and comic.nextIdentifier will also be checked:
+
 * if comic.identifier is comic.firstIdentifier there won't be a comic.previousIdentifier
 * if comic.identifier is comic.lastIdentifier there won't be a comic.nextIdentifier
 
+If you do not set both (!) comic.previousIdentifier and comic.nextIdentifier then they will be set automatically according to this rules:
 
-If you do not set both (!) comic.previousIdentifier and comic.nextIdentifier
-then they will be set automatically according to this rules:
 * `comic.previousIdentifier = comic.identifier - 1 day;`
 * `comic.previousIdentifier` never will be a day before `comic.firstIdentifier`
 * `comic.nextIdentifier = comic.identifier + 1 day;`
 * `comic.nextIdentifier` never will be a day after `comic.lastIdentifier`
 
-You should set the identifiers yourself if the comic is _not_ end-to-end e.g.
-2009-01-12, 2009-01-14, 2009-02-01, ... If you are not sure also set the identifiers yourself.
+You should set the identifiers yourself if the comic is _not_ end-to-end e.g. 2009-01-12, 2009-01-14, 2009-02-01, ... If you are not sure also set the identifiers yourself.
 
-#### number
+**number**
 
-comic.identifier will either be a specific number, or if no number has been
-specified by the engine it will be "0".
+comic.identifier will either be a specific number, or if no number has been specified by the engine it will be "0".
 
 Using comic.identifierSpecified (recommended!) you can have a comic that is identified by the number "0", if you don't use comic.identifierSpecified you have to shift everything see [Digital Purgatory (en)](https://store.kde.org/p/1080349) as an example.
 
@@ -351,8 +341,7 @@ comic.firstIdentifier   // is 1 by default
 comic.lastIdentifier    // has to be manually specified
 ```
 
-If comic.identifier is "0" and you assign something to comic.lastIdentifier,
-then comic.identifier will be reassigned that number automatically e.g.:
+If comic.identifier is "0" and you assign something to comic.lastIdentifier, then comic.identifier will be reassigned that number automatically e.g.:
 
 ```js
 comic.identifier = 0;
@@ -373,26 +362,22 @@ print(comic.identifier);            //would be 20 now
 In any case comic.identifier will be in the specified range.
 
 comic.previousIdentifier and comic.nextIdentifier will also be checked:
+
 * if comic.identifier is comic.firstIdentifier there won't be a comic.previousIdentifier
 * if comic.identifier is comic.lastIdentifier there won't be a comic.nextIdentifier
 
-If you do not set both (!) comic.previousIdentifier and comic.nextIdentifier
-then they will be set automatically according to this rules:
+If you do not set both (!) comic.previousIdentifier and comic.nextIdentifier then they will be set automatically according to this rules:
+
 * comic.previousIdentifier = comic.identifier - 1;
 * comic.previousIdentifier never will be smaller than comic.firstIdentifier
 * comic.nextIdentifier = comic.identifier + 1;
 * comic.nextIdentifier never will be larger than comic.lastIdentifier
 
-You should set the identifiers yourself if the comic is _not_ end-to-end e.g.
-1,4,5,9 ... If you are not sure also set the identifiers yourself.
+You should set the identifiers yourself if the comic is _not_ end-to-end e.g. 1,4,5,9 ... If you are not sure also set the identifiers yourself.
 
-#### string
+**string**
 
-Here you have to set nearly everything you want to use yourself, only one thing is set
-automatically.
-comic.identifier will either be a specific string, or if no string has been
-specified by the engine it will be an empty string (length = 0).
-
+Here you have to set nearly everything you want to use yourself, only one thing is set automatically. comic.identifier will either be a specific string, or if no string has been specified by the engine it will be an empty string (length = 0).
 
 ```js
 print(comic.identifierSpecified);   //suppose that it is false
@@ -400,7 +385,7 @@ comic.lastIdentifier = "muahaha";
 print(comic.identifier);            //would be "muahaha" now
 ```
 
-#### comic.image()
+**comic.image()**
 
 Accesses the image object.
 
@@ -419,4 +404,3 @@ if (comic.apiVersion >= 4600) {
   }
 }
 ```
-

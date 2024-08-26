@@ -1,47 +1,50 @@
 ---
-title: Saving and loading 
-description: >
-  Introduces the KIO library while adding loading and saving support to our application.
+title: Saving and loading
 weight: 4
 aliases:
   - /docs/getting-started/saving_and_loading/
+description: >-
+  Introduces the KIO library while adding loading and saving support to our
+  application.
 ---
 
-## Introduction
+# Saving and loading
+
+### Introduction
 
 Now that we have a basic text editor interface, it's time to make it do something useful. At the most basic, a text editor needs to be able to load files from data storage, save files that have been created/edited, and create new files.
 
 KDE Frameworks provides a number of classes for working with files that make life a lot easier for developers. [KIO](docs:kio) allows you to easily access files through network-transparent protocols. Qt also provides standard file dialogs for opening and saving files.
 
-![](saving_and_loading.webp)
+![](saving\_and\_loading.webp)
 
-## The Code
+### The Code
 
-### main.cpp
+#### main.cpp
 
 We don't need to change anything in here.
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/saving_and_loading/main.cpp" highlight="cpp" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/main.cpp" highlight="cpp" >\}}
 
-### mainwindow.h
+#### mainwindow.h
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/saving_and_loading/mainwindow.h" highlight="cpp" emphasize="7 11 16-26 30" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/mainwindow.h" highlight="cpp" emphasize="7 11 16-26 30" >\}}
 
-To add the ability to load and save files, we must add the functions which will do the work. Since the functions will be called through [Qt's signal/slot](http://doc.qt.io/qt-6/signalsandslots.html) mechanism we must specify that these functions are slots using `Q_SLOTS`. Since we are using slots in this header file, we must also add the [Q_OBJECT](docs:qtcore;QObject::Q_OBJECT) macro, as only [Q_OBJECTs](docs:qtcore;QObject::Q_OBJECT) can have signals and slots.
+To add the ability to load and save files, we must add the functions which will do the work. Since the functions will be called through [Qt's signal/slot](http://doc.qt.io/qt-6/signalsandslots.html) mechanism we must specify that these functions are slots using `Q_SLOTS`. Since we are using slots in this header file, we must also add the [Q\_OBJECT](docs:qtcore;QObject::Q\_OBJECT) macro, as only [Q\_OBJECTs](docs:qtcore;QObject::Q\_OBJECT) can have signals and slots.
 
 We also want to keep track of the filename of the currently opened file, so we declare a [QString](docs:qtcore;QString) `fileName`.
 
-### mainwindow.cpp
+#### mainwindow.cpp
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/saving_and_loading/mainwindow.cpp" highlight="cpp" emphasize="3-6 11-12 15 34-37 42-105" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/mainwindow.cpp" highlight="cpp" emphasize="3-6 11-12 15 34-37 42-105" >\}}
 
-We'll get into the details of mainwindow.cpp in a while. 
+We'll get into the details of mainwindow.cpp in a while.
 
-### texteditorui.rc
+#### texteditorui.rc
 
-This is identical to the `texteditorui.rc` from the [previous tutorial]({{< relref "using_actions/#texteditoruirc" >}}). We do not need to add any information about any of the [KStandardAction](docs:kconfigwidgets;KStandardAction) methods since the placement of those actions is handled automatically by the [KXmlGui](docs:kxmlgui) system.
+This is identical to the `texteditorui.rc` from the \[previous tutorial]\(\{{< relref "using\_actions/#texteditoruirc" >\}}). We do not need to add any information about any of the [KStandardAction](docs:kconfigwidgets;KStandardAction) methods since the placement of those actions is handled automatically by the [KXmlGui](docs:kxmlgui) system.
 
-## Explanation
+### Explanation
 
 Okay, now to implement the code that will do the loading and saving. This will all be happening in `mainwindow.cpp`.
 
@@ -51,13 +54,13 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent), fileName(QStrin
 
 The first thing we do is to initialize `fileName(QString())` in the MainWindow's [constructor initializer list](https://en.cppreference.com/w/cpp/language/constructor) to make sure that `fileName` is empty right from the beginning.
 
-### Adding the actions
+#### Adding the actions
 
-We will then provide the outward interface for the user so they can tell the application to load and save. Like with the quit action in the [previous tutorial]({{< relref "using_actions/#kstandardaction" >}}), we will use [KStandardAction](docs:kconfigwidgets;KStandardAction). We add the actions in the same way we did for the quit action and, for each one, we connect it to the appropriate slot that we declared in the header file.
+We will then provide the outward interface for the user so they can tell the application to load and save. Like with the quit action in the \[previous tutorial]\(\{{< relref "using\_actions/#kstandardaction" >\}}), we will use [KStandardAction](docs:kconfigwidgets;KStandardAction). We add the actions in the same way we did for the quit action and, for each one, we connect it to the appropriate slot that we declared in the header file.
 
-### Creating a new document
+#### Creating a new document
 
-The first function we create is the `newFile()` function. 
+The first function we create is the `newFile()` function.
 
 ```cpp
 void MainWindow::newFile()
@@ -67,19 +70,15 @@ void MainWindow::newFile()
 }
 ```
 
-`fileName.clear()` sets the `fileName` string to be empty to reflect the fact that this document is not stored anywhere yet. `textArea->clear()` then clears the central text area using the same function that we connected the 'clear' action to in the [previous tutorial]({{< relref "using_actions#creating-the-qaction-object" >}}).
+`fileName.clear()` sets the `fileName` string to be empty to reflect the fact that this document is not stored anywhere yet. `textArea->clear()` then clears the central text area using the same function that we connected the 'clear' action to in the \[previous tutorial]\(\{{< relref "using\_actions#creating-the-qaction-object" >\}}).
 
-{{< alert title="Warning" color="warning" >}}
-This example simply clears the text area without checking if the file has been saved first. It's only meant as a demonstration of file I/O and is *not* an example of best programming practices.
-{{< /alert >}}
+\{{< alert title="Warning" color="warning" >\}} This example simply clears the text area without checking if the file has been saved first. It's only meant as a demonstration of file I/O and is _not_ an example of best programming practices. \{{< /alert >\}}
 
-### Saving a file
+#### Saving a file
 
-{{< alert title="Note" color="info" >}}
-To make this tutorial simple, this example program can only save to local storage even though it can open any file from any location, even those from remote sources.
-{{< /alert >}}
+\{{< alert title="Note" color="info" >\}} To make this tutorial simple, this example program can only save to local storage even though it can open any file from any location, even those from remote sources. \{{< /alert >\}}
 
-### saveFileToDisk(const QString &)
+#### saveFileToDisk(const QString &)
 
 Now we get onto our first file handling code. We are going to implement a function which will save the contents of the text area to the file name given as a parameter. Qt provides a class for safely saving a file called [QSaveFile](docs:qtcore;QSaveFile).
 
@@ -116,7 +115,7 @@ Finally, we set MainWindows's `fileName` member to point to the file name we jus
 fileName = outputFileName;
 ```
 
-### saveFileAs()
+#### saveFileAs()
 
 This is the function that the `saveAs` slot is connected to. It simply calls the generic `saveFileToDisk(QString)` function and passes the file name returned by [QFileDialog::getSaveFileName()](docs:qtwidgets;QFileDialog::getSaveFileName).
 
@@ -129,7 +128,7 @@ void MainWindow::saveFileAs()
 
 [QFileDialog](docs:qtwidgets;QFileDialog) provides a number of static functions for displaying the common file dialog that is used by all KDE applications. Calling [QFileDialog::getSaveFileName()](docs:qtwidgets;QFileDialog::getSaveFileName) will display a dialog where the user can select the name of the file to save to or choose a new name. The function returns the full file name, which we then pass to `saveFileToDisk(QString)`.
 
-### saveFile()
+#### saveFile()
 
 ```c++
 void MainWindow::saveFile()
@@ -144,7 +143,7 @@ void MainWindow::saveFile()
 
 There's nothing exciting or new about this function, just the logic to decide whether or not to show the save dialog. If `fileName` is not empty, then the file is saved to `fileName`. But if it is, then the dialog is shown to allow the user to select a file name.
 
-### Loading a file
+#### Loading a file
 
 Finally, we get around to being able to load a file, from local storage or from a remote location like an FTP server. The code for this is all contained in `MainWindow::openFile()`.
 
@@ -188,19 +187,17 @@ if (storedJob) {
 }
 ```
 
-{{< alert title="Note" color="info" >}}
-Again, for simplicity's sake, this tutorial only saves text files to local disk. When you open a remote file for viewing and try to save it, the program will behave as if you were calling Save As on a completely new file.
-{{< /alert >}}
+\{{< alert title="Note" color="info" >\}} Again, for simplicity's sake, this tutorial only saves text files to local disk. When you open a remote file for viewing and try to save it, the program will behave as if you were calling Save As on a completely new file. \{{< /alert >\}}
 
-### CMakeLists.txt
+#### CMakeLists.txt
 
-{{< readfile file="/content/docs/getting-started/kxmlgui/saving_and_loading/CMakeLists.txt" highlight="cmake" emphasize="27-28 46-47" >}}
+\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/CMakeLists.txt" highlight="cmake" emphasize="27-28 46-47" >\}}
 
-Since we are now using the [KIO](docs:kio) library, we must tell CMake to link against it. We do this by passing `KIO` to the [`find_package()`](https://cmake.org/cmake/help/latest/command/find_package.html) function and `KF6::KIOCore` to the [`target_link_libraries()`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) function.
+Since we are now using the [KIO](docs:kio) library, we must tell CMake to link against it. We do this by passing `KIO` to the [`find_package()`](https://cmake.org/cmake/help/latest/command/find\_package.html) function and `KF6::KIOCore` to the [`target_link_libraries()`](https://cmake.org/cmake/help/latest/command/target\_link\_libraries.html) function.
 
-### Running our application
+#### Running our application
 
-Once again, you can repeat the same steps provided in {{< ref "hello_world#kxmlgui-running" >}} to build and install the application. You can then run the project with:
+Once again, you can repeat the same steps provided in \{{< ref "hello\_world#kxmlgui-running" >\}} to build and install the application. You can then run the project with:
 
 ```bash
 kdesrc-build --run --exec texteditor kxmlgui-tutorial

@@ -1,23 +1,23 @@
 ---
-title: "Plasma Widget tutorial"
+title: Plasma Widget tutorial
 weight: 2
-description: >
-  Learn how to create a KDE Plasma widget.
 aliases:
   - /docs/plasma/widget/
+description: Learn how to create a KDE Plasma widget.
 ---
+
+# Plasma Widget tutorial
 
 The KDE wiki has a [Getting Started and Hello World](https://techbase.kde.org/Development/Tutorials/Plasma5) tutorial which you can read as well.
 
+### Default Widgets
 
-## Default Widgets
+#### Learn By Example
 
-### Learn By Example
-
-You can learn by example by reading the default widgets located at:  
+You can learn by example by reading the default widgets located at:\
 `/usr/share/plasma/plasmoids/`
 
-You can fork an existing widget by copying the widget to where the downloaded widgets are installed to:  
+You can fork an existing widget by copying the widget to where the downloaded widgets are installed to:\
 `~/.local/share/plasma/plasmoids/`
 
 To properly fork the widget, rename the new folder, then edit the `Id` in the `metadata.json` file to match the new folder name. You will also want to edit the `Name` in the `metadata.json` file as well so you can tell it apart from the widget you forked it from. You should delete all the translated `Name[fr]` lines as well. Delete the `metadata.desktop` if it exists.
@@ -39,5 +39,4 @@ rm ./metadata.desktop
 plasmawindowed com.github.zren.myanalogclock
 ```
 
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

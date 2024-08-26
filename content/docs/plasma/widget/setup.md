@@ -1,16 +1,16 @@
 ---
-title: "Setup"
+title: Setup
 weight: 1
-description: >
-  Create a new plasma widget from scratch.
 aliases:
   - /docs/plasma/widget/setup/
+description: Create a new plasma widget from scratch.
 ---
 
-## Folder Structure
+# Setup
 
-{{< sections >}}
-{{< section-left >}}
+### Folder Structure
+
+\{{< sections >\}} \{{< section-left >\}}
 
 To start a new widget from scratch, first create a folder for your new widget somewhere in your coding directory (eg: `~/Code/plasmoid-helloworld`).
 
@@ -22,10 +22,10 @@ Inside `contents`, we will create the `ui` and `config` folders. `ui` is the fol
 
 Inside the `config` folder we have the `main.xml` which contains the schema of all our serialized configuration keys+values. The `config.qml` is used to define the tabs in the configuration window. Each tab will open a QML layout file (like `ui/configGeneral.qml`).
 
-Note that you don't *need* the 3 config files. You can get away with just the `main.qml` and `metadata.json` for a barebones widget.
-{{< /section-left >}}
+Note that you don't _need_ the 3 config files. You can get away with just the `main.qml` and `metadata.json` for a barebones widget. \{{< /section-left >\}}
 
-{{< section-right >}}
+\{{< section-right >\}}
+
 ```txt
 └── ~/Code/plasmoid-helloworld/
     └── package
@@ -38,13 +38,12 @@ Note that you don't *need* the 3 config files. You can get away with just the `m
         │       └── main.xml
         └── metadata.json
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
-## metadata.json
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< sections >}}
-{{< section-left >}}
+### metadata.json
+
+\{{< sections >\}} \{{< section-left >\}}
 
 Inside the `metadata.json` file we need to set the `Name` of the widget.
 
@@ -54,15 +53,15 @@ Inside the `metadata.json` file we need to set the `Name` of the widget.
 
 Widgets installed by the user (without root) like when you "Install New Widgets" will be installed to `~/.local/share/plasma/plasmoids/` (which may not yet exist). The default widgets shipped with KDE are installed to `/usr/share/plasma/plasmoids/`.
 
-`Category` is the category the widget can be filtered with in the widget list. A list of category names can be found [here]({{< ref "properties.md#category" >}}).
+`Category` is the category the widget can be filtered with in the widget list. A list of category names can be found \[here]\(\{{< ref "properties.md#category" >\}}).
 
 `X-Plasma-API` and `KPackageStructure` are also needed to just define that this package is a plasma widget, and where its entry point is.
 
-For the other properties, read the [`metadata.json` section in the Widget Properties page]({{< ref "properties.md#metadatajson" >}}).
+For the other properties, read the \[`metadata.json` section in the Widget Properties page]\(\{{< ref "properties.md#metadatajson" >\}}).
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">metadata.json</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+metadata.json
 
 ```json
 {
@@ -85,15 +84,14 @@ For the other properties, read the [`metadata.json` section in the Widget Proper
     "KPackageStructure": "Plasma/Applet"
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
-## contents/ui/main.qml
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< sections >}}
-{{< section-left >}}
+### contents/ui/main.qml
 
-This is the entry point. Various properties are available to be set. You should know that widgets have several ways of being represented. 
+\{{< sections >\}} \{{< section-left >\}}
+
+This is the entry point. Various properties are available to be set. You should know that widgets have several ways of being represented.
 
 * You can have a widget in the panel, which is just an icon that will show a popup window when clicked.
 * You can also have it on the desktop as a desktop widget which can be resized by the user. As a desktop widget it can switch between the "icon view" when smaller (which opens a popup), and directly showing the contents of the popup on the desktop when there's enough room.
@@ -114,15 +112,15 @@ If you change the compact representation, you will need to use a [`MouseArea`](h
 
 You can set the tooltip contents and various other things in the `main.qml`.
 
-### Examples of `main.qml`
+#### Examples of `main.qml`
 
 * Various examples in the [Getting Started](https://techbase.kde.org/Development/Tutorials/Plasma5/QML2/GettingStarted#main.qml) tutorial on the KDE wiki.
 * [colorpicker/package/contents/ui/main.qml](https://github.com/KDE/kdeplasma-addons/blob/master/applets/colorpicker/package/contents/ui/main.qml)
 * [fifteenPuzzle/package/contents/ui/main.qml](https://github.com/KDE/kdeplasma-addons/blob/master/applets/fifteenPuzzle/package/contents/ui/main.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -133,11 +131,11 @@ PlasmaComponents.Label {
 }
 ```
 
----
+***
 
 To show the text in the panel rather than in a popup:
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -153,22 +151,19 @@ PlasmaComponents.Label {
 }
 ```
 
----
+***
 
 To set the popup size:
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 {{< readfile file="/content/docs/plasma/widget/snippet/popup-size.qml" >}}
 ```
 
-{{< /section-right >}}
-{{< /sections >}}
+\{{< /section-right >\}} \{{< /sections >\}}
 
-{{< alert title="Note" color="info" >}}
-Plasmoids previously used a metadata.desktop file. This is discouraged, because the conversion to JSON will need to be done at runtime.
-Shipping a JSON file directly is supported for all of Plasma 5.
+\{{< alert title="Note" color="info" >\}} Plasmoids previously used a metadata.desktop file. This is discouraged, because the conversion to JSON will need to be done at runtime. Shipping a JSON file directly is supported for all of Plasma 5.
 
 In case you still have a desktop file inside of your project you can convert it to JSON and afterwards remove it.
 
@@ -176,9 +171,7 @@ In case you still have a desktop file inside of your project you can convert it 
 desktoptojson -s plasma-applet.desktop -i metadata.desktop
 rm metadata.desktop
 ```
-{{< /alert >}}
 
+\{{< /alert >\}}
 
-
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

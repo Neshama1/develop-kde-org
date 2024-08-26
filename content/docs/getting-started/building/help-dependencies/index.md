@@ -1,22 +1,23 @@
 ---
-title: "Installing build dependencies"
-description: "What to do when you are missing dependencies"
+title: Installing build dependencies
 weight: 5
-group: "help"
+group: help
+description: What to do when you are missing dependencies
 ---
 
-If you have any trouble getting things to build due to missing 3rd-party package dependencies, read on to learn what to do.
-If this guide does not manage to solve your compilation problems, be sure to [contact the developers]({{< ref "help-developers" >}}).
+# Installing build dependencies
 
-## How to install all the build dependencies of one package
+If you have any trouble getting things to build due to missing 3rd-party package dependencies, read on to learn what to do. If this guide does not manage to solve your compilation problems, be sure to \[contact the developers]\(\{{< ref "help-developers" >\}}).
+
+### How to install all the build dependencies of one package
 
 Often the simplest solution to the problem of missing dependencies is just to install all its required packages at once without needing to search for each dependency individually.
 
-Because most distributions keep track of package dependencies by using *source packages*, they also provide their own built-in commands to easily install all the build dependencies of each package.
+Because most distributions keep track of package dependencies by using _source packages_, they also provide their own built-in commands to easily install all the build dependencies of each package.
 
-While these commands will not *always* install all dependencies you will need when compiling KDE software (for example, when compiling with [kdesrc-build]({{< ref "kdesrc-build-setup" >}}), where the software is always changing), they will make your dependency resolution faster.
+While these commands will not _always_ install all dependencies you will need when compiling KDE software (for example, when compiling with \[kdesrc-build]\(\{{< ref "kdesrc-build-setup" >\}}), where the software is always changing), they will make your dependency resolution faster.
 
-### Debian, Ubuntu, Kubuntu, KDE neon
+#### Debian, Ubuntu, Kubuntu, KDE neon
 
 All the build packages known by the package you want to build can be installed with `apt build-dep`:
 
@@ -24,7 +25,7 @@ All the build packages known by the package you want to build can be installed w
 sudo apt build-dep dolphin
 ```
 
-### openSUSE
+#### openSUSE
 
 All the build packages known by the package you want to build can be installed with `zypper source-install --build-deps-only`:
 
@@ -32,11 +33,11 @@ All the build packages known by the package you want to build can be installed w
 sudo zypper --plus-content repo-source source-install --build-deps-only dolphin
 ```
 
-Note that temporarily enabling the source repositories so that build dependencies can be found is *not* automatic.
+Note that temporarily enabling the source repositories so that build dependencies can be found is _not_ automatic.
 
 The `--plus-content` option will make zypper temporarily enable it to get the info it needs.
 
-### Fedora
+#### Fedora
 
 All the build packages known by the package you want to build can be installed with `dnf builddep`:
 
@@ -46,7 +47,7 @@ sudo dnf builddep dolphin
 
 Note that `builddep` will temporarily enable the source repositories so that build dependencies can be found.
 
-## Using build errors to find missing dependencies
+### Using build errors to find missing dependencies
 
 Whenever you attempt to compile a project and it fails to build, most of the time this is caused by a missing dependency.
 
@@ -75,7 +76,7 @@ Meson projects typically prefer using `pkgconfig` over CMake package configurati
 
 The error here states that Meson could not find the pkgconfig for `gi-docgen` (most likely a file with the extension ".pc") or the CMake file (most likely a file with the extension ".cmake") that contains "gi-docgen" case insensitively in name.
 
-### Generic search
+#### Generic search
 
 There are two types of dependencies, build dependencies and runtime dependencies. The distribution package names for build dependencies usually begin with `lib` and/or end in `-dev` or `-devel`, whereas runtime dependencies usually just start with `lib`.
 
@@ -99,15 +100,15 @@ The usual pattern you will find for dependency packages looks like this:
 * openSUSE and Fedora: `kf6-<packagename>-devel` or `libKF6<PackageName>`
 * Arch: `<packagename>`
 
-{{< alert title="Tip" color="success" >}}
+\{{< alert title="Tip" color="success" >\}}
 
 You can also use web shortcuts provided by KRunner, which will open the package search website for each distribution.
 
 For example: open KRunner with Alt + Space, then type: `debian: textwidgets`. Your browser will open the "textwidgets" page of the [Debian Package Search website](https://packages.debian.org/) automatically.
 
-{{< /alert >}}
+\{{< /alert >\}}
 
-### Finding specific packages using CMake package configuration files
+#### Finding specific packages using CMake package configuration files
 
 A more efficient way is to use the functionality provided by your package manager to search for the CMake config file:
 
@@ -140,14 +141,14 @@ qt6-wayland-dev-tools: /usr/lib/qt6/libexec/qtwaylandscanner
 
 So the package you need to install is `qt6-wayland-dev-tools`.
 
-### Finding specific packages using pkgconfig files
+#### Finding specific packages using pkgconfig files
 
 Similarly to the above, certain distributions also allow to query for packages using pkgconfig files:
 
 * openSUSE: `zypper what-provides 'pkgconfig(gi-docgen)'`
 * Fedora: `dnf provides 'pkgconfig(gi-docgen)'`
 
-### Finding missing executables
+#### Finding missing executables
 
 If the CMake error looks like the following:
 
@@ -170,11 +171,14 @@ To solve this, you can specifically search for the executable in distribution pa
 * Arch: `sudo pacman -F /usr/bin/sass`
 * FreeBSD: `sudo pkg provides sass`
 
-{{< alert title="Configuring pkg-provides on FreeBSD" color="info" >}}
+\{{< alert title="Configuring pkg-provides on FreeBSD" color="info" >\}}
 
 <details>
+
 <summary>Click here to set up pkg-provides on FreeBSD</summary>
-<br>
+
+\
+
 
 Once you run `pkg provides`, if you face the error:
 
@@ -213,4 +217,4 @@ sudo pkg install texinfo
 
 </details>
 
-{{< /alert >}}
+\{{< /alert >\}}

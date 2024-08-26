@@ -1,20 +1,20 @@
 ---
-title: "Plasma's QML API"
+title: Plasma's QML API
 weight: 4
-description: >
-  A rundown of the QML types shipped in KDE Frameworks
 aliases:
   - /docs/plasma/widget/plasma-qml-api/
+description: A rundown of the QML types shipped in KDE Frameworks
 ---
 
-## Intro
+# Plasma's QML API
+
+### Intro
 
 KDE Frameworks ships with a number of useful extensions to Qt's QML. The [API documentation](docs:plasma-framework) is a good start if you need to know what a specific property does. If you want to browse any of the sources easier, it's also [available on GitLab](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/src/declarativeimports).
 
+### PlasmaComponents Controls
 
-## PlasmaComponents Controls
-
-QML ships with various controls, like [CheckBox](docs:qtquickcontrols;QtQuick.Controls.CheckBox), [RadioButton](docs:qtquickcontrols;QtQuick.Controls.RadioButton), [ComboBox](docs:qtquickcontrols;QtQuick.Controls.ComboBox) (dropdown menu), [SpinBox](docs:qtquickcontrols;QtQuick.Controls.SpinBox), [Slider](docs:qtquickcontrols;QtQuick.Controls.Slider), [TextField](docs:qtquickcontrols;QtQuick.Controls.TextField), [TextArea](docs:qtquickcontrols;QtQuick.Controls.TextArea), [Button](docs:qtquickcontrols;QtQuick.Controls.Button), [ToolButton](docs:qtquickcontrols;QtQuick.Controls.ToolButton). Plasma extends these controls to style them using the SVGs from the [Plasma Style]({{< ref "../theme/_index.md" >}}). It also assigns a number of default settings like setting the text color to follow the panel's color scheme.
+QML ships with various controls, like [CheckBox](docs:qtquickcontrols;QtQuick.Controls.CheckBox), [RadioButton](docs:qtquickcontrols;QtQuick.Controls.RadioButton), [ComboBox](docs:qtquickcontrols;QtQuick.Controls.ComboBox) (dropdown menu), [SpinBox](docs:qtquickcontrols;QtQuick.Controls.SpinBox), [Slider](docs:qtquickcontrols;QtQuick.Controls.Slider), [TextField](docs:qtquickcontrols;QtQuick.Controls.TextField), [TextArea](docs:qtquickcontrols;QtQuick.Controls.TextArea), [Button](docs:qtquickcontrols;QtQuick.Controls.Button), [ToolButton](docs:qtquickcontrols;QtQuick.Controls.ToolButton). Plasma extends these controls to style them using the SVGs from the \[Plasma Style]\(\{{< ref "../theme/\_index.md" >\}}). It also assigns a number of default settings like setting the text color to follow the panel's color scheme.
 
 PlasmaComponents 3 is a QML library that extends the [Qt Quick Controls 2 components](https://doc.qt.io/qt-5/qtquickcontrols-index.html) with defaults adapted to fit into Plasma widgets. Because PlasmaComponents 3 inherits from Qt Quick Controls 2, they have the same API, so the [Qt documentation](https://doc.qt.io/qt-5/qtquickcontrols-index.html) can be followed. For Plasma's specific behaviour changes, you can read the QML source code for each control in:
 
@@ -22,19 +22,13 @@ PlasmaComponents 3 is a QML library that extends the [Qt Quick Controls 2 compon
 
 Removed in Plasma 6.0: [PlasmaComponents 2](https://invent.kde.org/plasma/libplasma/-/tree/v5.102.0/src/declarativeimports/plasmacomponents/qml) was used in Plasma 5. It used the older [Qt Quick Controls 1](https://doc.qt.io/qt-5/qtquickcontrols1-index.html).
 
+#### Label
 
-### Label
+\{{< sections >\}} \{{< section-left >\}} [Labels](docs:qtquickcontrols;QtQuick.Controls.Label) are used for displaying text to the user. Plasma's Label are assigned a number of defaults. One thing is it sets the text color to follow the panel's color scheme.
 
-{{< sections >}}
-{{< section-left >}}
-[Labels](docs:qtquickcontrols;QtQuick.Controls.Label) are used for displaying text to the user.
-Plasma's Label are assigned a number of defaults. One thing
-is it sets the text color to follow the panel's color scheme.
+For the specifics, you can read the [`Label.qml` source code](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/Label.qml). \{{< /section-left >\}} \{{< section-right >\}}
 
-For the specifics, you can read the [`Label.qml` source code](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/Label.qml).
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -44,21 +38,18 @@ PlasmaComponents3.Label {
     text: i18n("Hello World")
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### CheckBox - Toggle
+#### CheckBox - Toggle
 
-{{< sections >}}
-{{< section-left >}}
-For a simple toggle, QML ships with [CheckBox](docs:qtquickcontrols;QtQuick.Controls.CheckBox). For Plasma's specific changes, you can read the QML source code at:
+\{{< sections >\}} \{{< section-left >\}} For a simple toggle, QML ships with [CheckBox](docs:qtquickcontrols;QtQuick.Controls.CheckBox). For Plasma's specific changes, you can read the QML source code at:
 
 * [`CheckBox.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/CheckBox.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -69,23 +60,20 @@ PlasmaComponents3.CheckBox {
     checked: true
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### RadioButton - Multiple Choice
+#### RadioButton - Multiple Choice
 
-{{< sections >}}
-{{< section-left >}}
-For multiple choices, QML ships with [RadioButton](docs:qtquickcontrols;QtQuick.Controls.RadioButton). For Plasma's specific changes, you can read the QML source code at:
+\{{< sections >\}} \{{< section-left >\}} For multiple choices, QML ships with [RadioButton](docs:qtquickcontrols;QtQuick.Controls.RadioButton). For Plasma's specific changes, you can read the QML source code at:
 
 * [`RadioButton.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/RadioButton.qml)
 
-Note that the [KDE Human Interface Guidelines]({{< ref "/hig/getting_input" >}}) suggest using a ComboBox when there are  more than 3 options.
+Note that the \[KDE Human Interface Guidelines]\(\{{< ref "/hig/getting\_input" >\}}) suggest using a ComboBox when there are more than 3 options.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -105,14 +93,12 @@ ColumnLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### ComboBox - Multiple Choice
+#### ComboBox - Multiple Choice
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 For multiple choices, QML also ships with [ComboBox](docs:qtquickcontrols;QtQuick.Controls.ComboBox) (dropdown menu). For Plasma's specific changes, you can read the QML source code at:
 
@@ -120,9 +106,9 @@ For multiple choices, QML also ships with [ComboBox](docs:qtquickcontrols;QtQuic
 
 Note that [`ComboBox.valueRole`](https://doc.qt.io/qt-5/qml-qtquick-controls2-combobox.html#valueRole-prop) and [`ComboBox.currentValue`](https://doc.qt.io/qt-5/qml-qtquick-controls2-combobox.html#currentValue-prop) was introduced in Qt 5.14. [Ubuntu 20.04 only has Qt 5.12](https://repology.org/project/qt/versions) so you will need to use your own `_valueRole` and `_currentValue` properties until Ubuntu 22.04. Make sure to not define a `valueRole` or `currentValue` property or it will break when your users upgrade to Qt 5.14.
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -146,22 +132,20 @@ PlasmaComponents3.ComboBox {
     readonly property var _currentValue: _valueRole && currentIndex >= 0 ? model[currentIndex][_valueRole] : null
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### Slider - Numbers
+#### Slider - Numbers
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 To control Integer or Real numbers, QML ships with [SpinBox](docs:qtquickcontrols;QtQuick.Controls.SpinBox) and [Slider](docs:qtquickcontrols;QtQuick.Controls.Slider). For Plasma's specific changes, you can read the QML source code at:
 
 * [`Slider.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/Slider.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.4
@@ -195,22 +179,18 @@ RowLayout {
 }
 
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+#### SpinBox - Numbers
 
-### SpinBox - Numbers
-
-{{< sections >}}
-{{< section-left >}}
-To control Integer or Real numbers, QML ships with [SpinBox](docs:qtquickcontrols;QtQuick.Controls.SpinBox) and [Slider](docs:qtquickcontrols;QtQuick.Controls.Slider). For Plasma's specific changes, you can read the QML source code at:
+\{{< sections >\}} \{{< section-left >\}} To control Integer or Real numbers, QML ships with [SpinBox](docs:qtquickcontrols;QtQuick.Controls.SpinBox) and [Slider](docs:qtquickcontrols;QtQuick.Controls.Slider). For Plasma's specific changes, you can read the QML source code at:
 
 * [`SpinBox.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/SpinBox.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -231,22 +211,19 @@ RowLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### TextField, TextArea - Input
+#### TextField, TextArea - Input
 
-{{< sections >}}
-{{< section-left >}}
-To enter text, QML ships with [TextField](docs:qtquickcontrols;QtQuick.Controls.TextField) and [TextArea](docs:qtquickcontrols;QtQuick.Controls.TextArea). For Plasma's specific changes, you can read the QML source code for each:
+\{{< sections >\}} \{{< section-left >\}} To enter text, QML ships with [TextField](docs:qtquickcontrols;QtQuick.Controls.TextField) and [TextArea](docs:qtquickcontrols;QtQuick.Controls.TextArea). For Plasma's specific changes, you can read the QML source code for each:
 
 * [`TextField.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/TextField.qml)
 * [`TextArea.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/TextArea.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -264,9 +241,9 @@ RowLayout {
 }
 ```
 
----
+***
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -276,22 +253,19 @@ PlasmaComponents3.TextArea {
     text: "Lorem ipsum\ndolor sit amet,\nconsectetur adipisicing elit"
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### Button, ToolButton
+#### Button, ToolButton
 
-{{< sections >}}
-{{< section-left >}}
-For buttons, QML ships with [Button](docs:qtquickcontrols;QtQuick.Controls.Button) and the flat [ToolButton](docs:qtquickcontrols;QtQuick.Controls.ToolButton) version. For Plasma's specific changes, you can read the QML source code for each:
+\{{< sections >\}} \{{< section-left >\}} For buttons, QML ships with [Button](docs:qtquickcontrols;QtQuick.Controls.Button) and the flat [ToolButton](docs:qtquickcontrols;QtQuick.Controls.ToolButton) version. For Plasma's specific changes, you can read the QML source code for each:
 
 * [`Button.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/Button.qml)
 * [`ToolButton.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/ToolButton.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -303,9 +277,9 @@ PlasmaComponents3.Button {
 }
 ```
 
----
+***
 
-<div class="filepath">contents/ui/main.qml</div>
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -316,22 +290,18 @@ PlasmaComponents3.ToolButton {
     text: i18n("Refresh")
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
+#### ScrollView
 
-### ScrollView
-
-{{< sections >}}
-{{< section-left >}}
-To add a scrollbar to manage overflow, QML ships with [ScrollView](docs:qtquickcontrols;QtQuick.Controls.ScrollView). For Plasma's specific changes, you can read the QML source code at:
+\{{< sections >\}} \{{< section-left >\}} To add a scrollbar to manage overflow, QML ships with [ScrollView](docs:qtquickcontrols;QtQuick.Controls.ScrollView). For Plasma's specific changes, you can read the QML source code at:
 
 * [`ScrollView.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/ScrollView.qml)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -348,50 +318,37 @@ PlasmaComponents3.ScrollView {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-### BusyIndicator
+#### BusyIndicator
 
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 This draws `widgets/busywidget.svg` from the Plasma Style and spins it. If animation speed is Instant in System Settings, it will not rotate.
 
 * [`BusyIndicator.qml`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/BusyIndicator.qml)
 * [Default `widgets/busywidget.svg` from Breeze](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/desktoptheme/breeze/widgets/busywidget.svg)
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
-{{< /section-right >}}
-{{< /sections >}}
+\{{< /section-right >\}} \{{< /sections >\}}
 
+### PlasmaExtras
 
-## PlasmaExtras
-
-To be consistent with elsewhere in Plasma, Plasma ships with a couple of special components.
-These components have their own API and are particularly helpful when creating a Plasma Widget.
+To be consistent with elsewhere in Plasma, Plasma ships with a couple of special components. These components have their own API and are particularly helpful when creating a Plasma Widget.
 
 You will need to import `PlasmaExtras` to use them.
 
-### Heading, Paragraph
+#### Heading, Paragraph
 
-<!-- TODO change to Kirigami::Heading and remove Paragraph -->
-
-{{< sections >}}
-{{< section-left >}}
-To be consistent with elsewhere in Plasma, Plasma ships with a couple different Label/Text
-types with preset default sizes. The first one is [Heading](docs:plasma-framework;org::kde::plasma::extras::Heading)
-for subsections of texts and the second one is [Paragraph](docs:plasma-framework;org::kde::plasma::extras::Paragraph).
-Both wraps by default with `Layout.fillWidth: true`.
+\{{< sections >\}} \{{< section-left >\}} To be consistent with elsewhere in Plasma, Plasma ships with a couple different Label/Text types with preset default sizes. The first one is [Heading](docs:plasma-framework;org::kde::plasma::extras::Heading) for subsections of texts and the second one is [Paragraph](docs:plasma-framework;org::kde::plasma::extras::Paragraph). Both wraps by default with `Layout.fillWidth: true`.
 
 ![Screenshot Paragraph and Heading](paragraphs.png)
 
-{{< /section-left >}}
-{{< section-right >}}
-<div class="filepath">contents/ui/main.qml</div>
+\{{< /section-left >\}} \{{< section-right >\}}
+
+contents/ui/main.qml
 
 ```qml
 import QtQuick 2.0
@@ -416,11 +373,10 @@ ColumnLayout {
     }
 }
 ```
-{{< /section-right >}}
-{{< /sections >}}
 
+\{{< /section-right >\}} \{{< /sections >\}}
 
-## PlasmaCore
+### PlasmaCore
 
 ```qml
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -434,10 +390,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 [See the API docs](https://api.kde.org/frameworks/plasma-plasma-framework/html/core.html) for the full list of types in `PlasmaCore`. You can also skim the generated [`.../core/plugins.qmltypes`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/core/plugins.qmltypes) file.
 
+#### PlasmaCore.Theme
 
-### PlasmaCore.Theme
-
-`PlasmaCore.Theme` contains the [Plasma Style]({{< ref "../theme/_index.md" >}}) color palette.
+`PlasmaCore.Theme` contains the \[Plasma Style]\(\{{< ref "../theme/\_index.md" >\}}) color palette.
 
 * `PlasmaCore.Theme.textColor`
 * `PlasmaCore.Theme.highlightColor`
@@ -457,8 +412,7 @@ There is also properties for the various color groups using a prefix.
 * `PlasmaCore.Theme.complementaryTextColor`
 * `PlasmaCore.Theme.headerTextColor`
 
-The full list of `PlasmaCore.Theme` color properties can be found in the `QuickTheme` class definition:
-[`plasma-framework/src/declarativeimports/core/quicktheme.h`](https://invent.kde.org/frameworks/plasma-framework/blob/master/src/declarativeimports/core/quicktheme.h)
+The full list of `PlasmaCore.Theme` color properties can be found in the `QuickTheme` class definition: [`plasma-framework/src/declarativeimports/core/quicktheme.h`](https://invent.kde.org/frameworks/plasma-framework/blob/master/src/declarativeimports/core/quicktheme.h)
 
 The `QuickTheme` class extends `Plasma::Theme` which also contains:
 
@@ -470,8 +424,7 @@ The `QuickTheme` class extends `Plasma::Theme` which also contains:
 * `PlasmaCore.Theme.useGlobalSettings` [`bool`](https://doc.qt.io/qt-5/qml-bool.html)
 * `PlasmaCore.Theme.wallpaperPath` [`string`](https://doc.qt.io/qt-5/qml-string.html)
 
-
-### PlasmaCore.Units.devicePixelRatio
+#### PlasmaCore.Units.devicePixelRatio
 
 In order to scale an Item by display scaling to support HiDPI monitors, you will need to multiply a pixel value by `PlasmaCore.Units.devicePixelRatio`. Plasma also ships with a few preset values for consistent spacing throughout Plasma.
 
@@ -500,11 +453,9 @@ RowLayout {
 }
 ```
 
+#### PlasmaCore.Units.iconSizes
 
-### PlasmaCore.Units.iconSizes
-
-{{< sections >}}
-{{< section-left >}}
+\{{< sections >\}} \{{< section-left >\}}
 
 `PlasmaCore.Units.iconSizes` is scaled by DPI.
 
@@ -515,16 +466,13 @@ RowLayout {
 * `PlasmaCore.Units.iconSizes.huge` `= 64px`
 * `PlasmaCore.Units.iconSizes.enormous` `= 128px`
 
-{{< /section-left >}}
-{{< section-right >}}
+\{{< /section-left >\}} \{{< section-right >\}}
 
 ![](iconsizes.png)
 
-{{< /section-right >}}
-{{< /sections >}}
+\{{< /section-right >\}} \{{< /sections >\}}
 
-
-### PlasmaCore.Units.shortDuration
+#### PlasmaCore.Units.shortDuration
 
 These properties are scaled by the Animation Speed in System Settings.
 
@@ -537,7 +485,4 @@ This property is a hardcoded value and shouldn't be used for animations. Instead
 
 * `PlasmaCore.Units.humanMoment` `= 2000ms`
 
-
-
-
-{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >}}
+\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

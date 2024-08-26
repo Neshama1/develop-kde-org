@@ -4,18 +4,21 @@ aliases:
   - /docs/plasma/kwin/api/
 ---
 
+# KWin scripting API
+
 This page describes the KWin Scripting API as of KWin 6.0. It has been generated using https://invent.kde.org/nicolasfella/kwin-scripting-api-generator
 
-## Global
+### Global
 
 Methods and properties added to the global JavaScript object.
 
-### Read-only Properties
+#### Read-only Properties
 
 * `KWin::Options options`: Global property to all configuration values of KWin core.
 * `KWin::Workspace workspace`: Global property to the core wrapper of KWin.
 * `object KWin`: Provides access to enums defined in KWin::WorkspaceWrapper
-### Functions
+
+#### Functions
 
 * `print(QVariant ... values)`: Prints all provided values to kDebug and as a D-Bus signal
 * `QVariant readConfig(QString key, QVariant defaultValue = QVariant())`: Reads the config value for key in the Script's configuration with the optional default value. If not providing a default value and no value stored in the configuration an undefined value is returned.
@@ -29,30 +32,33 @@ Methods and properties added to the global JavaScript object.
 * `bool assertNull(QVariant value, QString message = QString())`: Aborts the execution of the script if value is not null. If message is provided an error is thrown with the given message, if not provided an error with default message is thrown.
 * `bool assertNotNull(QVariant value, QString message = QString())`: Aborts the execution of the script if value is null. If message is provided an error is thrown with the given message, if not provided an error with default message is thrown.
 * `callDBus(QString service, QString path, QString interface, QString method, QVariant arg..., QJSValue callback = QJSValue())`: Call a D-Bus method at (service, path, interface and method). A variable number of arguments can be added to the method call. The D-Bus call is always performed in an async way invoking the callback provided as the last (optional) argument. The reply values of the D-Bus method call are passed to the callback.
-* `registerUserActionsMenu(QJSValue callback)`: Registers the passed in callback to be invoked whenever the User actions menu (`Alt+F3` or right click on window decoration) is about to be shown. The callback is invoked with a reference to the Client for which the menu is shown. The callback can return either a single menu entry to be added to the menu or an own sub menu with multiple entries. The object for a menu entry should be
-  ```js
-  {
-    title: "My Menu entry",
-    checkable: true,
-    checked: false,
-    triggered: function (action) {
-      // callback with triggered QAction
+*   `registerUserActionsMenu(QJSValue callback)`: Registers the passed in callback to be invoked whenever the User actions menu (`Alt+F3` or right click on window decoration) is about to be shown. The callback is invoked with a reference to the Client for which the menu is shown. The callback can return either a single menu entry to be added to the menu or an own sub menu with multiple entries. The object for a menu entry should be
+
+    ```js
+    {
+      title: "My Menu entry",
+      checkable: true,
+      checked: false,
+      triggered: function (action) {
+        // callback with triggered QAction
+      }
     }
-  }
-  ```
-  for a menu it should be
-  ```js
-  {
-    title: "My menu",
-    items: [{...}, {...}, ...] /*list with entries as described*/
-  }
-  ```
+    ```
 
-## KWin::WorkspaceWrapper
+    for a menu it should be
 
-### Enums
+    ```js
+    {
+      title: "My menu",
+      items: [{...}, {...}, ...] /*list with entries as described*/
+    }
+    ```
 
-#### ClientAreaOption
+### KWin::WorkspaceWrapper
+
+#### Enums
+
+**ClientAreaOption**
 
 * `PlacementArea`: window movement snapping area? ignore struts
 * `MovementArea`:
@@ -63,7 +69,7 @@ Methods and properties added to the global JavaScript object.
 * `FullArea`:
 * `ScreenArea`:
 
-#### ElectricBorder
+**ElectricBorder**
 
 * `ElectricTop`:
 * `ElectricTopRight`:
@@ -76,7 +82,7 @@ Methods and properties added to the global JavaScript object.
 * `ELECTRIC_COUNT`:
 * `ElectricNone`:
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QList< KWin::VirtualDesktop * >` `desktops`
 * `QSize` `desktopGridSize`
@@ -93,13 +99,13 @@ Methods and properties added to the global JavaScript object.
 * `QList< KWin::Window * >` `stackingOrder`: List of Clients currently managed by KWin, orderd by their visibility (later ones cover earlier ones).
 * `QPoint` `cursorPos`: The current position of the cursor.
 
-### Read-write Properties
+#### Read-write Properties
 
 * `KWin::VirtualDesktop *` `currentDesktop`
 * `KWin::Window *` `activeWindow`
 * `QString` `currentActivity`
 
-### Signals
+#### Signals
 
 * `windowAdded(KWin::Window *window)`
 * `windowRemoved(KWin::Window *window)`
@@ -116,7 +122,7 @@ Methods and properties added to the global JavaScript object.
 * `currentDesktopChanged(KWin::VirtualDesktop *previous)`: This signal is emitted when the current virtual desktop changes.
 * `cursorPosChanged()`: This signal is emitted when the cursor position changes. cursorPos()
 
-### Functions
+#### Functions
 
 * `slotSwitchDesktopNext()`
 * `slotSwitchDesktopPrevious()`
@@ -193,7 +199,7 @@ Methods and properties added to the global JavaScript object.
 * `QRectF` `clientArea(ClientAreaOption option, KWin::Output *output, KWin::VirtualDesktop *desktop) const`: Returns the geometry a Client can use with the specified option. This method should be preferred over other methods providing screen sizes as the various options take constraints such as struts set on panels into account. This method is also multi screen aware, but there are also options to get full areas. option The type of area which should be considered screen The screen for which the area should be considered desktop The desktop for which the area should be considered, in general there should not be a difference The specified screen geometry
 * `QRectF` `clientArea(ClientAreaOption option, KWin::Window *client) const`: Overloaded method for convenience. client The Client for which the area should be retrieved The specified screen geometry
 * `QRectF` `clientArea(ClientAreaOption option, const KWin::Window *client) const`
-* `createDesktop(int position, const QString &name) const`: Create a new virtual desktop at the requested position. position The position of the desktop. It should be in range [0, count]. name The name for the new desktop, if empty the default name will be used.
+* `createDesktop(int position, const QString &name) const`: Create a new virtual desktop at the requested position. position The position of the desktop. It should be in range \[0, count]. name The name for the new desktop, if empty the default name will be used.
 * `removeDesktop(KWin::VirtualDesktop *desktop) const`: Removes the specified virtual desktop.
 * `QString` `supportInformation() const`: Provides support information about the currently running KWin instance.
 * `raiseWindow(KWin::Window *window)`: Raises a Window above all others on the screen. window The Window to raise
@@ -201,37 +207,37 @@ Methods and properties added to the global JavaScript object.
 * `QList< KWin::Window * >` `windowAt(const QPointF &pos, int count=1) const`: Finds up to count windows at a particular location, prioritizing the topmost one first. A negative count returns all matching clients. pos The location to look for count The number of clients to return A list of Client objects
 * `bool` `isEffectActive(const QString &pluginId) const`: Checks if a specific effect is currently active. pluginId The plugin Id of the effect to check. true if the effect is loaded and currently active, false otherwise. 6.0
 
-## KWin::VirtualDesktop
+### KWin::VirtualDesktop
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QString` `id`
 * `uint` `x11DesktopNumber`
 
-### Read-write Properties
+#### Read-write Properties
 
 * `QString` `name`
 
-### Signals
+#### Signals
 
 * `nameChanged()`
 * `x11DesktopNumberChanged()`
 * `aboutToBeDestroyed()`: Emitted just before the desktop gets destroyed.
 
-### Functions
+#### Functions
 
-## KWin::Output
+### KWin::Output
 
-### Enums
+#### Enums
 
-#### DpmsMode
+**DpmsMode**
 
 * `On`:
 * `Standby`:
 * `Suspend`:
 * `Off`:
 
-#### Capability
+**Capability**
 
 * `Dpms`:
 * `Overscan`:
@@ -243,7 +249,7 @@ Methods and properties added to the global JavaScript object.
 * `IccProfile`:
 * `Tearing`:
 
-#### SubPixel
+**SubPixel**
 
 * `Unknown`:
 * `None`:
@@ -252,18 +258,19 @@ Methods and properties added to the global JavaScript object.
 * `Vertical_RGB`:
 * `Vertical_BGR`:
 
-#### RgbRange
+**RgbRange**
+
 * `Automatic`:
 * `Full`:
 * `Limited`:
 
-#### AutoRotationPolicy
+**AutoRotationPolicy**
 
 * `Never`:
 * `InTabletMode`:
 * `Always`:
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QRect` `geometry`
 * `qreal` `devicePixelRatio`
@@ -272,7 +279,7 @@ Methods and properties added to the global JavaScript object.
 * `QString` `model`
 * `QString` `serialNumber`
 
-### Signals
+#### Signals
 
 * `geometryChanged()`: This signal is emitted when the geometry of this output has changed.
 * `enabledChanged()`: This signal is emitted when the output has been enabled or disabled.
@@ -300,28 +307,28 @@ Methods and properties added to the global JavaScript object.
 * `sdrGamutWidenessChanged()`
 * `colorDescriptionChanged()`
 
-### Functions
+#### Functions
 
 * `QPointF` `mapToGlobal(const QPointF &pos) const`
 * `QPointF` `mapFromGlobal(const QPointF &pos) const`
 
-## KWin::Window
+### KWin::Window
 
-### Enums
+#### Enums
 
-#### SizeMode
+**SizeMode**
 
 * `SizeModeAny`:
 * `SizeModeFixedW`:
 * `SizeModeFixedH`:
 * `SizeModeMax`:
 
-#### SameApplicationCheck
+**SameApplicationCheck**
 
 * `RelaxedForActive`:
 * `AllowCrossProcesses`:
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QRectF` `bufferGeometry`: This property holds rectangle that the pixmap or buffer of this Window occupies on the screen. This rectangle includes invisible portions of the window, e.g. client-side drop shadows, etc.
 * `QRectF` `clientGeometry`: The geometry of the Window without frame borders.
@@ -336,23 +343,23 @@ Methods and properties added to the global JavaScript object.
 * `QString` `resourceName`
 * `QString` `resourceClass`
 * `QString` `windowRole`
-* `bool` `desktopWindow`: Returns whether the window is a desktop background window (the one with wallpaper). See _NET_WM_WINDOW_TYPE_DESKTOP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dock`: Returns whether the window is a dock (i.e. a panel). See _NET_WM_WINDOW_TYPE_DOCK at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `toolbar`: Returns whether the window is a standalone (detached) toolbar window. See _NET_WM_WINDOW_TYPE_TOOLBAR at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `menu`: Returns whether the window is a torn-off menu. See _NET_WM_WINDOW_TYPE_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `normalWindow`: Returns whether the window is a "normal" window, i.e. an application or any other window for which none of the specialized window types fit. See _NET_WM_WINDOW_TYPE_NORMAL at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dialog`: Returns whether the window is a dialog window. See _NET_WM_WINDOW_TYPE_DIALOG at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `splash`: Returns whether the window is a splashscreen. Note that many (especially older) applications do not support marking their splash windows with this type. See _NET_WM_WINDOW_TYPE_SPLASH at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `utility`: Returns whether the window is a utility window, such as a tool window. See _NET_WM_WINDOW_TYPE_UTILITY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dropdownMenu`: Returns whether the window is a dropdown menu (i.e. a popup directly or indirectly open from the applications menubar). See _NET_WM_WINDOW_TYPE_DROPDOWN_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `popupMenu`: Returns whether the window is a popup menu (that is not a torn-off or dropdown menu). See _NET_WM_WINDOW_TYPE_POPUP_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `tooltip`: Returns whether the window is a tooltip. See _NET_WM_WINDOW_TYPE_TOOLTIP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `notification`: Returns whether the window is a window with a notification. See _NET_WM_WINDOW_TYPE_NOTIFICATION at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `desktopWindow`: Returns whether the window is a desktop background window (the one with wallpaper). See \_NET\_WM\_WINDOW\_TYPE\_DESKTOP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dock`: Returns whether the window is a dock (i.e. a panel). See \_NET\_WM\_WINDOW\_TYPE\_DOCK at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `toolbar`: Returns whether the window is a standalone (detached) toolbar window. See \_NET\_WM\_WINDOW\_TYPE\_TOOLBAR at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `menu`: Returns whether the window is a torn-off menu. See \_NET\_WM\_WINDOW\_TYPE\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `normalWindow`: Returns whether the window is a "normal" window, i.e. an application or any other window for which none of the specialized window types fit. See \_NET\_WM\_WINDOW\_TYPE\_NORMAL at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dialog`: Returns whether the window is a dialog window. See \_NET\_WM\_WINDOW\_TYPE\_DIALOG at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `splash`: Returns whether the window is a splashscreen. Note that many (especially older) applications do not support marking their splash windows with this type. See \_NET\_WM\_WINDOW\_TYPE\_SPLASH at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `utility`: Returns whether the window is a utility window, such as a tool window. See \_NET\_WM\_WINDOW\_TYPE\_UTILITY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dropdownMenu`: Returns whether the window is a dropdown menu (i.e. a popup directly or indirectly open from the applications menubar). See \_NET\_WM\_WINDOW\_TYPE\_DROPDOWN\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `popupMenu`: Returns whether the window is a popup menu (that is not a torn-off or dropdown menu). See \_NET\_WM\_WINDOW\_TYPE\_POPUP\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `tooltip`: Returns whether the window is a tooltip. See \_NET\_WM\_WINDOW\_TYPE\_TOOLTIP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `notification`: Returns whether the window is a window with a notification. See \_NET\_WM\_WINDOW\_TYPE\_NOTIFICATION at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `bool` `criticalNotification`: Returns whether the window is a window with a critical notification.
 * `bool` `appletPopup`: Returns whether the window is an applet popup.
 * `bool` `onScreenDisplay`: Returns whether the window is an On Screen Display.
-* `bool` `comboBox`: Returns whether the window is a combobox popup. See _NET_WM_WINDOW_TYPE_COMBO at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dndIcon`: Returns whether the window is a Drag&Drop icon. See _NET_WM_WINDOW_TYPE_DND at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `comboBox`: Returns whether the window is a combobox popup. See \_NET\_WM\_WINDOW\_TYPE\_COMBO at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dndIcon`: Returns whether the window is a Drag\&Drop icon. See \_NET\_WM\_WINDOW\_TYPE\_DND at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `int` `windowType`: Returns the NETWM window type See https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `bool` `managed`: Whether this Window is managed by KWin (it has control over its placement and other aspects, as opposed to override-redirect windows that are entirely handled by the application).
 * `bool` `deleted`: Whether this Window represents an already deleted window and only kept for the compositor for animations.
@@ -367,11 +374,11 @@ Methods and properties added to the global JavaScript object.
 * `QIcon` `icon`
 * `bool` `shadeable`: Whether the Window can be shaded. The property is evaluated each time it is invoked. Because of that there is no notify signal.
 * `bool` `minimizable`: Whether the Window can be minimized. The property is evaluated each time it is invoked. Because of that there is no notify signal.
-* `QRectF` `iconGeometry`: The optional geometry representing the minimized Window in e.g a taskbar. See _NET_WM_ICON_GEOMETRY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html . The value is evaluated each time the getter is called. Because of that no changed signal is provided.
+* `QRectF` `iconGeometry`: The optional geometry representing the minimized Window in e.g a taskbar. See \_NET\_WM\_ICON\_GEOMETRY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html . The value is evaluated each time the getter is called. Because of that no changed signal is provided.
 * `bool` `specialWindow`: Returns whether the window is any of special windows types (desktop, dock, splash, ...), i.e. window types that usually don't have a window frame and the user does not use window management (moving, raising,...) on them. The value is evaluated each time the getter is called. Because of that no changed signal is provided.
-* `QString` `caption`: The Caption of the Window. Read from WM_NAME property together with a suffix for hostname and shortcut. To read only the caption as provided by WM_NAME, use the getter with an additional false value.
-* `QSizeF` `minSize`: Minimum size as specified in WM_NORMAL_HINTS
-* `QSizeF` `maxSize`: Maximum size as specified in WM_NORMAL_HINTS
+* `QString` `caption`: The Caption of the Window. Read from WM\_NAME property together with a suffix for hostname and shortcut. To read only the caption as provided by WM\_NAME, use the getter with an additional false value.
+* `QSizeF` `minSize`: Minimum size as specified in WM\_NORMAL\_HINTS
+* `QSizeF` `maxSize`: Maximum size as specified in WM\_NORMAL\_HINTS
 * `bool` `wantsInput`: Whether the Window can accept keyboard focus. The value is evaluated each time the getter is called. Because of that no changed signal is provided.
 * `bool` `transient`: Whether the Window is a transient Window to another Window. transientFor
 * `KWin::Window *` `transientFor`: The Window to which this Window is a transient if any.
@@ -393,11 +400,11 @@ Methods and properties added to the global JavaScript object.
 * `bool` `hidden`: Whether this window is hidden. It's usually the case with auto-hide panels.
 * `bool` `inputMethod`: Returns whether this window is a input method window. This is only used for Wayland.
 
-### Read-write Properties
+#### Read-write Properties
 
 * `qreal` `opacity`
 * `bool` `skipsCloseAnimation`: Whether the window does not want to be animated on window close. There are legit reasons for this like a screenshot application which does not want it's window being captured.
-* `bool` `fullScreen`: Whether this Window is fullScreen. A Window might either be fullScreen due to the _NET_WM property or through a legacy support hack. The fullScreen state can only be changed if the Window does not use the legacy hack. To be sure whether the state changed, connect to the notify signal.
+* `bool` `fullScreen`: Whether this Window is fullScreen. A Window might either be fullScreen due to the \_NET\_WM property or through a legacy support hack. The fullScreen state can only be changed if the Window does not use the legacy hack. To be sure whether the state changed, connect to the notify signal.
 * `QList< KWin::VirtualDesktop * >` `desktops`: The virtual desktops this client is on. If it's on all desktops, the list is empty.
 * `bool` `onAllDesktops`: Whether the Window is on all desktops. That is desktop is -1.
 * `QStringList` `activities`: The activities this client is on. If it's on all activities the property is empty.
@@ -408,12 +415,12 @@ Methods and properties added to the global JavaScript object.
 * `bool` `keepBelow`: Whether the Window is set to be kept below other windows.
 * `bool` `shade`: Whether the Window is shaded.
 * `bool` `minimized`: Whether the Window is minimized.
-* `bool` `demandsAttention`: Whether window state _NET_WM_STATE_DEMANDS_ATTENTION is set. This state indicates that some action in or with the window happened. For example, it may be set by the Window Manager if the window requested activation but the Window Manager refused it, or the application may set it if it finished some work. This state may be set by both the Window and the Window Manager. It should be unset by the Window Manager when it decides the window got the required attention (usually, that it got activated).
+* `bool` `demandsAttention`: Whether window state \_NET\_WM\_STATE\_DEMANDS\_ATTENTION is set. This state indicates that some action in or with the window happened. For example, it may be set by the Window Manager if the window requested activation but the Window Manager refused it, or the application may set it if it finished some work. This state may be set by both the Window and the Window Manager. It should be unset by the Window Manager when it decides the window got the required attention (usually, that it got activated).
 * `QRectF` `frameGeometry`: The geometry of this Window. Be aware that depending on resize mode the frameGeometryChanged signal might be emitted at each resize step or only at the end of the resize operation.
 * `bool` `noBorder`: Whether the window has a decoration or not. This property is not allowed to be set by applications themselves. The decision whether a window has a border or not belongs to the window manager. If this property gets abused by application developers, it will be removed again.
 * `KWin::Tile *` `tile`: The Tile this window is associated to, if any
 
-### Signals
+#### Signals
 
 * `stackingOrderChanged()`
 * `shadeChanged()`
@@ -478,37 +485,37 @@ Methods and properties added to the global JavaScript object.
 * `maximizeGeometryRestoreChanged()`
 * `fullscreenGeometryRestoreChanged()`
 
-### Functions
+#### Functions
 
 * `closeWindow()=0`
 * `setMaximize(bool vertically, bool horizontally)`: Sets the maximization according to vertically and horizontally.
 
-## KWin::TileManager
+### KWin::TileManager
 
-### Read-only Properties
+#### Read-only Properties
 
 * `KWin::Tile *` `rootTile`
 * `TileModel *` `model`
 
-### Signals
+#### Signals
 
 * `tileRemoved(KWin::Tile *tile)`
 
-### Functions
+#### Functions
 
 * `KWin::Tile *` `bestTileForPosition(qreal x, qreal y)`
 
-## KWin::Tile
+### KWin::Tile
 
-### Enums
+#### Enums
 
-#### LayoutDirection
+**LayoutDirection**
 
 * `Floating`:
 * `Horizontal`:
 * `Vertical`:
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QRectF` `absoluteGeometry`
 * `QRectF` `absoluteGeometryInScreen`
@@ -519,12 +526,12 @@ Methods and properties added to the global JavaScript object.
 * `bool` `isLayout`
 * `bool` `canBeRemoved`
 
-### Read-write Properties
+#### Read-write Properties
 
 * `QRectF` `relativeGeometry`
 * `qreal` `padding`
 
-### Signals
+#### Signals
 
 * `relativeGeometryChanged()`
 * `absoluteGeometryChanged()`
@@ -537,13 +544,13 @@ Methods and properties added to the global JavaScript object.
 * `windowRemoved(Window *window)`
 * `windowsChanged()`
 
-### Functions
+#### Functions
 
 * `resizeByPixels(qreal delta, Qt::Edge edge)`
 
-## GlobalMethods and properties added to the global JavaScript object in scriptd effects.
+### GlobalMethods and properties added to the global JavaScript object in scriptd effects.
 
-### Read-only Properties
+#### Read-only Properties
 
 * `KWin::EffectsHandler` `effects`: Global property to the core wrapper of KWin Effects
 * `KWin::ScriptedEffect` `effect`: Global property to the actual Effect
@@ -551,9 +558,9 @@ Methods and properties added to the global JavaScript object.
 * `object` `KWin`: Provides access to enums defined in KWin::WorkspaceWrapper
 * `object` `QEasingCurve`: Provides access to enums defined in QEasingCurve
 
-### Functions
+#### Functions
 
-* `QList<quint64>` `animate(settings)`: Schedules one or many animations for one window. The animations are defined through the settings object providing a more declarative way to specify the animations than the animate call on the effect object. The settings object supports the following attributes: <syntaxhighlight lang="javascript"> { window: EffectWindow, /* the window to animate, required */ duration: int, /* duration in msec, required */ curve: QEasingCurve.Type, /* global easing curve, optional */ type: Effect.Attribute, /* for first animation, optional */ from: FPx2, /* for first animation, optional */ to: FPx2, /* for first animation, optional */ delay: int, /* for first animation, optional */ shader: int, /* for first animation, optional */ animations: [ /* additional animations, optional */ { curve: QEasingCurve.Type, /* overrides global */ type: Effect.Attribute, from: FPx2, to: FPx2, delay: int, shader: int } ] } </syntaxhighlight> At least one animation or attribute setter (see below) needs to be specified either with the top-level properties or in the animations list.
+* `QList<quint64>` `animate(settings)`: Schedules one or many animations for one window. The animations are defined through the settings object providing a more declarative way to specify the animations than the animate call on the effect object. The settings object supports the following attributes: { window: EffectWindow, /\* the window to animate, required _/ duration: int, /_ duration in msec, required _/ curve: QEasingCurve.Type, /_ global easing curve, optional _/ type: Effect.Attribute, /_ for first animation, optional _/ from: FPx2, /_ for first animation, optional _/ to: FPx2, /_ for first animation, optional _/ delay: int, /_ for first animation, optional _/ shader: int, /_ for first animation, optional _/ animations: \[ /_ additional animations, optional _/ { curve: QEasingCurve.Type, /_ overrides global \*/ type: Effect.Attribute, from: FPx2, to: FPx2, delay: int, shader: int } ] } At least one animation or attribute setter (see below) needs to be specified either with the top-level properties or in the animations list.
 * `QList<quint64>` `set(settings)`: Like animate, just that the manipulation does not implicitly end with the animation. You have to explicitly cancel it. Until then, the manipulated attribute will remain at animation target value.
 * `bool` `cancel(QList<quint64>)`: Cancel one or more present animations caused and returned by KWin::ScriptedEffect::animate or KWin::ScriptedEffect::set. For convenience you can pass a single quint64 as well.
 * `print(QVariant ... values)`: Prints all provided values to kDebug and as a D-Bus signal
@@ -562,19 +569,20 @@ Methods and properties added to the global JavaScript object.
 * `int` `displayHeight()`: Height of the complete display (all screens).
 * `bool` `registerScreenEdge(ElectricBorder border, QScriptValue callback)`: Registers the callback for the screen edge. When the mouse gets pushed against the given edge the callback will be invoked.
 * `bool` `registerShortcut(QString title, QString text, QString keySequence, QScriptValue callback)`: Registers keySequence as a global shortcut. When the shortcut is invoked the callback will be called. Title and text are used to name the shortcut and make it available to the global shortcut configuration module.
-* `uint` `addFragmentShader(ShaderTrait traits, QString fragmentShaderFile)`: Creates a shader and returns an identifier which can be used in animate or set. The shader sources must be provided in the shaders sub-directory of the contents package directory. The fragment shader needs to have the file extension frag. Each shader should be provided in a GLSL 1.10 and GLSL 1.40 variant. The 1.40 variant needs to have a suffix _core. E.g. there should be a shader myCustomShader.frag and myCustomShader_core.frag. The vertex shader is generated from the ShaderTrait. The ShaderTrait enum can be used as flags in this method.
+* `uint` `addFragmentShader(ShaderTrait traits, QString fragmentShaderFile)`: Creates a shader and returns an identifier which can be used in animate or set. The shader sources must be provided in the shaders sub-directory of the contents package directory. The fragment shader needs to have the file extension frag. Each shader should be provided in a GLSL 1.10 and GLSL 1.40 variant. The 1.40 variant needs to have a suffix \_core. E.g. there should be a shader myCustomShader.frag and myCustomShader\_core.frag. The vertex shader is generated from the ShaderTrait. The ShaderTrait enum can be used as flags in this method.
 * `uint` `setUniform(uint shaderId, QString name, QJSValue value)`: Updates the uniform value of the uniform identified by @p name for the shader identified by @p shaderId. The @p value can be a floating point numeric value (integer uniform values are not supported), an array with either 2, 3 or 4 numeric values, a string to identify a color or a variant value to identify a color as returned by readConfig. This method can be used to update the state of the shader when the configuration of the effect changed.
 
-### Functions
+#### Functions
 
-## KWin::EffectsHandlerManager class that handles all the effects.
+### KWin::EffectsHandlerManager class that handles all the effects.
 
-### Enums
+#### Enums
 
-#### OnScreenMessageHideFlag
+**OnScreenMessageHideFlag**
+
 * `SkipsCloseAnimation`: The on-screen-message should skip the close window animation. EffectWindow::skipsCloseAnimation
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QStringList` `activeEffects`
 * `QStringList` `loadedEffects`
@@ -599,12 +607,12 @@ Methods and properties added to the global JavaScript object.
 * `KWin::SessionState` `sessionState`: The status of the session i.e if the user is logging out 5.18
 * `KWin::EffectWindow *` `inputPanel`
 
-### Read-write Properties
+#### Read-write Properties
 
 * `KWin::VirtualDesktop *` `currentDesktop`
 * `KWin::EffectWindow *` `activeWindow`
 
-### Signals
+#### Signals
 
 * `screenAdded(KWin::Output *screen)`: This signal is emitted whenever a new screen is added to the system.
 * `screenRemoved(KWin::Output *screen)`: This signal is emitted whenever a screen is removed from the system.
@@ -626,7 +634,7 @@ Methods and properties added to the global JavaScript object.
 * `tabBoxUpdated()`: Signal emitted when the selected TabBox window changed or the TabBox List changed. An effect should only response to this signal if it referenced the TabBox with refTabBox. refTabBox currentTabBoxWindowList currentTabBoxDesktopList currentTabBoxWindow currentTabBoxDesktop 4.7
 * `tabBoxKeyEvent(QKeyEvent *event)`: Signal emitted when a key event, which is not handled by TabBox directly is, happens while TabBox is active. An effect might use the key event to e.g. change the selected window. An effect should only response to this signal if it referenced the TabBox with refTabBox. event The key event not handled by TabBox directly refTabBox 4.7
 * `mouseChanged(const QPointF &pos, const QPointF &oldpos, Qt::MouseButtons buttons, Qt::MouseButtons oldbuttons, Qt::KeyboardModifiers modifiers, Qt::KeyboardModifiers oldmodifiers)`: Signal emitted when mouse changed. If an effect needs to get updated mouse positions, it needs to first call startMousePolling. For a fullscreen effect it is better to use an input window and react on windowInputMouseEvent. pos The new mouse position oldpos The previously mouse position buttons The pressed mouse buttons oldbuttons The previously pressed mouse buttons modifiers Pressed keyboard modifiers oldmodifiers Previously pressed keyboard modifiers. startMousePolling 4.7
-* `cursorShapeChanged()`: Signal emitted when the cursor shape changed. You'll likely want to query the current cursor as reaction: xcb_xfixes_get_cursor_image_unchecked Connection to this signal is tracked, so if you don't need it anymore, disconnect from it to stop cursor event filtering
+* `cursorShapeChanged()`: Signal emitted when the cursor shape changed. You'll likely want to query the current cursor as reaction: xcb\_xfixes\_get\_cursor\_image\_unchecked Connection to this signal is tracked, so if you don't need it anymore, disconnect from it to stop cursor event filtering
 * `propertyNotify(KWin::EffectWindow *w, long atom)`: Receives events registered for using registerPropertyType. Use readProperty() to get the property data. Note that the property may be already set on the window, so doing the same processing from windowAdded() (e.g. simply calling propertyNotify() from it) is usually needed. w The window whose property changed, is null if it is a root window property atom The property 4.7
 * `currentActivityChanged(const QString &id)`: This signal is emitted when the global activity is changed id id of the new current activity 4.9
 * `activityAdded(const QString &id)`: This signal is emitted when a new activity is added id id of the new activity 4.9
@@ -634,7 +642,7 @@ Methods and properties added to the global JavaScript object.
 * `screenLockingChanged(bool locked)`: This signal is emitted when the screen got locked or unlocked. locked true if the screen is now locked, false if it is now unlocked 4.11
 * `screenAboutToLock()`: This signal is emitted just before the screen locker tries to grab keys and lock the screen Effects should release any grabs immediately 5.17
 * `stackingOrderChanged()`: This signels is emitted when ever the stacking order is change, ie. a window is risen or lowered 4.10
-* `screenEdgeApproaching(ElectricBorder border, qreal factor, const QRect &geometry)`: This signal is emitted when the user starts to approach the border with the mouse. The factor describes how far away the mouse is in a relative mean. The values are in [0.0, 1.0] with 0.0 being emitted when first entered and on leaving. The value 1.0 means that the border is reached with the mouse. So the values are well suited for animations. The signal is always emitted when the mouse cursor position changes. border The screen edge which is being approached factor Value in range [0.0,1.0] to describe how close the mouse is to the border geometry The geometry of the edge which is being approached 4.11
+* `screenEdgeApproaching(ElectricBorder border, qreal factor, const QRect &geometry)`: This signal is emitted when the user starts to approach the border with the mouse. The factor describes how far away the mouse is in a relative mean. The values are in \[0.0, 1.0] with 0.0 being emitted when first entered and on leaving. The value 1.0 means that the border is reached with the mouse. So the values are well suited for animations. The signal is always emitted when the mouse cursor position changes. border The screen edge which is being approached factor Value in range \[0.0,1.0] to describe how close the mouse is to the border geometry The geometry of the edge which is being approached 4.11
 * `virtualScreenSizeChanged()`: Emitted whenever the virtualScreenSize changes. virtualScreenSize() 5.0
 * `virtualScreenGeometryChanged()`: Emitted whenever the virtualScreenGeometry changes. virtualScreenGeometry() 5.0
 * `windowDataChanged(KWin::EffectWindow *w, int role)`: This signal gets emitted when the data on EffectWindow w for role changed. An Effect can connect to this signal to read the new value and react on it. E.g. an Effect which does not operate on windows grabbed by another Effect wants to cancel the already scheduled animation if another Effect adds a grab. w The EffectWindow for which the data changed role The data role which changed EffectWindow::setData EffectWindow::data 5.8.4
@@ -647,7 +655,7 @@ Methods and properties added to the global JavaScript object.
 * `startupRemoved(const QString &id)`
 * `inputPanelChanged()`
 
-### Functions
+#### Functions
 
 * `reconfigureEffect(const QString &name)`
 * `bool` `loadEffect(const QString &name)`
@@ -677,17 +685,18 @@ Methods and properties added to the global JavaScript object.
 * `addRepaint(const QRegion &r)`
 * `addRepaint(int x, int y, int w, int h)`
 
-## KWin::EffectWindow Representation of a window used by/for Effect classes.
+### KWin::EffectWindow Representation of a window used by/for Effect classes.
 
-### Enums
+#### Enums
 
-####
+
+
 * `PAINT_DISABLED`: Window will not be painted
 * `PAINT_DISABLED_BY_DESKTOP`: Window will not be painted because of which desktop it's on
 * `PAINT_DISABLED_BY_MINIMIZE`: Window will not be painted because it is minimized
 * `PAINT_DISABLED_BY_ACTIVITY`: Window will not be painted because it's not on the current activity
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QRectF` `geometry`
 * `QRectF` `expandedGeometry`
@@ -705,25 +714,25 @@ Methods and properties added to the global JavaScript object.
 * `QRectF` `rect`
 * `QString` `windowClass`
 * `QString` `windowRole`
-* `bool` `desktopWindow`: Returns whether the window is a desktop background window (the one with wallpaper). See _NET_WM_WINDOW_TYPE_DESKTOP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dock`: Returns whether the window is a dock (i.e. a panel). See _NET_WM_WINDOW_TYPE_DOCK at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `toolbar`: Returns whether the window is a standalone (detached) toolbar window. See _NET_WM_WINDOW_TYPE_TOOLBAR at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `menu`: Returns whether the window is a torn-off menu. See _NET_WM_WINDOW_TYPE_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `normalWindow`: Returns whether the window is a "normal" window, i.e. an application or any other window for which none of the specialized window types fit. See _NET_WM_WINDOW_TYPE_NORMAL at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dialog`: Returns whether the window is a dialog window. See _NET_WM_WINDOW_TYPE_DIALOG at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `splash`: Returns whether the window is a splashscreen. Note that many (especially older) applications do not support marking their splash windows with this type. See _NET_WM_WINDOW_TYPE_SPLASH at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `utility`: Returns whether the window is a utility window, such as a tool window. See _NET_WM_WINDOW_TYPE_UTILITY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dropdownMenu`: Returns whether the window is a dropdown menu (i.e. a popup directly or indirectly open from the applications menubar). See _NET_WM_WINDOW_TYPE_DROPDOWN_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `popupMenu`: Returns whether the window is a popup menu (that is not a torn-off or dropdown menu). See _NET_WM_WINDOW_TYPE_POPUP_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `tooltip`: Returns whether the window is a tooltip. See _NET_WM_WINDOW_TYPE_TOOLTIP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `notification`: Returns whether the window is a window with a notification. See _NET_WM_WINDOW_TYPE_NOTIFICATION at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `criticalNotification`: Returns whether the window is a window with a critical notification. using the non-standard _KDE_NET_WM_WINDOW_TYPE_CRITICAL_NOTIFICATION
-* `bool` `onScreenDisplay`: Returns whether the window is an on screen display window using the non-standard _KDE_NET_WM_WINDOW_TYPE_ON_SCREEN_DISPLAY
-* `bool` `comboBox`: Returns whether the window is a combobox popup. See _NET_WM_WINDOW_TYPE_COMBO at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
-* `bool` `dndIcon`: Returns whether the window is a Drag&Drop icon. See _NET_WM_WINDOW_TYPE_DND at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `desktopWindow`: Returns whether the window is a desktop background window (the one with wallpaper). See \_NET\_WM\_WINDOW\_TYPE\_DESKTOP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dock`: Returns whether the window is a dock (i.e. a panel). See \_NET\_WM\_WINDOW\_TYPE\_DOCK at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `toolbar`: Returns whether the window is a standalone (detached) toolbar window. See \_NET\_WM\_WINDOW\_TYPE\_TOOLBAR at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `menu`: Returns whether the window is a torn-off menu. See \_NET\_WM\_WINDOW\_TYPE\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `normalWindow`: Returns whether the window is a "normal" window, i.e. an application or any other window for which none of the specialized window types fit. See \_NET\_WM\_WINDOW\_TYPE\_NORMAL at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dialog`: Returns whether the window is a dialog window. See \_NET\_WM\_WINDOW\_TYPE\_DIALOG at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `splash`: Returns whether the window is a splashscreen. Note that many (especially older) applications do not support marking their splash windows with this type. See \_NET\_WM\_WINDOW\_TYPE\_SPLASH at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `utility`: Returns whether the window is a utility window, such as a tool window. See \_NET\_WM\_WINDOW\_TYPE\_UTILITY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dropdownMenu`: Returns whether the window is a dropdown menu (i.e. a popup directly or indirectly open from the applications menubar). See \_NET\_WM\_WINDOW\_TYPE\_DROPDOWN\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `popupMenu`: Returns whether the window is a popup menu (that is not a torn-off or dropdown menu). See \_NET\_WM\_WINDOW\_TYPE\_POPUP\_MENU at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `tooltip`: Returns whether the window is a tooltip. See \_NET\_WM\_WINDOW\_TYPE\_TOOLTIP at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `notification`: Returns whether the window is a window with a notification. See \_NET\_WM\_WINDOW\_TYPE\_NOTIFICATION at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `criticalNotification`: Returns whether the window is a window with a critical notification. using the non-standard \_KDE\_NET\_WM\_WINDOW\_TYPE\_CRITICAL\_NOTIFICATION
+* `bool` `onScreenDisplay`: Returns whether the window is an on screen display window using the non-standard \_KDE\_NET\_WM\_WINDOW\_TYPE\_ON\_SCREEN\_DISPLAY
+* `bool` `comboBox`: Returns whether the window is a combobox popup. See \_NET\_WM\_WINDOW\_TYPE\_COMBO at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `bool` `dndIcon`: Returns whether the window is a Drag\&Drop icon. See \_NET\_WM\_WINDOW\_TYPE\_DND at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `int` `windowType`: Returns the NETWM window type See https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `bool` `deleted`: Whether this EffectWindow represents an already deleted window and only kept for the compositor for animations.
-* `QString` `caption`: The Caption of the window. Read from WM_NAME property together with a suffix for hostname and shortcut.
+* `QString` `caption`: The Caption of the window. Read from WM\_NAME property together with a suffix for hostname and shortcut.
 * `bool` `keepAbove`: Whether the window is set to be kept above other windows.
 * `bool` `keepBelow`: Whether the window is set to be kept below other windows.
 * `bool` `modal`: Whether the window represents a modal window.
@@ -732,7 +741,7 @@ Methods and properties added to the global JavaScript object.
 * `QSizeF` `basicUnit`: By how much the window wishes to grow/shrink at least. Usually QSize(1,1). MAY BE DISOBEYED BY THE WM! It's only for information, do NOT rely on it at all.
 * `bool` `move`: Whether the window is currently being moved by the user.
 * `bool` `resize`: Whether the window is currently being resized by the user.
-* `QRectF` `iconGeometry`: The optional geometry representing the minimized Client in e.g a taskbar. See _NET_WM_ICON_GEOMETRY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
+* `QRectF` `iconGeometry`: The optional geometry representing the minimized Client in e.g a taskbar. See \_NET\_WM\_ICON\_GEOMETRY at https://standards.freedesktop.org/wm-spec/wm-spec-latest.html .
 * `bool` `specialWindow`: Returns whether the window is any of special windows types (desktop, dock, splash, ...), i.e. window types that usually don't have a window frame and the user does not use window management (moving, raising,...) on them.
 * `QIcon` `icon`
 * `bool` `skipSwitcher`: Whether the window should be excluded from window switching effects.
@@ -756,11 +765,11 @@ Methods and properties added to the global JavaScript object.
 * `bool` `lockScreen`: Whether this EffectWindow represents the screenlocker greeter. 5.22
 * `bool` `hiddenByShowDesktop`: Whether this EffectWindow is hidden because the show desktop mode is active.
 
-### Read-write Properties
+#### Read-write Properties
 
 * `bool` `minimized`: Whether the window is minimized.
 
-### Signals
+#### Signals
 
 * `windowStartUserMovedResized(KWin::EffectWindow *w)`: Signal emitted when a user begins a window move or resize operation. To figure out whether the user resizes or moves the window use isUserMove or isUserResize. Whenever the geometry is updated the signal windowStepUserMovedResized is emitted with the current geometry. The move/resize operation ends with the signal windowFinishUserMovedResized. Only one window can be moved/resized by the user at the same time! w The window which is being moved/resized windowStepUserMovedResized windowFinishUserMovedResized EffectWindow::isUserMove EffectWindow::isUserResize
 * `windowStepUserMovedResized(KWin::EffectWindow *w, const QRectF &geometry)`: Signal emitted during a move/resize operation when the user changed the geometry. Please note: KWin supports two operation modes. In one mode all changes are applied instantly. This means the window's geometry matches the passed in geometry. In the other mode the geometry is changed after the user ended the move/resize mode. The geometry differs from the window's geometry. Also the window's pixmap still has the same size as before. Depending what the effect wants to do it would be recommended to scale/translate the window. w The window which is being moved/resized geometry The geometry of the window in the current move/resize step. windowStartUserMovedResized windowFinishUserMovedResized EffectWindow::isUserMove EffectWindow::isUserResize
@@ -783,7 +792,7 @@ Methods and properties added to the global JavaScript object.
 * `windowShown(KWin::EffectWindow *w)`: The window w gets shown again. The window was previously initially shown with windowAdded and hidden with windowHidden. windowHidden windowAdded
 * `windowHidden(KWin::EffectWindow *w)`: The window w got hidden but not yet closed. This can happen when a window is still being used and is supposed to be shown again with windowShown. On X11 an example is autohiding panels. On Wayland every window first goes through the window hidden state and might get shown again, or might get closed the normal way. windowShown windowClosed
 
-### Functions
+#### Functions
 
 * `addRepaint(const QRect &r)`
 * `addRepaint(int x, int y, int w, int h)`
@@ -799,11 +808,12 @@ Methods and properties added to the global JavaScript object.
 * `setData(int role, const QVariant &data)`: Can be used to by effects to store arbitrary data in the EffectWindow. Invoking this method will emit the signal EffectsHandler::windowDataChanged. EffectsHandler::windowDataChanged
 * `QVariant` `data(int role) const`
 
-## KWin::AnimationEffect
+### KWin::AnimationEffect
 
-### Enums
+#### Enums
 
-#### Anchor
+**Anchor**
+
 * `Left`:
 * `Top`:
 * `Right`:
@@ -812,7 +822,8 @@ Methods and properties added to the global JavaScript object.
 * `Vertical`:
 * `Mouse`:
 
-#### Attribute
+**Attribute**
+
 * `Opacity`:
 * `Brightness`:
 * `Saturation`:
@@ -828,7 +839,8 @@ Methods and properties added to the global JavaScript object.
 * `ShaderUniform`: Like Shader, but additionally allows to animate a float uniform passed to the shader. The uniform location must be provided as metadata.
 * `NonFloatBase`:
 
-#### MetaType
+**MetaType**
+
 * `SourceAnchor`:
 * `TargetAnchor`:
 * `RelativeSourceX`:
@@ -837,24 +849,24 @@ Methods and properties added to the global JavaScript object.
 * `RelativeTargetY`:
 * `Axis`:
 
-#### Direction
+**Direction**
 
 * `Forward`:
 * `Backward`:
 
-#### TerminationFlag
+**TerminationFlag**
 
 * `DontTerminate`: Don't terminate the animation when it reaches source or target position.
 * `TerminateAtSource`: Terminate the animation when it reaches the source position. An animation can reach the source position if its direction was changed to go backward (from target to source).
 * `TerminateAtTarget`: Terminate the animation when it reaches the target position. If this flag is not set, then the animation will be persistent.
 
-### Functions
+#### Functions
 
-## KWin::ScriptedEffect
+### KWin::ScriptedEffect
 
-### Enums
+#### Enums
 
-#### DataRole
+**DataRole**
 
 * `WindowAddedGrabRole`:
 * `WindowClosedGrabRole`:
@@ -865,29 +877,29 @@ Methods and properties added to the global JavaScript object.
 * `WindowForceBackgroundContrastRole`:
 * `WindowBackgroundContrastRole`:
 
-#### EasingCurve
+**EasingCurve**
 
 * `GaussianCurve`:
 
-#### ShaderTrait
+**ShaderTrait**
 
 * `MapTexture`:
 * `UniformColor`:
 * `Modulate`:
 * `AdjustSaturation`:
 
-### Read-only Properties
+#### Read-only Properties
 
 * `QString` `pluginId`: The plugin ID of the effect
 * `bool` `isActiveFullScreenEffect`: True if we are the active fullscreen effect
 
-### Signals
+#### Signals
 
 * `configChanged()`: Signal emitted whenever the effect's config changed.
 * `animationEnded(KWin::EffectWindow *w, quint64 animationId)`
 * `isActiveFullScreenEffectChanged()`
 
-### Functions
+#### Functions
 
 * `bool` `borderActivated(ElectricBorder border) override`
 * `bool` `isGrabbed(KWin::EffectWindow *w, DataRole grabRole)`: Whether another effect has grabbed the w with the given grabRole. w The window to check grabRole The grab role to check true if another window has grabbed the effect, false otherwise
