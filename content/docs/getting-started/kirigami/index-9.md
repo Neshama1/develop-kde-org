@@ -82,7 +82,7 @@ Kirigami.Action {
 
 ### Using actions in other components
 
-As mentioned in the [introduction tutorial for actions](../../../../../docs/getting-started/kirigami/introduction-actions/), Kirigami Actions are [contextual](../../../../../docs/getting-started/kirigami/introduction-actions/#actions-are-contextual), which means they show up in different places depending on where you put them. In addition to that, they also have different representations for desktop and mobile.
+As mentioned in the [introduction tutorial for actions](../../../../docs/getting-started/kirigami/introduction-actions/), Kirigami Actions are [contextual](../../../../docs/getting-started/kirigami/introduction-actions/#actions-are-contextual), which means they show up in different places depending on where you put them. In addition to that, they also have different representations for desktop and mobile.
 
 #### Page
 
@@ -143,11 +143,11 @@ Kirigami.ApplicationWindow {
 
 \{{< /compare >\}}
 
-You can read more about Global Drawers in the [documentation page for drawers](../components-drawers/#globaldrawer).
+You can read more about Global Drawers in the [documentation page for drawers](components-drawers/#globaldrawer).
 
 #### Context drawer
 
-A [Kirigami.ContextDrawer](docs:kirigami2;ContextDrawer) consists of an additional set of actions that are hidden behind a three-dots menu on the top right in desktop mode or on the bottom right in mobile mode if there is no space. It is used to display actions that are only relevant to a specific page. You can read more about them in our [Kirigami Drawers](../../../../../docs/getting-started/kirigami/components-drawers/) tutorial.
+A [Kirigami.ContextDrawer](docs:kirigami2;ContextDrawer) consists of an additional set of actions that are hidden behind a three-dots menu on the top right in desktop mode or on the bottom right in mobile mode if there is no space. It is used to display actions that are only relevant to a specific page. You can read more about them in our [Kirigami Drawers](../../../../docs/getting-started/kirigami/components-drawers/) tutorial.
 
 \{{< compare >\}}
 
@@ -179,7 +179,7 @@ Kirigami.ActionTextField {
 
 In this example, we are creating a "clear" button for a search field that is only visible when text is entered.
 
-![Search field with text: "I want](searchfield.webp)
+![Search field with text: "I want](components-actions/searchfield.webp)
 
 \{{< alert title="Note" color="info" >\}}
 
@@ -254,7 +254,7 @@ Kirigami.ApplicationWindow {
 
 \{{< figure caption="A horizontal toolbar being displayed at the top of the application" src="action\_tool\_bar.webp" >\}}
 
-You can read more about [ActionToolBar](docs:kirigami2;ActionToolBar) components in their [dedicated documentation page](../components-actiontoolbar/).
+You can read more about [ActionToolBar](docs:kirigami2;ActionToolBar) components in their [dedicated documentation page](components-actiontoolbar/).
 
 #### Cards
 
@@ -294,10 +294,10 @@ Kirigami.Card {
 
 \{{< section-right >\}}
 
-![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](card.png)
+![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](components-actions/card.png)
 
 \{{< /section-right >\}}
 
 \{{< /sections >\}}
 
-For more information consult the [component page for Cards](../components-card/).
+For more information consult the [component page for Cards](components-card/).

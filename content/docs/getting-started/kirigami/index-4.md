@@ -17,7 +17,7 @@ One way we could do this is by creating a new page where we place the required i
 
 Instead, we'll be using a dialog.
 
-![Dialog appearing in the middle of the application](dialog.webp)
+![Dialog appearing in the middle of the application](introduction-dialogs/dialog.webp)
 
 ### Opening the dialog
 
@@ -208,4 +208,4 @@ Much nicer.
 
 </details>
 
-![Screenshot of the application with four example cards](addedKountdowns.webp)
+![Screenshot of the application with four example cards](introduction-dialogs/addedKountdowns.webp)

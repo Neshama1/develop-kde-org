@@ -1,2 +1,0 @@
-# introduction-getting\_started
-

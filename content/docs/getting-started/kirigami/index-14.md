@@ -9,7 +9,7 @@ description: Chips are small elements typically used to list out related propert
 
 [Kirigami.Chip](docs:kirigami2;Chip) components are small elements inherited from [AbstractButton](https://doc.qt.io/qt-6/qml-qtquick-controls2-abstractbutton.html) used for displaying common properties or filters of something. These are typically text elements, which is also interactable and comes with an optional delete button.
 
-![Example Chips in Kirigami Gallery](chips\_kirigami\_gallery.png)
+![Example Chips in Kirigami Gallery](components-chips/chips\_kirigami\_gallery.png)
 
 ### Quick Start
 
@@ -51,7 +51,7 @@ Kirigami.ApplicationWindow {
 
 \{{< section-right >\}}
 
-![Declaring and Displaying Chips](chips\_usage.png)
+![Declaring and Displaying Chips](components-chips/chips\_usage.png)
 
 \{{< /section-right >\}} \{{< /sections >\}}
 
@@ -97,7 +97,7 @@ Kirigami.ApplicationWindow {
 
 \{{< alert title="Note" color="info" >\}}
 
-You can dynamically append and remove data from the ListModel, and the Repeater will automatically make those changes. However, simply changing a specific item from either the Repeater or ListModel does not affect the other, and requires the changing of both, unless something like [QAbstractListModel](https://doc.qt.io/qt-6/qabstractlistmodel.html) is used. See [Example Application](index.md#example-application) for more information.
+You can dynamically append and remove data from the ListModel, and the Repeater will automatically make those changes. However, simply changing a specific item from either the Repeater or ListModel does not affect the other, and requires the changing of both, unless something like [QAbstractListModel](https://doc.qt.io/qt-6/qabstractlistmodel.html) is used. See [Example Application](index-14.md#example-application) for more information.
 
 \{{< /alert >\}}
 
@@ -107,4 +107,4 @@ The example application below showcases how chips can be used in programs such a
 
 \{{< readfile file="/content/docs/getting-started/kirigami/components-chips/main.qml" highlight="qml" >\}}
 
-![Chips Example Application](chips\_example\_app.png)
+![Chips Example Application](components-chips/chips\_example\_app.png)

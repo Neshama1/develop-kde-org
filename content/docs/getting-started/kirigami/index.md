@@ -23,7 +23,7 @@ We need a C++ compiler, Qt development packages, and Kirigami. Open a terminal a
 
 \{{< installpackage arch="base-devel extra-cmake-modules cmake kirigami ki18n kcoreaddons breeze kiconthemes qt6-base qt6-declarative qqc2-desktop-style" opensuse="cmake kf6-extra-cmake-modules kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-base-devel qt6-declarative-devel qt6-quickcontrols2-devel kf6-qqc2-desktop-style" fedoraCommand=`sudo dnf groupinstall "Development Tools" "Development Libraries" sudo dnf install cmake extra-cmake-modules kf6-kirigami2-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtquickcontrols2-devel kf6-qqc2-desktop-style` >\}}
 
-Further information for other distributions can be found [here](../../../../../docs/getting-started/building/help-dependencies/).
+Further information for other distributions can be found [here](../../../../docs/getting-started/building/help-dependencies/).
 
 If you wish to build Kirigami with Qt6, it is recommended to use [kdesrc-build](index.md#kdesrc-build) instead, especially for Linux installations using Plasma 5.
 
@@ -31,7 +31,7 @@ If you wish to build Kirigami with Qt6, it is recommended to use [kdesrc-build](
 
 KDE has a custom tool to easily build all of its libraries and programs: **kdesrc-build**. It can be used to build Kirigami on Linux and FreeBSD.
 
-For this tutorial, you will need to follow the [setup instructions for kdesrc-build](../../../../../docs/getting-started/building/kdesrc-build-setup/).
+For this tutorial, you will need to follow the [setup instructions for kdesrc-build](../../../../docs/getting-started/building/kdesrc-build-setup/).
 
 After that, you may simply run the following on a terminal:
 
@@ -138,7 +138,7 @@ It must follow a [reverse-DNS naming scheme](https://en.wikipedia.org/wiki/Rever
 
 \{{< alert title="Note" color="info" >\}}
 
-Window and taskbar icons will work in a Wayland session only if apps' desktop files are placed in `~/.local/share/applications` or `/usr/share/applications`. To get icons working in this tutorial, either copy the app's desktop file there or switch to a development session as instructed in [kdesrc-build tutorial](../../../../../docs/getting-started/building/kdesrc-build-compile/). Some KDE applications might have working icons if they were already installed on the system.
+Window and taskbar icons will work in a Wayland session only if apps' desktop files are placed in `~/.local/share/applications` or `/usr/share/applications`. To get icons working in this tutorial, either copy the app's desktop file there or switch to a development session as instructed in [kdesrc-build tutorial](../../../../docs/getting-started/building/kdesrc-build-compile/). Some KDE applications might have working icons if they were already installed on the system.
 
 \{{< /alert >\}}
 
@@ -148,7 +148,7 @@ Window and taskbar icons will work in a Wayland session only if apps' desktop fi
 
 \{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" >\}}
 
-The `CMakeLists.txt` defines how to build your projects. Most of the content here is just to bootstrap your project. You can read a line-by-line, in-depth explanation of what this CMakeLists file does [here](../../../../../docs/getting-started/kirigami/advanced-understanding\_cmakelists/).
+The `CMakeLists.txt` defines how to build your projects. Most of the content here is just to bootstrap your project. You can read a line-by-line, in-depth explanation of what this CMakeLists file does [here](../../../../docs/getting-started/kirigami/advanced-understanding\_cmakelists/).
 
 The most important thing to keep in mind is that the C++ build dependencies of Qt and KDE Frameworks are managed with [find\_package()](https://cmake.org/cmake/help/latest/command/find\_package.html) and QML runtime dependencies are managed with [ecm\_find\_qml\_module()](https://api.kde.org/ecm/module/ECMFindQmlModule.html). You will have to modify these lines and include any additional components that you decide to use during the development of your application.
 
@@ -188,15 +188,15 @@ For now, we don't need to go into too much detail regarding what our `main.cpp` 
 
 <summary>Click here to read more</summary>
 
-The application needs to set its icon theme, QStyle, and QtQuick Controls style to Breeze in order to show up on Windows. To learn more about it, see [Figuring out main.cpp](../../../../../docs/getting-started/kirigami/advanced-maincpp/).
+The application needs to set its icon theme, QStyle, and QtQuick Controls style to Breeze in order to show up on Windows. To learn more about it, see [Figuring out main.cpp](../../../../docs/getting-started/kirigami/advanced-maincpp/).
 
 </details>
 
 \{{< /alert >\}}
 
-If you want to get ahead, you can read more about how this `main.cpp` works in [Figuring out main.cpp](../../../../../docs/getting-started/kirigami/advanced-maincpp/).
+If you want to get ahead, you can read more about how this `main.cpp` works in [Figuring out main.cpp](../../../../docs/getting-started/kirigami/advanced-maincpp/).
 
-If you want to see a few ways on how the C++ code can be improved, like using [KAboutData](docs:kcoreaddons;KAboutData) for translatable application metadata, be sure to check our [KXmlGui tutorial](../../../../../docs/getting-started/kxmlgui/).
+If you want to see a few ways on how the C++ code can be improved, like using [KAboutData](docs:kcoreaddons;KAboutData) for translatable application metadata, be sure to check our [KXmlGui tutorial](../../../../docs/getting-started/kxmlgui/).
 
 For now, the part that interests us is this line:
 
@@ -318,7 +318,7 @@ kirigami-hello.exe # On Windows
 
 Voilà! Now you will see your very first Kirigami app appear before your very own eyes.
 
-![Screenshot of the generated Kirigami application](hello-kworld.webp)
+![Screenshot of the generated Kirigami application](introduction-getting\_started/hello-kworld.webp)
 
 To run the new QML application in mobile mode, you can use `QT_QUICK_CONTROLS_MOBILE=1`:
 

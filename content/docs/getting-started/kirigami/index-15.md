@@ -64,13 +64,13 @@ Kirigami.ApplicationWindow {
 \
 
 
-![Simple dialog containing only text](dialog.webp)
+![Simple dialog containing only text](components-dialogs/dialog.webp)
 
 \{{< /section-right >\}}
 
 \{{< /sections >\}}
 
-As shown in the [introduction tutorial about dialogs](../../../../../docs/getting-started/kirigami/introduction-dialogs/), it is also possible to capture a `standardButton(button)` to assign some behavior to it, like a binding to enable it only under certain conditions.
+As shown in the [introduction tutorial about dialogs](../../../../docs/getting-started/kirigami/introduction-dialogs/), it is also possible to capture a `standardButton(button)` to assign some behavior to it, like a binding to enable it only under certain conditions.
 
 This type of dialog is generic and applies to most use cases, and it works well with complex interactive content (especially views):
 
@@ -126,7 +126,7 @@ Kirigami.ApplicationWindow {
 \
 
 
-![A simple scrollable dialog](scrollabledialog.webp)
+![A simple scrollable dialog](components-dialogs/scrollabledialog.webp)
 
 \{{< /section-right >\}}
 
@@ -180,7 +180,7 @@ Kirigami.ApplicationWindow {
 \
 
 
-![A simple prompt dialog containing only text](promptdialog.webp)
+![A simple prompt dialog containing only text](components-dialogs/promptdialog.webp)
 
 \{{< /section-right >\}}
 
@@ -248,7 +248,7 @@ Kirigami.ApplicationWindow {
 \
 
 
-![A PromptDialog with a custom TextField](promptdialogtextfield.webp)
+![A PromptDialog with a custom TextField](components-dialogs/promptdialogtextfield.webp)
 
 \{{< /section-right >\}}
 
@@ -324,7 +324,7 @@ Kirigami.ApplicationWindow {
 \
 
 
-![A simple MenuDialog listing actions like Play and Pause for media](menudialog.webp)
+![A simple MenuDialog listing actions like Play and Pause for media](components-dialogs/menudialog.webp)
 
 \{{< /section-right >\}}
 

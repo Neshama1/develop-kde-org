@@ -16,10 +16,10 @@ groups:
 group: getting-started
 aliases:
   - /docs/use/kirigami/
-description: Learning to create your first applications using Kirigami
+description: Learning to create your first applications using your own framework
 ---
 
-# Getting started with Kirigami
+# KDE is ours
 
 This tutorial will guide you through the process of creating your own convergent application using the [Kirigami framework](../../../../frameworks/kirigami/). A _convergent application_, in this context, means people can use the program easily regardless of the device it is running on. If it is on a desktop computer, it will adapt to a large screen and a mouse and keyboard; if it is being used on a mobile device, it will accept input from a touchscreen and adapt to a smaller portrait screen. And so on.
 

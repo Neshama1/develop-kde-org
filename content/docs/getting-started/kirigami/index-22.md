@@ -83,7 +83,7 @@ The call to `ecm_add_qml_module()` was used here to modify the traditional C++ s
 
 You may also create a separate QML module that does not use the executable as backing target using `ecm_add_qml_module()`. In this case, you'd create a library target using [add\_library()](https://cmake.org/cmake/help/latest/command/add\_library.html), link it to an existing executable target using `target_link_libraries()`, and in addition to installing the library with `install()` you will need to finalize the QML module with [ecm\_finalize\_qml\_module()](https://api.kde.org/ecm/module/ECMQmlModule.html) so it can generate two files: `qmldir` and `qmltypes`. These files are used by QtQuick applications to find separate QML modules.
 
-The method for creating a separate QML module is better exemplified in [Using separate files](../introduction-separatefiles/).
+The method for creating a separate QML module is better exemplified in [Using separate files](introduction-separatefiles/).
 
 These are additions provided by extra-cmake-modules to make the use of [Qt declarative registration](https://doc.qt.io/qt-6.7/cmake-build-qml-application.html) (the [replacement to Qt resource files](https://doc.qt.io/qt-5/resources.html)) easier.
 
@@ -97,7 +97,7 @@ The documentation for all three commands can be found in the [extra-cmake-module
 
 ### src/components/CMakeLists.txt
 
-In the tutorial about [how to split your code into separate files](../../../../../docs/getting-started/kirigami/introduction-separatefiles/#preparing-cmake-for-the-new-files), a new CMake file was introduced to allow for separate QML modules:
+In the tutorial about [how to split your code into separate files](../../../../docs/getting-started/kirigami/introduction-separatefiles/#preparing-cmake-for-the-new-files), a new CMake file was introduced to allow for separate QML modules:
 
 \{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/CMakeLists.txt" highlight="cmake" >\}}
 

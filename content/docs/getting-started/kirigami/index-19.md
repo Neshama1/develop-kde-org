@@ -15,7 +15,7 @@ Kirigami provides the component [Kirigami.ActionToolBar](docs:kirigami2;ActionTo
 
 \{{< alert title="Note" color="info" >\}}
 
-This page assumes you are familiar with [Kirigami.Action](docs:kirigami2;Action) objects. If you are not, you can learn all about them in our beginner tutorial or in [the dedicated documentation page for them](../components-actions/).
+This page assumes you are familiar with [Kirigami.Action](docs:kirigami2;Action) objects. If you are not, you can learn all about them in our beginner tutorial or in [the dedicated documentation page for them](components-actions/).
 
 \{{< /alert >\}}
 
@@ -84,7 +84,7 @@ Kirigami.ApplicationWindow {
 
 #### Alignment
 
-By default, actions in the [ActionToolBar](\[Kirigami.ActionToolBar]\(docs:kirigami2;ActionToolBar\)) will be left aligned. This might not be desirable in all situations. Thankfully we can change this with the [alignment](docs:kirigami2;ActionToolBar::alignment) property. We can set this property to a range of values, but the three most relevant ones are `Qt.AlignLeft`, `Qt.AlignCenter`, and `Qt.AlignRight` (which deal with [horizontal alignment](docs:qtcore;Qt::Alignment)).
+By default, actions in the [ActionToolBar](components-actiontoolbar/\[Kirigami.ActionToolBar]\(docs:kirigami2;ActionToolBar\)) will be left aligned. This might not be desirable in all situations. Thankfully we can change this with the [alignment](docs:kirigami2;ActionToolBar::alignment) property. We can set this property to a range of values, but the three most relevant ones are `Qt.AlignLeft`, `Qt.AlignCenter`, and `Qt.AlignRight` (which deal with [horizontal alignment](docs:qtcore;Qt::Alignment)).
 
 \{{< sections >\}}
 
@@ -133,7 +133,7 @@ Kirigami.ApplicationWindow {
 \
 
 
-![ActionToolBar with children center-aligned](../../../../../docs/getting-started/kirigami/components-actiontoolbar/ActionToolBar-aligned.webp)
+![ActionToolBar with children center-aligned](../../../../docs/getting-started/kirigami/components-actiontoolbar/ActionToolBar-aligned.webp)
 
 \{{< /section-right >\}}
 

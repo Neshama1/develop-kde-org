@@ -7,7 +7,7 @@ description: Connect models from C++ backend to QML frontend
 
 # Connect models to your QML user interface
 
-As shown from the [previous tutorial](../../../../../docs/getting-started/kirigami/advanced-connect\_backend/), you can connect C++ code to QML by creating a class that will be treated as just another component in QML. However, you may want to represent more complicated data, such as data that needs to act as a custom [ListModel](docs:qtquick;qml-qtqml-models-listmodel.html) or in some way needs to be delegated from a [Repeater](docs:qtquick;qml-qtquick-repeater.html).
+As shown from the [previous tutorial](../../../../docs/getting-started/kirigami/advanced-connect\_backend/), you can connect C++ code to QML by creating a class that will be treated as just another component in QML. However, you may want to represent more complicated data, such as data that needs to act as a custom [ListModel](docs:qtquick;qml-qtqml-models-listmodel.html) or in some way needs to be delegated from a [Repeater](docs:qtquick;qml-qtquick-repeater.html).
 
 We can create our own [models](docs:qtcore;qabstractlistmodel.html) from the C++ side, and declare how the data from that model should be represented on the QML frontend.
 
@@ -194,7 +194,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![App Screenshot](app\_screenshot.png)
+![App Screenshot](advanced-connect\_models/app\_screenshot.png)
 
 ### Data Modification
 
@@ -302,13 +302,13 @@ Now, whenever the values of the model change in the frontend, the changes should
 
 \{{< section-left >\}}
 
-![app\_screenshot\_1.png](app\_screenshot\_1.png)
+![app\_screenshot\_1.png](advanced-connect\_models/app\_screenshot\_1.png)
 
 \{{< /section-left >\}}
 
 \{{< section-right >\}}
 
-![app\_screenshot\_2.png](app\_screenshot\_2.png)
+![app\_screenshot\_2.png](advanced-connect\_models/app\_screenshot\_2.png)
 
 \{{< /section-right >\}}
 
@@ -396,13 +396,13 @@ Now, we should be given a new action at the top of the app that brings up a prom
 
 \{{< section-left >\}}
 
-![app\_screenshot\_add\_1.png](app\_screenshot\_add\_1.png)
+![app\_screenshot\_add\_1.png](advanced-connect\_models/app\_screenshot\_add\_1.png)
 
 \{{< /section-left >\}}
 
 \{{< section-right >\}}
 
-![app\_screenshot\_add\_2.png](app\_screenshot\_add\_2.png)
+![app\_screenshot\_add\_2.png](advanced-connect\_models/app\_screenshot\_add\_2.png)
 
 \{{< /section-right >\}}
 
@@ -476,13 +476,13 @@ ColumnLayout {
 
 \{{< section-left >\}}
 
-![app\_screenshot\_del\_1.png](app\_screenshot\_del\_1.png)
+![app\_screenshot\_del\_1.png](advanced-connect\_models/app\_screenshot\_del\_1.png)
 
 \{{< /section-left >\}}
 
 \{{< section-right >\}}
 
-![app\_screenshot\_del\_2.png](app\_screenshot\_del\_2.png)
+![app\_screenshot\_del\_2.png](advanced-connect\_models/app\_screenshot\_del\_2.png)
 
 \{{< /section-right >\}}
 
