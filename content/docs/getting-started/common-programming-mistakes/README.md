@@ -1,2 +1,0 @@
-# Common programming mistakes
-
