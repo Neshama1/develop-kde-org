@@ -7,7 +7,7 @@ description: What to do when you are missing dependencies
 
 # Installing build dependencies
 
-If you have any trouble getting things to build due to missing 3rd-party package dependencies, read on to learn what to do. If this guide does not manage to solve your compilation problems, be sure to \[contact the developers]\(\{{< ref "help-developers" >\}}).
+If you have any trouble getting things to build due to missing 3rd-party package dependencies, read on to learn what to do. If this guide does not manage to solve your compilation problems, be sure to [contact the developers](index.md).
 
 ### How to install all the build dependencies of one package
 
@@ -15,7 +15,7 @@ Often the simplest solution to the problem of missing dependencies is just to in
 
 Because most distributions keep track of package dependencies by using _source packages_, they also provide their own built-in commands to easily install all the build dependencies of each package.
 
-While these commands will not _always_ install all dependencies you will need when compiling KDE software (for example, when compiling with \[kdesrc-build]\(\{{< ref "kdesrc-build-setup" >\}}), where the software is always changing), they will make your dependency resolution faster.
+While these commands will not _always_ install all dependencies you will need when compiling KDE software (for example, when compiling with [kdesrc-build](index-5.md), where the software is always changing), they will make your dependency resolution faster.
 
 #### Debian, Ubuntu, Kubuntu, KDE neon
 
@@ -100,13 +100,11 @@ The usual pattern you will find for dependency packages looks like this:
 * openSUSE and Fedora: `kf6-<packagename>-devel` or `libKF6<PackageName>`
 * Arch: `<packagename>`
 
-\{{< alert title="Tip" color="success" >\}}
-
+{% hint style="success" %}
 You can also use web shortcuts provided by KRunner, which will open the package search website for each distribution.
 
 For example: open KRunner with Alt + Space, then type: `debian: textwidgets`. Your browser will open the "textwidgets" page of the [Debian Package Search website](https://packages.debian.org/) automatically.
-
-\{{< /alert >\}}
+{% endhint %}
 
 #### Finding specific packages using CMake package configuration files
 
@@ -171,8 +169,7 @@ To solve this, you can specifically search for the executable in distribution pa
 * Arch: `sudo pacman -F /usr/bin/sass`
 * FreeBSD: `sudo pkg provides sass`
 
-\{{< alert title="Configuring pkg-provides on FreeBSD" color="info" >\}}
-
+{% hint style="info" %}
 <details>
 
 <summary>Click here to set up pkg-provides on FreeBSD</summary>
@@ -216,5 +213,4 @@ sudo pkg install texinfo
 ```
 
 </details>
-
-\{{< /alert >\}}
+{% endhint %}
