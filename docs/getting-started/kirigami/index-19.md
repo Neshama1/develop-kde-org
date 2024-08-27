@@ -74,21 +74,13 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< compare >\}}
+![ActionToolBar with enough space for all children](../../../content/docs/getting-started/kirigami/components-actiontoolbar/ActionToolBar1.webp)
 
-\{{< figure class="text-center" caption="ActionToolBar with enough space for all children" src="ActionToolBar1.webp" >\}}
-
-\{{< figure class="text-center" caption="ActionToolBar with overflow menu containing children" src="ActionToolBar2.webp" >\}}
-
-\{{< /compare >\}}
+![ActionToolBar with overflow menu containing children](../../../content/docs/getting-started/kirigami/components-actiontoolbar/ActionToolBar2.webp)
 
 #### Alignment
 
 By default, actions in the [ActionToolBar](../../../content/docs/getting-started/kirigami/components-actiontoolbar/\[Kirigami.ActionToolBar]\(docs:kirigami2;ActionToolBar\)) will be left aligned. This might not be desirable in all situations. Thankfully we can change this with the [alignment](docs:kirigami2;ActionToolBar::alignment) property. We can set this property to a range of values, but the three most relevant ones are `Qt.AlignLeft`, `Qt.AlignCenter`, and `Qt.AlignRight` (which deal with [horizontal alignment](docs:qtcore;Qt::Alignment)).
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -126,15 +118,4 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-![ActionToolBar with children center-aligned](components-actiontoolbar/ActionToolBar-aligned.webp)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![ActionToolBar with children center-aligned](../../../content/docs/getting-started/kirigami/components-actiontoolbar/ActionToolBar-aligned.webp)
