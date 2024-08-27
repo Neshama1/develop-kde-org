@@ -151,7 +151,7 @@ CMake Configuration:   (without them, our kit will have a warning that they are 
 Python: None
 ````
 
-\{{< figure width="60%" src="kde-builder\_kit\_settings.png)
+![](../../../../content/docs/getting-started/building/ide/qt-creator/kde-builder\_kit\_settings.png)
 
 #### Configure Build Settings
 
