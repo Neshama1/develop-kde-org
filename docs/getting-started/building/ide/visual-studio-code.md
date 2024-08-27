@@ -11,18 +11,28 @@ description: Popular, customizable, has support for many programming languages.
 
 Microsoft Visual Studio Code (VS Code) is a popular cross-platform, general-purpose, open source IDE. Thanks to its powerful extensions ecosystem it supports many languages as well as deep customization options for themes, fonts, keyboard controls, and more.
 
-A screen recording version is available https://www.youtube.com/watch?v=BCJhD57GN0Y
+A screen recording version is available
+
+{% embed url="https://www.youtube.com/watch?v=BCJhD57GN0Y" %}
 
 ### Installation
 
-| [Manjaro](https://software.manjaro.org/package/vscode), [Arch](https://archlinux.org/packages/?q=vscode) | <pre><code>sudo pacman -S vscode
-</code></pre>                                                                                                                                                                                                                                                                                                                     |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Fedora                                                                                                   | <pre><code>sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+\| [Manjaro](https://software.manjaro.org/package/vscode), [Arch](https://archlinux.org/packages/?q=vscode) |
+
+```
+sudo pacman -S vscode
+```
+
+\| | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | | Fedora |
+
+```
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update
 sudo dnf install code
-</code></pre> |
+```
+
+|
 
 ### Setup
 
