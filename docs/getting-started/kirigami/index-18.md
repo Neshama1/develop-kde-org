@@ -4,7 +4,7 @@ weight: 209
 description: Display messages related to the content in your application
 group: components
 aliases:
-  - /docs/getting-started/kirigami/components-inlinemessages/
+  - ../../../content/docs/getting-started/kirigami/components-inlinemessages/
 ---
 
 Inline messages provide an immediate way for you to notify your users about something that happened while using the application.
@@ -14,10 +14,6 @@ Inline messages provide an immediate way for you to notify your users about some
 [Kirigami.InlineMessage](docs:kirigami2;InlineMessage) components have two important properties to be mindful of:
 - [visible](https://doc.qt.io/qt-6/qml-qtquick-item.html#visible-prop): by default this is set to false, so that the message only appears when you explicitly want it to. This can be overridden if you wish by setting it to true. When a hidden inline message is set to be visible, you get a nice animation.
 - [text](docs:kirigami2;templates::InlineMessage::text): here is where you set the text of your inline message.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 import QtQuick
@@ -42,15 +38,7 @@ Kirigami.Page {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![A window showing a button which when clicked makes an inline message with light blue background pop up with text above it, near the top of the application](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-simple.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A window showing a button which when clicked makes an inline message with light blue background pop up with text above it, near the top of the application](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-simple.png)
 
 ## Different types
 
@@ -60,10 +48,6 @@ Standard inline messages are like the ones above: they have a blue background an
 - **Positive** (`Kirigami.MessageType.Positive`): has a green background, tick icon, and indicates that something went well.
 - **Warning** (`Kirigami.MessageType.Warning`): has an orange background, an exclamation-mark icon, and can be used to warn the user about something they should be mindful of.
 - **Error** (`Kirigami.MessageType.Error`): has a red background, a cross icon, and can be used to tell the user that something has gone wrong.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 ColumnLayout {
@@ -98,23 +82,11 @@ ColumnLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![A window showcasing all four inline message types in blue, green, orange and red](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-types.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A window showcasing all four inline message types in blue, green, orange and red](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-types.png)
 
 ## Customising text and icons
 
 Inline messages support rich text, which can be defined with simple HTML-like markup. This allows you to add some formatting to your inline message's text or even include an external web link if you want to.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.InlineMessage {
@@ -126,21 +98,9 @@ Kirigami.InlineMessage {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![An inline message with rich text and a hyperlink](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-richtext.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![An inline message with rich text and a hyperlink](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-richtext.png)
 
 You can also customise the icon that appears on the top left of your message by providing a system icon name for the [icon.source](docs:kirigami2;templates::InlineMessage::icon) property. These icon names should correspond to icons installed on your system; you can use an application such as Cuttlefish provided by [plasma-sdk](https://invent.kde.org/plasma/plasma-sdk) to browse and search the icons available on your system, and see what their names are.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.InlineMessage {
@@ -151,23 +111,11 @@ Kirigami.InlineMessage {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![An inline message with a custom icon](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-icon.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![An inline message with a custom icon](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-icon.png)
 
 ## Using actions in inline messages
 
 If your messages need to be interactive, you can attach Kirigami actions to your inline messages. Like with pages, you can do this by setting the [InlineMessage.actions](docs:kirigami2;templates::InlineMessage::actions) property to either a [Kirigami.Action](docs:kirigami2;Action) or an array containing [Kirigami.Action](docs:kirigami2;Action) components.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 ColumnLayout {
@@ -200,25 +148,13 @@ ColumnLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![An inline message with two actions](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-actions.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![An inline message with two actions](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-actions.png)
 
 ## Close buttons
 
 Inline messages provide a close button that can be used to easily dismiss them. 
 
 By default, this close button is hidden, but this can be overridden by setting the [showCloseButton](docs:kirigami2;templates::InlineMessage::showCloseButton) property to `true`.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.InlineMessage {
@@ -229,12 +165,4 @@ Kirigami.InlineMessage {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-![An inline message with close button to its right side](/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-closebutton.png)
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![An inline message with close button to its right side](../../../content/docs/getting-started/kirigami/components-inlinemessages/inlinemessages-closebutton.png)
