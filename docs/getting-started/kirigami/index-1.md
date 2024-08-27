@@ -26,13 +26,13 @@ Pages are organized in a [page stack](docs:kirigami2;AbstractApplicationWindow::
 
 ![A single page on the phone](../../../content/docs/getting-started/kirigami/introduction-pages/desktop.webp)
 
-\{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 
 A [Kirigami.Page](docs:kirigami2;Page) inherits from a [Controls.Page](docs:qtquickcontrols;QtQuick.Controls.Page), and as such you can use the latter's properties as well.
 
 When looking through QML API documentation, make sure to look into the functions and properties inherited by the API you are looking at as well.
 
-\{{< /alert >}}
+{% endhint %}
 
 Let's go back to the `Main.qml` file we created in our previous tutorial:
 
@@ -46,7 +46,7 @@ The idea behind our app is that we're going to be able to display a bunch of cou
 
 Kirigami pages also feature neat titles placed within the toolbar, quickly indicating to the user which page they are on. All we need to do is to set a page title using the `title` property of [Kirigami.ScrollablePage](docs:kirigami2;ScrollablePage). In this case, we used one of the `i18nc()` functions we explored in our previous tutorial to this end.
 
-\{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 
 You could also choose to define your page within its own QML document. To do so, you'd create the new QML file, for example `kirigami-tutorial/src/qml/StartPage.qml`, add it to your `kirigami-tutorial/src/CMakeLists.txt` file, and set the window's first page to load it, like so:
 
@@ -58,4 +58,4 @@ pageStack.initialPage: Qt.resolvedUrl("StartPage.qml")
 
 There is further information about alternative page structures [within our Kirigami documentation](/docs/getting-started/kirigami/components-pagerow_pagestack).
 
-\{{< /alert >}}
+{% endhint %}
