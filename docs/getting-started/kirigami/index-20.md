@@ -22,10 +22,6 @@ QtQuick Controls provides two useful components that you can use to this end.
 * [value](https://doc.qt.io/qt-6/qml-qtquick-controls2-progressbar.html#value-prop): the current value of the action that is in progress (e.g. 50% loaded)
 * [indeterminate](https://doc.qt.io/qt-6/qml-qtquick-controls2-progressbar.html#indeterminate-prop): if the action that is in process currently has no clear progress value, you can set this property to `true` to show the user that something is happening but its progress is not yet clear (but will be soon).
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 import QtQuick
 import QtQuick.Layouts
@@ -59,18 +55,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" caption="Above: progress bar at 50%; below: indeterminate progress bar" src="progressbar-both.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Above: progress bar at 50%; below: indeterminate progress bar](../../../content/docs/getting-started/kirigami/components-progressbars/progressbar-both.webp)
 
 ### Busy indicator
 
@@ -102,4 +87,4 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< figure class="text-center" src="busyindicator.webp" >\}}
+![](../../../content/docs/getting-started/kirigami/components-progressbars/busyindicator.webp)
