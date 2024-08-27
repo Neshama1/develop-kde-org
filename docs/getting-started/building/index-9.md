@@ -1,11 +1,13 @@
 ---
-title: "Building KDE software manually"
-description: "Understanding the traditional CMake build process"
+title: Building KDE software manually
 weight: 41
-group: "cmake-build"
+group: cmake-build
+description: Understanding the traditional CMake build process
 ---
 
-While users on older Linux distributions might have to resort to [kdesrc-build]({{< ref "kdesrc-build-setup" >}}) or containers to be able to build KDE software, users of more up-to-date distributions might not need to use them.
+# Building KDE software manually
+
+While users on older Linux distributions might have to resort to [kdesrc-build](index-5.md) or containers to be able to build KDE software, users of more up-to-date distributions might not need to use them.
 
 The process of building KDE software with kdesrc-build or containers involves builds from the master branch, which includes unreleased code changes. These changes might rely on unreleased changes from other dependencies, so you end up needing to build those dependencies as well. This is often the case with very fast-paced software such as KDE’s [Itinerary](https://apps.kde.org/itinerary/) and [Neochat](https://apps.kde.org/neochat/).
 
@@ -13,13 +15,13 @@ kdesrc-build uniquely also makes it easy to run a whole Plasma Desktop session.
 
 If the software you want to contribute to is an application that does not have bleeding edge build dependencies, it is perfectly possible (and faster and easier) to build it manually by running CMake commands on a sufficiently up-to-date Linux distribution, like the latest [Fedora](https://fedoraproject.org/spins/kde/), [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/), or [Arch Linux](https://archlinux.org/).
 
-If the software you want to contribute to does in fact have bleeding edge dependencies and you do not care about the dependencies themselves, it is also possible to build it manually with CMake by using a distribution that provides KDE software built from the master, like [openSUSE Krypton](https://en.opensuse.org/SDB:Argon_and_Krypton), [KDE neon Unstable Edition, or KDE neon Developer Edition](https://neon.kde.org/download).
+If the software you want to contribute to does in fact have bleeding edge dependencies and you do not care about the dependencies themselves, it is also possible to build it manually with CMake by using a distribution that provides KDE software built from the master, like [openSUSE Krypton](https://en.opensuse.org/SDB:Argon\_and\_Krypton), [KDE neon Unstable Edition, or KDE neon Developer Edition](https://neon.kde.org/download).
 
-This tutorial teaches you the basics of building a KDE project using standalone CMake the right way, how to deal with targets and tests, and the traditional way you *will* find in the wild.
+This tutorial teaches you the basics of building a KDE project using standalone CMake the right way, how to deal with targets and tests, and the traditional way you _will_ find in the wild.
 
 This knowledge is also helpful to Windows users using [Craft](https://community.kde.org/Craft) who are designing a new application using KDE libraries and haven’t yet created their own Craft blueprints.
 
-## Summary of commands to build a KDE project manually {#summary}
+### Summary of commands to build a KDE project manually <a href="#summary" id="summary"></a>
 
 This summary is provided in case you are already somewhat familiar with CMake or you just want to skip the explanation and check the right commands to quickly start compiling a KDE project.
 
@@ -39,7 +41,7 @@ cmake --build build/ --parallel
 cmake --install build/
 ```
 
-If you get stuck while running the first command, be sure to look at our [guide about installing build dependencies for a CMake project]({{< ref "help-dependencies" >}}).
+If you get stuck while running the first command, be sure to look at our \[guide about installing build dependencies for a CMake project]\(\{{< ref "help-dependencies" >\}}).
 
 If you get stuck while running the second command, it’s most likely a code issue that is in need of fixing.
 
@@ -58,7 +60,7 @@ cmake --build build/ --target uninstall
 
 Keep reading this page if you want to know more about what’s happening under the hood or if you would like to understand the build instructions you might see being provided by KDE projects and others.
 
-## The three compilation steps {#three-steps}
+### The three compilation steps <a href="#three-steps" id="three-steps"></a>
 
 The compilation process of C++ software with CMake is made of three steps:
 
@@ -76,13 +78,13 @@ cmake --build build/ --parallel
 cmake --install build/ --prefix placetoinstall/
 ```
 
-## CMake is a build system generator {#build-system-generator}
+### CMake is a build system generator <a href="#build-system-generator" id="build-system-generator"></a>
 
 CMake itself is not really a build system. It doesn’t compile things by itself: it calls other software to compile the project for you, and that software is the build system.
 
 On Linux, the most common build systems are Make and Ninja. On Windows, the main build system is the MSVC compiler toolset.
 
-During the configuration step, CMake uses the source files of the project to *generate* the necessary files to build the project with a *build system* inside a *build directory*, otherwise known as *binary directory*. Hence, CMake is a *build system generator*.
+During the configuration step, CMake uses the source files of the project to _generate_ the necessary files to build the project with a _build system_ inside a _build directory_, otherwise known as _binary directory_. Hence, CMake is a _build system generator_.
 
 CMake can then build the project by calling `make` or `ninja` (on Linux) or `msbuild` (on Windows) on the generated files:
 
@@ -92,7 +94,7 @@ CMake can then build the project by calling `make` or `ninja` (on Linux) or `msb
 
 Lastly, during the installation step, CMake copies the files built by the build system to the place where it needs to be.
 
-## Compiling on Windows
+### Compiling on Windows
 
 At this point in time, this guide does not go in-depth about manually compiling projects on Windows.
 
@@ -100,7 +102,7 @@ The easiest way to compile KDE software on Windows is with Craft, whether you us
 
 All the instructions on this guide should work by default on a Linux terminal. To follow this guide’s instructions, you will need to set up Craft and run all of the commands using Craft’s provided terminal shell, CraftRoot.
 
-## The configuration step {#configuration}
+### The configuration step <a href="#configuration" id="configuration"></a>
 
 The first command prepares the project by trying to find its build dependencies:
 
@@ -108,13 +110,13 @@ The first command prepares the project by trying to find its build dependencies:
 cmake -B build/
 ```
 
-You can read more about it in the [guide about installing build dependencies for a CMake project]({{< ref "help-dependencies" >}}).
+You can read more about it in the \[guide about installing build dependencies for a CMake project]\(\{{< ref "help-dependencies" >\}}).
 
-{{< alert title="Note for Windows users" color="info" >}}
+{% hint style="info" %}
+Note for Windows users
 
 Windows users using [Craft](https://community.kde.org/Craft) can install missing build dependencies with the `craft` tool. For example: `craft kxmlgui`.
-
-{{< /alert >}}
+{% endhint %}
 
 In reality, what CMake is actually running is:
 
@@ -137,7 +139,7 @@ If both the source code and build directory are omitted, CMake will default to s
 cmake ..
 ```
 
-### Out-of-tree builds {#out-of-tree}
+#### Out-of-tree builds <a href="#out-of-tree" id="out-of-tree"></a>
 
 There are four common ways to compile a project:
 
@@ -184,11 +186,11 @@ The fourth way, which is very commonly done by IDEs (a notable example being [Qt
 cmake -S projectdir/ -B build/
 ```
 
-It is also an out-of-tree build, and in this case the build directory is not even inside the project root folder. It requires doing extra navigation steps, but it is convenient, for example, if you want to have multiple, different build folders in the same place, as is the case with [multi-configuration builds]({{< ref "#multi-config" >}}).
+It is also an out-of-tree build, and in this case the build directory is not even inside the project root folder. It requires doing extra navigation steps, but it is convenient, for example, if you want to have multiple, different build folders in the same place, as is the case with [multi-configuration builds](index-9.md).
 
-### Defining a generator {#generators}
+#### Defining a generator <a href="#generators" id="generators"></a>
 
-A *generator* in the context of CMake is the name given to a build system variant or specialization.
+A _generator_ in the context of CMake is the name given to a build system variant or specialization.
 
 By running CMake with the `-G` flag without passing any parameter to it, CMake will show what generators are available on your system:
 
@@ -249,7 +251,7 @@ On Windows, the only generators you will ever care about are:
 
 Qt projects (and consequently also KDE projects) tend to build slightly faster with the Ninja build system on Linux and tend to produce more reliable builds with Visual Studio generators on Windows.
 
-Ninja and Visual Studio are also able to do [multi-configuration builds]({{< ref "#multi-config" >}}).
+Ninja and Visual Studio are also able to do [multi-configuration builds](index-9.md).
 
 The Kate-derived generators are essentially the same as the Make and Ninja generators, except they create `kateproject` files that can be opened with KDE’s main text editor [Kate](https://kate-editor.org) with the [build plugin](https://docs.kde.org/stable5/en/kate/kate/kate-application-plugin-build.html) already set up for the current project.
 
@@ -259,7 +261,7 @@ To set a generator for the project you are attempting to build, use the `-G` fla
 cmake -B build/ -G "Ninja - Multi-Config"
 ```
 
-### Defining configuration options {#config-variables}
+#### Defining configuration options <a href="#config-variables" id="config-variables"></a>
 
 You can give instructions to override what CMake does by passing variables to the `-D` flag followed by `=somevalue`.
 
@@ -295,12 +297,12 @@ KDE has mostly standardized on the ON/OFF pair of values.
 
 There are two commonly used CMake variables that are found in the wild but have better replacements:
 
-* [CMAKE_BUILD_TYPE](https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html) → `--config` flag for the build and install steps
-* [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) → `--prefix` for the install step
+* [CMAKE\_BUILD\_TYPE](https://cmake.org/cmake/help/latest/variable/CMAKE\_BUILD\_TYPE.html) → `--config` flag for the build and install steps
+* [CMAKE\_INSTALL\_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE\_INSTALL\_PREFIX.html) → `--prefix` for the install step
 
-See the sections on [multi-configuration]({{< ref "#multi-config" >}}) and the [install step]({{< ref "#install" >}}), respectively.
+See the sections on [multi-configuration](index-9.md) and the [install step](index-9.md), respectively.
 
-## The build step {#build}
+### The build step <a href="#build" id="build"></a>
 
 It doesn’t matter which method you used to generate the necessary files to build the project, you can point to the build directory with the second command:
 
@@ -308,7 +310,7 @@ It doesn’t matter which method you used to generate the necessary files to bui
 cmake --build build/
 ```
 
-This step effectively calls the relevant build system *for* you. It is virtually the same as running the following with `make`:
+This step effectively calls the relevant build system _for_ you. It is virtually the same as running the following with `make`:
 
 ```bash
 cd build
@@ -377,18 +379,17 @@ This is no longer necessary, as CMake provides a flag to rebuild the project fro
 cmake --build build/ --clean-first
 ```
 
-## The install step {#install}
+### The install step <a href="#install" id="install"></a>
 
-This step installs the contents of the build directory into a certain *install prefix*:
+This step installs the contents of the build directory into a certain _install prefix_:
 
 ```bash
 cmake --install build/ --prefix placetoinstall/
 ```
 
+The place where you want a project to be installed _for users_ is typically `/usr` on Linux and `c:/Program Files/${PROJECT_NAME}` for Windows.
 
-The place where you want a project to be installed *for users* is typically `/usr` on Linux and `c:/Program Files/${PROJECT_NAME}` for Windows.
-
-For *local* builds on Linux however it is a better idea to install the project to `~/.local`, as it has the equivalent paths to `/usr`, but in userspace.
+For _local_ builds on Linux however it is a better idea to install the project to `~/.local`, as it has the equivalent paths to `/usr`, but in userspace.
 
 To summarize, when building a KDE project manually with CMake, use the following on Linux:
 
@@ -402,7 +403,7 @@ And the following on Windows:
 cmake --install build/
 ```
 
-### Where the files will be installed {#install-location}
+#### Where the files will be installed <a href="#install-location" id="install-location"></a>
 
 KDE projects need to install multiple files:
 
@@ -435,7 +436,7 @@ All of these paths and more are standardized in KDE software that uses the [KDEI
 * `EXECROOTDIR` the same as the prefix, so `/usr` or `c:/Program Files/$PROJECT_NAME`
 * `DATAROOTDIR` the same as `/usr/share` on Linux or `c:/Program Files/${PROJECT_NAME}/bin/data` on Windows
 
-## Multi-configuration builds {#multi-config}
+### Multi-configuration builds <a href="#multi-config" id="multi-config"></a>
 
 Most of the time you will likely want to have only one build directory for simplicity, in which case CMake defaults to a “Debug” configuration with all debug symbols available for the developer.
 
@@ -475,7 +476,7 @@ cmake --build build-debug/ --parallel --config Debug
 cmake --install build-debug/ --config Debug
 ```
 
-It can be a bit impractical when doing manual compilation yourself. CMake provides a simpler way to doing multi-configuration with a single build directory, but you will need to specify a multi-configuration capable [generator]({{< ref "#generators" >}}) (on Linux there is Ninja, on Windows there is Visual Studio):
+It can be a bit impractical when doing manual compilation yourself. CMake provides a simpler way to doing multi-configuration with a single build directory, but you will need to specify a multi-configuration capable \[generator]\(\{{< ref "#generators" >\}}) (on Linux there is Ninja, on Windows there is Visual Studio):
 
 ```bash
 cmake -B build/ -G "Ninja Multi-Config"
@@ -485,11 +486,11 @@ cmake --install build/ --config Release
 cmake --install build/ --config Debug
 ```
 
-## Building CMake targets {#targets}
+### Building CMake targets <a href="#targets" id="targets"></a>
 
 CMake has the concept of targets, usually executables or libraries that have their own properties, source files, and dependencies.
 
-Whenever the project’s `CMakeLists.txt` files have a call to [add_executable()](https://cmake.org/cmake/help/latest/command/add_executable.html), [add_library()](https://cmake.org/cmake/help/latest/command/add_library.html) or [add_custom_target()](https://cmake.org/cmake/help/latest/command/add_custom_target.html), a target is being created. The name of the target is always the first word of such calls: a call to `add_executable(projectbin)` creates an executable target called `projectbin`.
+Whenever the project’s `CMakeLists.txt` files have a call to [add\_executable()](https://cmake.org/cmake/help/latest/command/add\_executable.html), [add\_library()](https://cmake.org/cmake/help/latest/command/add\_library.html) or [add\_custom\_target()](https://cmake.org/cmake/help/latest/command/add\_custom\_target.html), a target is being created. The name of the target is always the first word of such calls: a call to `add_executable(projectbin)` creates an executable target called `projectbin`.
 
 Well-structured desktop applications will usually have a single executable target, and multiple dependent smaller library targets that are linked to it. For example, a library target for settings, a target for models, a target for dialogs, having all these linked as dependencies to the main executable.
 
@@ -511,8 +512,8 @@ Remember to build the whole project by the end to make sure the new changes don�
 
 There are custom targets provided both by CMake and by KDE’s extra-cmake-modules (ECM):
 
-* CMake’s [add_test()](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html) provides the `test` target
-* ECM’s [ecm_add_tests()](https://api.kde.org/ecm/module/ECMAddTests.html) provides a new target for each C++ test file based on the filename without the file extension (.cpp)
+* CMake’s [add\_test()](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html) provides the `test` target
+* ECM’s [ecm\_add\_tests()](https://api.kde.org/ecm/module/ECMAddTests.html) provides a new target for each C++ test file based on the filename without the file extension (.cpp)
 * ECM’s [KDECMakeSettings](https://api.kde.org/ecm/kde-module/KDECMakeSettings.html) module provides the `uninstall` target
 
 So to run all tests for a KDE project, you can do the following:
