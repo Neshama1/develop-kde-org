@@ -19,10 +19,6 @@ For demonstrative purposes, this tutorial uses an AbstractCard to make the text 
 
 Kirigami provides a [Heading](docs:kirigami2;Heading) that can be used for page or section titles.
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 import QtQuick
 import QtQuick.Layouts
@@ -64,26 +60,11 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="Five headings with different levels for size comparison" src="heading.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Five headings with different levels for size comparison](../../../content/docs/getting-started/kirigami/style-typography/heading.webp)
 
 ### Labels
 
 Text elements should use the [Label](docs:qtquickcontrols;QtQuick.Controls.Label) component from QtQuick Controls 2.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -106,26 +87,11 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center align-baseline" src="label.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Heading and lorem ipsum text aligned to the horizontal center](../../../content/docs/getting-started/kirigami/style-typography/label.webp)
 
 ### Text Alignment
 
 You can align your text elements using the [horizontalAlignment](https://doc.qt.io/qt-6/qml-qtquick-text.html#horizontalAlignment-prop) and [verticalAlignment](https://doc.qt.io/qt-6/qml-qtquick-text.html#verticalAlignment-prop) properties.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -160,22 +126,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="Heading and lorem ipsum text aligned to the horizontal center" src="alignment-horizontal1.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
+![Heading and lorem ipsum text aligned to the horizontal center](../../../content/docs/getting-started/kirigami/style-typography/alignment-horizontal1.webp)
 
 ```qml
 import QtQuick
@@ -210,22 +161,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="Heading and lorem ipsum text using right-aligned text" src="alignment-horizontal2.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
+![Heading and lorem ipsum text using right-aligned text](../../../content/docs/getting-started/kirigami/style-typography/alignment-horizontal2.webp)
 
 ```qml
 import QtQuick
@@ -262,22 +198,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="Heading with bottom vertical alignment and lorem ipsum text with top vertical alignment" src="alignment-vertical1.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
+![Heading with bottom vertical alignment and lorem ipsum text with top vertical alignment](../../../content/docs/getting-started/kirigami/style-typography/alignment-vertical1.webp)
 
 ```qml
 import QtQuick
@@ -314,26 +235,11 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="Heading with top vertical alignment and lorem ipsum text with bottom vertical alignment" src="alignment-vertical2.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Heading with top vertical alignment and lorem ipsum text with bottom vertical alignment](../../../content/docs/getting-started/kirigami/style-typography/alignment-vertical2.webp)
 
 ### Rich Text
 
 QML allows you to display (and edit) rich text. The behavior can be controlled via the [textFormat](https://doc.qt.io/qt-6/qml-qtquick-text.html#textFormat-prop) property.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -364,18 +270,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" alt="A Label containing a list of fruits using HTML tags like paragraph, unordered lists and bold fonts" src="rich-text.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![A Label containing a list of fruits using HTML tags like paragraph, unordered lists and bold fonts](../../../content/docs/getting-started/kirigami/style-typography/rich-text.webp)
 
 ### Theme
 
