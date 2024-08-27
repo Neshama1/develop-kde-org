@@ -41,7 +41,55 @@ touch addonsexample/contents/ui/main.qml
 
 We start by using a very standard `CMakeLists.txt`:
 
-\{{< snippet repo="libraries/kirigami-addons" file="examples/FormCardTutorial/CMakeLists.txt" lang="cmake" >\}}
+```cmake
+cmake_minimum_required(VERSION 3.20)
+
+project(FormCardTutorial)
+
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(ECMQmlModule)
+
+find_package(Qt6 REQUIRED COMPONENTS
+    Widgets        # For QApplication
+    Quick          # For QML
+    QuickControls2 # For QQuickStyle
+)
+find_package(KF6 REQUIRED COMPONENTS
+    CoreAddons # For KAboutData
+    I18n       # For KLocalizedContext
+)
+qt_policy(SET QTP0001 NEW)
+
+add_executable(addonsexample)
+
+target_sources(addonsexample PRIVATE main.cpp)
+
+ecm_add_qml_module(addonsexample
+    GENERATE_PLUGIN_SOURCE
+    URI org.kde.addonsexample
+)
+
+ecm_target_qml_sources(addonsexample SOURCES
+    Main.qml
+    SettingsPage.qml
+    JsonAboutPage.qml
+)
+
+target_link_libraries(addonsexample PRIVATE
+    Qt::Widgets
+    Qt::Quick
+    Qt::QuickControls2
+    KF6::CoreAddons
+    KF6::I18n
+)
+
+install(TARGETS addonsexample DESTINATION ${KDE_INSTALL_BINDIR})
+```
 
 A standard `resources.qrc`:
 
@@ -56,7 +104,47 @@ A standard `resources.qrc`:
 
 The interesting part will be the `main.cpp`:
 
-\{{< snippet repo="libraries/kirigami-addons" file="examples/FormCardTutorial/main.cpp" lang="cpp" >\}}
+```cpp
+#include <QtQml>
+#include <QApplication>
+#include <QQmlApplicationEngine>
+#include <QIcon>
+#include <QQuickStyle>
+#include <KAboutData>
+#include <KLocalizedContext>
+#include <KLocalizedString>
+
+int main(int argCount, char* argVector[])
+{
+    QApplication app(argCount, argVector);
+    KLocalizedString::setApplicationDomain("org.kde.addonsexample");
+
+    KAboutData aboutData(
+        QStringLiteral("addonsexample"),
+        i18nc("@title:window", "Addons Example"),
+        QStringLiteral("1.0"),
+        i18nc("@info", "This program shows how to use Kirigami Addons"),
+        KAboutLicense::GPL_V3,
+        QStringLiteral("(C) 2023"),
+        i18nc("@info", "Optional text shown in the About"),
+        QStringLiteral("https://kde.org"));
+
+    aboutData.addAuthor(i18nc("@info:credit", "John Doe"),
+                        i18nc("@info:credit", "Maintainer"));
+
+    KAboutData::setApplicationData(aboutData);
+
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("kde")));
+
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.loadFromModule("org.kde.addonsexample", "Main");
+    app.exec();
+}
+```
 
 If you have read our [KXmlGui tutorial](../kxmlgui/) or the last Kirigami tutorial on the [Kirigami About page](advanced-add\_about\_page/), much of this will seem familiar to you.
 
@@ -74,7 +162,27 @@ The idea for our app is to design our own Kirigami Addons gallery, showcasing mu
 
 Initially, our `contents/ui/main.qml` should look like this:
 
-\{{< readfile file="First.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
+
+import org.kde.about 1.0
+
+Kirigami.ApplicationWindow {
+    id: root
+    width: 600
+    height: 700
+
+    pageStack.initialPage: Kirigami.ScrollablePage {
+        ColumnLayout {
+            // Our code will go here
+        }
+    }
+}
+```
 
 We use our handy [pageStack](components-pagerow\_pagestack/) to set the initial page to a [Kirigami.ScrollablePage](docs:kirigami2;ScrollablePage).
 
@@ -86,13 +194,71 @@ Importing `org.kde.kirigamiaddons.formcard` makes all FormCard components availa
 
 We will have only a single section in our main page, so we add a single FormCard:
 
-\{{< readfile file="Second.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
+
+import org.kde.about 1.0
+
+Kirigami.ApplicationWindow {
+    id: root
+    width: 600
+    height: 700
+
+    pageStack.initialPage: Kirigami.ScrollablePage {
+        ColumnLayout {
+            FormCard.FormCard {
+                // Our buttons will go here
+            }
+        }
+    }
+}
+```
 
 The great thing about FormCard is that it does automatic layouting for you. In other words, just the order of its components is enough to indicate their position inside the FormCard, no [Layout attached properties](https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html) are necessary and you are expected not to use [anchors](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html) or [positioners](https://doc.qt.io/qt-6/qtquick-positioning-layouts.html).
 
 We can simply add a few buttons inside our FormCard:
 
-\{{< readfile file="Third.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
+
+import org.kde.about 1.0
+
+Kirigami.ApplicationWindow {
+    id: root
+    width: 600
+    height: 700
+
+    pageStack.initialPage: Kirigami.ScrollablePage {
+        ColumnLayout {
+            FormCard.FormCard {
+                FormCard.FormButtonDelegate {
+                    id: aboutKDEButton
+                    icon.name: "kde"
+                    text: i18n("About KDE Page")
+                }
+                FormCard.FormButtonDelegate {
+                    id: aboutPageButton
+                    icon.name: "applications-utilities"
+                    text: i18n("About Addons Example")
+                }
+                FormCard.FormButtonDelegate {
+                    id: settingsButton
+                    icon.name: "settings-configure"
+                    text: i18n("Single Settings Page")
+                }
+            }
+        }
+    }
+}
+```
 
 That's it! The buttons are not usable just yet, but we are now set up to play with our About pages!
 
@@ -107,4 +273,4 @@ aboutexample
 
 To see other ways to build your application (for example, on Windows), see the [Getting Started with Kirigami](introduction-getting\_started/) page.
 
-\{{< figure src="setting-up.webp" class="text-center" >\}}
+![](../../../content/docs/getting-started/kirigami/addons-introduction/setting-up.webp)
