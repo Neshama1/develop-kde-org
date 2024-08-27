@@ -17,10 +17,6 @@ When provided with enough space, form layouts will take up two columns. The colu
 
 Children of a [Kirigami.FormLayout](docs:kirigami2;FormLayout) have a property named [Kirigami.FormData.label](docs:kirigami2;FormLayoutAttached::label). This property lets you set the label that will be provided for the child component in question.
 
-{{< sections >}}
-
-{{< section-left >}}
-
 ```qml
 import QtQuick
 import QtQuick.Layouts
@@ -47,15 +43,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-{{< figure class="text-center" caption="A simple form layout in desktop mode" src="formlayouts-simple.webp" >}}
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A simple form layout in desktop mode](../../../content/docs/getting-started/kirigami/components-formlayouts/formlayouts-simple.webp)
 
 ## Sections and separators
 
@@ -72,10 +60,6 @@ This does not apply to every component, hence the recommendation that you use [K
 {% endhint %}
 
 This header text is larger than the normal label text, and provides users with a nice visual cue of what the form layout section is about.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.FormLayout {
@@ -123,24 +107,11 @@ Kirigami.FormLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-{{< figure class="text-center" caption="A form layout with sections" src="formlayouts-sections.webp" >}}
-
-{{< /section-right >}}
-
-{{< /sections >}}
-
+![A form layout with sections](../../../content/docs/getting-started/kirigami/components-formlayouts/formlayouts-sections.webp)
 
 ## Checkable children
 
 A handy feature of [Kirigami.FormLayout](docs:kirigami2;FormLayout) is that you can add checkboxes to its children. This can be useful in settings pages where you might want to let the user enable or disable a setting, and also want the user to provide some extra information in a component such as a textfield.
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.FormLayout {
@@ -160,15 +131,7 @@ Kirigami.FormLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-{{< figure class="text-center" caption="A form layout with checkable label." src="formlayouts-checkable.webp" >}}
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A form layout with checkable label](../../../content/docs/getting-started/kirigami/components-formlayouts/formlayouts-checkable.webp)
 
 ## Forcing a desktop or mobile layout
 
@@ -176,10 +139,6 @@ If you would rather have your form layout stay consistent regardless of your app
 
 - When set to `true`, the form layout will be structured in a desktop-optimized widescreen (double-column) layout
 - When set to `false`, the form layout will be structured in a mobile layout (single column)
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.FormLayout {
@@ -198,23 +157,11 @@ Kirigami.FormLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-{{< figure class="text-center" caption="A form layout with forced mobile layout" src="formlayouts-widemode.webp" >}}
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A form layout with forced mobile layout](../../../content/docs/getting-started/kirigami/components-formlayouts/formlayouts-widemode.webp)
 
 ## Aligning your labels
 
 There are instances when you want a label to be assigned to components that have more than one line or to a list of components. This can be achieved by putting the [Kirigami.FormData.label](docs:kirigami2;FormLayoutAttached::label) in the [ColumnLayout](https://doc.qt.io/qt-6/qml-qtquick-layouts-columnlayout.html), as you might have noticed in [Sections and Separators](#sections-and-separators). By default the label is positioned in the vertical center of the layout, which is not always desirable. We can change this with help of [Kirigami.FormData.labelAlignment](docs:kirigami2;FormLayoutAttached::labelAlignment).
-
-{{< sections >}}
-
-{{< section-left >}}
 
 ```qml
 Kirigami.FormLayout {
@@ -232,19 +179,11 @@ Kirigami.FormLayout {
 }
 ```
 
-{{< /section-left >}}
-
-{{< section-right >}}
-
-{{< figure class="text-center" caption="A form layout with top-aligned label" src="formlayouts-labelalignment.webp" >}}
-
-{{< /section-right >}}
-
-{{< /sections >}}
+![A form layout with top-aligned label](../../../content/docs/getting-started/kirigami/components-formlayouts/formlayouts-labelalignment.webp)
 
 Setting the label alignment is particularly convenient to manage components or lists of components whose size you do not know beforehand. [Elisa](https://apps.kde.org/elisa) is a very good example of this:
 
-{{< figure class="text-center" caption="The Comment label is only top aligned when its corresponding component has more than one line" src="elisa.webp" >}}
+![The Comment label is only top aligned when its corresponding component has more than one line](../../../content/docs/getting-started/kirigami/components-formlayouts/elisa.webp)
 
 We can do something similar to this with a JavaScript ternary operator:
 
