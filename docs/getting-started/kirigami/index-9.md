@@ -88,15 +88,51 @@ As mentioned in the [introduction tutorial for actions](introduction-actions/), 
 
 A [Kirigami.Page](docs:kirigami2;Page) shows Actions on the right of the top header in desktop mode, and on a footer in mobile mode.
 
-\{{< readfile file="/content/docs/getting-started/kirigami/components-actions/pageactions.qml" highlight="qml" >\}}
+```qml
+import org.kde.kirigami as Kirigami
 
-\{{< compare >\}}
+Kirigami.ApplicationWindow {
+    title: "Actions Demo"
+    width: 600
+    height: 600
 
-\{{< figure class="text-left mx-auto" caption="Page actions on the desktop" src="desktop\_page.webp" >\}}
+    globalDrawer: Kirigami.GlobalDrawer {}
+    contextDrawer: Kirigami.ContextDrawer {}
 
-\{{< figure class="text-right mx-auto" caption="Page actions on a mobile device" src="mobile\_page.webp" >\}}
+    pageStack.initialPage: Kirigami.Page {
+        title: "Demo"
 
-\{{< /compare >\}}
+        actions: [
+            Kirigami.Action {
+                icon.name: "go-home"
+                onTriggered: showPassiveNotification("Main action triggered")
+            },
+            Kirigami.Action {
+                icon.name: "go-previous"
+                onTriggered: showPassiveNotification("Left action triggered")
+            },
+            Kirigami.Action {
+                icon.name: "go-next"
+                onTriggered: showPassiveNotification("Right action triggered")
+            },
+            Kirigami.Action {
+                text: "Contextual Action 1"
+                icon.name: "bookmarks"
+                onTriggered: showPassiveNotification("Contextual action 1 clicked")
+            },
+            Kirigami.Action {
+                text: "Contextual Action 2"
+                icon.name: "folder"
+                enabled: false
+            }
+        ]
+    }
+}
+```
+
+![Page actions on the desktop](../../../content/docs/getting-started/kirigami/components-actions/desktop\_page.webp)
+
+![Page actions on a mobile device](../../../content/docs/getting-started/kirigami/components-actions/mobile\_page.webp)
 
 #### Global drawer
 
@@ -137,11 +173,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< compare >\}}
-
-\{{< figure class="text-center" caption="Global Drawer actions on the desktop" src="desktop\_global\_drawers.webp" >\}}
-
-\{{< /compare >\}}
+![Global Drawer actions on the desktop](../../../content/docs/getting-started/kirigami/components-actions/desktop\_global\_drawers.webp)
 
 You can read more about Global Drawers in the [documentation page for drawers](../../../content/docs/getting-started/kirigami/components-drawers/#globaldrawer).
 
@@ -149,13 +181,9 @@ You can read more about Global Drawers in the [documentation page for drawers](.
 
 A [Kirigami.ContextDrawer](docs:kirigami2;ContextDrawer) consists of an additional set of actions that are hidden behind a three-dots menu on the top right in desktop mode or on the bottom right in mobile mode if there is no space. It is used to display actions that are only relevant to a specific page. You can read more about them in our [Kirigami Drawers](components-drawers/) tutorial.
 
-\{{< compare >\}}
+![](../../../content/docs/getting-started/kirigami/components-actions/contextdrawer-retracted.webp)
 
-\{{< figure class="text-center mx-auto" src="contextdrawer-retracted.webp" >\}}
-
-\{{< figure class="text-center mx-auto" src="contextdrawer-mobile-drawer.webp" >\}}
-
-\{{< /compare >\}}
+![](../../../content/docs/getting-started/kirigami/components-actions/contextdrawer-mobile-drawer.webp)
 
 #### ActionTextFields
 
@@ -212,9 +240,9 @@ ListView {
 }
 ```
 
-\{{< figure src="swipe\_desktop.png" caption="SwipeListItem on a computer" class="text-center" >\}}
+![SwipeListItem on a computer](../../../content/docs/getting-started/kirigami/components-actions/swipe\_desktop.png)
 
-\{{< figure src="swipe\_mobile.png" caption="SwipeListItem on a mobile device" class="text-center mt-4" >\}}
+![SwipeListItem on a mobile device](../../../content/docs/getting-started/kirigami/components-actions/swipe\_mobile.png)
 
 #### ActionToolBar
 
@@ -252,7 +280,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< figure caption="A horizontal toolbar being displayed at the top of the application" src="action\_tool\_bar.webp" >\}}
+![A horizontal toolbar being displayed at the top of the application](../../../content/docs/getting-started/kirigami/components-actions/action\_tool\_bar.webp)
 
 You can read more about [ActionToolBar](docs:kirigami2;ActionToolBar) components in their [dedicated documentation page](../../../content/docs/getting-started/kirigami/components-actiontoolbar/).
 
