@@ -194,7 +194,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![App Screenshot](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot.png)
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot.png)
 
 ### Data Modification
 
@@ -298,21 +298,9 @@ Kirigami.ApplicationWindow {
 
 Now, whenever the values of the model change in the frontend, the changes should automatically update on the backend.
 
-\{{< sections >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_1.png)
 
-\{{< section-left >\}}
-
-![app\_screenshot\_1.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_1.png)
-
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-![app\_screenshot\_2.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_2.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_2.png)
 
 #### Adding Rows
 
@@ -392,21 +380,10 @@ Kirigami.ApplicationWindow {
 
 Now, we should be given a new action at the top of the app that brings up a prompt that allows to add a new element to the model, with our own custom data.
 
-\{{< sections >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_add\_1.png)
 
-\{{< section-left >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_add\_2.png)
 
-![app\_screenshot\_add\_1.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_add\_1.png)
-
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-![app\_screenshot\_add\_2.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_add\_2.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 #### Removing Rows
 
@@ -472,21 +449,9 @@ ColumnLayout {
 }
 ```
 
-\{{< sections >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_del\_1.png)
 
-\{{< section-left >\}}
-
-![app\_screenshot\_del\_1.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_del\_1.png)
-
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-![app\_screenshot\_del\_2.png](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_del\_2.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![](../../../content/docs/getting-started/kirigami/advanced-connect\_models/app\_screenshot\_del\_2.png)
 
 ### Full Code
 
@@ -494,7 +459,114 @@ ColumnLayout {
 
 <summary>Main.qml</summary>
 
-\{{< readfile file="/content/docs/getting-started/kirigami/advanced-connect\_models/Main.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+import org.kde.kirigami as Kirigami
+import CustomModel 1.0
+
+Kirigami.ApplicationWindow {
+    id: root
+    title: "Tutorial"
+
+    CustomModel {
+        id: customModel
+    }
+
+    Kirigami.OverlaySheet {
+        id: editPrompt
+
+        property var model
+        property alias text: editPromptText.text
+
+        title: "Edit Characters"
+
+        Controls.TextField {
+            id: editPromptText
+        }
+
+        footer: Controls.DialogButtonBox {
+            standardButtons: Controls.DialogButtonBox.Ok
+            onAccepted: {
+                const model = editPrompt.model;
+                model.characters = editPromptText.text;
+                editPrompt.close();
+            }
+        }
+    }
+
+    Kirigami.OverlaySheet {
+        id: addPrompt
+
+        title: "Add New Species"
+
+        Controls.TextField {
+            id: addPromptText
+        }
+
+        footer: Controls.DialogButtonBox {
+            standardButtons: Controls.DialogButtonBox.Ok
+            onAccepted: {
+                customModel.addSpecies(addPromptText.text);
+                addPromptText.text = ""; // Clear TextField every time it's done
+                addPrompt.close();
+            }
+        }
+    }
+
+    pageStack.initialPage: Kirigami.ScrollablePage {
+        actions: [
+            Kirigami.Action {
+                icon.name: "add"
+                text: "Add New Species"
+                onTriggered: {
+                    addPrompt.open();
+                }
+            }
+        ]
+
+        ColumnLayout {
+            Repeater {
+                model: customModel
+                delegate: Kirigami.AbstractCard {
+                    Layout.fillHeight: true
+                    header: Kirigami.Heading {
+                        text: model.species
+                        level: 2
+                    }
+                    contentItem: Item {
+                        implicitWidth: delegateLayout.implicitWidth
+                        implicitHeight: delegateLayout.implicitHeight
+                        ColumnLayout {
+                            id: delegateLayout
+                            Controls.Label {
+                                text: model.characters
+                            }
+                            RowLayout {
+                                Controls.Button {
+                                    text: "Edit"
+                                    onClicked: {
+                                        editPrompt.text = model.characters;
+                                        editPrompt.model = model;
+                                        editPrompt.open();
+                                    }
+                                }
+                                Controls.Button {
+                                    text: "Delete"
+                                    onClicked: {
+                                        customModel.deleteSpecies(model.species, index);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
 
 </details>
 
@@ -505,7 +577,42 @@ ColumnLayout {
 
 <summary>model.h</summary>
 
-\{{< readfile file="/content/docs/getting-started/kirigami/advanced-connect\_models/model.h" highlight="cpp" >\}}
+```qml
+#pragma once
+
+#include <QAbstractListModel>
+
+class Model : public QAbstractListModel {
+Q_OBJECT;
+
+private:
+    QMap<QString, QStringList> m_list = {
+            {"Feline", {"Tigress",   "Waai Fuu"}},
+            {"Fox",    {"Carmelita", "Diane", "Krystal"}},
+            {"Goat",   {"Sybil",     "Toriel"}}
+    };
+
+    static QString formatList(const QStringList &list);
+
+public:
+    enum Roles {
+        SpeciesRole = Qt::UserRole,
+        CharactersRole
+    };
+
+    int rowCount(const QModelIndex &) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
+
+    QVariant data(const QModelIndex &index, int role) const override;
+
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+
+    Q_INVOKABLE void addSpecies(const QString &species);
+
+    Q_INVOKABLE void deleteSpecies(const QString &species, const int &rowIndex);
+};
+```
 
 </details>
 
@@ -516,7 +623,73 @@ ColumnLayout {
 
 <summary>model.cpp</summary>
 
-\{{< readfile file="/content/docs/getting-started/kirigami/advanced-connect\_models/model.cpp" highlight="cpp" >\}}
+```qml
+#include "model.h"
+
+int Model::rowCount(const QModelIndex &) const {
+    return m_list.count();
+}
+
+QHash<int, QByteArray> Model::roleNames() const {
+    QHash<int, QByteArray> map = {
+            {SpeciesRole,   "species"},
+            {CharactersRole, "characters"}
+    };
+    return map;
+}
+
+QVariant Model::data(const QModelIndex &index, int role) const {
+    const auto it = m_list.begin() + index.row();
+    switch (role) {
+        case SpeciesRole:
+            return it.key();
+        case CharactersRole:
+            return formatList(it.value());
+        default:
+            return {};
+    }
+}
+
+QString Model::formatList(const QStringList& list) {
+    QString result;
+    for (const QString& character : list) {
+        result += character;
+        if (list.last() != character) {
+            result += ", ";
+        }
+    }
+    return result;
+}
+
+bool Model::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if (!value.canConvert<QString>() && role != Qt::EditRole) {
+        return false;
+    }
+
+    auto it = m_list.begin() + index.row();
+    QString charactersUnformatted = value.toString();
+    QStringList characters = charactersUnformatted.split(", ");
+
+    m_list[it.key()] = characters;
+    emit dataChanged(index, index);
+
+    return true;
+}
+
+void Model::addSpecies(const QString& species) {
+    beginInsertRows(QModelIndex(), m_list.size() - 1, m_list.size() - 1);
+    m_list.insert(species, {});
+    endInsertRows();
+    emit dataChanged(index(0), index(m_list.size() - 1));
+}
+
+void Model::deleteSpecies(const QString &species, const int& rowIndex) {
+    beginRemoveRows(QModelIndex(), rowIndex, rowIndex);
+    m_list.remove(species);
+    endRemoveRows();
+    emit dataChanged(index(0), index(m_list.size() - 1));
+}
+```
 
 </details>
 
