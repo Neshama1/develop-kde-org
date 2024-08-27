@@ -21,7 +21,14 @@ Before getting started, we will need to install Kirigami on our machine. There a
 
 We need a C++ compiler, Qt development packages, and Kirigami. Open a terminal application and run one of the following, depending on which Linux distribution you are using:
 
-\{{< installpackage arch="base-devel extra-cmake-modules cmake kirigami ki18n kcoreaddons breeze kiconthemes qt6-base qt6-declarative qqc2-desktop-style" opensuse="cmake kf6-extra-cmake-modules kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-base-devel qt6-declarative-devel qt6-quickcontrols2-devel kf6-qqc2-desktop-style" fedoraCommand=`sudo dnf groupinstall "Development Tools" "Development Libraries" sudo dnf install cmake extra-cmake-modules kf6-kirigami2-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtquickcontrols2-devel kf6-qqc2-desktop-style` >\}}
+| [Manjaro](https://software.manjaro.org/package/base-devel), [Arch](https://archlinux.org/packages/?q=base-devel) | <pre><code>sudo pacman -S base-devel extra-cmake-modules cmake kirigami ki18n kcoreaddons breeze kiconthemes qt6-base qt6-declarative qqc2-desktop-style
+</code></pre>                                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [OpenSUSE](https://software.opensuse.org/package/cmake)                                                          | <pre><code>sudo zypper install cmake kf6-extra-cmake-modules kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-base-devel qt6-declarative-devel qt6-quickcontrols2-devel kf6-qqc2-desktop-style
+</code></pre>                                                                   |
+| Fedora                                                                                                           | <pre><code>sudo dnf groupinstall "Development Tools" "Development Libraries"
+sudo dnf install cmake extra-cmake-modules kf6-kirigami2-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kiconthemes-devel qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtquickcontrols2-devel kf6-qqc2-desktop-style
+</code></pre> |
 
 Further information for other distributions can be found [here](../building/help-dependencies/).
 
@@ -71,7 +78,10 @@ kirigami-tutorial/
 
 Within this folder we are going to create a `src/` folder and `CMakeLists.txt`. It is generally considered good practice to place all our main C++ code files in a `src/` folder. We also put the `Main.qml` file in it since it will be run together with the executable.
 
-\{{< alert title="Tip" color="info" >\}}
+
+
+{% hint style="info" %}
+Tip
 
 You can quickly create this file structure with:
 
@@ -80,18 +90,47 @@ mkdir -p kirigami-tutorial/src
 touch kirigami-tutorial/{CMakeLists.txt,org.kde.tutorial.desktop}
 touch kirigami-tutorial/src/{CMakeLists.txt,main.cpp,Main.qml}
 ```
+{% endhint %}
 
-\{{< /alert >\}}
-
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}
+Note
 
 In case you want to automatically build the project with kde-builder/kdesrc-build, custom module name should be the same as the project root folder (in our case it will be "kirigami-tutorial"), otherwise you would need to customize the `source-dir` or `dest-dir` for the module. We will assume the path to your `main.cpp` will be `$HOME/kde/src/kirigami-tutorial/src/main.cpp`.
-
-\{{< /alert >\}}
+{% endhint %}
 
 #### Main.qml
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/src/qml/Main.qml" highlight="qml" >\}}
+```qml
+// Includes relevant modules used by the QML
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+import org.kde.kirigami as Kirigami
+
+// Provides basic features needed for all kirigami applications
+Kirigami.ApplicationWindow {
+    // Unique identifier to reference this object
+    id: root
+
+    width: 400
+    height: 300
+
+    // Window title
+    // i18nc() makes a string translatable
+    // and provides additional context for the translators
+    title: i18nc("@title:window", "Hello World")
+
+    // Set the first page that will be loaded when the app opens
+    // This can also be set to an id of a Kirigami.Page
+    pageStack.initialPage: Kirigami.Page {
+        Controls.Label {
+            // Center label horizontally and vertically within parent object
+            anchors.centerIn: parent
+            text: i18n("Hello World!")
+        }
+    }
+}
+```
 
 Here's where we will be handling our application's frontend.
 
@@ -104,11 +143,11 @@ For now, let's focus on `Main.qml`. First we [import](https://doc.qt.io/qt-6/qtq
 * [QtQuick Layouts](https://doc.qt.io/qt-6/qtquicklayouts-index.html), which provides tools for placing components within the application window.
 * [Kirigami](docs:kirigami2), which provides a number of components suited for creating applications that work across devices of different shapes and sizes.
 
-\{{< alert title="Note" color="info">\}}
+{% hint style="info" %}
+Note
 
 Putting the QtQuick Controls and Kirigami imports into separate namespaces using the `as` keyword is a best practice that ensures no components with the same name can conflict. You might see different names for QtQuick Controls in the wild, such as "QQC" or "QQC2". We will be using "Controls" in this tutorial for clarity.
-
-\{{< /alert >\}}
+{% endhint %}
 
 We then come to our base element, [Kirigami.ApplicationWindow](docs:kirigami2;ApplicationWindow), which provides some basic features needed for all Kirigami applications. This is the window that will contain each of our pages, the main sections of our UI.
 
@@ -116,13 +155,13 @@ We then set the window's `id` property to "root". IDs are useful because they le
 
 We also set the window `title` property to "Hello World". You'll notice that we have wrapped our "Hello World" string in a function called `i18nc()`, where we detail the context of the string as well as the string itself.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}
+Note
 
 [i18n()](https://techbase.kde.org/Development/Tutorials/Localization/i18n#Translatable\_Code\_Using\_i18n\(\)) functions make your app more easily translatable, as they return a version of the provided string in the user's language (as long as your app has been localised for that language). While an English user might see our window title as "Hello World", a Spanish user would see "Hola Mundo".
 
 [i18nc()](https://techbase.kde.org/Development/Tutorials/Localization/i18n#Adding\_Context\_with\_i18nc\(\)) builds on the `i18n()` function by allowing developers to provide some context to translators working on the app. Here we clarify that the UI component is the title of the application window, so we have included the string "@title:window" before "Hello World". See the [Ki18n Programmer's guide](https://api.kde.org/frameworks/ki18n/html/prg\_guide.html#good\_ctxt) for more details.
-
-\{{< /alert >\}}
+{% endhint %}
 
 We then set the first page of our page stack. Most Kirigami applications are organised as a stack of pages, each page containing related components suited to a specific task. For now, we are keeping it simple, and sticking to a single page. [pageStack](docs:kirigami2;AbstractApplicationWindow::pageStack) is an initially empty stack of pages provided by [Kirigami.ApplicationWindow](docs:kirigami2;ApplicationWindow), and with `pageStack.initialPage: Kirigami.Page {...}` we set the first page presented upon loading the application to a [Kirigami.Page](docs:kirigami2;Page). This page will contain all our content.
 
@@ -134,19 +173,77 @@ The primary purpose of [Desktop Entry files](https://specifications.freedesktop.
 
 It must follow a [reverse-DNS naming scheme](https://en.wikipedia.org/wiki/Reverse\_domain\_name\_notation) followed by the `.desktop` extension such as `org.kde.tutorial.desktop`:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/org.kde.tutorial.desktop" highlight="ini" >\}}
+```ini
+[Desktop Entry]
+Name=Kirigami Tutorial
+Name[ca]=Guia d'aprenentatge del Kirigami
+Name[cs]=Tutoriál Kirigami
+Name[eo]=Lernilo pri Kirigami
+Name[es]=Tutorial de Kirigami
+Name[fr]=Tutoriel pour Kirigami
+Name[it]=Esercitazione di Kirigami
+Name[nl]=Kirigami handleiding
+Name[sl]=Učbenik Kirigami
+Name[sv]=Kirigami-handledning
+Name[tr]=Kirigami Öğreticisi
+Name[uk]=Підручник з Kirigami
+Name[x-test]=xxKirigami Tutorialxx
+Name[zh_TW]=Kirigami 教學
+Exec=kirigami-hello
+Icon=kde
+Type=Application
+Terminal=false
+Categories=Utility
+```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}
+Note
 
 Window and taskbar icons will work in a Wayland session only if apps' desktop files are placed in `~/.local/share/applications` or `/usr/share/applications`. To get icons working in this tutorial, either copy the app's desktop file there or switch to a development session as instructed in [kdesrc-build tutorial](../building/kdesrc-build-compile/). Some KDE applications might have working icons if they were already installed on the system.
-
-\{{< /alert >\}}
+{% endhint %}
 
 #### CMakeLists.txt
 
 `CMakeLists.txt` files are needed to use KDE's build system of choice, [CMake](https://cmake.org/). Our `kirigami-tutorial/CMakeLists.txt` file is going to specify some of our application's characteristics. It also includes some of the dependencies we need in order to compile our project.
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" >\}}
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(kirigami-tutorial)
+
+find_package(ECM 6.0.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMFindQmlModule)
+include(ECMQmlModule)
+
+find_package(Qt6 REQUIRED COMPONENTS
+    Core
+    Quick
+    Test
+    Gui
+    QuickControls2
+    Widgets
+)
+
+find_package(KF6 REQUIRED COMPONENTS
+    Kirigami
+    I18n
+    CoreAddons
+    QQC2DesktopStyle
+    IconThemes
+)
+
+ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
+
+add_subdirectory(src)
+
+install(PROGRAMS org.kde.tutorial.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 The `CMakeLists.txt` defines how to build your projects. Most of the content here is just to bootstrap your project. You can read a line-by-line, in-depth explanation of what this CMakeLists file does [here](advanced-understanding\_cmakelists/).
 
@@ -158,7 +255,38 @@ The line with `install()` tells CMake where to install the desktop file.
 
 Let's delve into the `kirigami-tutorial/src/CMakeLists.txt` file in there.
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/src/CMakeLists.txt" highlight="cmake" >\}}
+```cmake
+add_executable(kirigami-hello)
+
+ecm_add_qml_module(kirigami-hello
+    URI
+    org.kde.tutorial
+)
+
+target_sources(kirigami-hello
+    PRIVATE
+    main.cpp
+)
+
+ecm_target_qml_sources(kirigami-hello
+    SOURCES
+    Main.qml
+)
+
+target_link_libraries(kirigami-hello
+    PRIVATE
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Gui
+    Qt6::QuickControls2
+    Qt6::Widgets
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::IconThemes
+)
+
+install(TARGETS kirigami-hello ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+```
 
 This file consists of five steps:
 
@@ -178,23 +306,59 @@ The file `kirigami-tutorial/src/main.cpp` handles the "business logic" of our ap
 
 It also functions as the entrypoint to our application. The two parts of our project, the backend and the user interface, are both set up and started here.
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/src/main.cpp" highlight="cpp" >\}}
+```cpp
+#include <QApplication>
+#include <QQmlApplicationEngine>
+#include <QtQml>
+#include <QUrl>
+#include <QQuickStyle>
+#include <KLocalizedContext>
+#include <KLocalizedString>
+#include <KIconTheme>
+
+int main(int argc, char *argv[])
+{
+    KIconTheme::initTheme();
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("tutorial");
+    QApplication::setOrganizationName(QStringLiteral("KDE"));
+    QApplication::setOrganizationDomain(QStringLiteral("kde.org"));
+    QApplication::setApplicationName(QStringLiteral("Kirigami Tutorial"));
+    QApplication::setDesktopFileName(QStringLiteral("org.kde.tutorial"));
+
+    QApplication::setStyle(QStringLiteral("breeze"));
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+        QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
+    }
+
+    QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.loadFromModule("org.kde.tutorial", "Main");
+
+    if (engine.rootObjects().isEmpty()) {
+        return -1;
+    }
+
+    return app.exec();
+}
+```
 
 For now, we don't need to go into too much detail regarding what our `main.cpp` code does, but its role will grow significantly more important once we decide to add more complex functionality to our application in the future.
 
-\{{< alert title="Theming on Windows" color="info">\}}
+{% hint style="info" %}
+Theming on Windows
 
 <details>
 
 <summary>Click here to read more</summary>
 
-The application needs to set its icon theme, QStyle, and QtQuick Controls style to Breeze in order to show up on Windows. To learn more about it, see [Figuring out main.cpp](advanced-maincpp/).
+The application needs to set its icon theme, QStyle, and QtQuick Controls style to Breeze in order to show up on Windows. To learn more about it, see [Figuring out main.cpp](index-23.md).
 
 </details>
+{% endhint %}
 
-\{{< /alert >\}}
-
-If you want to get ahead, you can read more about how this `main.cpp` works in [Figuring out main.cpp](advanced-maincpp/).
+If you want to get ahead, you can read more about how this `main.cpp` works in [Figuring out main.cpp](index-23.md)
 
 If you want to see a few ways on how the C++ code can be improved, like using [KAboutData](docs:kcoreaddons;KAboutData) for translatable application metadata, be sure to check our [KXmlGui tutorial](../kxmlgui/).
 
@@ -206,7 +370,8 @@ engine.loadFromModule("org.kde.tutorial", "Main");
 
 The first argument is the URI set in `kirigami-tutorial/src/CMakeLists.txt`, and the second argument is the name of the QML module we want to use (`Main`, coming from the name of our `Main.qml` file, which needs to start with an uppercase letter).
 
-\{{< alert title="The old method" color="info" >\}}
+{% hint style="info" %}
+The old method
 
 <details>
 
@@ -229,8 +394,7 @@ This [Qt resource URI](https://doc.qt.io/qt-6/resources.html) above follows the 
 * file = the QML file
 
 </details>
-
-\{{< /alert >\}}
+{% endhint %}
 
 ### Compiling and installing the application <a href="#build" id="build"></a>
 
@@ -332,10 +496,10 @@ If you have compiled the project manually with CMake and for some reason you'd l
 cmake --build build/ --target uninstall
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}
+Note
 
 Next time you want to create the files and folders needed, you can use [KAppTemplate](https://apps.kde.org/kapptemplate) or [KDevelop](https://apps.kde.org/kdevelop/) to automatically generate a suitable project to start from. They are available from each major distribution's repositories. These applications will also generate files containing [AppStream](https://www.freedesktop.org/software/appstream/docs/sect-Metadata-Application.html) metadata and a `.desktop` file that contains information about how the application should be displayed in a linux application launcher.
 
 Thanks to the magic of CMakeLists, you can also use IDEs such as KDevelop or [QtCreator](https://www.qt.io/product/development-tools) to develop this application within a comfortable environment with minimal effort.
-
-\{{< /alert >\}}
+{% endhint %}
