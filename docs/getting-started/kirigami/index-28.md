@@ -78,7 +78,7 @@ The application's AboutPage is slightly more complex, but it's still very simple
 
 And our `contents/ui/MyAboutPage.qml` should have the following:
 
-{% hint style="error" %}Ah ah ah
+{% hint style="danger" %}Ah ah ah
 
 This file is not available.
 
@@ -164,7 +164,7 @@ Instead of letting your about page get information from [KAboutData](docs:kcorea
 
 Change your `MyAboutPage.json` to something like this:
 
-{% hint style="error" %}Ah ah ah
+{% hint style="danger" %}Ah ah ah
 
 This file is not available.
 
