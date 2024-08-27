@@ -288,10 +288,6 @@ You can read more about [ActionToolBar](docs:kirigami2;ActionToolBar) components
 
 A [Kirigami.Card](docs:kirigami2;Card) is used to display a collection of information or actions together. These actions can be added to the `actions` group, similarly to previous components.
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 Kirigami.Card {
     actions: [
@@ -318,14 +314,6 @@ Kirigami.Card {
 
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
 ![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](../../../content/docs/getting-started/kirigami/components-actions/card.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 For more information consult the [component page for Cards](../../../content/docs/getting-started/kirigami/components-card/).
