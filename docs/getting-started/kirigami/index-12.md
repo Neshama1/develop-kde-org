@@ -19,10 +19,6 @@ Kirigami also offers 3 kinds of [views](https://doc.qt.io/qt-6/qtquick-modelview
 
 A [Kirigami.AbstractCard](docs:kirigami2;AbstractCard) is the simplest type of card. It's just a rectangle with a shadow, which can contain any [Item](docs:qtquick;QtQuick.Item) in it. It can also have Items assigned to its [header](docs:kirigami2;templates::AbstractCard::header) or [footer](docs:kirigami2;templates::AbstractCard::footer) properties. In this case a [Kirigami.Heading](docs:kirigami2;Heading) is its `header` and a [Controls.Label](docs:qtquickcontrols;QtQuick.Controls.Label) is the card's [contentItem](https://doc.qt.io/Qt-6/qml-qtquick-controls-control.html#contentItem-prop).
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 Kirigami.AbstractCard {
     Layout.fillHeight: true
@@ -37,23 +33,11 @@ Kirigami.AbstractCard {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
 ![Screenshot of an Abstract Card, a simple rectangular button with left-aligned text](../../../../../docs/getting-started/kirigami/components-card/abstract-card.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 ### Card
 
 A [Kirigami.Card](docs:kirigami2;Card) inherits from [AbstractCard](docs:kirigami2;AbstractCard) and provides more features out of the box. Cards inherit the same [header](docs:kirigami2;templates::AbstractCard::header) and [footer](docs:kirigami2;templates::AbstractCard::footer) from an Abstract Card, but you are encouraged to use a [banner](docs:kirigami2;Card::banner) and a set of [Kirigami.Action](docs:kirigami2;Action) in the `actions` group instead.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 Kirigami.Card {
@@ -82,15 +66,7 @@ Kirigami.Card {
 
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
 ![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](../../../../../docs/getting-started/kirigami/components-card/card1.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 ### CardsLayout
 
@@ -109,10 +85,6 @@ A [CardsLayout](docs:kirigami2;CardsLayout) should always be contained within a 
 {% endhint %}
 
 A card can optionally be oriented horizontally. In this case it will be wider than tall, and is better suited to being placed in a [ColumnLayout](https://doc.qt.io/qt-6/qml-qtquick-layouts-columnlayout.html). If you must put it in a [CardsLayout](docs:kirigami2;CardsLayout), it will have a [maximumColumns](docs:kirigami2;CardsLayout::maximumColumns) of `2` by default.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 ColumnLayout {
@@ -140,15 +112,7 @@ ColumnLayout {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
 ![Screenshot of a CardsLayout showing two side by side cards in portrait orientation on top of a card in landscape orientation, all with different components being used](../../../../../docs/getting-started/kirigami/components-card/cardslayout.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 ### CardsListView
 
@@ -157,10 +121,6 @@ A [Kirigami.CardsListView](docs:kirigami2;CardsListView) is a list view that can
 A [CardsListView](docs:kirigami2;CardsListView) will stretch child cards to its own width. This component should therefore only be used with cards which will look good at any horizontal size. Use of a [Card](docs:kirigami2;Card) component inside it is discouraged, unless it has [Qt.Horizontal](docs:qtcore;Qt::Orientation) as its [headerOrientation](docs:kirigami2;templates::AbstractCard::headerOrientation) property.
 
 The choice between using this view with [AbstractCard](docs:kirigami2;AbstractCard) components or a conventional [ListView](docs:qtquick;QtQuick.ListView) with [AbstractListItem](docs:kirigami2;AbstractListItem)/[BasicListItem](docs:kirigami2;BasicListItem) components is purely an aesthetic one.
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 Kirigami.CardsListView {
@@ -204,15 +164,4 @@ Kirigami.CardsListView {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
 ![Screenshot of a CardsListView, which is a simple vertical list of cards in landscape mode](../../../../../docs/getting-started/kirigami/components-card/cardslistview.png)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
