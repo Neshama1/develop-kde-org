@@ -94,7 +94,7 @@ See the official documentation: [Open projects](https://doc.qt.io/qtcreator/crea
 
 If you are opening the project for the first time, the "Configure Project" view will be opened.
 
-\{{< figure width="80%" src="configure\_project\_view.png" >\}}
+\{{< figure width="80%" src="configure\_project\_view.png)
 
 Press the "Select all kits" checkbox several times to deselect every kit. Then create "KDE Builder kit" (if not done yet), and select it.
 
@@ -104,11 +104,11 @@ If the project has a `CMakePresets.json` in its root directory (KCalc does), you
 
 For your convenience, you can remove all temporary kits from the project, so they are not shown in the available kits in the Project mode. You can do this in "Manage Kits". In case you want them in the future, you could do **Build | Reload CMake Presets**.
 
-\{{< figure width="60%" src="remove\_temporary\_kits.png" >\}}
+\{{< figure width="60%" src="remove\_temporary\_kits.png)
 
 Alternatively, you can keep temporary kits there, but deactivate them for the project. If you accidentally clicked on an unwanted kit in "Build & Run", it got activated. To disable it again, click on its name with right mouse button, and select "Disable Kit for all projects".
 
-\{{< figure width="300px" src="disabling\_activated\_kit.png" >\}}
+\{{< figure width="300px" src="disabling\_activated\_kit.png)
 
 **Creating the KDE Builder kit**
 
@@ -122,7 +122,7 @@ This kit is a global IDE setting, so you will only need to do it once.
 
 In the left sidebar, switch to "Projects" mode (Ctrl+5), then click "Manage Kits...".
 
-\{{< figure width="300px" src="manage\_kits\_button.png" >\}}
+\{{< figure width="300px" src="manage\_kits\_button.png)
 
 Press the "Add" button, and fill in the fields as follows:
 
@@ -151,13 +151,13 @@ CMake Configuration:   (without them, our kit will have a warning that they are 
 Python: None
 ````
 
-\{{< figure width="60%" src="kde-builder\_kit\_settings.png" >\}}
+\{{< figure width="60%" src="kde-builder\_kit\_settings.png)
 
 #### Configure Build Settings
 
 Open the "Projects" mode (Ctrl + 5), go to "Build & Run", "KDE Builder kit", then click "Build".
 
-\{{< figure width="250px" src="select\_kit\_build\_configuration.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/select\_kit\_build\_configuration.png)
 
 The "Build Settings" view will open.
 
@@ -165,11 +165,11 @@ The "Build Settings" view will open.
 
 Under the "Edit build configuration", press the "Add" button to add a new build configuration, select any type, for example, "Debug", and give it a name, for example, "KDE Builder build configuration".
 
-\{{< figure width="50%" src="adding\_build\_configuration.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/adding\_build\_configuration.png)
 
 **CMake section**
 
-\{{< figure width="50%" src="cmake\_section.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/cmake\_section.png)
 
 Under the "Build directory" field, enter the build directory of the module, in our example it will be `~/kde/build/kcalc`.
 
@@ -181,7 +181,7 @@ Under "Use Build Environment", press "Details" to expand this setting. Under "Ba
 
 **Build Steps section**
 
-\{{< figure width="50%" src="build\_steps\_section.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/build\_steps\_section.png)
 
 In the "CMake arguments" field, enter the "-j" and a value of your num-cores option, for example, "-j 10".
 
@@ -189,7 +189,7 @@ Under targets, ensure you selected "all".
 
 **Build Environment section**
 
-\{{< figure width="50%" src="build\_environment\_section.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/build\_environment\_section.png)
 
 Copy the text from the generated file located at `~/kde/src/kcalc/.qtcreator/cmake_Configure_and_Build_Environment.txt` and paste to the text field in this section.
 
@@ -199,7 +199,7 @@ Open the "Projects" mode (Ctrl + 5), go to "Build & Run", "KDE Builder kit", the
 
 **Deployment section**
 
-\{{< figure width="50%" src="deployment\_section.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/deployment\_section.png)
 
 Under "Deploy configuration", press "Add Deploy Step" and select "CMake install".
 
@@ -209,19 +209,19 @@ For convenience, you can rename the configuration as "KDE Builder Deploy configu
 
 In the "Run configuration" field, press Add button, and select "Custom Executable".
 
-\{{< figure width="500px" src="run\_section\_create\_conf.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/run\_section\_create\_conf.png)
 
 Rename the configuration for your convenience, for example as "KDE Builder Run configuration".
 
 In the "Executable" field, specify the path to the _installed_ project binary. In our example, it is `~/kde/usr/bin/kcalc`.
 
-\{{< figure width="500px" src="run\_configuration\_executable.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/run\_configuration\_executable.png)
 
 **Environment section**
 
 Click "Details" to expand this setting.
 
-\{{< figure width="700px" src="run\_environment\_section.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/run\_environment\_section.png)
 
 In the "Base environment for this run configuration" select "System Environment".
 
@@ -233,7 +233,7 @@ Note: if you want to see debugging messages, you can add corresponding variables
 
 In the left bottom corner, in the configuration selector, ensure the correct configuration is selected (i.e. for the "kcalc" project, the Build, Deploy and Run configurations applied are those that we configured).
 
-\{{< figure width="40%" src="configuration\_selection\_indicator.png" >\}}
+![](../../../../content/docs/getting-started/building/ide/qt-creator/configuration\_selection\_indicator.png)
 
 You are now ready to start developing.
 
