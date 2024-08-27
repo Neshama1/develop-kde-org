@@ -23,13 +23,10 @@ A [Kirigami.Action](docs:kirigami2;Action) encapsulates a user interface action.
 
 If you have used Kirigami apps before, you have certainly interacted with Kirigami actions. In this image, we can see actions to the right of the page title with various icons. Kirigami actions can be displayed in several ways and can do a wide variety of things.
 
-\{{< compare >\}}
+![](../../../content/docs/getting-started/kirigami/introduction-actions/actions-desktop.webp)
 
-\{{< figure class="text-center mx-auto" src="actions-desktop.webp" >\}}
+![](../../../content/docs/getting-started/kirigami/introduction-actions/actions-mobile.webp)
 
-\{{< figure class="text-center mx-auto" src="actions-mobile.webp" >\}}
-
-\{{< /compare >\}}
 
 ### Adding countdowns
 
@@ -91,26 +88,11 @@ Many of KDE's icons follow the FreeDesktop Icon Naming specification. Therefore,
 
 The [onTriggered](docs:qtquickcontrols;QtQuick.Controls.Action::triggered) signal handler is the most important. This is what our action will do when it is used. You'll notice that in our example we're using the method [kountdownModel.append](https://doc.qt.io/qt-6/qml-qtqml-models-listmodel.html#append-method) of the `kountdownModel` we created in our previous tutorial. This method lets us append a new element to our list model. We are providing it with an object (indicated by curly braces `{}`) that has the relevant properties for our countdowns (`name`, `description`, and a placeholder `date`).
 
-\{{< /section-left >\}}
+![Add kountdown" button on the top right, our custom countdown is added](../../../content/docs/getting-started/kirigami/introduction-actions/action\_result.webp)
 
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" caption="Each time we click our "Add kountdown" button on the top right, our custom countdown is added" src="action\_result.webp" >\}}
-
-\{{< figure class="text-center" caption="Mobile version" src="action\_result\_mobile.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Mobile version](../../../content/docs/getting-started/kirigami/introduction-actions/action\_result\_mobile.webp)
 
 ### Global drawer
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 The next component is a [Kirigami.GlobalDrawer](docs:kirigami2;GlobalDrawer). It shows up as a [hamburger menu](https://en.wikipedia.org/wiki/Hamburger\_button). By default it opens a sidebar, which is especially useful on mobile, as the user can just swipe in a side of the screen to open it. Global drawers are useful for global navigation and actions. We are going to create a simple global drawer that includes a "quit" button.
 
@@ -138,17 +120,9 @@ Here, we put our global drawer inside our application window. The main property 
 
 Since we are keeping our global drawer simple for now, we are setting the [GlobalDrawer.isMenu](docs:kirigami2;GlobalDrawer::isMenu) property to `true`. This displays our global drawer as a normal application menu, taking up less space than the default global drawer pane.
 
-\{{< /section-left >\}}
+![Global drawer](../../../content/docs/getting-started/kirigami/introduction-actions/global\_drawer.webp)
 
-\{{< section-right >\}}
-
-\{{< figure class="text-center" caption="Global drawer" src="global\_drawer.webp" >\}}
-
-\{{< figure class="text-center" caption="Global drawer as a menu" src="quit\_action.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Global drawer as a menu](../../../content/docs/getting-started/kirigami/introduction-actions/quit\_action.webp)
 
 {% hint style="success" %}Tip
 
@@ -177,6 +151,121 @@ Among other Kirigami components.
 
 <summary>Main.qml:</summary>
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-actions/Main.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+import org.kde.kirigami as Kirigami
+
+Kirigami.ApplicationWindow {
+    id: root
+
+    width: 400
+    height: 300
+
+    title: i18nc("@title:window", "Day Kountdown")
+
+    // Global drawer element with app-wide actions
+    globalDrawer: Kirigami.GlobalDrawer {
+        // Makes drawer a small menu rather than sliding pane
+        isMenu: true
+        actions: [
+            Kirigami.Action {
+                text: i18n("Quit")
+                icon.name: "application-exit-symbolic"
+                shortcut: StandardKey.Quit
+                onTriggered: Qt.quit()
+            }
+        ]
+    }
+
+    ListModel {
+        id: kountdownModel
+        ListElement {
+            name: "Dog birthday!!"
+            description: "Big doggo birthday blowout."
+            date: 100
+        }
+    }
+
+    Component {
+        id: kountdownDelegate
+        Kirigami.AbstractCard {
+            contentItem: Item {
+                implicitWidth: delegateLayout.implicitWidth
+                implicitHeight: delegateLayout.implicitHeight
+                GridLayout {
+                    id: delegateLayout
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        right: parent.right
+                    }
+                    rowSpacing: Kirigami.Units.largeSpacing
+                    columnSpacing: Kirigami.Units.largeSpacing
+                    columns: root.wideScreen ? 4 : 2
+
+                    Kirigami.Heading {
+                        Layout.fillHeight: true
+                        level: 1
+                        text: date
+                    }
+
+                    ColumnLayout {
+                        Kirigami.Heading {
+                            Layout.fillWidth: true
+                            level: 2
+                            text: name
+                        }
+                        Kirigami.Separator {
+                            Layout.fillWidth: true
+                            visible: description.length > 0
+                        }
+                        Controls.Label {
+                            Layout.fillWidth: true
+                            wrapMode: Text.WordWrap
+                            text: description
+                            visible: description.length > 0
+                        }
+                    }
+                    Controls.Button {
+                        Layout.alignment: Qt.AlignRight
+                        Layout.columnSpan: 2
+                        text: i18n("Edit")
+                    }
+                }
+            }
+        }
+    }
+
+    pageStack.initialPage: Kirigami.ScrollablePage {
+        title: i18nc("@title", "Kountdown")
+
+        // Kirigami.Action encapsulates a UI action. Inherits from Controls.Action
+        actions: [
+            Kirigami.Action {
+                id: addAction
+                // Name of icon associated with the action
+                icon.name: "list-add-symbolic"
+                // Action text, i18n function returns translated string
+                text: i18nc("@action:button", "Add kountdown")
+                // What to do when triggering the action
+                onTriggered: kountdownModel.append({
+                    name: "Kirigami Action added card!",
+                    description: "Congratulations, your Kirigami Action works!",
+                    date: 1000
+                })
+            }
+        ]
+
+        Kirigami.CardsListView {
+            id: cardsView
+            model: kountdownModel
+            delegate: kountdownDelegate
+        }
+    }
+}
+
+```
 
 </details>
