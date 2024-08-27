@@ -23,10 +23,6 @@ It can be activated by tapping the hamburger menu or by swiping from the left ed
 
 [Kirigami.GlobalDrawer](docs:kirigami2;GlobalDrawer) components are what we use to create such drawers. These are set to the [globalDrawer](docs:kirigami2;AbstractApplicationWindow::globalDrawer) property of the [Kirigami.ApplicationWindow](docs:kirigami2;ApplicationWindow) that forms the basis of our Kirigami application.
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 import QtQuick
 import org.kde.kirigami as Kirigami
@@ -62,18 +58,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
 ![Screenshot of a global drawer in desktop mode that looks like a sidebar](../../../../../docs/getting-started/kirigami/components-drawers/globaldrawer\_simple.webp)
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
 
 {% hint style="info" %}Note
 
@@ -86,10 +71,6 @@ The [titleIcon](docs:kirigami2;GlobalDrawer::titleIcon) property takes names for
 Headers can be used to place sticky components at the top of your global drawer. Header components will stay in place even if your global drawer contains nested Kirigami actions that replace the current layer on the global drawer.
 
 Your chosen header component can be set with the global drawer's `header` property, and it will replace the global drawer's title. This is useful to add a `Kirigami.SearchField`, for example:
-
-\{{< sections >\}}
-
-\{{< section-left >\}}
 
 ```qml
 import QtQuick
@@ -130,18 +111,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\
-
-
-\{{< figure class="text-center" caption="Our global drawer now shows the search bar component we set as the header" src="globaldrawer\_header.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Our global drawer now shows the search bar component we set as the header](../../../content/docs/getting-started/kirigami/components-drawers/globaldrawer\_header.webp)
 
 #### Adapting for the desktop
 
@@ -155,10 +125,6 @@ In this menu mode, headers and banners are not visible.
 
 {% endhint %}
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 globalDrawer: Kirigami.GlobalDrawer {
     isMenu: true
@@ -169,15 +135,7 @@ globalDrawer: Kirigami.GlobalDrawer {
 }
 ```
 
-\{{< /section-left >\}}
-
-\{{< section-right >\}}
-
-\{{< figure class="text-center" caption="Global drawer in menu mode, without a header or banner" src="globaldrawer\_menu.webp" >\}}
-
-\{{< /section-right >\}}
-
-\{{< /sections >\}}
+![Our global drawer now shows the search bar component we set as the header](../../../content/docs/getting-started/kirigami/components-drawers/globaldrawer\_menu.webp)
 
 ### Context Drawers
 
@@ -187,25 +145,61 @@ A context drawer will only show up if any [contextualActions](docs:kirigami2;Pag
 
 On a desktop, when a window has enough space, contextual actions show up as part of the `actions` group in the top toolbar. When space is limited, such as on a mobile device or in a narrow window, contextual actions are hidden behind a hamburger menu on the right side. This is different from other actions in the `actions` group, namely `actions.main`, `actions.left` and `actions.right`; these do not get hidden in space-constrained windows, and are instead collapsed into their respective icons.
 
-\{{< readfile file="/content/docs/getting-started/kirigami/components-drawers/contextdrawer.qml" highlight="qml" >\}}
+```qml
+import org.kde.kirigami as Kirigami
 
-\{{< compare >\}}
+Kirigami.ApplicationWindow {
+    title: "Drawers App"
+    height: 600
+    width: 1200
+    minimumWidth: 500
 
-\{{< figure class="text-center mx-auto" src="contextdrawer-retracted.webp" caption="Context drawer with contextual actions hidden" >\}}
+    globalDrawer: Kirigami.GlobalDrawer {}
+    contextDrawer: Kirigami.ContextDrawer {}
 
-\{{< figure class="text-center mx-auto" src="contextdrawer-expanded.webp" caption="Context drawer showing all contextual actions" >\}}
+    pageStack.initialPage: [ emptyPage, contextDrawerPage ]
 
-\{{< /compare >\}}
+    Kirigami.Page {
+        title: "Empty page"
+        id: emptyPage
+    }
+
+    Kirigami.Page {
+        id: contextDrawerPage
+        title: "Context Drawer page"
+
+        actions: [
+            Kirigami.Action {
+                icon.name: "media-record"
+            },
+            Kirigami.Action {
+                icon.name: "arrow-left"
+            },
+            Kirigami.Action {
+                icon.name: "arrow-right"
+            },
+            Kirigami.Action {
+                text: "Contextual Action 1"
+                icon.name: "media-playback-start"
+            },
+            Kirigami.Action {
+                text: "Contextual Action 2"
+                icon.name: "media-playback-stop"
+            }
+        ]
+    }
+}
+```
+
+![Context drawer with contextual actions hidden](../../../content/docs/getting-started/kirigami/components-drawers/contextdrawer-retracted.webp)
+
+![Our global drawer now shows the search bar component we set as the header](../../../content/docs/getting-started/kirigami/components-drawers/contextdrawer-expanded.webp)
 
 On mobile, the drawer always consists of actions hidden behind a hamburger menu. It can be activated by tapping the hamburger menu or by swiping from the right edge to the middle of the screen in Left to Right mode or from the left edge in Right to Left mode.
 
-\{{< compare >\}}
+![Our global drawer now shows the search bar component we set as the header](../../../content/docs/getting-started/kirigami/components-drawers/contextdrawer-mobile.webp)
 
-\{{< figure class="text-center mx-auto" src="contextdrawer-mobile.webp" caption="Same example above, running in mobile mode" >\}}
-
-\{{< figure class="text-center mx-auto" src="contextdrawer-mobile-drawer.webp" caption="Context drawer open in mobile mode" >\}}
-
-\{{< /compare >\}}
+![Our global drawer now shows the search bar component we set as the header](../../../content/docs/getting-started/kirigami/components-drawers/contextdrawer-mobile-drawer.webp)
 
 ### Modal and Inline drawers
 
@@ -261,10 +255,6 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< compare >\}}
+![Modal drawer not visible](../../../content/docs/getting-started/kirigami/components-drawers/modaldrawer1.webp)
 
-\{{< figure class="text-center mx-auto" caption="Modal drawer not visible" src="modaldrawer1.webp" >\}}
-
-\{{< figure class="text-center mx-auto" caption="Modal drawer at the bottom edge of the screen" src="modaldrawer2.webp" >\}}
-
-\{{< /compare >\}}
+![Modal drawer at the bottom edge of the screen](../../../content/docs/getting-started/kirigami/components-drawers/modaldrawer2.webp)
