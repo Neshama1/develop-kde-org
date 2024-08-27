@@ -174,9 +174,6 @@ To solve this, you can specifically search for the executable in distribution pa
 
 <summary>Click here to set up pkg-provides on FreeBSD</summary>
 
-\
-
-
 Once you run `pkg provides`, if you face the error:
 
 ```bash
