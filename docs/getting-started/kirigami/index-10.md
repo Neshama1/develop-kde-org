@@ -39,7 +39,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< figure class="text-center" caption="A single page with light blue color to show the page's dimensions" src="singlepage.webp" >}}
+![A single page with light blue color to show the page's dimensions](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/singlepage.webp)
 
 There are two improvements that can be done here. The first is that, with [initialPage](docs:kirigami2;PageRow::initialPage), we can both set `mainPage` to be the first page that appears in the page row, and have its dimensions be managed by the page row instead of via manual [anchors](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html), [positioners](https://doc.qt.io/qt-6/qtquick-positioning-layouts.html) or [layouts](https://doc.qt.io/qt-6/layout.html). The second is to have a toolbar, which can be set by defining a toolbar style with [globalToolBar.style](docs:kirigami2;PageRow::globalToolBar). There are a few styles we can choose from, but we'll go with [Kirigami.ApplicationHeaderStyle.Auto](docs:kirigami2;templates::ApplicationHeader::headerStyle) for now.
 
@@ -64,7 +64,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< figure class="text-center" caption="A single page with toolbar and light blue color to show the page's dimensions" src="initialpage.webp" >}}
+![A single page with toolbar and light blue color to show the page's dimensions](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/initialpage.webp)
 
 There are only two ways of adding pages to a page row: by setting its [initialPage](docs:kirigami2;PageRow::initialPage) (which can optionally take an array of pages) or by using [push()](docs:kirigami2;PageRow::push). To delete a page from the page row, you should use [pop()](docs:kirigami2;PageRow::pop), whereas [goBack()](docs:kirigami2;PageRow::goBack) or [goForward()](docs:kirigami2;PageRow::goForward) can be used to navigate between pages.
 
@@ -112,9 +112,9 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< figure class="text-center" caption="Initial page with light blue color" src="multiplepages1.webp" >}}
+![Initial page with light blue color](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/multiplepages1.webp)
 
-{{< figure class="text-center" caption="Upon clicking \"Push!\", a second page with light green color shows up" src="multiplepages2.webp" >}}
+![Upon clicking Push](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/multiplepages2.webp)
 
 ## The application's stack of pages
 
@@ -160,13 +160,9 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-{{< compare >}}
+![](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/pagestack1.webp)
 
-{{< figure class="text-center mx-auto" src="pagestack1.webp" >}}
-
-{{< figure class="text-center mx-auto" src="pagestack2.webp" >}}
-
-{{< /compare >}}
+![](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/pagestack2.webp)
 
 In general you'll want to use a `pageStack` rather than implement your own [PageRow](docs:kirigami2;PageRow), especially when your application gets bigger and you need your components living in separate files. If you create your window in your `Main.qml` using a [Kirigami.ApplicationWindow](docs:kirigami2;ApplicationWindow), a component residing in another file can still directly invoke the global `pageStack` by means of a call to the [applicationWindow()](docs:kirigami2;AbstractApplicationWindow::applicationWindow):
 
@@ -210,5 +206,4 @@ Kirigami.Page {
 }
 ```
 
-
-{{< figure class="text-center" caption="Clicking the button pushes a new page with help of applicationWindow" src="pushpage.webp" >}}
+![Clicking the button pushes a new page with help of applicationWindow](../../../content/docs/getting-started/kirigami/components-pagerow_pagestack/pushpage.webp)
