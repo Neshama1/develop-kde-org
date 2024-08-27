@@ -33,7 +33,7 @@ Kirigami.AbstractCard {
 }
 ```
 
-![Screenshot of an Abstract Card, a simple rectangular button with left-aligned text](../../../../../docs/getting-started/kirigami/components-card/abstract-card.png)
+![Screenshot of an Abstract Card, a simple rectangular button with left-aligned text](../../../content/docs/getting-started/kirigami/components-card/abstract-card.png)
 
 ### Card
 
@@ -66,7 +66,7 @@ Kirigami.Card {
 
 ```
 
-![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](../../../../../docs/getting-started/kirigami/components-card/card1.png)
+![Screenshot of a full-fledged Card with a banner background behind its title, white background behind its text, and two actions with icons and a hamburger menu at the bottom](../../../content/docs/getting-started/kirigami/components-card/card1.png)
 
 ### CardsLayout
 
@@ -112,7 +112,7 @@ ColumnLayout {
 }
 ```
 
-![Screenshot of a CardsLayout showing two side by side cards in portrait orientation on top of a card in landscape orientation, all with different components being used](../../../../../docs/getting-started/kirigami/components-card/cardslayout.png)
+![Screenshot of a CardsLayout showing two side by side cards in portrait orientation on top of a card in landscape orientation, all with different components being used](../../../content/docs/getting-started/kirigami/components-card/cardslayout.png)
 
 ### CardsListView
 
@@ -164,4 +164,4 @@ Kirigami.CardsListView {
 }
 ```
 
-![Screenshot of a CardsListView, which is a simple vertical list of cards in landscape mode](../../../../../docs/getting-started/kirigami/components-card/cardslistview.png)
+![Screenshot of a CardsListView, which is a simple vertical list of cards in landscape mode](../../../content/docs/getting-started/kirigami/components-card/cardslistview.png)
