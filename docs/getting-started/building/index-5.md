@@ -15,19 +15,25 @@ If you're a visual learner, we also provide [video tutorials about setting up kd
 
 The tool we will be using here for setting up a development environment and building KDE software is [kdesrc-build](https://invent.kde.org/sdk/kdesrc-build). It will let you set up your development environment and compile applications on Linux and FreeBSD.
 
-\{{< alert title="Keep in mind" color=success >\}}
+{% hint style="success" %}
+Keep in mind
 
 You only need to set up your environment once, and then you will be able to compile (and recompile) KDE software as often as needed later on!
-
-\{{< /alert >\}}
+{% endhint %}
 
 ### Install git
 
 Setting up your environment on a Linux machine is fairly simple. First you will need to use your operating system's package manager to install git:
 
-\{{< installpackage ubuntu="git" opensuse="git" fedora="git perl perl-IPC-Cmd perl-MD5 perl-FindBin" arch="git"
-
-> \}}
+| [Kubuntu](https://packages.ubuntu.com/search?keywords=git), [KDE Neon](https://build.neon.kde.org/search/?q=git) | <pre><code>sudo apt install git
+</code></pre>                                         |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [Manjaro](https://software.manjaro.org/package/git), [Arch](https://archlinux.org/packages/?q=git)               | <pre><code>sudo pacman -S git
+</code></pre>                                           |
+| [OpenSUSE](https://software.opensuse.org/package/git)                                                            | <pre><code>sudo zypper install git
+</code></pre>                                      |
+| [Fedora](https://packages.fedoraproject.org/pkgs/git/git/)                                                       | <pre><code>sudo dnf install git perl perl-IPC-Cmd perl-MD5 perl-FindBin
+</code></pre> |
 
 ### Configure git
 
@@ -84,7 +90,8 @@ mkdir -p ~/.local/bin
 ln -sf ~/.local/share/kdesrc-build/kdesrc-build ~/.local/bin
 ```
 
-\{{< alert title="About \~/.local/bin" color="info" >\}}
+{% hint style="info" %}
+About \~/.local/bin
 
 Some Linux distributions might not follow the [Freedesktop Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) that enforces that the `~/.local/bin` directory be added to the `$PATH`, which is required for an executable to show up in the terminal without its absolute path.
 
@@ -99,19 +106,16 @@ export PATH=$PATH:~/.local/bin
 Closing and reopening your terminal window once should be enough for `kdesrc-build` to appear for the next steps.
 
 Don't forget to warn your distribution to follow the specification.
+{% endhint %}
 
-\{{< /alert >\}}
-
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}
+Note
 
 Some distros need source repositories enabled before you can install the development packages you need. Do that now, _if needed_:
 
 <details>
 
 <summary>Click here to see how to enable source repos</summary>
-
-\
-
 
 **KDE neon/Debian/Ubuntu/Kubuntu/etc:**
 
@@ -167,8 +171,7 @@ sudo apt update
 ```
 
 </details>
-
-\{{< /alert >\}}
+{% endhint %}
 
 #### Initial setup
 
@@ -203,7 +206,7 @@ The initial setup of kdesrc-build should have installed the required Qt6 package
 
 If your Linux distribution does not provide recent versions of Qt packages, you have four options:
 
-* Use one of the alternative build methods mentioned in \[Building KDE software]\(\{{< ref "building" >\}})
+* Use one of the alternative build methods mentioned in [Building KDE software](./)
 * [Build Qt6 using kdesrc-build](https://community.kde.org/Get\_Involved/development/More#Build\_Qt\_using\_kdesrc-build)
 * [Install Qt6 using the Qt online installer](https://community.kde.org/Get\_Involved/development/More#Qt\_6\_installed\_using\_the\_Qt\_online\_installer)
 * Switch distros to something [better suited for building KDE software from source code](https://community.kde.org/Get\_Involved/development#Operating\_system) either as the primary operating system or in a virtual machine
