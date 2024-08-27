@@ -7,7 +7,7 @@ aliases:
   - /hig/patterns-content/iconandtext/
 ---
 
-# Icons
+# Specification
 
 KDE apps respect the FreeDesktop [icon theme](https://specifications.freedesktop.org/icon-theme-spec/latest/) and [icon naming](https://specifications.freedesktop.org/icon-naming-spec/latest/) standards, and make extensive use of themable icons.
 
@@ -21,7 +21,7 @@ Many considerations go into choosing the right icon for each button, menu item, 
 
 The Breeze icon theme — as well as most others — includes icons consisting of just a base shape with a broad meaning, as well as icons consisting of multiple base shapes and/or emblems that narrow the icon's meaning to only a certain type of object or target. We call these _universal_ and _specific_ icons. For example:
 
-&#x20; \| | | --------------|----------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------| **Universal** | ![](../../../hig/icon-list-add.png) | ![](../../../hig/icon-edit-entry.png) | ![](../../../hig/icon-edit-delete-remove.png) | **Specific** | ![](../../../hig/icon-folder-add.png) | ![](../../../hig/icon-edit-image.png) | ![](../../../hig/icon-bookmark-remove.png) |
+&#x20; \| | | --------------|----------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------| **Universal** | ![](../../../../hig/icon-list-add.png) | ![](../../../../hig/icon-edit-entry.png) | ![](../../../../hig/icon-edit-delete-remove.png) | **Specific** | ![](../../../../hig/icon-folder-add.png) | ![](../../../../hig/icon-edit-image.png) | ![](../../../../hig/icon-bookmark-remove.png) |
 
 \
 \
@@ -64,7 +64,7 @@ Most buttons should also include text. Only use an icons-only button in the foll
 
 In both cases, only proceed with the plan to omit text if an icon can be found that uses instantly recognizable imagery common across all operating systems and apps. Examples include:
 
-&#x20; \| | | -----------------------------------------------------------------|------------------------|------------------------------------------------------------------|- ![](../../../hig/icon-only-list-add.png) | `list-add` | ![](../../../hig/icon-only-configure.png) | `configure` ![](../../../hig/icon-only-go-previous.png) | `go-previous` | ![](../../../hig/icon-only-print.png) | `print` ![](../../../hig/icon-only-go-home.png) | `go-home` | ![](../../../hig/icon-only-player-volume-muted.png) | `player-volume-muted` ![](../../../hig/icon-only-search.png) | `search` | ![](../../../hig/icon-only-media-playback-start.png) | `media-playback-start` ![](../../../hig/icon-only-edit-delete.png) | `edit-delete` | ![](../../../hig/icon-only-documentinfo.png) | `documentinfo` ![](../../../hig/icon-only-edit-delete-remove.png) | `edit-delete-remove` | ![](../../../hig/icon-only-open-menu.png) | `open-menu`
+&#x20; \| | | -----------------------------------------------------------------|------------------------|------------------------------------------------------------------|- ![](../../../../hig/icon-only-list-add.png) | `list-add` | ![](../../../../hig/icon-only-configure.png) | `configure` ![](../../../../hig/icon-only-go-previous.png) | `go-previous` | ![](../../../../hig/icon-only-print.png) | `print` ![](../../../../hig/icon-only-go-home.png) | `go-home` | ![](../../../../hig/icon-only-player-volume-muted.png) | `player-volume-muted` ![](../../../../hig/icon-only-search.png) | `search` | ![](../../../../hig/icon-only-media-playback-start.png) | `media-playback-start` ![](../../../../hig/icon-only-edit-delete.png) | `edit-delete` | ![](../../../../hig/icon-only-documentinfo.png) | `documentinfo` ![](../../../../hig/icon-only-edit-delete-remove.png) | `edit-delete-remove` | ![](../../../../hig/icon-only-open-menu.png) | `open-menu`
 
 \
 \
