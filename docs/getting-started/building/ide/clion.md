@@ -20,7 +20,11 @@ Follow the [Install CLion](https://www.jetbrains.com/help/clion/installation-gui
 
 If you are using Arch Linux, you can install the AUR package [clion](https://aur.archlinux.org/packages/clion) or [clion-eap](https://aur.archlinux.org/packages/clion-eap).
 
-\{{< alert title="Note" color="info" >\}} This article assumes you use KDE Builder. The older tool kdesrc-build does not support CLion configuration generation. \{{< /alert >\}}
+{% hint style="info" %}
+Note
+
+This article assumes you use KDE Builder. The older tool kdesrc-build does not support CLion configuration generation.
+{% endhint %}
 
 ### KDE Builder configuration
 
