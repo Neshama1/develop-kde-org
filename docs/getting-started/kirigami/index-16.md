@@ -40,7 +40,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window containing a button "Beep" in the center, which when clicked shows a passive notification "Boop" at the bottom of the window](../../../../../docs/getting-started/kirigami/components-controls/controls-button.webp)
+![A window containing a button "Beep" in the center, which when clicked shows a passive notification "Boop" at the bottom of the window](../../../content/docs/getting-started/kirigami/components-controls/controls-button.webp)
 
 #### Toggleable buttons
 
@@ -85,7 +85,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window containing a toggleable button "Hide inline drawer" in the center which when toggled hides the "Peekaboo" inline drawer](../../../../../docs/getting-started/kirigami/components-controls/controls-togglebutton.webp)
+![A window containing a toggleable button "Hide inline drawer" in the center which when toggled hides the "Peekaboo" inline drawer](../../../content/docs/getting-started/kirigami/components-controls/controls-togglebutton.webp)
 
 {% hint style="info" %}Note
 
@@ -130,7 +130,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing a custom toolbar in the window header simulating a Kirigami.globalToolBar, with a left menu icon that shows a passive notification "Kirigami Pages and Actions are better!" and a right toolbutton "Beep" which is completely flat simulating a Kirigami.Action](../../../../../docs/getting-started/kirigami/components-controls/controls-toolbutton.webp)
+![A window showing a custom toolbar in the window header simulating a Kirigami.globalToolBar, with a left menu icon that shows a passive notification "Kirigami Pages and Actions are better!" and a right toolbutton "Beep" which is completely flat simulating a Kirigami.Action](../../../content/docs/getting-started/kirigami/components-controls/controls-toolbutton.webp)
 
 ### Selection controls
 
@@ -169,7 +169,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing two checkboxes where more than one checkbox can be ticked at the same time](../../../../../docs/getting-started/kirigami/components-controls/controls-checkbox.webp)
+![A window showing two checkboxes where more than one checkbox can be ticked at the same time](../../../content/docs/getting-started/kirigami/components-controls/controls-checkbox.webp)
 
 As you can see, they are simple to use. The [checked](https://doc.qt.io/qt-6/qml-qtquick-controls2-abstractbutton.html#checked-prop) property holds a boolean value determining whether or not they have been checked.
 
@@ -211,7 +211,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing two radio buttons where only one radio button can be ticked at the same time](../../../../../docs/getting-started/kirigami/components-controls/controls-radiobutton.webp)
+![A window showing two radio buttons where only one radio button can be ticked at the same time](../../../content/docs/getting-started/kirigami/components-controls/controls-radiobutton.webp)
 
 #### Switches
 
@@ -247,7 +247,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing two evenly-spaced switches that function as toggles](../../../../../docs/getting-started/kirigami/components-controls/controls-switch.webp)
+![A window showing two evenly-spaced switches that function as toggles](../../../content/docs/getting-started/kirigami/components-controls/controls-switch.webp)
 
 ### Sliders
 
@@ -297,7 +297,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing a vertical slider with its current value underneath it](../../../../../docs/getting-started/kirigami/components-controls/controls-slider.webp)
+![A window showing a vertical slider with its current value underneath it](../../../content/docs/getting-started/kirigami/components-controls/controls-slider.webp)
 
 Another useful property we can use is [stepSize](https://doc.qt.io/qt-6/qml-qtquick-controls2-slider.html#stepSize-prop). Setting this to a numerical value allows us to create a slider that snaps onto values that are multiples of the specified `stepSize`, with these multiples being indicated by tickmarks. Therefore if we set this property to `2.0`, when the user drags the slider handle, they will only be able to select `0.0`, `2.0`, `4.0`, etc. up to the value specified in the `to` property.
 
@@ -333,7 +333,7 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing a set of tickmarked sliders that are symmetrically divided, with each division being called a step](../../../../../docs/getting-started/kirigami/components-controls/controls-slidersteps.webp)
+![A window showing a set of tickmarked sliders that are symmetrically divided, with each division being called a step](../../../content/docs/getting-started/kirigami/components-controls/controls-slidersteps.webp)
 
 #### Range sliders
 
@@ -394,4 +394,4 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-![A window showing a range slider, followed by a few labels underneath and a button with a checkmark icon](../../../../../docs/getting-started/kirigami/components-controls/controls-rangeslider.webp)
+![A window showing a range slider, followed by a few labels underneath and a button with a checkmark icon](../../../content/docs/getting-started/kirigami/components-controls/controls-rangeslider.webp)
