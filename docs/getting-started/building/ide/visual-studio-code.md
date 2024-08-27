@@ -66,7 +66,7 @@ The following configuration sections will only need to be done the first time yo
 
 A notification popup at the bottom-right of the window will ask if you want to install the recommended extensions for working on this project:
 
-![Screenshot of the prompt to install recommended extensions](../../../content/docs/getting-started/building/ide/visual-studio-code/recommended-extensions-prompt.png)
+![Screenshot of the prompt to install recommended extensions](../../../../content/docs/getting-started/building/ide/visual-studio-code/recommended-extensions-prompt.png)
 
 These extensions add support to VS Code for technologies commonly used in KDE projects, such as CMake, C++, Qt, and more.
 
@@ -79,11 +79,11 @@ After the extensions have been installed:
 * If a notification prompt asks if you want to switch to a pre-release version of the C++ extension, click `No`.
 * A notification prompt will ask `Would you like to configure project "kcalc"?` Click `Yes`.
 
-![Screenshot of the prompt to configure the project](../../../content/docs/getting-started/building/ide/visual-studio-code/configure-project-prompt.png)
+![Screenshot of the prompt to configure the project](../../../../content/docs/getting-started/building/ide/visual-studio-code/configure-project-prompt.png)
 
 A prompt will open at the top-middle of the window asking to choose a kit (a set of predefined configurations used when building and running the project). Select `Unspecified` to have the kit chosen automatically based on the project and system configuration:
 
-![Screenshot of the prompt to select a kit](../../../content/docs/getting-started/building/ide/visual-studio-code/select-kit-prompt.png)
+![Screenshot of the prompt to select a kit](../../../../content/docs/getting-started/building/ide/visual-studio-code/select-kit-prompt.png)
 
 The integrated terminal will open at the bottom of the window, and if the project was configured successfully, the last line should say:
 
@@ -91,7 +91,7 @@ The integrated terminal will open at the bottom of the window, and if the projec
 [cmake] -- Build files have been written to: /home/<username>/kde/build/kcalc
 ```
 
-![Screenshot of the terminal showing successful configuration](../../../content/docs/getting-started/building/ide/visual-studio-code/configuration-successful.png)
+![Screenshot of the terminal showing successful configuration](../../../../content/docs/getting-started/building/ide/visual-studio-code/configuration-successful.png)
 
 You are ready to start working on the code with VS Code! 🎉
 
@@ -99,15 +99,15 @@ You are ready to start working on the code with VS Code! 🎉
 
 To start debugging, click on the `Run and Debug` icon on the left sidebar, then click on the green play button to start debugging.
 
-![Screenshot of how to start a debug session](../../../content/docs/getting-started/building/ide/visual-studio-code/run-and-debug.png)
+![Screenshot of how to start a debug session](../../../../content/docs/getting-started/building/ide/visual-studio-code/run-and-debug.png)
 
 If the project has multiple targets it will open a prompt at the top-middle of the window asking to choose a target. Select the target you want to debug; in this case, `kcalc`:
 
-![Screenshot of the prompt to select a target](../../../content/docs/getting-started/building/ide/visual-studio-code/initial-launch-target.png)
+![Screenshot of the prompt to select a target](../../../../content/docs/getting-started/building/ide/visual-studio-code/initial-launch-target.png)
 
 We should now be running a debug session of the `kcalc` project. 🚀
 
-![Screenshot of the debug session](../../../content/docs/getting-started/building/ide/visual-studio-code/debug-session.png)
+![Screenshot of the debug session](../../../../content/docs/getting-started/building/ide/visual-studio-code/debug-session.png)
 
 To later change the target, open the Command Palette (`Ctrl+Shift+P`) and run the `CMake: Set Debug Target` command.
 
@@ -129,19 +129,19 @@ We'll use the `plasma-workspace` project as an example, as it contains many `KDE
 
 Open the build target selector by clicking the button (defaults to `all`):
 
-![Screenshot of button to choose the build configuration](../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-choose-build-button.png)
+![Screenshot of button to choose the build configuration](../../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-choose-build-button.png)
 
 Filter for KCMs by typing `kcm_` in the popup, and choose one of the options marked `MODULE_LIBRARY` that represents a KCM:
 
-![Screenshot filtering build targets for available KCMs](../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-choose.png)
+![Screenshot filtering build targets for available KCMs](../../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-choose.png)
 
 Now you can start debugging the KCM by selecting the `kcm` launch configuration and clicking the green play button:
 
-![Screenshot of choosing the kcm launch configuration](../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-start-debugging.png)
+![Screenshot of choosing the kcm launch configuration](../../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-start-debugging.png)
 
 The KCM will open in a new window, and the debugger will hit breakpoints in the C++ code. Breakpoints in QML are sadly not possible.
 
-![Screenshot of kcm running](../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-running.png)
+![Screenshot of kcm running](../../../../content/docs/getting-started/building/ide/visual-studio-code/kcm-running.png)
 
 #### Debugging with external executables
 
