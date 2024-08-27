@@ -19,7 +19,44 @@ CMake is useful because it allows us to automate much of the stuff that needs to
 
 You might remember this `CMakeLists.txt` file from the first tutorial:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" >\}}
+```qml
+cmake_minimum_required(VERSION 3.20)
+project(kirigami-tutorial)
+
+find_package(ECM 6.0.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMFindQmlModule)
+include(ECMQmlModule)
+
+find_package(Qt6 REQUIRED COMPONENTS
+    Core
+    Quick
+    Test
+    Gui
+    QuickControls2
+    Widgets
+)
+
+find_package(KF6 REQUIRED COMPONENTS
+    Kirigami
+    I18n
+    CoreAddons
+    QQC2DesktopStyle
+    IconThemes
+)
+
+ecm_find_qmlmodule(org.kde.kirigami REQUIRED)
+
+add_subdirectory(src)
+
+install(PROGRAMS org.kde.tutorial.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 The first line, `cmake_minimum_required()` sets the version of CMake we will be calling.
 
@@ -35,7 +72,22 @@ Then we get to a section where we include a number of necessary CMake and KDE se
 
 The following section is important, because it specifies which dependencies we'll be bringing in at compile time. Let's look at the first:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" start=13 lines=14 >\}}
+```qml
+find_package(Qt6 REQUIRED COMPONENTS
+    Core
+    Quick
+    Test
+    Gui
+    QuickControls2
+    Widgets
+)
+
+find_package(KF6 REQUIRED COMPONENTS
+    Kirigami
+    I18n
+    CoreAddons
+    QQC2DesktopStyle
+```
 
 * [find\_package()](https://cmake.org/cmake/help/latest/command/find\_package.html) finds and loads the external library and its components.
 * `REQUIRED` tells CMake to exit with an error if the package cannot be found.
@@ -56,17 +108,52 @@ Pay close attention to your included components, as omitting ones used in our co
 
 The install line instructs CMake to install the desktop file in `${KDE_INSTALL_APPDIR}`, which on Linux translates to `$XDG_DATA_DIRS/applications`, usually `/usr/share/applications`, and on Windows translates to `C:/Program Files/${PROJECT_NAME}/bin/data/applications`:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" start=32 lines=1 >\}}
+```qml
+add_subdirectory(src)
+```
 
 The final line lets CMake print out which packages it has found, and it makes compilation fail immediately if it encounters an error:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/CMakeLists.txt" highlight="cmake" start=34 lines=1 >\}}
+```qml
+install(PROGRAMS org.kde.tutorial.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+```
 
 And above that, `add_subdirectory(src)` points CMake into the `src/` directory, where it finds another `CMakeLists.txt` file.
 
 ### src/CMakeLists.txt
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-getting\_started/src/CMakeLists.txt" highlight="cmake" >\}}
+```qml
+add_executable(kirigami-hello)
+
+ecm_add_qml_module(kirigami-hello
+    URI
+    org.kde.tutorial
+)
+
+target_sources(kirigami-hello
+    PRIVATE
+    main.cpp
+)
+
+ecm_target_qml_sources(kirigami-hello
+    SOURCES
+    Main.qml
+)
+
+target_link_libraries(kirigami-hello
+    PRIVATE
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Gui
+    Qt6::QuickControls2
+    Qt6::Widgets
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::IconThemes
+)
+
+install(TARGETS kirigami-hello ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+```
 
 While the first file handled metadata and finding libraries, this one will consist of handling dependencies and installing the application. It has the following CMake calls:
 
@@ -99,7 +186,24 @@ The documentation for all three commands can be found in the [extra-cmake-module
 
 In the tutorial about [how to split your code into separate files](introduction-separatefiles/#preparing-cmake-for-the-new-files), a new CMake file was introduced to allow for separate QML modules:
 
-\{{< readfile file="/content/docs/getting-started/kirigami/introduction-separatefiles/components/CMakeLists.txt" highlight="cmake" >\}}
+```qml
+add_library(kirigami-hello-components)
+
+ecm_add_qml_module(kirigami-hello-components
+    URI "org.kde.tutorial.components"
+    GENERATE_PLUGIN_SOURCE
+)
+
+ecm_target_qml_sources(kirigami-hello-components
+    SOURCES
+    AddDialog.qml
+    KountdownDelegate.qml
+)
+
+ecm_finalize_qml_module(kirigami-hello-components)
+
+install(TARGETS kirigami-hello-components ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+```
 
 The requirement for this file to be read by CMake is adding a call to `add_subdirectory()` in the `src/CMakeLists.txt` pointing to it.
 
