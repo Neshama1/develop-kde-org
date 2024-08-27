@@ -117,11 +117,11 @@ Kirigami.ApplicationWindow {
 
 \{{< /sections >\}}
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 With the default Breeze theme in KDE Plasma it can be hard to tell whether a button is toggled, since buttons are coloured blue when they are clicked on. Make sure you take this into account when creating your application: a different control might be more user friendly.
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### Toolbar buttons
 

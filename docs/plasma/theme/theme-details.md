@@ -94,11 +94,11 @@ intensity=1.9
 saturation=1.9
 ```
 
-{{< alert title="Tip" color="success" >}}
+{% hint style="success" %}Tip
 
 There is an online tool available to get a general idea of how these values interact with each other: https://niccolo.venerandi.com/backstage/files/ownopacity/main.html
 
-{{< /alert >}}
+{% endhint %}
 
 2. Blurring what is behind windows, panels or tooltips.
 This is **enabled by default**. Since Plasma Frameworks 5.57, this can be disabled like so:
@@ -108,7 +108,7 @@ This is **enabled by default**. Since Plasma Frameworks 5.57, this can be disabl
 enabled=false
 ```
 
-{{< alert title="Deprecation Note" color="warning" >}}
+{% hint style="warning" %}Deprecation Note
 
 Prior to KDE Frameworks 6, themes used a `metadata.desktop` file instead of `metadata.json` + `plasmarc`.
 
@@ -144,7 +144,7 @@ enabled=false
 
 </details>
 
-{{< /alert >}}
+{% endhint %}
 
 ## Default Theme Wallpaper
 

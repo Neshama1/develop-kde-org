@@ -13,7 +13,7 @@ description: Compiling advanced C++ widgets with CMake
 A template can be found in `plasma-framework`:\
 [`plasma-framework` / `template/qml-plasmoid`](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/templates/qml-plasmoid)
 
-\{{< alert color="warning" >\}} Do not reuse the same `Id`/namespace you used with a widget installed with `kpackagetool5`. If a user installed it to their home directory, the code in the home directory will be loaded instead of the code in the root directory. \{{< /alert >\}}
+{% hint style="warning" %} Do not reuse the same `Id`/namespace you used with a widget installed with `kpackagetool5`. If a user installed it to their home directory, the code in the home directory will be loaded instead of the code in the root directory. {% endhint %}
 
 ```bash
 mkdir -p ~/Code/plasmoid-helloworld2
@@ -32,7 +32,7 @@ You can run all build and test commands in a single line like so:
 (cd ./build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make && sudo make install) && plasmoidviewer -a com.github.zren.helloworld2
 ```
 
-\{{< alert color="warning" >\}} You cannot ship a widget that needs to be compiled on the [KDE Store](https://store.kde.org). You will need to publish it in an [Ubuntu PPA](https://help.ubuntu.com/community/PPA), on the [Arch AUR](https://aur.archlinux.org/), or with [OpenSUSE OBS](https://build.opensuse.org/). \{{< /alert >\}} \{{< /section-left >\}} \{{< section-right >\}}
+{% hint style="warning" %} You cannot ship a widget that needs to be compiled on the [KDE Store](https://store.kde.org). You will need to publish it in an [Ubuntu PPA](https://help.ubuntu.com/community/PPA), on the [Arch AUR](https://aur.archlinux.org/), or with [OpenSUSE OBS](https://build.opensuse.org/). {% endhint %} \{{< /section-left >\}} \{{< section-right >\}}
 
 ```txt
 └── ~/Code/plasmoid-helloworld2/
@@ -79,7 +79,7 @@ Plasma ships with a number of useful QML plugins like \[PlasmaCore]\(\{{< ref "p
 import org.kde.plasma.private.mediaframe 2.0
 ```
 
-\{{< alert color="info" >\}} While KDE puts `.private` in the namespace of these plugins, they can be accessed by any QML widget / application. If you plan on using someone else's "private" plugin, your widget may experience bugs when Plasma updates. \{{< /alert >\}}
+{% hint style="info" %} While KDE puts `.private` in the namespace of these plugins, they can be accessed by any QML widget / application. If you plan on using someone else's "private" plugin, your widget may experience bugs when Plasma updates. {% endhint %}
 
 Another example is the "Kicker" plugin for the "Application Menu" widget which is reused by the kickoff "Application Launcher" widget.
 

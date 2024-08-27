@@ -58,11 +58,11 @@ We add our `kountdownModel` inside the [Kirigami.ApplicationWindow](docs:kirigam
 
 A model defines the way that a data entry is structured. Our `kountdownModel` will consist of only one element for now. By looking at our [ListElement](https://doc.qt.io/qt-6/qml-qtqml-models-listelement.html) above, we can see how the data of our `kountdownModel` are structured: it contains a name, a description, and a date. This isn't set in stone, and you may have different sorts of data in your model. The first two are just strings, and the third is a number we're using as a placeholder.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 Since QML is built on top of JavaScript, many of this language's features are available for use in QML files. However, QML variables have to be prefixed with `property`, unless it is inside a JS code block. You can read more about it in [this page](https://doc.qt.io/qt-6/qtqml-javascript-topic.html).
 
-\{{< /alert >\}}
+{% endhint %}
 
 Models are also useful in how they can be modified through the use of several methods. Some important ones are:
 
@@ -202,11 +202,11 @@ Next we specify the spacing between the rows and columns within our grid, so tha
 | largeSpacing  | 8px    |
 | gridUnit      | 18px   |
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 KDE's Visual Design Group (VDG) has a lot more information about the different units defined within Plasma and Kirigami on the [Human Interface Guidelines](../../../hig/layout/units/).
 
-\{{< /alert >\}}
+{% endhint %}
 
 As you might remember, `root` is the id of our [Kirigami.ApplicationWindow](docs:kirigami2;ApplicationWindow). It provides the [wideScreen](docs:kirigami2;AbstractApplicationWindow::wideScreen) property, used to determine whether the current device screen is a widescreen (i.e. a computer monitor or a phone in landscape). We use a [ternary conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional\_operator) here to vary the number of columns in our grid depending on the screen we are using: if it's a widescreen, the grid will have 4 columns, else it will have 2.
 

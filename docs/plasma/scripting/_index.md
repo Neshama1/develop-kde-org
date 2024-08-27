@@ -61,7 +61,7 @@ There are three ways that scripts can be executed in plasma-desktop:
     /usr/share/plasma/shells/org.kde.plasma.desktop/contents/layout.js
     ```
 
-    \{{< alert color="info" title="Note" >\}} For security reasons, scripts located in the user's home directory will **not** be run during this phase. \{{< /alert >\}}
+    {% hint style="info" %}Note For security reasons, scripts located in the user's home directory will **not** be run during this phase. {% endhint %}
 *   **on update**: when `plasmashell` is started, it will check for scripts with a `.js` suffix in the current shell package under the `updates` directory.
 
     ```bash
@@ -81,7 +81,7 @@ There are three ways that scripts can be executed in plasma-desktop:
     performed=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/obsolete_kickoffrc.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/unlock_widgets.js
     ```
 
-    \{{< alert color="info" title="Note" >\}} For security reasons, scripts located in the user's home directory will **not** be run during this phase. \{{< /alert >\}}
+    {% hint style="info" %}Note For security reasons, scripts located in the user's home directory will **not** be run during this phase. {% endhint %}
 *   **interactively**: an interactive scripting dialog can be requested either via the KRunner window (`Alt+F2`, by default, or via the "Run Command" entry in various desktop menus) by entering "desktop console" as the search term. In Plasma versions earlier than 5.23 it can be triggered directly via dbus with:
 
     ```bash

@@ -75,11 +75,11 @@ Kirigami.ApplicationWindow {
 
 \{{< /sections >\}}
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 The [titleIcon](docs:kirigami2;GlobalDrawer::titleIcon) property takes names for system-wide icons according to the FreeDesktop specification. These icons and icon names can be viewed with KDE's CuttleFish application which comes with [plasma-sdk](https://invent.kde.org/plasma/plasma-sdk), or by visiting [FreeDesktop's icon naming specification](https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html).
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### Header
 
@@ -149,11 +149,11 @@ While panel-style global drawers can be useful in mobile environments, they migh
 
 Thankfully, Kirigami global drawers provide an [isMenu](docs:kirigami2;GlobalDrawer::isMenu) property. When set to `true`, they turn into more traditional menus only on the desktop.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 In this menu mode, headers and banners are not visible.
 
-\{{< /alert >\}}
+{% endhint %}
 
 \{{< sections >\}}
 

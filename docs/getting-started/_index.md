@@ -303,7 +303,7 @@ In this section we will go over some common problems related to the design of Qt
 
 ### Delayed Initialization
 
-\{{< alert title="Important!" color="warning">\}} This part is outdated and need an helpful hand to update it. \{{< /alert >\}}
+{% hint style="warning" %}Important! This part is outdated and need an helpful hand to update it. {% endhint %}
 
 Although the design of modern C++ applications can be very complex, application windows can be loaded and displayed to the user very quickly through the technique of \[http://www.kdedevelopers.org/node/509 delayed initialization]. This technique is relatively straightforward and useful at all stages of an interactive program.
 

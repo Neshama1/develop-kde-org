@@ -33,6 +33,6 @@ When we now run a CI/CD pipeline for your app on the latest branch then the job 
 
 Continue with the page on \[publishing a release of your application on Google Play]\(\{{< ref "publishing" >\}}) to learn how to clear the 24.02 branch of your application for publishing on Google Play.
 
-\{{< alert title="Note" color="info" >\}} If the application you want to publish on Google Play is based on Qt 5 then include the template `/gitlab-templates/craft-android-qt5-googleplay-apks.yml`.
+{% hint style="info" %}Note If the application you want to publish on Google Play is based on Qt 5 then include the template `/gitlab-templates/craft-android-qt5-googleplay-apks.yml`.
 
-See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. \{{< /alert >\}}
+See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. {% endhint %}

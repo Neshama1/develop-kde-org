@@ -57,11 +57,11 @@ simplemdviewer/
         └── main.qml
 ```
 
-\{{< alert title="Tip" color="success" >\}}
+{% hint style="success" %}Tip
 
 To quickly generate this folder structure, just run: `mkdir -p simplemdviewer/src/qml/`
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Development
 
@@ -97,7 +97,8 @@ Create a new `src/qml/main.qml` file that specifies the UI of the application:
 
 \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/main.qml" highlight="qml" >\}}
 
-\{{< alert title="Warning" color="warning">\}} Older distributions such as Debian or Ubuntu LTS that do not have an up-to-date Kirigami might require lowering the Kirigami import version from `3.20` to `3.15` to run. \{{< /alert >\}}
+{% hint style="warning" %}Warning
+Older distributions such as Debian or Ubuntu LTS that do not have an up-to-date Kirigami might require lowering the Kirigami import version from `3.20` to `3.15` to run. {% endhint %}
 
 We have just created a new QML-Kirigami-Python application. Run it:
 

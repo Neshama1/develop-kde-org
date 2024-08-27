@@ -23,11 +23,11 @@ One of the best ways to improve your development skills is by putting them into 
 
 We have several pieces of documentation that can help guide you towards becoming a contributor. We recommend you take a look at the developer-specific section of our [Development Guide](../building/help-dependencies/) which can help you learn more about the KDE Community's development workflow. We also recommend you take a look at our documentation for KDE's GitLab instance, called [Invent](https://community.kde.org/Infrastructure/GitLab), as you will likely need to interact with it during the development process. The KDE Community interacts mainly through Matrix, and we also have [a page on the community wiki](https://community.kde.org/Matrix) that will guide you through setting up with your very own account.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 While interacting with others in the KDE Community, please make sure you abide by the [Code of Conduct](https://kde.org/code-of-conduct/).
 
-\{{< /alert >\}}
+{% endhint %}
 
 With your newfound skills you are in a good position to begin contributing to Kirigami projects. Thankfully, many of KDE's most popular applications and components are built with this framework. Here are a list of projects you are welcome to help with.
 

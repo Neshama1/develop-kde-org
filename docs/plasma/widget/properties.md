@@ -467,7 +467,7 @@ This list was taken from: [https://techbase.kde.org/Projects/Plasma/PIG](https:/
 
 \{{< sections >\}} \{{< section-left >\}}
 
-`KPackageStructure` is a string to identify the associated [KPackage::PackageStructure](docs:kpackage;KPackage::PackageStructure). For a plasma widget, it should be `Plasma/Applet`. \{{< alert title="Note" color="info" >\}} In desktop files, the `ServiceTypes` key was defined instead. This key is however deprecated and desktop files will no longer be supported in KF6. To convert a desktop file to json, you can run the `desktoptojson -i metadata.json` command. The `ServiceTypes` -> `KPackageStructure` change must be done manually \{{< /alert >\}}
+`KPackageStructure` is a string to identify the associated [KPackage::PackageStructure](docs:kpackage;KPackage::PackageStructure). For a plasma widget, it should be `Plasma/Applet`. {% hint style="info" %}Note In desktop files, the `ServiceTypes` key was defined instead. This key is however deprecated and desktop files will no longer be supported in KF6. To convert a desktop file to json, you can run the `desktoptojson -i metadata.json` command. The `ServiceTypes` -> `KPackageStructure` change must be done manually {% endhint %}
 
 \{{< /section-left >\}} \{{< section-right >\}}
 
@@ -494,7 +494,7 @@ X-KDE-ServiceTypes=Plasma/Applet
 
 `X-Plasma-API` tells plasma what script engine to use. `declarativeappletscript` is the standard `QML` loader.
 
-`X-Plasma-MainScript` is the entry point of your qml code. The default value is `ui/main.qml`. \{{< alert title="Note" color="info" >\}} In Plasma 6, it is no longer possible to specify a custom mainscript. Instead, `ui/main.qml` is used as the entry point. The `X-Plasma-MainScript` entry may be omitted from the metadata in both Plasma 5 and 6. `X-Plasma-API` may also be removed in KF6, but is needed in KF5. \{{< /alert >\}}
+`X-Plasma-MainScript` is the entry point of your qml code. The default value is `ui/main.qml`. {% hint style="info" %}Note In Plasma 6, it is no longer possible to specify a custom mainscript. Instead, `ui/main.qml` is used as the entry point. The `X-Plasma-MainScript` entry may be omitted from the metadata in both Plasma 5 and 6. `X-Plasma-API` may also be removed in KF6, but is needed in KF5. {% endhint %}
 
 \{{< /section-left >\}} \{{< section-right >\}}
 

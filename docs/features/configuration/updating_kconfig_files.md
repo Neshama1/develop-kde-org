@@ -43,11 +43,11 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
 install(FILES okular.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 ```
 
-\{{< alert color="warning" title="Warning" >\}}
+{% hint style="warning" %}Warning
 
 Before you deploy update files to your users, you should verify that they do what you want. Otherwise you will probably get bug reports, but you already missed your change to fix them. See the #Testing update files section.
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Moving configuration data around
 

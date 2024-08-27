@@ -89,7 +89,7 @@ The "Open Project Wizard" window will open:
 
 \{{< figure alt="Open Project Wizard window" width="800px" src="open-project-wizard-window.png" >\}}
 
-\{{< alert title="Tip" color="info" >\}} You can reach these settings later by going to **Settings | Build, Execution, Deployment | CMake**. \{{< /alert >\}}
+{% hint style="info" %}Tip You can reach these settings later by going to **Settings | Build, Execution, Deployment | CMake**. {% endhint %}
 
 If the project has a `CMakePresets.json` in its root directory (KCalc does), you will see many greyed-out CMake Profiles. They are read only, and disabled by default. You do not need them. Scroll the list down to be able to see the "KDE Builder cmake profile", which you want to select.
 
@@ -99,13 +99,13 @@ If you have done that, proceed by pressing OK.
 
 **Creating the toolchain**
 
-\{{< alert title="Tip" color="info" >\}} This is a global IDE setting, so you will only need to do it once. \{{< /alert >\}}
+{% hint style="info" %}Tip This is a global IDE setting, so you will only need to do it once. {% endhint %}
 
 The "Toolchains" window will appear:
 
 \{{< figure alt="Toolchains window" width="700px" src="kb-toolchain-creation.png" >\}}
 
-\{{< alert title="Tip" color="info" >\}} You can reach these settings later by going to **Settings | Build, Execution, Deployment | Toolchains**. \{{< /alert >\}}
+{% hint style="info" %}Tip You can reach these settings later by going to **Settings | Build, Execution, Deployment | Toolchains**. {% endhint %}
 
 * Press "+" icon, and select "System" from the list.
 * In the Name field, enter exactly "KDE Builder toolchain".
@@ -192,4 +192,4 @@ It is possible to show a normal window titlebar. For this, open the registry (do
 
 You need to enable this key in Registry: `credentialStore.linux.prefer.kwallet`. It allows to use KWallet if KWallet and SecretService are both available.
 
-\{{< alert title="Note" color="info" >\}} See the developer documentation in KDE Builder for details about [config generation for CLion](https://kde-builder.kde.org/en/developer/ide-configs-generation.html#clion). \{{< /alert >\}}
+{% hint style="info" %}Note See the developer documentation in KDE Builder for details about [config generation for CLion](https://kde-builder.kde.org/en/developer/ide-configs-generation.html#clion). {% endhint %}

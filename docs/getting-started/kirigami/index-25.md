@@ -17,11 +17,11 @@ In this tutorial, we will create a class that contains a QMap, where a QString i
 
 To do this, we need to declare a class that inherits from [QAbstractListModel](docs:qtcore;qabstractlistmodel.html). Let's also add in some add data to the QMap. These declarations will be located in `model.h`.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 If you are following along, please remember to update your `CMakeLists.txt` file!
 
-\{{< /alert >\}}
+{% endhint %}
 
 ```cpp
 #pragma once
@@ -44,17 +44,17 @@ Of course, we can't just display this class as is. We also need to tell QML on h
 * `roleNames()` - You can think of role names as property names attached to data in QML. This function allows you to create those roles.
 * `data()` - This function is called when you want to retrieve the data that corresponds to the role names from the model.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 The custom role names created by `roleNames()` are only usable when a model is being delegated, and are not usable outside of it. See [Models and Views](docs:qtquick;qtquick-modelviewsdata-modelview.html#models).
 
-\{{< /alert >\}}
+{% endhint %}
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 Technically, models in Qt are represented as tables, with rows and columns. So, what overriding `rowCount()` does is tell Qt how many rows are in a model. Since we are just dealing with a one-dimensional array in this tutorial, you can just think of "rows" as "number of elements."
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### Overriding and Implementing `rowCount()`
 
@@ -227,11 +227,11 @@ bool Model::setData(const QModelIndex &index, const QVariant &value, int role) {
 }
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 `setData()` does not automatically emit `dataChanged()` and that still has to be done manually.
 
-\{{< /alert >\}}
+{% endhint %}
 
 Let's update the QML code so that we can open up a prompt that allows us to edit the model using a Controls.Button attached to the cards.
 
@@ -344,11 +344,11 @@ void Model::addSpecies(const QString& species) {
 }
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 The `dataChanged()` function uses QModelIndex as the data type for its parameters. However, we can convert integers in QModelIndex data types using the `index()` function.
 
-\{{< /alert >\}}
+{% endhint %}
 
 Let's update the QML code so we are given the ability to add a new key to the QMap.
 

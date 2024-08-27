@@ -22,7 +22,7 @@ You can easily edit the contents of SVG files by opening them with a plain text 
 
 The `<svg>` tag contains the contents of the file, while `<rect>` represents the rectangle and is called an _element_ or an _object_. Every element may contain _attributes_, and the ones that matter most to Plasma Style designers will be `id`, `label`, and `style`.
 
-{{< alert title="Tip - SVG Formatting" color="success" >}}
+{% hint style="success" %}Tip - SVG Formatting
 
 <details>
 <summary>Click to toggle tip</summary>
@@ -45,7 +45,7 @@ Which can be a useful technique whenever you end up needing to edit large SVG fi
 
 </details>
 
-{{< /alert >}}
+{% endhint %}
 
 In the above image, the blue rectangle attributes can be seen by clicking on it while having the "Object Properties" pane open. You can open the "Object Properties" pane by pressing `Ctrl+Shift+O`, going to the menu `Object -> Object Properties...`, or by right clicking the element you'd like to inspect and cliking on "Object Properties".
 

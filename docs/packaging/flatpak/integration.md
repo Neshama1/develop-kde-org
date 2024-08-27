@@ -105,9 +105,9 @@ In order to get debug messages related to portals in your application, we first 
 
 Then, by running `journalctl --follow` in a terminal window and running any portal-using application (such as Flatpak'd apps) it is possible to see which portals have been requested by the application, and any error messages (often related to DBus). Likewise, you may filter the log to only `xdg-desktop-portal` or `plasma-xdg-desktop-portal-kde` with `journalctl --user-unit <service here>`. You can also monitor DBus messages using `dbus-monitor`, which indicates whether portals get involved at all, as everything goes through DBus.
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 If the debug output gets overly polluted, you can disable standard output or standard error logging easily by editing the service again.
-{{< /alert >}}
+{% endhint %}
 
 ### Theming
 

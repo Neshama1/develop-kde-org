@@ -13,11 +13,11 @@ description: Displaying and modifying data provided by Akonadi
 
 This tutorial will guide you through the steps of creating an Akonadi application from scratch. This powerful framework allow us to easily display and manipulate personal information management (PIM) data. We will use it to create a simple QML and Kirigami application that will allow the user to view their emails.
 
-\{{< alert color="warning" title="Warning" >\}}
+{% hint style="warning" %}Warning
 
 This tutorial assumes you have some prior knowledge of [Qt Model/View programming](https://doc.qt.io/qt-5/model-view-programming.html). Akonadi makes heavy use of models and proxy models to display information.
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Preparation
 
@@ -250,11 +250,11 @@ private:
 };
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 To work, this example will also require you to implement the getter for the newly created `Q_PROPERTY`.
 
-\{{< /alert >\}}
+{% endhint %}
 
 With that, we can now extend the `QuickMail` constructor to also create the models.
 
@@ -312,11 +312,11 @@ The next component is the actual UI of the mail folder selector page:
 
 ![Screenshot of a tree view of mail folders](../../../content/docs/features/akonadi/folderpage.png)
 
-\{{< alert color="info" title="Note" >\}}
+{% hint style="info" %}Note
 
 You can get a better tree view using Kirigami Addons.
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### The List of Mails
 
@@ -409,11 +409,11 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
 }
 ```
 
-\{{< alert title="Note" color="warning" >\}}
+{% hint style="warning" %}Note
 
 You will also need to implement the constructor and the `roleNames` methods, and then add the file to your CMakeLists.txt configuration, to make this example work.
 
-\{{< /alert >\}}
+{% endhint %}
 
 Don't forget to register the `MailModel` in the `main.cpp` file.
 

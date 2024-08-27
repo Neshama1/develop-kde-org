@@ -120,9 +120,9 @@ Since we are making a separate QML file for our Settings page, and since we need
 
 The nice thing about the form card page is that it comes with an internal layout, so no additional ColumnLayout is needed and our delegates can be added directly to it.
 
-{{< alert color="info" title="Note" >}}
+{% hint style="info" %}Note
 It is possible to use FormCard delegates directly with a Kirigami.ScrollablePage, but in that case you will need to add your own layouts.
-{{< /alert >}}
+{% endhint %}
 
 ### FormHeader
 
@@ -286,7 +286,7 @@ FormCard.FormCard {
 
 We bind the visibility of each radio button to a switch, so they only appear when the switch is enabled.
 
-{{< alert title="Best Practices" color="success" >}}
+{% hint style="success" %}Best Practices
 
 <details><summary>Click here to read more</summary>
 
@@ -306,7 +306,7 @@ See [this page](https://doc.qt.io/qt-6/qtquick-bestpractices.html#prefer-declara
 
 </details>
 
-{{< /alert >}}
+{% endhint %}
 
 {{< figure src="formradiodelegate.webp" >}}
 

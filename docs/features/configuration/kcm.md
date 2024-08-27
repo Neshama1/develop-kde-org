@@ -100,7 +100,7 @@ More complex layouts will require using a different root component. Each has its
  - Use [GridViewKCM](docs:kdeclarative;org::kde::kcm::GridViewKCM) for arranging selectable items in a grid.
  - Use [SimpleKCM](docs:kdeclarative;org::kde::kcm::SimpleKCM) otherwise.
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 KCMs can consist of multiple pages that are dynamically opened and closed. To push another page to the page-stack, we can use:
 
 ```js
@@ -114,7 +114,7 @@ To pop a page (remove the last page on the page-stack) you can just use:
 ```js
 kcm.pop()
 ```
-{{< /alert >}}
+{% endhint %}
 
 ## Run it!
 

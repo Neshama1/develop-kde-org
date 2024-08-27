@@ -81,11 +81,11 @@ The only thing that needs adjustments here is the pricing, which was set to "Fre
 
 {{< figure class="text-center" src="../pricing-availability-price.png" >}}
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 
 KDE e.V. is currently investigating the financial and technical matters necessary for app developers to provide paid versions of their apps on the Microsoft Store. Once this becomes possible, you will be able to use this as an additional means for users to donate and support the project.
 
-{{< /alert >}}
+{% endhint %}
 
 The rest can be left as is.
 
@@ -107,11 +107,11 @@ The most important section is at the top.
 
 Very important: The category/subcategory for the store! People will not be able to locate your stuff easily if you choose a category that does not match your application.
 
-{{< alert title="Warning" color="warning" >}}
+{% hint style="warning" %}Warning
 
 You won't be able to change the category after setting it the first time. Choose well.
 
-{{< /alert >}}
+{% endhint %}
 
 For example, Kile should be in something like "Productivity", like other tools of that kind.
 If unsure, just browse through the Microsoft store and take a look at which kind of applications are where.

@@ -163,7 +163,7 @@ contents/ui/main.qml
 
 \{{< /section-right >\}} \{{< /sections >\}}
 
-\{{< alert title="Note" color="info" >\}} Plasmoids previously used a metadata.desktop file. This is discouraged, because the conversion to JSON will need to be done at runtime. Shipping a JSON file directly is supported for all of Plasma 5.
+{% hint style="info" %}Note Plasmoids previously used a metadata.desktop file. This is discouraged, because the conversion to JSON will need to be done at runtime. Shipping a JSON file directly is supported for all of Plasma 5.
 
 In case you still have a desktop file inside of your project you can convert it to JSON and afterwards remove it.
 
@@ -172,6 +172,6 @@ desktoptojson -s plasma-applet.desktop -i metadata.desktop
 rm metadata.desktop
 ```
 
-\{{< /alert >\}}
+{% endhint %}
 
 \{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

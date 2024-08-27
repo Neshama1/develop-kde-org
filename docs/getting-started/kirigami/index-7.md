@@ -18,11 +18,11 @@ Primitive components such as [Rectangle](docs:qtquick;QtQuick.Rectangle) should 
 
 Hardcoded colors in QML, such as `#32b2fa` or `red`, should usually be avoided; if it is really necessary to have elements with custom colors, it should be an area where only custom colors are used (usually in the content area of the app, and never in chrome areas such as toolbars or dialogs). For instance, a hardcoded `black` foreground cannot be used over a [Kirigami.Theme.backgroundColor](docs:kirigami2;Kirigami::Platform::PlatformTheme::backgroundColor) background, because if the platform uses a dark color scheme the result will have poor contrast with black over almost black. This is an accessibility issue and should be avoided.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 If you really need to use custom colors, check out [Kontrast](https://apps.kde.org/kontrast/) to ensure that the colors you choose have good contrast and are [WCAG compliant](https://en.wikipedia.org/wiki/Web\_Content\_Accessibility\_Guidelines).
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Theme
 

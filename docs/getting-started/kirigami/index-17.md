@@ -65,11 +65,11 @@ FormLayouts can also be divided into sections. Setting where a section starts is
 
 However, this is not recommended. On components where [Kirigami.FormData.isSection](docs:kirigami2;FormLayoutAttached::isSection) is set to `true`, the label text provided for this component's [Kirigami.FormData.label](docs:kirigami2;FormLayoutAttached::label) property will be displayed as the section's header text.
 
-{{< alert title="Warning" color="warning" >}}
+{% hint style="warning" %}Warning
 
 This does not apply to every component, hence the recommendation that you use [Kirigami.Separator](docs:kirigami2;Separator) or [Item](docs:qtquick;QtQuick.Item) components in places where you would like to use a header text.
 
-{{< /alert >}}
+{% endhint %}
 
 This header text is larger than the normal label text, and provides users with a nice visual cue of what the form layout section is about.
 

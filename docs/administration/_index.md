@@ -49,11 +49,11 @@ echo $?      # for Bash, 0 means successful
 echo $status # for fish, 0 also means successful
 ```
 
-\{{< alert title="Note" color="info" >\}} The $? variable is updated when each foreground process exits. If you need to use that variable later, you need to save it away. \{{< /alert >\}}
+{% hint style="info" %}Note The $? variable is updated when each foreground process exits. If you need to use that variable later, you need to save it away. {% endhint %}
 
 In this example, the return value is 0. It would be 1 if the Cancel button had been selected instead of the OK button.
 
-\{{< alert title="Note" color="info" >\}} This is different from the convention used by the underlying widgets. If you are familiar with Qt widgets, this might be a bit confusing, however it is important to conform to the standard approach to shell scripting. \{{< /alert >\}}
+{% hint style="info" %}Note This is different from the convention used by the underlying widgets. If you are familiar with Qt widgets, this might be a bit confusing, however it is important to conform to the standard approach to shell scripting. {% endhint %}
 
 #### Shell Script Return Value with Error
 
@@ -474,7 +474,7 @@ qdbus $dbusRef close
 
 Line 1 runs kdialog, with an initial label of "Initialising", and a progress bar with four elements. We capture the return value in a variable (which can be named just about anything - I chose "dbusRef") for later use with the `qdbus` command. Line 2 sets the bar to one stage along, and line 3 changes the label to "Thinking really hard". Line 4 is just a delay (which would be when your script would perform the first part of the lengthy task in a real application). Line 5 then increases the progress bar, followed by another delay (representing more processing) in line 6. Line 7 changes the label, while lines 8 through 11 further increase the progress bar over a few seconds. Line 12 closes the progress bar dialog - without this, it will remain displayed. If you'd prefer that the progress bar dialog closed as soon as the bar gets to 100%, you can pass the `setAutoClose true` argument to `qdbus`. If a task is taking a very long time, the user may decide that it is better cancelled. kdialog can assist with this too, as shown in the example below.
 
-\{{< alert color="info" title="Note" >\}} The `qdbus` binary might be called `qdbus-qt5` depending on your distribution. \{{< /alert >\}}
+{% hint style="info" %}Note The `qdbus` binary might be called `qdbus-qt5` depending on your distribution. {% endhint %}
 
 #### --progressbar dialog box example, with Cancel
 

@@ -292,7 +292,7 @@ There are multiple views APIs can be used, some from Qt and some from Kirigami. 
 
 The delegate on the other hand always need to have its dimensions set. Generally its dimensions are set to use only the full width of the view.
 
-\{{< alert title="Common mistakes" color="warning">\}}
+{% hint style="warning" %}Common mistakes
 
 The above means that delegates should not have bottom anchors, since the delegate doesn't need to have the same height as the view. In other words, you will probably never want to use `anchors.fill: parent`.
 
@@ -315,7 +315,7 @@ Controls.ItemDelegate {
 }
 ```
 
-\{{< /alert >\}}
+{% endhint %}
 
 The most common use of a delegate is within a [Component](docs:qtqml;QtQml.Component), which does not instantiate the delegate immediately. When a view is constructed, the delegate is then used as a blueprint to make each item in the view.
 

@@ -42,7 +42,7 @@ The following section is important, because it specifies which dependencies we'l
 * `COMPONENTS` is a parameter that precedes the specific components of the framework we will include.
 * Each word after `COMPONENTS` refers to a specific component of the library.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 If you are looking to add any components listed in the [KDE API documentation](https://api.kde.org/) to your application, you may check the right sidebar for how to add the component with CMake. For instance, for [Kirigami](docs:kirigami2;), you will find something like `find_package(KF6Kirigami)`, which with the addition of ECM becomes:
 
@@ -52,7 +52,7 @@ find_package(KF6 COMPONENTS Kirigami)
 
 Pay close attention to your included components, as omitting ones used in our code will stop our application from compiling.
 
-\{{< /alert >\}}
+{% endhint %}
 
 The install line instructs CMake to install the desktop file in `${KDE_INSTALL_APPDIR}`, which on Linux translates to `$XDG_DATA_DIRS/applications`, usually `/usr/share/applications`, and on Windows translates to `C:/Program Files/${PROJECT_NAME}/bin/data/applications`:
 
@@ -87,11 +87,11 @@ The method for creating a separate QML module is better exemplified in [Using se
 
 These are additions provided by extra-cmake-modules to make the use of [Qt declarative registration](https://doc.qt.io/qt-6.7/cmake-build-qml-application.html) (the [replacement to Qt resource files](https://doc.qt.io/qt-5/resources.html)) easier.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 These libraries should match the components that we included in our previous `CMakeLists.txt` file, otherwise these components will not be included and our application won't compile.
 
-\{{< /alert >\}}
+{% endhint %}
 
 The documentation for all three commands can be found in the [extra-cmake-modules API for ECMQmlModule](https://api.kde.org/ecm/module/ECMQmlModule.html).
 

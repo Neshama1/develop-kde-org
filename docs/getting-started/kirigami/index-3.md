@@ -72,7 +72,7 @@ actions: [ Kirigami.Action {}, Kirigami.Action {} ]
 
 The `id` and `text` properties should be familiar from previous tutorials. However, the inherited [Action.icon](https://doc.qt.io/qt-6/qml-qtquick-controls2-action.html#icon-prop) property should be interesting: it is an object with several properties letting you display certain icons for your actions. Fortunately, to use KDE icons all we need to do is provide the name property for the icon property, `icon.name`.
 
-\{{< alert title="Viewing the available icons" color="info" >\}}
+{% hint style="info" %}Viewing the available icons
 
 <details>
 
@@ -87,7 +87,7 @@ Many of KDE's icons follow the FreeDesktop Icon Naming specification. Therefore,
 
 </details>
 
-\{{< /alert >\}}
+{% endhint %}
 
 The [onTriggered](docs:qtquickcontrols;QtQuick.Controls.Action::triggered) signal handler is the most important. This is what our action will do when it is used. You'll notice that in our example we're using the method [kountdownModel.append](https://doc.qt.io/qt-6/qml-qtqml-models-listmodel.html#append-method) of the `kountdownModel` we created in our previous tutorial. This method lets us append a new element to our list model. We are providing it with an object (indicated by curly braces `{}`) that has the relevant properties for our countdowns (`name`, `description`, and a placeholder `date`).
 
@@ -150,11 +150,11 @@ Since we are keeping our global drawer simple for now, we are setting the [Globa
 
 \{{< /sections >\}}
 
-\{{< alert title="Tip" color="success" >\}}
+{% hint style="success" %}Tip
 
 The [Actions based components](../../../../../docs/getting-started/kirigami/components-actions/) page of these docs provides further detail on Kirigami Actions and how they can be used.
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Actions are contextual
 

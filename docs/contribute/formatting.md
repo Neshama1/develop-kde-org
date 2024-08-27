@@ -188,16 +188,16 @@ Usage suggestions:
 
 *   Use `info` to display general information or additional content:
 
-    \{{< alert title="Note" color="info" >\}} Text you want to display in the alert. \{{< /alert >\}}
+    {% hint style="info" %}Note Text you want to display in the alert. {% endhint %}
 *   Use `success` to display advice or important pieces of information, such as tips or best practices:
 
-    \{{< alert title="Tip" color="success" >\}} Did you know that you can collapse the contents of an alert? \{{< /alert >\}}
+    {% hint style="success" %}Tip Did you know that you can collapse the contents of an alert? {% endhint %}
 *   Use `warning` to warn the reader that a certain action can have dangerous results if misused:
 
-    \{{< alert title="Warning" color="warning" >\}} Be careful with what you are doing here! You have been warned! \{{< /alert >\}}
+    {% hint style="warning" %}Warning Be careful with what you are doing here! You have been warned! {% endhint %}
 *   Use `error` to display content that is of very high importance:
 
-    \{{< alert title="Important" color="error" >\}} This WILL make your machine explode! 💣 \{{< /alert >\}}
+    {% hint style="error" %}Important This WILL make your machine explode! 💣 {% endhint %}
 
 In cases where your alert is too long and might disrupt the flow of the text, you can make it collapsible using [Markdown's details summary](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections).
 
@@ -210,7 +210,7 @@ This content was hidden!
 {{</* /alert */>}}
 ```
 
-\{{< alert title="Tip" color="success" >\}}
+{% hint style="success" %}Tip
 
 <details>
 
@@ -220,7 +220,7 @@ This content was hidden!&#x20;
 
 </details>
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### rel/ref links
 

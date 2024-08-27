@@ -15,11 +15,11 @@ A [Kirigami.Action](docs:kirigami2;Action) consists of a clickable action whose 
 
 We can use these to provide our applications with easy-to-reach actions that are essential to their functionality.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 Kirigami Actions inherit from [QtQuick.Controls.Action](docs:qtquickcontrols;QtQuick.Controls.Action) and can be assigned shortcuts.
 
-\{{< /alert >\}}
+{% endhint %}
 
 Like [QtQuick Controls Actions](docs:qtquickcontrols;QtQuick.Controls.Action), they can be assigned to menu items and toolbar buttons, but also to multiple other Kirigami components.
 
@@ -37,11 +37,11 @@ Kirigami.Action {
 }
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 The [icon.name](https://doc.qt.io/qt-6/qml-qtquick-controls2-action.html#icon.name-prop) property takes names for system-wide icons following the FreeDesktop specification. These icons and icon names can be viewed with KDE's CuttleFish application which comes with [plasma-sdk](https://invent.kde.org/plasma/plasma-sdk), or by visiting [FreeDesktop's icon naming specification](https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html).
 
-\{{< /alert >\}}
+{% endhint %}
 
 One feature offered by Kirigami Actions on top of QtQuick Actions is the possibility to nest actions.
 
@@ -181,11 +181,11 @@ In this example, we are creating a "clear" button for a search field that is onl
 
 ![Search field with text: "I want](../../../content/docs/getting-started/kirigami/components-actions/searchfield.webp)
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 You should rarely use an ActionTextField directly. [SearchField](docs:kirigami2;SearchField) and [PasswordField](docs:kirigami2;PasswordField) both inherit from `ActionTextField` and are likely to cover your desired use-case.
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### SwipeListItem
 

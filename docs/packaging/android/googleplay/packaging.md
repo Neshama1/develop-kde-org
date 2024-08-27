@@ -35,7 +35,7 @@ This template adds three jobs to the CI/CD pipeline of KTrip:
 
 The last two jobs are only added for pipelines on mainline branches of mainline repositories. In particular, you won't see them in a merge request pipeline.
 
-\{{< alert title="Note" color="info" >\}} Mainline branches are the `master` branch and release branches like `release/24.02`. \{{< /alert >\}}
+{% hint style="info" %}Note Mainline branches are the `master` branch and release branches like `release/24.02`. {% endhint %}
 
 After successfully running a CI/CD pipeline for the 24.02 branch of KTrip, the `craft_android_appbundle_qt66` job will have created an AAB that we can download by browsing the job artifacts. The `googleplay_aab_qt66` job will have logged
 
@@ -45,9 +45,9 @@ We will change this later.
 
 The `sign_aab_qt66` job has not run. That's okay. We will run it later.
 
-\{{< alert title="Note" color="info" >\}} If the application you want to publish on Google Play is based on Qt 5 then include the template `/gitlab-templates/craft-android-appbundle.yml`.
+{% hint style="info" %}Note If the application you want to publish on Google Play is based on Qt 5 then include the template `/gitlab-templates/craft-android-appbundle.yml`.
 
-See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. \{{< /alert >\}}
+See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. {% endhint %}
 
 ### Signing the Android App Bundle
 

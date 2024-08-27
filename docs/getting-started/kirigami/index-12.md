@@ -96,17 +96,17 @@ Kirigami.Card {
 
 A [Kirigami.CardsLayout](docs:kirigami2;CardsLayout) is most useful when the cards being presented are either not instantiated by a model or are instantiated by a model that always has very few items. They are presented as a grid of two columns which will remain centered if the application is really wide, or become a single column if there is not enough space for two columns, such as a mobile phone screen.
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 [`CardsListView`](docs:kirigami2;CardsListView) is better suited for larger models.
 
-\{{< /alert >\}}
+{% endhint %}
 
-\{{< alert title="Important" color="warning" >\}}
+{% hint style="warning" %}Important
 
 A [CardsLayout](docs:kirigami2;CardsLayout) should always be contained within a [ColumnLayout](https://doc.qt.io/qt-6/qml-qtquick-layouts-columnlayout.html).
 
-\{{< /alert >\}}
+{% endhint %}
 
 A card can optionally be oriented horizontally. In this case it will be wider than tall, and is better suited to being placed in a [ColumnLayout](https://doc.qt.io/qt-6/qml-qtquick-layouts-columnlayout.html). If you must put it in a [CardsLayout](docs:kirigami2;CardsLayout), it will have a [maximumColumns](docs:kirigami2;CardsLayout::maximumColumns) of `2` by default.
 

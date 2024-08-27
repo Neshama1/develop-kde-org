@@ -38,11 +38,11 @@ When we now run a CI/CD pipeline for NeoChat then, after successful completion, 
 
 By default, the installer is not signed. Windows may refuse to run this installer.
 
-\{{< alert title="Note" color="info" >\}} If the application you want to package is based on Qt 5 then include the template `/gitlab-templates/craft-windows-x86-64.yml`.
+{% hint style="info" %}Note If the application you want to package is based on Qt 5 then include the template `/gitlab-templates/craft-windows-x86-64.yml`.
 
 If you need to use MinGW instead of MSVC for building your application then include the template `/gitlab-templates/craft-windows-mingw64-qt6.yml` (for Qt 6) or `/gitlab-templates/craft-windows-mingw64.yml` (for Qt 5).
 
-See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. \{{< /alert >\}}
+See the [documentation of our CI/CD pipelines](https://invent.kde.org/sysadmin/ci-utilities/-/tree/master/gitlab-templates?ref\_type=heads#our-gitlab-cicd-pipelines) for more information about the available CI/CD job templates. {% endhint %}
 
 ### Signing the installer
 
@@ -58,7 +58,7 @@ See the documentation of the [windowsbinariessigner's project settings](https://
 
 When we now run a CI/CD pipeline for NeoChat on the `release/24.02` branch then the `craft_windows_qt6_x86_64` job will create a signed Windows installer which you should be able to install on your Windows machine.
 
-\{{< alert title="Note" color="info" >\}} Only mainline branches can be cleared for signing. Mainline branches are the `master` branch and release branches like `release/24.02`. Windows installers created on work branches and forks are never signed. \{{< /alert >\}}
+{% hint style="info" %}Note Only mainline branches can be cleared for signing. Mainline branches are the `master` branch and release branches like `release/24.02`. Windows installers created on work branches and forks are never signed. {% endhint %}
 
 ### Publishing the application on KDE's CDN
 

@@ -9,11 +9,11 @@ description: Laying out your content
 
 # Typography
 
-\{{< alert color="info" >\}}
+{% hint style="info" %}
 
 For demonstrative purposes, this tutorial uses an AbstractCard to make the text examples clearer. A better way to achieve the same results would be to use a [Kirigami Addons FormCard](../../../../../docs/getting-started/kirigami/addons-introduction/).
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Headings
 

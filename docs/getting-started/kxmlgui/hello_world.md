@@ -13,7 +13,7 @@ description: Your first window using KDE Frameworks
 
 Your first program shall greet the world with a friendly "Hello World". For that, we will use a [KMessageBox](docs:kwidgetsaddons;KMessageBox) and customize one of its buttons.
 
-\{{< alert title="Note" color="info" >\}} To get more information about any class you come across, you can use [KDE's API Reference site](https://api.kde.org/index.html). It can be quickly accessed via KRunner with the `kde:` search keyword (e.g. `kde: KMessageBox`). You may also find it useful to consult Qt's documentation with `qt:`, since much of KDE's Frameworks builds upon it. \{{< /alert >\}}
+{% hint style="info" %}Note To get more information about any class you come across, you can use [KDE's API Reference site](https://api.kde.org/index.html). It can be quickly accessed via KRunner with the `kde:` search keyword (e.g. `kde: KMessageBox`). You may also find it useful to consult Qt's documentation with `qt:`, since much of KDE's Frameworks builds upon it. {% endhint %}
 
 ### Preparation
 
@@ -57,11 +57,11 @@ The first argument of the [KGuiItem](docs:kwidgetsaddons;KGuiItem) constructor i
 
 Now that we have the item needed for our primary action button, we can create our popup with [KMessageBox::questionTwoActions()](docs:kwidgetsaddons;KMessageBox::questionTwoActions). The first argument is the parent widget of the [KMessageBox](docs:kwidgetsaddons;KMessageBox), which is not needed for us here, so we pass `nullptr`. The second argument is the text that will appear inside the message box and above the buttons, in our case, "Hello World". The third is the caption shown in the window's titlebar, "Hello Title". Then, we set our custom [KGuiItem](docs:kwidgetsaddons;KGuiItem), `primaryAction`. Lastly, we add a convenience object with [KStandardGuiItem::cancel()](docs:kwidgetsaddons;KStandardGuiItem::cancel), which returns a ready-made [KGuiItem](docs:kwidgetsaddons;KGuiItem) with localized text and cancel functionality, satisfying the function signature.
 
-\{{< alert title="Important" color="warning" >\}}
+{% hint style="warning" %}Important
 
 Using a QStringLiteral for strings like `QStringLiteral("Hello World!")` instead of literals like `"Hello World!"` is both a best practice in Qt programming and an expected coding practice in KDE software.
 
-\{{< /alert >\}}
+{% endhint %}
 
 #### About and Internationalization
 
@@ -75,13 +75,13 @@ We start with a call to [KLocalizedString::setApplicationDomain()](docs:ki18n;KL
 
 More information on internalization can be found in the [programmer's guide for internationalization](https://api.kde.org/frameworks/ki18n/html/prg\_guide.html).
 
-\{{< alert title="Important" color="warning" >\}}
+{% hint style="warning" %}Important
 
 Since we are about to use many string arguments, instead of writing `QStringLiteral()` 7 times, we can use QString's [operator""\_s](https://doc.qt.io/qt-6/qstring.html#operator-22-22\_s), a shorter notation for [string literals](https://en.cppreference.com/w/cpp/language/string\_literal) special to Qt that does the same thing. This is also where the `using namespace Qt::Literals::StringLiterals;` comes from.
 
 So instead of `QStringLiteral("Hello World!")`, just typing `u"Hello World!"_s` is enough.
 
-\{{< /alert >\}}
+{% endhint %}
 
 [KAboutData](docs:kcoreaddons;KAboutData) is a core KDE Frameworks component that stores information about an application, which can then be reused by many other KDE Frameworks components. We instantiate a new [KAboutData](docs:kcoreaddons;KAboutData) object with its fairly complete default constructor and add author information. After all the required information has been set, we call [KAboutData::setApplicationData()](docs:kcoreaddons;KAboutData::setApplicationData) to initialize the properties of the [QApplication ](docs:qtwidgets;QApplication)object.
 

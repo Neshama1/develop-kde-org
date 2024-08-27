@@ -31,7 +31,7 @@ If the application is using Qt5, use the `qt515` image:
 docker run -ti --rm -v $PWD/craft-kde-android:/home/user/CraftRoot invent-registry.kde.org/sysadmin/ci-images/android-qt515 bash
 ```
 
-\{{< alert color="info" title="Note" >\}} If this fails with an error similar to "Permission denied", you may need to disable SELinux while using craft by running `sudo setenforce 0` \{{< /alert >\}}
+{% hint style="info" %}Note If this fails with an error similar to "Permission denied", you may need to disable SELinux while using craft by running `sudo setenforce 0` {% endhint %}
 
 After the image is done downloading, you should be in a new shell which is running inside of the container. Now it's time to initialize Craft:
 

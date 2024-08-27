@@ -93,13 +93,13 @@ The first line indicates that this .desktop file is of type Service; this is nec
 
 The MimeType line defines the type of file for which this servicemenu applies. You can define more than one mimetype by providing a list separated by semicolons (but no spaces). In this case, our servicemenu will show up when we select PNG or JPEG images. The File Associations control panel is a good place to look for mimetype definitions. 
 
-{{< alert title="Tip" color="success" >}}
+{% hint style="success" %}Tip
 
 To create a servicemenu for directories use the ```inode/directory```
 mimetype. To create a servicemenu for all files, use the base ```application/octet-stream```
 mimetype
 
-{{< /alert >}}
+{% endhint %}
 
  You can also specify an entire group of mimetypes using "typeglobs". To make our servicemenu apply not only to PNGs and JPEGs but to all images we would simply change the MimeType entry to be:
 
@@ -160,14 +160,14 @@ Exec=qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
 
 If we save it and open up Dolphin, when we right-click on a PNG, JPEG or GIF image we should now have a "Set as background" item in the menu. Try it out! 
 
-{{< alert title="Tip" color="success" >}}
+{% hint style="success" %}Tip
 
 If you have a complex task that requires more than one command (for example if we wanted to copy the image file somewhere first and then use D-Bus to set it as the background) use a shell:
 ```bash
 Exec=/bin/sh -c ";<YOUR COMMANDS HERE>"
 ```
 
-{{< /alert >}}
+{% endhint %}
 
 ## And Now Back to Our Regularly Scheduled Broadcast...
 

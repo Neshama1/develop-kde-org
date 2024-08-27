@@ -76,7 +76,7 @@ keytool -genkeypair -alias org.kde.ktrip -keyalg RSA -keysize 2048 \
 
 I have generated the key on the machine the signing service runs on. If you generate the key yourself then you have to ask our [system administrators](https://community.kde.org/Sysadmin) to upload the keystore file and the file with the password to this machine.
 
-\{{< alert title="Note" color="info" >\}} For the releases of KTrip published in our F-Droid repositories we use a different signing key which is also used to sign almost all other apps published in our F-Droid repositories. We decided not to upload this key to Google Play. The minor drawback is that one cannot update a KTrip installed from F-Droid with a KTrip from Google Play and vice versa. \{{< /alert >\}}
+{% hint style="info" %}Note For the releases of KTrip published in our F-Droid repositories we use a different signing key which is also used to sign almost all other apps published in our F-Droid repositories. We decided not to upload this key to Google Play. The minor drawback is that one cannot update a KTrip installed from F-Droid with a KTrip from Google Play and vice versa. {% endhint %}
 
 #### Uploading the Signing Key to Google Play
 
@@ -182,7 +182,7 @@ Google Play wants to know if some parts of the app can only be accessed after en
 
 ![Screenshot showing the 'App access' form](../../../../content/docs/packaging/android/googleplay/05-set-up-your-app-02.png)
 
-\{{< alert title="Note" color="info" >\}} For a chat app like NeoChat which cannot be reviewed without a Matrix account it's more complicated. For the Microsoft Store we provide Microsoft with credentials for a test account they can use to review NeoChat. \{{< /alert >\}}
+{% hint style="info" %}Note For a chat app like NeoChat which cannot be reviewed without a Matrix account it's more complicated. For the Microsoft Store we provide Microsoft with credentials for a test account they can use to review NeoChat. {% endhint %}
 
 **Ads**
 

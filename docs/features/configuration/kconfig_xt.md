@@ -141,7 +141,7 @@ The first line `File=config.kcfg` specifies where the configuration options for 
 
 The second line `ClassName=YourConfigClassName` specifies the name of the class that will be generated from the .kcfg file. Save this file under yourconfigclassname.kcfgc. This will result in the yourconfigclassname.{h,cpp} files being generated.
 
-\{{< alert title="Note" color="info" >\}} KConfigXT offers a variety of options. The full list can be seen in the [kconfig\_compiler documentation](docs:kconfig;kconfig\_compiler.html). \{{< /alert >\}}
+{% hint style="info" %}Note KConfigXT offers a variety of options. The full list can be seen in the [kconfig\_compiler documentation](docs:kconfig;kconfig\_compiler.html). {% endhint %}
 
 ### Adjusting the CMakeLists.txt file
 
@@ -235,7 +235,7 @@ GenerateProperties=true
 
 Notice the `ParentInConstructor=true` --- this option allows generating a `Config` class, that takes an optional `QObject *parent` argument. This allows your `ManagedConfigModule` to watch changes in the KCM: once you change something using controls on the QML side, KCM will indicate, that the changes were made, and will offer you to save or reset them.
 
-\{{< alert title="Note" color="info" >\}} `ParentInConstructor=true` is incompatible with the `Singleton=true`. \{{< /alert >\}}
+{% hint style="info" %}Note `ParentInConstructor=true` is incompatible with the `Singleton=true`. {% endhint %}
 
 Do not forget, that to make changes you need setters and properties in `Config` class, that are generated using `Mutators=true` and `GenerateProperties=true` options.
 

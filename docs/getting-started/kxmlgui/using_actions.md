@@ -169,7 +169,7 @@ Besides having the action in the toolbar, it can also be added to the menubar. H
 
 Change the 'version' attribute of the `<gui>` tag if you changed the .rc file since the last install to force a system cache update. Be sure it is an integer, if you use a decimal value, it will not work, and you will get no warning about it.
 
-\{{< alert title="Warning" color="warning" >\}} The version attribute must always be an integer number. \{{< /alert >\}}
+{% hint style="warning" %}Warning The version attribute must always be an integer number. {% endhint %}
 
 Some notes on the interaction between code and the .rc file: menus appear automatically and should have a `<text/>` child tag unless they refer to standard menus. Actions need to be created manually and inserted into the `actionCollection()` using the same name as in the .rc file. Actions can be hidden or disabled, whereas menus can't.
 

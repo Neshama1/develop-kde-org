@@ -95,11 +95,11 @@ Kirigami.ApplicationWindow {
 }
 ```
 
-\{{< alert title="Note" color="info" >\}}
+{% hint style="info" %}Note
 
 You can dynamically append and remove data from the ListModel, and the Repeater will automatically make those changes. However, simply changing a specific item from either the Repeater or ListModel does not affect the other, and requires the changing of both, unless something like [QAbstractListModel](https://doc.qt.io/qt-6/qabstractlistmodel.html) is used. See [Example Application](index-14.md#example-application) for more information.
 
-\{{< /alert >\}}
+{% endhint %}
 
 ### Example Application
 

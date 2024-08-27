@@ -233,13 +233,13 @@ This file contains the graphical elements needed to make an analog clock icon. I
 * `hint-hands-shadow-offset-to-west` or `hint-hands-shadows-offset-to-east`: horizontal offset of the hands shadows, default is 0 offset (since Plasma 5.16)
 * `hint-hands-shadow-offset-to-north` or `hint-hands-shadow-offset-to-south`: vertical offset of the hands shadows, default is 0 offset (since Plasma 5.16)
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 
 In the SVG, the Hand elements as well as their optional Shadow counterparts must be oriented in a direction as the one indicating the time 6:30:30.
 
 The relative position of the Hand elements as well as their optional Shadow counterparts with respect to the center of ClockFace does not matter.
 
-{{< /alert >}}
+{% endhint %}
 
 ### widgets/configuration-icons.svg
 
@@ -996,8 +996,7 @@ Some of the most common icons:
 * `system.svg`
 * [More...](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/src/desktoptheme/breeze/icons)
 
-{{< alert color="warning" title="Deprecated in Plasma 6" >}}
-
+{% hint style="warning" %}Deprecated in Plasma 6
 The use of special icons provided by the Plasma theme to be used in the system tray has been [deprecated](https://invent.kde.org/plasma/plasma-desktop/-/issues/82) and tray icons now come from the icon theme. See [the reasoning for the change](https://pointieststick.com/2023/08/12/how-all-this-icon-stuff-is-going-to-work-in-plasma-6/) for details.
 
-{{< /alert >}}
+{% endhint %}

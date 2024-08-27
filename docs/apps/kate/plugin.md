@@ -115,9 +115,9 @@ source build/prefix.sh
 kate
 ```
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 If we were to install the plugin to the root directory where Kate plugins are deployed, it would have been installed in `/usr/lib/qt/plugins/ktexteditor/markdowpreview.so`. To do that, you'd need to remove the `-D CMAKE_INSTALL_PREFIX` call and run the install command with sudo, and sourcing `prefix.sh` would no longer be necessary.
-{{< /alert >}}
+{% endhint %}
 
 With Kate now running, go to Settings, Configure Kate..., Plugins, and verify that the "Markdown Previewer" plugin is present.
 
@@ -154,9 +154,9 @@ MarkdownPreviewPluginView::MarkdownPreviewPluginView(MarkdownPreviewPlugin *plug
 
 Before proceeding further, make sure the code compiles. Then install the plugin, enable it in Kate and verify that the toolview is visible in the right sidebar. If the toolview isn't visible, make sure the plugin is enabled and recheck your code.
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 If you didn't use an icon and your sidebar settings are set to "icon-only", you won't see the button for the toolview and it will appear as if there is no toolview because of the non existent icon. To disable this setting, check the option "**Show text for left and right sidebar buttons**".
-{{< /alert >}}
+{% endhint %}
 
 Now to the actual previewing. To be able to tell when the active document changes the `MainWindow` class emits a `viewChanged()` [signal](https://doc.qt.io/qt-6/signalsandslots.html). We will connect to this signal and then check if the new document is of Markdown type. If it is, we will load the document's text into the preview widget which will take care of the rest.
 

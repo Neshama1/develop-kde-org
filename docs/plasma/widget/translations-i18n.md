@@ -99,10 +99,10 @@ We'll also create a `merge.sh` script which will extract the messages from our c
 
 Lastly, we'll make a `build.sh` script to convert the `fr.po` text files into the binary `.mo` files which are needed for KDE to recognize the translations.
 
-\{{< alert color="info" >\}} The latest copy of my `merge.sh` and `build.sh` can be found here:
+{% hint style="info" %} The latest copy of my `merge.sh` and `build.sh` can be found here:
 
 * [`translate/merge.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge)
-* [`translate/build.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build) \{{< /alert >\}}
+* [`translate/build.sh`](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build) {% endhint %}
 
 A working example can be seen in the Tiled Menu widget:
 
@@ -160,7 +160,7 @@ sudo apt install gettext
 
 First thing we need to do in our `merge.sh` script, is list all files we wish to get translated in our widgets code.
 
-\{{< alert color="info" >\}} The latest copy of my complete `merge.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge). \{{< /alert >\}}
+{% hint style="info" %} The latest copy of my complete `merge.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/merge). {% endhint %}
 
 `DIR` is the directory (absolute path to `package/translate/`) since we may run the merge script from another directory.
 
@@ -379,7 +379,7 @@ echo "[merge] Done merging messages"
 
 \{{< sections >\}} \{{< section-left >\}} Once our `fr.po` has been filled out, we can then convert it to a binary `.mo` file. So lets get started on our `build.sh` script.
 
-\{{< alert color="info" >\}} The latest copy of my complete `build.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build). \{{< /alert >\}}
+{% hint style="info" %} The latest copy of my complete `build.sh` script [can be found here](https://github.com/Zren/plasma-applet-lib/blob/master/package/translate/build). {% endhint %}
 
 We start with the same code that we used in our `merge.sh` script to parse our `metadata.desktop` file and get the widget's namespace. We also reuse the same code to iterate the `.po` files.
 

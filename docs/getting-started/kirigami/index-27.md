@@ -27,7 +27,7 @@ addonsexample/
         └── main.qml
 ```
 
-\{{< alert title="Tip" color="success" >\}}
+{% hint style="success" %}Tip
 
 You can quickly create this file structure with:
 
@@ -37,7 +37,7 @@ touch addonsexample/{CMakeLists.txt,main.cpp,resources.qrc}
 touch addonsexample/contents/ui/main.qml
 ```
 
-\{{< /alert >\}}
+{% endhint %}
 
 We start by using a very standard `CMakeLists.txt`:
 

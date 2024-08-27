@@ -27,11 +27,11 @@ in the theme folder to match your theme name.
 
 See [Theme Metadata]({{< ref "theme-details#theme-metadata">}}) if you need help.
 
-{{< alert title="Important" color="warning" >}}
+{% hint style="warning" %}Important
 
 Prior to KDE Frameworks 6, themes used a `metadata.desktop` file instead of `metadata.json`.
 
-{{< /alert >}}
+{% endhint %}
 
 ```bash
 # Create theme directory in home if it doesn't exist
@@ -47,9 +47,9 @@ mv ./default ./mytheme
 # (entries like Name[fr] or Description[zh_CN]).
 ```
 
-{{< alert color="info" title="Note" >}}
+{% hint style="info" %}Note
 The `default/` theme is the base `Breeze` theme with all the default SVGs. `breeze-light/` and `breeze-dark/` only have a `colors` file and a pair of metadata files and inherit everything else from the `default/` theme.
-{{< /alert >}}
+{% endhint %}
 
 ### Step 2: Open a file {#open}
 
@@ -66,13 +66,13 @@ and create replacement elements. Elements can be any SVG primitive or object gro
 
 See [SVG Elements and Inkscape]({{< ref "theme-svg.md" >}}) to understand how to edit Plasma SVG elements.
 
-{{< alert color="info" title="Hint" >}}
+{% hint style="info" %}Hint
 
 You can embed raster images as SVG elements if you creatively prefer raster editors
 like Krita, GIMP, etc. Remember to _embed_ each image instead of _linking_ (Inkscape:
 Effects -> Images -> Embed All Images).
 
-{{< /alert >}}
+{% endhint %}
 
 ### Step 4: Use an Inkscape extension {#extension}
 
@@ -84,12 +84,12 @@ KSvg](https://invent.kde.org/frameworks/ksvg/-/tree/master/src/tools/inkscape%20
 
 Make sure that the element ID for each new element is correctly set.
 
-{{< alert color="info" title="Hint" >}}
+{% hint style="info" %}Hint
 
 In Inkscape you can check the element ID for each element by right-clicking on the
 element and choosing Object Properties.
 
-{{< /alert >}}
+{% endhint %}
 
 ### Step 6: Edit hint elements {#hints}
 
@@ -114,11 +114,11 @@ create a new theme.
 * If you created separate themes that do not require compositing/desktop effects (SVGs in the `opaque/` folder), remember
 to test your theme with compositing turned off (this can be toggled with the keyboard shortcut `Alt+Shift+F12` on X11).
 
-{{< alert title="Note" color="info" >}}
+{% hint style="info" %}Note
 
 The `opaque/` folder is only relevant for themes on the Plasma X11 session, as the Wayland session does not allow to turn off compositing. See [Opaque Folder]({{< ref "theme-elements#opaque-folder" >}}) for details.
 
-{{< /alert >}}
+{% endhint %}
 
 When you update the theme, you need to battle with Plasma's caching. To make sure
 you are running the latest version of your theme after updating its files, clear the cache:
@@ -141,11 +141,11 @@ See the `colors` file in the `default` theme for an example.
 
 * If the `colors` file is omitted, Plasma will use the current Plasma system colors.
 
-{{< alert title="Important" color="warning" >}}
+{% hint style="warning" %}Important
 
 Theme SVGs will not be colorized unless they contain the `hint-apply-color-scheme` element.)
 
-{{< /alert >}}
+{% endhint %}
 
 ## Hints and Tips
 

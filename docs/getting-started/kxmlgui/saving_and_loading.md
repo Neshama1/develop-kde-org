@@ -72,11 +72,11 @@ void MainWindow::newFile()
 
 `fileName.clear()` sets the `fileName` string to be empty to reflect the fact that this document is not stored anywhere yet. `textArea->clear()` then clears the central text area using the same function that we connected the 'clear' action to in the \[previous tutorial]\(\{{< relref "using\_actions#creating-the-qaction-object" >\}}).
 
-\{{< alert title="Warning" color="warning" >\}} This example simply clears the text area without checking if the file has been saved first. It's only meant as a demonstration of file I/O and is _not_ an example of best programming practices. \{{< /alert >\}}
+{% hint style="warning" %}Warning This example simply clears the text area without checking if the file has been saved first. It's only meant as a demonstration of file I/O and is _not_ an example of best programming practices. {% endhint %}
 
 #### Saving a file
 
-\{{< alert title="Note" color="info" >\}} To make this tutorial simple, this example program can only save to local storage even though it can open any file from any location, even those from remote sources. \{{< /alert >\}}
+{% hint style="info" %}Note To make this tutorial simple, this example program can only save to local storage even though it can open any file from any location, even those from remote sources. {% endhint %}
 
 #### saveFileToDisk(const QString &)
 
@@ -187,7 +187,7 @@ if (storedJob) {
 }
 ```
 
-\{{< alert title="Note" color="info" >\}} Again, for simplicity's sake, this tutorial only saves text files to local disk. When you open a remote file for viewing and try to save it, the program will behave as if you were calling Save As on a completely new file. \{{< /alert >\}}
+{% hint style="info" %}Note Again, for simplicity's sake, this tutorial only saves text files to local disk. When you open a remote file for viewing and try to save it, the program will behave as if you were calling Save As on a completely new file. {% endhint %}
 
 #### CMakeLists.txt
 

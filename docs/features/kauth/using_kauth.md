@@ -132,14 +132,14 @@ be retained for that action. The values could be:
 
 If this attribute is missing, the authorization will be queried every time.
 
-{{< alert color="info" title="Note" >}}
+{% hint style="info" %}Note
 Only the PolicyKit and polkit-1 backends use this attribute.
-{{< /alert >}}
+{% endhint %}
 
-{{< alert color="warning" title="Warning" >}}
+{% hint style="warning" %}Warning
 With the polkit-1 backend, "session" and "always" have the same meaning.
 They just make the authorization persist for a few minutes.
-{{< /alert >}}
+{% endhint %}
 
 ## Calling the helper from the application
 
