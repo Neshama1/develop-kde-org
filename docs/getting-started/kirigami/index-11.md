@@ -38,7 +38,7 @@ When the direct children of a [Kirigami.ScrollablePage](docs:kirigami2;Scrollabl
 page itself, a scrollbar appears at the right edge of the page and the page
 will be scrollable.
 
-{{< figure src="neochatscrollablepage.webp" caption="Two scrollable pages, both containing a ListView with custom contents (screenshot of NeoChat)" >}}
+![Two scrollable pages, both containing a ListView with custom contents (screenshot of NeoChat)](../../../content/docs/getting-started/kirigami/components-scrollablepages_listviews/neochatscrollablepage.webp)
 
 Often you have more than one child in your [Kirigami.ScrollablePage](docs:kirigami2;ScrollablePage), and positioning items
 can be tricky—especially in combination with a [ListView](docs:qtquick;QtQuick.ListView).
