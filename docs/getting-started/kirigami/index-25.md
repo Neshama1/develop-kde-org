@@ -570,9 +570,6 @@ Kirigami.ApplicationWindow {
 
 </details>
 
-\
-
-
 <details>
 
 <summary>model.h</summary>
@@ -615,9 +612,6 @@ public:
 ```
 
 </details>
-
-\
-
 
 <details>
 
