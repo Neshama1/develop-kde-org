@@ -32,10 +32,6 @@ If you have used Kirigami apps before, you have certainly interacted with Kiriga
 
 A countdown app is pretty useless without the ability to add countdowns. Let's create an action that'll let us do this.
 
-\{{< sections >\}}
-
-\{{< section-left >\}}
-
 ```qml
 
 pageStack.initialPage: Kirigami.ScrollablePage {
