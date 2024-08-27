@@ -27,7 +27,11 @@ addonsexample
 
 Add a new line to our `resources.qrc`:
 
-{{< snippet repo="libraries/kirigami-addons" file="examples/FormCardTutorial/resources.qrc" lang="qrc" >}}
+{% hint style="danger" %}Ah ah ah
+
+This file is not available.
+
+{% endhint %}
 
 And change `main.qml` to include our new Settings page:
 
@@ -198,7 +202,7 @@ We use a [Kirigami.Icon](docs:kirigami2;Icon) here for simplicity, but this coul
 
 It should end up looking like this:
 
-{{< figure src="formtextdelegate.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formtextdelegate.webp)
 
 ### FormButtonDelegate
 
@@ -249,7 +253,7 @@ We use its `icon.name` property to set a plus (+) icon to appear after the space
 
 Since this example is for simple illustrative purposes, we don't delve deep into what would be done once the button is clicked: it just prints "Clicked!" to the terminal. We _could_ make a new page for account creation that adds another user to a model, then push the page into view, similarly to what we did in `main.qml`.
 
-{{< figure src="formbuttondelegate.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formbuttondelegate.webp)
 
 ### FormRadioDelegate, FormCheckDelegate and FormSwitchDelegate
 
@@ -308,7 +312,7 @@ See [this page](https://doc.qt.io/qt-6/qtquick-bestpractices.html#prefer-declara
 
 {% endhint %}
 
-{{< figure src="formradiodelegate.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formradiodelegate.webp)
 
 To test our checkbox, we can add a new [FormCheckDelegate](https://api.kde.org/frameworks/kirigami-addons/html/classFormCheckDelegate.html) to our General section.
 
@@ -339,7 +343,7 @@ Here we use the `onToggled` [signal handler](https://doc.qt.io/qt-6/qtqml-syntax
 
 So far our application should look like this:
 
-{{< figure src="formcheckboxdelegate.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcheckboxdelegate.webp)
 
 ### FormComboBoxDelegate
 
@@ -349,25 +353,25 @@ This combobox has several useful properties we can make use of: `editable`, `dis
 
 Setting `editable: true` allows the user to edit the text of the combobox, which is useful in case adding new combobox options is needed:
 
-{{< figure src="formcombobox-editable.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-editable.webp)
 
 Whenever you need to show additional text before each option, you can use something like `displayText: "Profile: " + currentText`:
 
-{{< figure src="formcombobox-displaytext.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-displaytext.webp)
 
 And the most interesting one, which we will be using in our example, is `displayMode`. It can have three options:
 
 * **FormComboBoxDelegate.ComboBox**: the standard small box showing a list of options.
 
-{{< figure src="formcombobox-comboboxmode.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-comboboxmode.webp)
 
 * **FormComboBoxDelegate.Dialog**: a dialog showing a list of options in the middle of the window, like a [Kirigami.OverlaySheet](docs:kirigami2;OverlaySheet).
 
-{{< figure src="formcombobox-dialogmode.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-dialogmode.webp)
 
 * **FormComboBoxDelegate.Page**: a new page containing a list of options shown in a separate window.
 
-{{< figure src="formcombobox-pagemode.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-pagemode.webp)
 
 Add the following between the "Current Color Scheme" and "Show Tray Icon" delegates in your "General" form card.
 
@@ -384,18 +388,22 @@ FormCard.FormComboBoxDelegate {
 
 With the checkbox, our Settings page should look like this:
 
-{{< figure src="formcombobox-result.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formcombobox-result.webp)
 
 ### FormDelegateSeparator
 
 Our Settings page is taking shape, but each section is starting to get long. We can add a few FormDelegateSeparators to make our page tidier:
 
-{{< snippet repo="libraries/kirigami-addons" file="examples/FormCardTutorial/contents/ui/SettingsPage.qml" lang="qml" >}}
+{% hint style="danger" %}Ah ah ah
+
+This file is not available.
+
+{% endhint %}
 
 Generally, you may use separators whenever you see major distinctions between components, although the choice of where to place them is ultimately yours. For example, in the General section, the checkbox differs from its previous components as it doesn't start with text; in the Autosave section, the separator groups the radio buttons together; and in the Accounts section, adding a separator between the last account and the button provides some additional focus to the button.
 
 The `above` and `below` properties are rather self-explanatory when it comes to their use: you pass the `id` of the components above and below the separator. When they are set, the separator will swiftly disappear whenever the above or below item is highlighted/hovered. They are most useful, for instance, when you need to generate components dynamically and you can't automatically assume which item will come immediately before or after the separator. That would be the case in the Accounts section of our application once the logic to add new accounts were actually implemented, in which case we could always grab the last item in the model to do so.
 
-{{< figure src="formdelegateseparator.webp" >}}
+![](../../../content/docs/getting-started/kirigami/addons-delegates/formdelegateseparator.webp)
 
 Notice how the separator above the tray icon setting does not appear while it is hovered.
