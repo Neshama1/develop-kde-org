@@ -14,7 +14,7 @@ This tutorial introduces the concept of actions. Actions are a unified way of su
 
 For example, if we wanted to let the user of our [main window tutorial](main\_window.md) clear the text box by clicking a button in the toolbar, from an option in the File menu or through a keyboard shortcut, it could all be done with one [QAction](docs:qtwidgets;QAction).
 
-![](../../../content/docs/getting-started/kxmlgui/using\_actions.webp)
+![](../../../content/docs/getting-started/kxmlgui/using_actions/using\_actions.webp)
 
 ### QActions
 
@@ -41,13 +41,63 @@ Don't worry about the .rc file just yet. We will see what it's about by the end 
 
 #### mainwindow.h
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/mainwindow.h" highlight="cpp" emphasize="15" >\}}
+```c++
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <KXmlGuiWindow>
+
+class KTextEdit;
+
+class MainWindow : public KXmlGuiWindow
+{
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+
+private:
+    KTextEdit *textArea;
+    void setupActions();
+};
+
+#endif // MAINWINDOW_H
+```
 
 Only a function `void setupActions()` has been added which will do all the work setting up the [QActions](docs:qtwidgets;QAction).
 
 #### mainwindow.cpp
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/mainwindow.cpp" highlight="cpp" emphasize="1-2 4-6 13 16-30" >\}}
+```c++
+#include <QApplication>
+#include <QAction>
+#include <KTextEdit>
+#include <KLocalizedString>
+#include <KActionCollection>
+#include <KStandardAction>
+#include "mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
+{
+    textArea = new KTextEdit();
+    setCentralWidget(textArea);
+    setupActions();
+}
+
+void MainWindow::setupActions()
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QAction *clearAction = new QAction(this);
+    clearAction->setText(i18n("&Clear"));
+    clearAction->setIcon(QIcon::fromTheme(u"document-new-symbolic"_s));
+    actionCollection()->addAction(u"clear"_s, clearAction);
+    actionCollection()->setDefaultShortcut(clearAction, Qt::CTRL | Qt::Key_L);
+    connect(clearAction, &QAction::triggered, textArea, &KTextEdit::clear);
+
+    KStandardAction::quit(qApp, &QCoreApplication::quit, actionCollection());
+
+    setupGUI(Default, u"texteditorui.rc"_s);
+}
+```
 
 ### Explanation
 
@@ -77,7 +127,7 @@ Note that the text is passed through the `i18n()` function; this is necessary fo
 
 The ampersand (&) in the action text denotes which letter will be used as an accelerator for said action. If the user opens a menu and presses the 'Alt' key, this will highlight the first letter of 'Clear' with an underscore, denoting the key they can press to perform said action. In this case, the user would press 'Alt+C' to clear the textbox when the `File` menu is open.
 
-![](../../../content/docs/getting-started/kxmlgui/using\_actions\_highlighting.webp)
+![](../../../content/docs/getting-started/kxmlgui/using_actions/using\_actions\_highlighting.webp)
 
 The ampersand is also useful for internationalisation: in non-Latin languages such as Japanese (where 'copy' is コピー), using the first letter of that language to accelerate the action could be cumbersome. The ampersand lets translators know whether they should include the Latin character in parentheses, allowing non-English users to use the same accelerator key even if the translated string is completely different.
 
@@ -161,7 +211,30 @@ Since the description of the UI is defined with XML, the layout must follow stri
 
 **texteditorui.rc**
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/texteditorui.rc" highlight="xml" >\}}
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<gui name="texteditor"
+     version="1"
+     xmlns="https://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="https://www.kde.org/standards/kxmlgui/1.0
+                         https://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd">
+  <MenuBar>
+    <Menu name="file" >
+      <Action name="clear" />
+    </Menu>
+    <Menu >
+      <text>A&amp;nother Menu</text>
+      <Action name="clear" />
+    </Menu>
+  </MenuBar>
+
+  <ToolBar name="mainToolBar" >
+    <text>Main Toolbar</text>
+    <Action name="clear" />
+  </ToolBar>
+</gui>
+```
 
 The `<Toolbar>` tag allows you to describe the toolbar, which is the bar across the top of the window normally with icons. Here it is given the unique name `mainToolBar` and its user visible name set to "Main Toolbar" using the `<text>` tag. The `clear` action is added to the toolbar using the `<Action>` tag, the name parameter in this tag being the string that was passed to the action collection with [KActionCollection::addAction()](docs:kxmlgui;KActionCollection::addAction) in `mainwindow.cpp`.
 
@@ -181,7 +254,57 @@ Finally, the `texteditorui.rc` needs to go somewhere where the system can find i
 
 #### CMakeLists.txt
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/using\_actions/CMakeLists.txt" highlight="cmake" emphasize="3 26 29 31 37 43 46-47" >\}}
+```cmake
+cmake_minimum_required(VERSION 3.20)
+
+project(texteditor)
+
+set(QT_MIN_VERSION "6.6.0")
+set(KF_MIN_VERSION "6.0.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(FeatureSummary)
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Core    # QCommandLineParser, QStringLiteral
+    Widgets # QApplication, QAction
+)
+
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+    CoreAddons      # KAboutData
+    I18n            # KLocalizedString
+    XmlGui          # KXmlGuiWindow, KActionCollection
+    TextWidgets     # KTextEdit
+    ConfigWidgets   # KStandardActions
+)
+
+add_executable(texteditor)
+
+target_sources(texteditor
+    PRIVATE
+    main.cpp
+    mainwindow.cpp
+)
+
+target_link_libraries(texteditor
+    Qt6::Widgets
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::XmlGui
+    KF6::TextWidgets
+    KF6::ConfigWidgets
+)
+
+install(TARGETS texteditor ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES texteditorui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/texteditor)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 This file is almost identical to the one for the \[previous tutorial]\(\{{< relref "main\_window/#cmakeliststxt" >\}}), but with two extra lines at the end that describe where the files are to be installed. Firstly, the `texteditor` target is installed to the right place for binaries using `${KDE_INSTALL_TARGETS_DEFAULT_ARGS}`, then the `texteditorui.rc` file that describes the layout of the user interface is installed to the application's data directory, `${KDE_INSTALL_KXMLGUIDIR}`.
 
