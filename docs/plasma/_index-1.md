@@ -168,6 +168,8 @@ The code looks pretty straightforward except maybe the model of the `GridView`. 
 
 The result can be seen here:
 
+{% embed url="https://develop.kde.org/docs/plasma/kwineffect/effect.webm" %}
+
 ### Delegates are Per Screen
 
 One thing to keep in mind is that the delegates are instantiated per screen. For example,
