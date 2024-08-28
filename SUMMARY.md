@@ -78,7 +78,6 @@
       * [KDE Frameworks 6 porting guide](docs/features/configuration/porting\_kf6.md)
       * [Settings module (KCM) development](docs/features/configuration/kcm.md)
       * [KConfigDialog](docs/features/configuration/configdialog.md)
-      * [Updating KConfig files](docs/features/configuration/updating\_kconfig\_files.md)
     * [D-Bus](docs/features/d-bus/README.md)
       * [What is D-Bus practically useful for?](docs/features/d-bus/\_index.md)
       * [Introduction to D-Bus](docs/features/d-bus/introduction\_to\_dbus.md)
@@ -244,3 +243,4 @@
   * [Accessibility and inclusiveness](content/accessibility.md)
 * [Others](frameworks/README.md)
   * [Oxygen Icons](frameworks/oxygen-icons.md)
+  * [Updating KConfig files](frameworks/updating\_kconfig\_files.md)
