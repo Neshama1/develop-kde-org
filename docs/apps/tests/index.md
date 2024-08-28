@@ -91,13 +91,13 @@ I, [2023-10-17T20:37:55.217687 #32112]  INFO -- : run.rb exiting true
 To build Selenium manually, you will need to install its dependencies first:
 
 | [Kubuntu](https://packages.ubuntu.com/search?keywords=extra-cmake-modules), [KDE Neon](https://build.neon.kde.org/search/?q=extra-cmake-modules) | <pre><code>sudo apt install extra-cmake-modules libkf5windowsystem-dev libkf5wayland-dev libkpipewire-dev kwin-dev libwayland-dev
-</code></pre>   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Manjaro](https://software.manjaro.org/package/extra-cmake-modules), [Arch](https://archlinux.org/packages/?q=extra-cmake-modules)               | <pre><code>sudo pacman -S extra-cmake-modules kwindowsystem5 kwayland5 kpipewire kwin wayland
-</code></pre>                                       |
+</code></pre>  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Manjaro](https://software.manjaro.org/package/extra-cmake-modules)[Arch](https://archlinux.org/packages/?q=extra-cmake-modules)                 | <pre><code>sudo pacman -S extra-cmake-modules kwindowsystem5 kwayland5 kpipewire kwin wayland
+</code></pre>                                      |
 | [OpenSUSE](https://software.opensuse.org/package/extra-cmake-modules)                                                                            | <pre><code>sudo zypper install extra-cmake-modules kwindowsystem-devel kwayland-devel kpipewire-devel kwin5-devel wayland-devel
-</code></pre>     |
-| [Fedora](https://packages.fedoraproject.org/pkgs/extra-cmake-modules/extra-cmake-modules/)                                                       | <pre><code>sudo dnf install extra-cmake-modules kf5-kwindowsystem-devel kf5-kwayland-devel kpipewire-devel kwin-devel wayland-devel
+</code></pre>    |
+| [Fedora](https://packages.fedoraproject.org/pkgs/extra-cmake-modules/extra-cmake-modules/)                                                       | <pre><code>sudo dnf install extra-cmake-modules kf5-kwindowsystem-devel kf5-kwayland-devel kpipewire-devel kwin-devel wayland-deve
 </code></pre> |
 
 Then clone the repository and build it:
