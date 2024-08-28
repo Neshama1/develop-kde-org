@@ -13,12 +13,57 @@ Flatpaks are built locally using `flatpak-builder`. The tool checks out the sour
 
 Create a new flatpak manifest file `simplemdviewer/org.kde.simplemdviewer.json`:
 
-\{{< tabset-qt >\}} \{{< tab-qt tabName="PyQt6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/org.kde.simplemdviewer.json" highlight="json" >\}} \{{< /tab-qt >\}} \{{< tab-qt tabName="PySide6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyside-app/src/org.kde.simplemdviewer.json" highlight="json" >\}} \{{< /tab-qt >\}} \{{< /tabset-qt >\}}
+{% tabs %}
+{% tab title="PySide6" %}
+```json
+{
+    "id": "org.kde.simplemdviewer",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "6.7",
+    "sdk": "org.kde.Sdk",
+    "base": "io.qt.PySide.BaseApp",
+    "base-version": "6.7",
+    "command": "simplemdviewer",
+    "finish-args": [
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--device=dri",
+    "--socket=pulseaudio"
+    ],
+    "modules": [
+        "python3-markdown.json",
+        {
+            "name": "simplemdviewer",
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "python3 setup.py build",
+                "python3 setup.py install --prefix=/app --root=/"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "path": "dist/org.kde.simplemdviewer-0.1.tar.gz"
+                }
+            ]
+        }
+    ],
+    "cleanup-commands": [
+        "/app/cleanup-BaseApp.sh"
+    ]
+}
+```
+{% endtab %}
 
-{% hint style="info" %}Note
+{% tab title="PyQt6" %}
+
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+Note
 
 The Flatpak manifest for PySide uses the version 6.7 for the runtime and the base app, as opposed to PyQt which uses the version 6.6. The reason for this is that PySide Flatpak base app is only available from the version 6.7 and upwards.
-
 {% endhint %}
 
 This file reads that we use the `markdown` module and the build info is provided by the `python3-markdown.json` manifest file. We are going to create this manifest automatically using `flatpak-pip-generator`.
@@ -61,9 +106,11 @@ To attempt a first build of the flatpak, run:
 flatpak-builder --verbose --force-clean flatpak-build-dir org.kde.simplemdviewer.json
 ```
 
-{% hint style="success" %}Tip You can add the flag `--install-deps-from flathub` to flatpak-builder to make it download the Sdk, Platform and Baseapp for you instead of installing them manually.
+{% hint style="success" %}
+Tip You can add the flag \`--install-deps-from flathub\` to flatpak-builder to make it download the Sdk, Platform and Baseapp for you instead of installing them manually.
 
-If you installed Flathub as a user repository, you will need to add the `--user` flag to install the runtime. Otherwise you might see the error "Flatpak system operation Deploy not allowed for user". {% endhint %}
+If you installed Flathub as a user repository, you will need to add the `--user` flag to install the runtime. Otherwise you might see the error "Flatpak system operation Deploy not allowed for user".
+{% endhint %}
 
 Test the flatpak build:
 
