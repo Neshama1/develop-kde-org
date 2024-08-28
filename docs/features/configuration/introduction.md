@@ -28,15 +28,23 @@ Values stored may be of any number of data types. They are stored and retrieved 
 
 The [KConfig](docs:kconfig;KConfig) object is used to access a given configuration object. There are a number of ways to create a config object:
 
-\{{< highlight cpp >\}} // a plain old read/write config object KConfig config("myapprc");
+```cpp
+// a plain old read/write config object
+KConfig config("myapprc");
 
-// a specific file in the filesystem // currently must be an INI style file KConfig fullPath("/etc/kderc");
+// a specific file in the filesystem
+// currently must be an INI style file
+KConfig fullPath("/etc/kderc");
 
-// not merged with global values KConfig globalFree("localsrc", KConfig::NoGlobals);
+// not merged with global values
+KConfig globalFree("localsrc", KConfig::NoGlobals);
 
-// not merged with globals or the $KDEDIRS hierarchy KConfig simpleConfig("simplerc", KConfig::SimpleConfig);
+// not merged with globals or the $KDEDIRS hierarchy
+KConfig simpleConfig("simplerc", KConfig::SimpleConfig);
 
-// outside the standard config resource KConfig dataResource("data", KConfig::SimpleConfig, QStandardPaths::AppDataLocation); \{{< /highlight >\}}
+// outside the standard config resource
+KConfig dataResource("data", KConfig::SimpleConfig, QStandardPaths::AppDataLocation);
+```
 
 The KConfig object create on line 2 is a regular config object. We can read values from it, write new entries and ask for various properties of the object. This object will be loaded from the config resource as determined by [QStandardPaths](https://doc.qt.io/qt-5/qstandardpaths.html), meaning that every instance of the myapprc object in each of the directories in the config resource hierarchy will be merged to create the values seen in this object. This is how system wide and per-user/group profiles are generated and supported and it all happens transparently to the application itself.
 
