@@ -16,7 +16,7 @@ Now that we have a basic text editor interface, it's time to make it do somethin
 
 KDE Frameworks provides a number of classes for working with files that make life a lot easier for developers. [KIO](docs:kio) allows you to easily access files through network-transparent protocols. Qt also provides standard file dialogs for opening and saving files.
 
-![](../../../content/docs/getting-started/kxmlgui/saving\_and\_loading.webp)
+![](../../../content/docs/getting-started/kxmlgui/saving_and_loading/saving\_and\_loading.webp)
 
 ### The Code
 
@@ -24,11 +24,88 @@ KDE Frameworks provides a number of classes for working with files that make lif
 
 We don't need to change anything in here.
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/main.cpp" highlight="cpp" >\}}
+```c++
+#include <QApplication>
+#include <QCommandLineParser>
+#include <KAboutData>
+#include <KLocalizedString>
+#include "mainwindow.h"
+
+int main (int argc, char *argv[])
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("texteditor");
+    KAboutData aboutData(
+        u"texteditor"_s,
+        i18n("Text Editor"),
+        u"1.0"_s,
+        i18n("A simple editor capable of saving and loading"),
+        KAboutLicense::GPL,
+        i18n("(c) 2024"),
+        i18n("Educational application..."),
+        u"https://apps.kde.org/someappname/"_s,
+        u"submit@bugs.kde.org"_s);
+
+    aboutData.addAuthor(
+        i18n("John Doe"),
+        i18n("Tutorial learner"),
+        u"john.doe@example.com"_s,
+        u"https://john-doe.example.com"_s,
+        u"johndoe"_s);
+
+    KAboutData::setApplicationData(aboutData);
+
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
+    MainWindow *window = new MainWindow();
+    window->show();
+
+    return app.exec();
+}
+```
 
 #### mainwindow.h
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/mainwindow.h" highlight="cpp" emphasize="7 11 16-26 30" >\}}
+```c++
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <KXmlGuiWindow>
+
+class KTextEdit;
+class KJob;
+
+class MainWindow : public KXmlGuiWindow
+{
+    Q_OBJECT
+
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+
+private:
+    void setupActions();
+    void saveFileToDisk(const QString &outputFileName);
+
+private Q_SLOTS:
+    void newFile();
+    void openFile();
+    void saveFile();
+    void saveFileAs();
+
+    void downloadFinished(KJob *job);
+
+private:
+    KTextEdit *textArea;
+    QString fileName;
+};
+
+#endif // MAINWINDOW_H
+```
 
 To add the ability to load and save files, we must add the functions which will do the work. Since the functions will be called through [Qt's signal/slot](http://doc.qt.io/qt-6/signalsandslots.html) mechanism we must specify that these functions are slots using `Q_SLOTS`. Since we are using slots in this header file, we must also add the [Q\_OBJECT](docs:qtcore;QObject::Q\_OBJECT) macro, as only [Q\_OBJECTs](docs:qtcore;QObject::Q\_OBJECT) can have signals and slots.
 
@@ -36,7 +113,111 @@ We also want to keep track of the filename of the currently opened file, so we d
 
 #### mainwindow.cpp
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/mainwindow.cpp" highlight="cpp" emphasize="3-6 11-12 15 34-37 42-105" >\}}
+```c++
+#include <QApplication>
+#include <QAction>
+#include <QSaveFile>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QByteArray>
+#include <KTextEdit>
+#include <KLocalizedString>
+#include <KActionCollection>
+#include <KStandardAction>
+#include <KMessageBox>
+#include <KIO/StoredTransferJob>
+#include "mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent), fileName(QString())
+{
+    textArea = new KTextEdit();
+    setCentralWidget(textArea);
+    setupActions();
+}
+
+void MainWindow::setupActions()
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QAction *clearAction = new QAction(this);
+    clearAction->setText(i18n("&Clear"));
+    clearAction->setIcon(QIcon::fromTheme(u"document-new-symbolic"_s));
+    actionCollection()->addAction(u"clear"_s, clearAction);
+    actionCollection()->setDefaultShortcut(clearAction, Qt::CTRL | Qt::Key_L);
+    connect(clearAction, &QAction::triggered, textArea, &KTextEdit::clear);
+
+    KStandardAction::quit(qApp, &QCoreApplication::quit, actionCollection());
+    KStandardAction::open(this, &MainWindow::openFile, actionCollection());
+    KStandardAction::save(this, &MainWindow::saveFile, actionCollection());
+    KStandardAction::saveAs(this, &MainWindow::saveFileAs, actionCollection());
+    KStandardAction::openNew(this, &MainWindow::newFile, actionCollection());
+
+    setupGUI(Default, u"texteditorui.rc"_s);
+}
+
+void MainWindow::newFile()
+{
+    fileName.clear();
+    textArea->clear();
+}
+
+void MainWindow::saveFileToDisk(const QString &outputFileName)
+{
+    if (!outputFileName.isNull()) {
+        QSaveFile file(outputFileName);
+        file.open(QIODevice::WriteOnly);
+
+        QByteArray outputByteArray;
+        outputByteArray.append(textArea->toPlainText().toUtf8());
+
+        file.write(outputByteArray);
+        file.commit();
+
+        fileName = outputFileName;
+    }
+}
+
+void MainWindow::saveFileAs()
+{
+    saveFileToDisk(QFileDialog::getSaveFileName(this, i18n("Save File As")));
+}
+
+void MainWindow::saveFile()
+{
+    if (!fileName.isEmpty()) {
+        saveFileToDisk(fileName);
+    } else {
+        saveFileAs();
+    }
+}
+
+void MainWindow::openFile()
+{
+    const QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open File"));
+
+    if (!fileNameFromDialog.isEmpty()) {
+        KIO::Job *job = KIO::storedGet(fileNameFromDialog);
+        fileName = fileNameFromDialog.toLocalFile();
+        connect(job, &KJob::result, this, &MainWindow::downloadFinished);
+        job->exec();
+    }
+}
+
+void MainWindow::downloadFinished(KJob *job)
+{
+    if (job->error()) {
+        KMessageBox::error(this, job->errorString());
+        fileName.clear();
+        return;
+    }
+
+    const KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob *>(job);
+
+    if (storedJob) {
+        textArea->setPlainText(QTextStream(storedJob->data(), QIODevice::ReadOnly).readAll());
+    }
+}
+```
 
 We'll get into the details of mainwindow.cpp in a while.
 
@@ -191,7 +372,67 @@ if (storedJob) {
 
 #### CMakeLists.txt
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/saving\_and\_loading/CMakeLists.txt" highlight="cmake" emphasize="27-28 46-47" >\}}
+```cmake
+cmake_minimum_required(VERSION 3.20)
+
+project(texteditor)
+
+set(QT_MIN_VERSION "6.6.0")
+set(KF_MIN_VERSION "6.0.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(FeatureSummary)
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Core    # QCommandLineParser, QStringLiteral
+    Widgets # QApplication, QAction
+)
+
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+    CoreAddons      # KAboutData
+    I18n            # KLocalizedString
+    XmlGui          # KXmlGuiWindow, KActionCollection
+    TextWidgets     # KTextEdit
+    ConfigWidgets   # KStandardActions
+
+    WidgetsAddons   # KMessageBox
+
+    KIO             # KIO
+
+)
+
+add_executable(texteditor)
+
+target_sources(texteditor
+    PRIVATE
+    main.cpp
+    mainwindow.cpp
+)
+
+target_link_libraries(texteditor
+    Qt6::Widgets
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::XmlGui
+    KF6::TextWidgets
+    KF6::ConfigWidgets
+
+    KF6::WidgetsAddons
+
+    KF6::KIOCore
+
+)
+
+install(TARGETS texteditor ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES texteditorui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/texteditor)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 Since we are now using the [KIO](docs:kio) library, we must tell CMake to link against it. We do this by passing `KIO` to the [`find_package()`](https://cmake.org/cmake/help/latest/command/find\_package.html) function and `KF6::KIOCore` to the [`target_link_libraries()`](https://cmake.org/cmake/help/latest/command/target\_link\_libraries.html) function.
 
