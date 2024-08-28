@@ -4,39 +4,41 @@ weight: 6
 description: A reference list of SVG elements
 ---
 
-##  Current Theme Elements
+# Theme elements reference
 
-As mentioned in [Theme Location, Structure and Definition]({{< ref "theme-details#structure" >}}), each theme is stored in its own sub-folder following the name of the theme.
+### Current Theme Elements
+
+As mentioned in [Theme Location, Structure and Definition](theme-details.md), each theme is stored in its own sub-folder following the name of the theme.
 
 Each theme contains the following file structure. All SVG files should be in either `.svg` or `.svgz` format.
 
 If you are looking for a list of elements to start creating your Plasma Style fast, consider starting with the following recommended elements:
 
-* [dialogs/background]({{< ref "#dialogsbackgroundsvg" >}}): background for Plasma widgets on the panel
-* [widgets/arrows]({{< ref "#widgetsarrowssvg" >}}): arrows used in several places
-* [widgets/background]({{< ref "#widgetsbackgroundsvg" >}}): background for Plasma widgets on the desktop
-* [widgets/button]({{< ref "#widgetsbuttonsvg" >}}): buttons used in several places
-* [widgets/containment-controls]({{< ref "#widgetscontainment-controlssvg" >}}): elements used for Edit Mode
-* [widgets/panel-background]({{< ref "#widgetspanel-backgroundsvg" >}}): background for Plasma panels
-* [widgets/plasmoidheading]({{< ref "#widgetsplasmoidheadingsvg" >}}): heading and footer of Plasma widgets
-* [widgets/tasks]({{< ref "#widgetstaskssvg" >}}): task manager icons
-* [widgets/tooltip]({{< ref "#widgetstooltipsvg" >}}): thumbnail shown when hovering task manager icons
+* dialogs/background: background for Plasma widgets on the panel
+* widgets/arrows: arrows used in several places
+* widgets/background: background for Plasma widgets on the desktop
+* widgets/button: buttons used in several places
+* widgets/containment-controls: elements used for Edit Mode
+* widgets/panel-background: background for Plasma panels
+* widgets/plasmoidheading: heading and footer of Plasma widgets
+* widgets/tasks: task manager icons
+* widgets/tooltip: thumbnail shown when hovering task manager icons
 
-## dialogs/ folder
+### dialogs/ folder
 
 This folder contains elements used for dialogs.
 
-### dialogs/background.svg
+#### dialogs/background.svg
 
 This file contains the generic dialog background used by Plasma widgets managed on the panel, in addition to the Add Widget pane, and KRunner.
 
-See [Background SVG Format]({{< ref "background-svg.md" >}}) for information on the required elements in this file.
+See [Background SVG Format](background-svg.md) for information on the required elements in this file.
 
-## widgets/ folder
+### widgets/ folder
 
 This folder contains elements used for the generic background used for desktop widgets.
 
-### widgets/action-overlays.svg
+#### widgets/action-overlays.svg
 
 This file contains 9 overlays for icons used to indicate actions, with their respective states.
 
@@ -50,7 +52,7 @@ This file contains 9 overlays for icons used to indicate actions, with their res
     * `hover`
     * `pressed`
 
-### widgets/actionbutton.svg
+#### widgets/actionbutton.svg
 
 * **`[size]-[state]`**
   * **`[size]`** can be:
@@ -64,7 +66,7 @@ This file contains 9 overlays for icons used to indicate actions, with their res
     * `hover`
     * `focus`
 
-### widgets/analog_meter.svg
+#### widgets/analog\_meter.svg
 
 This file contains the icons used for an analog gauge widget (similar to a pressure gauge or fuel tank indicator).
 
@@ -79,7 +81,7 @@ Deprecated relic from KDE4, only used in plasma-sdk/themeexplorer.
 * `label0`: the rect for the first label
 * `label1`: the rect for the second label
 
-### widgets/arrows.svg
+#### widgets/arrows.svg
 
 Arrow icons that match the theme. Four elements should exist and have the following IDs in this SVG file:
 
@@ -88,15 +90,15 @@ Arrow icons that match the theme. Four elements should exist and have the follow
 * `down-arrow`
 * `left-arrow`
 
-### widgets/background.svg
+#### widgets/background.svg
 
 This file contains the generic widget background used for Plasma widgets managed on the desktop or used in Edit Mode.
 
 See the section on backgrounds above for information on the required elements in this file.
 
-See [Background SVG Format]({{< ref "background-svg.md" >}}) for information on the required elements in this file.
+See [Background SVG Format](background-svg.md) for information on the required elements in this file.
 
-### widgets/bar_meter_horizontal.svg
+#### widgets/bar\_meter\_horizontal.svg
 
 A horizontal meter that serves as a progressbar. Used, for instance, in the Battery and Brightness widget to indicate battery levels.
 
@@ -123,17 +125,17 @@ A horizontal meter that serves as a progressbar. Used, for instance, in the Batt
 * `hint-bar-stretch`: make the progressbar background element stretched rather than tiled
 * `hint-tile-center`
 
-### widgets/bar_meter_vertical.svg
+#### widgets/bar\_meter\_vertical.svg
 
-A vertical meter that serves as a vertical progressbar. It has the same format of [bar_meter_horizontal.svg]({{< ref "#widgetsbar_meter_horizontalsvg" >}}).
+A vertical meter that serves as a vertical progressbar. It has the same format of [bar\_meter\_horizontal.svg](theme-elements.md#widgets-bar\_meter\_horizontal.svg).
 
-### widgets/branding.svg
+#### widgets/branding.svg
 
 A little Plasma logo that can be customized by distributors as a branding element.
 
 Contains a single element with ID `brilliant`.
 
-### widgets/busywidget.svg
+#### widgets/busywidget.svg
 
 Used to indicate a busy state, it's a circular image that will be animated with a rotation. It is used for instance as the default animation in the Task Manager to indicate that an application is opening.
 
@@ -143,7 +145,7 @@ Used to indicate a busy state, it's a circular image that will be animated with 
 * `paused`: the paused state
 * `hint-rotation-angle`
 
-### widgets/button.svg
+#### widgets/button.svg
 
 This file contains graphical elements used for the standard button and toolbutton widgets.
 
@@ -184,7 +186,7 @@ Two optional hints are available for the background rendering:
 To better visualize how the element names are composed, here is a random selection of possible example IDs for buttons and toolbuttons:
 
 | TOOLBUTTON/MASK | STATE   | POSITION/HINT    | RESULT                              |
-|-----------------|---------|------------------|-------------------------------------|
+| --------------- | ------- | ---------------- | ----------------------------------- |
 |                 | normal  | topleft          | normal-topleft                      |
 | toolbutton      | hover   | bottom           | toolbutton-hover-bottom             |
 |                 | pressed | bottomright      | pressed-bottomright                 |
@@ -192,24 +194,24 @@ To better visualize how the element names are composed, here is a random selecti
 |                 | hover   | hint-top-margin  | hover-hint-top-margin               |
 | toolbutton      | pressed | hint-left-margin | toolbutton-pressed-hint-left-margin |
 
-Each button/toolbutton consists of a single frame of 9 main elements for the rectangular shape and 4 extra elements for size hints. See the [Background SVG Format]({{< ref "background-svg.md" >}}) for details on handling positions and hints.
+Each button/toolbutton consists of a single frame of 9 main elements for the rectangular shape and 4 extra elements for size hints. See the \[Background SVG Format]\(\{{< ref "background-svg.md" >\}}) for details on handling positions and hints.
 
-### widgets/calendar.svg
+#### widgets/calendar.svg
 
 Contains a single element with ID `event`.
 
-It is proportional to the [SVG page]({{< ref "theme-svg.md" >}}), and while it is no longer in use by Plasma, the marking can be found in the third party [Event Calendar widget](https://store.kde.org/p/998901/) to represent an event happening during a certain day.
+It is proportional to the [SVG page](theme-svg.md), and while it is no longer in use by Plasma, the marking can be found in the third party [Event Calendar widget](https://store.kde.org/p/998901/) to represent an event happening during a certain day.
 
-### widgets/checkmarks.svg
+#### widgets/checkmarks.svg
 
 This file contains only two elements:
 
-* `radiobutton`: the ticked state of a radiobutton. The actual radio button is stored in [widgets/radiobutton.svg]({{< ref "#widgetsradiobuttonsvg" >}}) instead
+* `radiobutton`: the ticked state of a radiobutton. The actual radio button is stored in \[widgets/radiobutton.svg]\(\{{< ref "#widgetsradiobuttonsvg" >\}}) instead
 * `checkbox`: the ticked state of a checkbox
 
 If no `checkmarks.svg` file is provided, the default style from Qt will be used instead.
 
-### widgets/clock.svg
+#### widgets/clock.svg
 
 This file contains the graphical elements needed to make an analog clock icon. It must have the following IDs:
 
@@ -222,7 +224,7 @@ This file contains the graphical elements needed to make an analog clock icon. I
 * `Glass`: a final overlay which allows for things such as the appearance of glass
 * `hint-square-clock`: if present the shape of the clock will be square rather than round
 * **`hint-[hand(shadow)]-rotation-center-offset`**: the point of a hand (shadow) where it is "pinned" to the clock center, defined by the center of the hint, relative to the element position (can be outside the element)
-  * **`[hand(shadow)]`**: the default is "(width/2, width/2)" from top-left of the hand (shadow) element  (since Plasma 5.16)
+  * **`[hand(shadow)]`**: the default is "(width/2, width/2)" from top-left of the hand (shadow) element (since Plasma 5.16)
   * **`[hand(shadow)]`** can be:
     * `hourhand`
     * `hourhandshadow`
@@ -233,15 +235,15 @@ This file contains the graphical elements needed to make an analog clock icon. I
 * `hint-hands-shadow-offset-to-west` or `hint-hands-shadows-offset-to-east`: horizontal offset of the hands shadows, default is 0 offset (since Plasma 5.16)
 * `hint-hands-shadow-offset-to-north` or `hint-hands-shadow-offset-to-south`: vertical offset of the hands shadows, default is 0 offset (since Plasma 5.16)
 
-{% hint style="info" %}Note
+{% hint style="info" %}
+Note
 
 In the SVG, the Hand elements as well as their optional Shadow counterparts must be oriented in a direction as the one indicating the time 6:30:30.
 
 The relative position of the Hand elements as well as their optional Shadow counterparts with respect to the center of ClockFace does not matter.
-
 {% endhint %}
 
-### widgets/configuration-icons.svg
+#### widgets/configuration-icons.svg
 
 This file contains a set of simple icons that are meant to be shortcuts for configuration actions. Must contain the following elements:
 
@@ -257,7 +259,7 @@ This file contains a set of simple icons that are meant to be shortcuts for conf
 * `maximize`: a maximize icon, not similar to the maximize window decoration
 * `unmaximize`: an unmaximize icon, not the same as minimize
 * `collapse`: set something in a minimized, collapsed status
-* `restore`: restore from *collapse* status
+* `restore`: restore from _collapse_ status
 * `status`: refers to a status of something, logging or system monitoring in general
 * `return-to-source`: make detached extender items return to their owner applet
 * `add` and `remove`: specular actions, adding and removing for instance an item from a list
@@ -266,7 +268,7 @@ This file contains a set of simple icons that are meant to be shortcuts for conf
 * `filter`: the icon for sorting/filtering actions
 * `menu`: the icon for the hamburger menu
 
-### widgets/containment-controls.svg
+#### widgets/containment-controls.svg
 
 This file handles the controls used to resize the panel in Edit Mode.
 
@@ -296,11 +298,11 @@ Which control will be used depends on the position of the panel, namely the top,
 * `horizontal-centerindicator`
 * `vertical-centerindicator`
 
-### widgets/dragger.svg
+#### widgets/dragger.svg
 
 This file contains an icon meant to be a generic drag handle (not currently used, but available).
 
-It uses the same elements as other backgrounds similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), except `left`, `topleft`, `bottomleft`, `right`, `topright`, `bottomright`.
+It uses the same elements as other backgrounds similarly to the [Background SVG Format](background-svg.md), except `left`, `topleft`, `bottomleft`, `right`, `topright`, `bottomright`.
 
 It also has the following elements:
 
@@ -309,11 +311,11 @@ It also has the following elements:
 * `background-vertical-topright`
 * `background-vertical-topleft`
 
-### widgets/frame.svg
+#### widgets/frame.svg
 
 This file contains a generic frame used mostly to visually group widgets together in widget containers.
 
-It must have three frames and uses the same elements as other backgrounds similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), but with the following `[3dlook]` prefixes:
+It must have three frames and uses the same elements as other backgrounds similarly to the [Background SVG Format](background-svg.md), but with the following `[3dlook]` prefixes:
 
 * **`[3dlook]-[position/hint]`**
   * **`[3dlook]`** can be:
@@ -336,11 +338,11 @@ It must have three frames and uses the same elements as other backgrounds simila
     * `hint-bottom-margin`
     * `hint-left-margin`
 
-### widgets/glowbar.svg
+#### widgets/glowbar.svg
 
 This file contains a single frame that represents a glow and it is used for instance in the panel autohide/unhide hint of the Plasma Desktop.
 
-It follows the [Background SVG Format]({{< ref "background-svg.md" >}}), without prefixes.
+It follows the [Background SVG Format](background-svg.md), without prefixes.
 
 In other words, it's simply:
 
@@ -361,14 +363,14 @@ In other words, it's simply:
     * `hint-bottom-margin`
     * `hint-left-margin`
 
-### widgets/identiconshapes.svg
+#### widgets/identiconshapes.svg
 
 Probably a relic from KDE 4.
 
 * **`shape[number]`**
   * **`[number]`** can be from 1 to 32.
 
-### widgets/identicontheme.svg
+#### widgets/identicontheme.svg
 
 Probably a relic from KDE 4.
 
@@ -385,18 +387,18 @@ Probably a relic from KDE 4.
 * `active-overlay`
 * `selected-overlay`
 
-### widgets/line.svg
+#### widgets/line.svg
 
 This file contains a simple line used to separate items in layouts, it contains only two elements IDs:
 
 * `vertical-line`
 * `horizontal-line`
 
-### widgets/lineedit.svg
+#### widgets/lineedit.svg
 
 This file contains a frame SVG used to style line edits, spinboxes and other similar fields.
 
-It must have three frames and uses the same elements as other backgrounds, similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), but with the following `[state]` prefixes:
+It must have three frames and uses the same elements as other backgrounds, similarly to the [Background SVG Format](background-svg.md), but with the following `[state]` prefixes:
 
 * **`[state]-[position/hint]`**
   * **`[state]`** can be:
@@ -419,11 +421,11 @@ It must have three frames and uses the same elements as other backgrounds, simil
     * `hint-bottom-margin`
     * `hint-left-margin`
 
-### widgets/listitem.svg
+#### widgets/listitem.svg
 
 This file contains an icon used for opened/clicked notifications.
 
-It must have 3 frames and uses the same elements as other backgrounds, similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), but with the following `[type]` prefixes:
+It must have 3 frames and uses the same elements as other backgrounds, similarly to the [Background SVG Format](background-svg.md), but with the following `[type]` prefixes:
 
 * **`[type]-[position/hint]`**
   * **`[type]`** can be:
@@ -450,7 +452,7 @@ It must have 3 frames and uses the same elements as other backgrounds, similarly
 * `hint-tile-center`
 * `separator`
 
-### widgets/margins-highlight.svg
+#### widgets/margins-highlight.svg
 
 This file includes four diagonal margin elements with a triangle shape and a central `fill` element.
 
@@ -460,11 +462,11 @@ This file includes four diagonal margin elements with a triangle shape and a cen
 * `bottomleft`
 * `fill`
 
-### widgets/media-delegate.svg
+#### widgets/media-delegate.svg
 
 Intended to be used as delegate for media types.
 
-It uses the same elements as other backgrounds, similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), but with the `[picture]` and `[selected]` prefixes:
+It uses the same elements as other backgrounds, similarly to the [Background SVG Format](background-svg.md), but with the `[picture]` and `[selected]` prefixes:
 
 * **`picture-[selected]-[position/hint]`**
   * **`[selected]`** can be:
@@ -486,9 +488,9 @@ It uses the same elements as other backgrounds, similarly to the [Background SVG
     * `hint-bottom-margin`
     * `hint-left-margin`
 
-### widgets/menubaritem.svg
+#### widgets/menubaritem.svg
 
-This file contains three frames of 9 elements, similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), with each frame representing a menu state:
+This file contains three frames of 9 elements, similarly to the [Background SVG Format](background-svg.md), with each frame representing a menu state:
 
 * **`[state]-[position]`**
   * **`[state]`** can be:
@@ -512,11 +514,11 @@ This file contains three frames of 9 elements, similarly to the [Background SVG 
     * `bottom`
     * `left`
 
-### widgets/monitor.svg
+#### widgets/monitor.svg
 
 This file contains several elements used to represent a screen used in places such as the wallpaper configuration dialog.
 
-It contains a frame with 9 elements, similarly to the [Background SVG Format]({{< ref "background-svg.md" >}}), and a few extra elements:
+It contains a frame with 9 elements, similarly to the [Background SVG Format](background-svg.md), and a few extra elements:
 
 * **`[position]`**
   * **`[position]`** can be:
@@ -533,7 +535,7 @@ It contains a frame with 9 elements, similarly to the [Background SVG Format]({{
 * `base` : a stand for the monitor
 * `hint-stretch-borders`
 
-### widgets/notes.svg
+#### widgets/notes.svg
 
 This file contains the elements used to design note stickers, with 10 different color variants:
 
@@ -550,7 +552,7 @@ This file contains the elements used to design note stickers, with 10 different 
     * `translucent`
     * `translucent-light`
 
-### widgets/pager.svg
+#### widgets/pager.svg
 
 This file contains the graphical elements used for the little rectangle screens of the Virtual Desktop Pager widgets.
 
@@ -580,11 +582,11 @@ And the following optional IDs:
 * `center`
 * `hint-stretch-borders`
 
-### widgets/panel-background.svg
+#### widgets/panel-background.svg
 
 This file contains the background image used for panels.
 
-It follows the [Background SVG Format]({{< ref "background-svg.md" >}}) and must have at least one frame and at most three frames. In other words, the available base frames are:
+It follows the [Background SVG Format](background-svg.md) and must have at least one frame and at most three frames. In other words, the available base frames are:
 
 * **`[position/hint]`**
   * **`[position]`** can be:
@@ -620,19 +622,17 @@ In other words, the available optional frames are:
 * **`[cardinaldirection]-shadow-[position/hint]`**
 * **`[cardinaldirection]-mask-[position/hint]`**
 
-<!--*** When the panel is not 100% wide/tall the north, south etc. prefixes becomes *north-mini*, *south-mini* etc. . Please note that if KRunner Positioning is set to "Top edge of screen" (which is default), then Plasma treats it as not 100% wide north panel. -->
-
 All prefixes fallback to a no prefix version when not available.
 
 If an element ID with prefix `shadow` is available, it will be used as a drop shadow for the panel when compositing is available.
 
 If an element called `floating-center` is present, elements named `floating-hint-[direction]-margin` (where `direction` is one of `top`, `bottom`, `left` or `right`) set to a specific width and height can be used to specify the margins that panels should have in floating mode.
 
-See [Background SVG Format]({{< ref "background-svg.md" >}}) for information on the required elements in this file.
+See [Background SVG Format](background-svg.md) for information on the required elements in this file.
 
-### widgets/picker.svg
+#### widgets/picker.svg
 
-This file contains two frames following the [Background SVG Format]({{< ref "background-svg.md" >}}), in addition to a few hints:
+This file contains two frames following the \[Background SVG Format]\(\{{< ref "background-svg.md" >\}}), in addition to a few hints:
 
 * **`[mask]-[position]`**
   * **`[mask]`** can be:
@@ -657,7 +657,7 @@ This file contains two frames following the [Background SVG Format]({{< ref "bac
 * `hint-compose-over-border`
 * `hint-stretch-borders`
 
-### widgets/plasmoidheading.svg
+#### widgets/plasmoidheading.svg
 
 This file contains the header and footer of a widget/notification popup.
 
@@ -681,13 +681,13 @@ It has 2 frames with the following prefixes:
 * `hint-left-margin`
 * `hint-stretch-borders`
 
-### widgets/plot-background.svg
+#### widgets/plot-background.svg
 
 This file contains the background for plotting (graph) widgets, such as the plots in KSysGuard.
 
 This seems to be deprecated.
 
-### widgets/radiobutton.svg
+#### widgets/radiobutton.svg
 
 This file contains four elements used to represent the different states of a radio button, two elements for additional decoration, and one hint to specify its size.
 
@@ -699,7 +699,7 @@ This file contains four elements used to represent the different states of a rad
 * `symbol`: the symbol to be used as a checked sign
 * `hint-size`: the size of the whole radio button
 
-### widgets/scrollbar.svg
+#### widgets/scrollbar.svg
 
 This file contains the classical `elevator` scrollbar. It must have the following prefixes:
 
@@ -728,7 +728,7 @@ This file contains the classical `elevator` scrollbar. It must have the followin
     * `topleft`
     * `center`
 
-### widgets/scrollwidget.svg
+#### widgets/scrollwidget.svg
 
 Used by Plasma::ScrollWidget, it must contain a single frame:
 
@@ -744,7 +744,7 @@ Used by Plasma::ScrollWidget, it must contain a single frame:
     * `topleft`
     * `center`
 
-### widgets/slider.svg
+#### widgets/slider.svg
 
 Used to theme sliders, it must have the following elements:
 
@@ -770,7 +770,7 @@ Used to theme sliders, it must have the following elements:
 * `horizontal-slider-hover`: background for the handle when it is under the mouse
 * `hint-stretch-borders`
 
-### widgets/tabbar.svg
+#### widgets/tabbar.svg
 
 This file contains graphical elements for tabbars.
 
@@ -801,9 +801,9 @@ It must have 4 frames, each one for tabs in the possible orientations a tabbar c
     * `hint-left-margin`
 * `hint-tile-center`
 
-### widgets/tasks.svg
+#### widgets/tasks.svg
 
-This file contains elements used for task item backgrounds in the panel Task Manager and follows the [Background SVG Format]({{< ref "background-svg.md" >}}), with a few extras.
+This file contains elements used for task item backgrounds in the panel Task Manager and follows the [Background SVG Format](background-svg.md), with a few extras.
 
 Each task `[state]` must be represented by a single frame of 9 `[position]` elements. The size `[hint]` can only be applied to the normal state.
 
@@ -846,7 +846,7 @@ Optionally, for each of the base frames, if you want to create a different backg
     * `left`
 * `hint-stretch-borders`
 
-### widgets/timer.svg
+#### widgets/timer.svg
 
 This file contains the numbers and separators used for the Timer widget.
 
@@ -857,10 +857,10 @@ This file contains the numbers and separators used for the Timer widget.
 * `separator_1`: the default separator (`:`), in countdown state
 * `separatorB`: the dot separator (`.`)
 * `separatorB_1`: the dot separator (`.`), in countdown state
-* `separatorC`: the blank separator (` `)
-* `separatorC_1`: the blank separator (` `), in countdown state
+* `separatorC`: the blank separator ( )
+* `separatorC_1`: the blank separator ( ), in countdown state
 
-### widgets/toolbar.svg
+#### widgets/toolbar.svg
 
 Used in the ToolBar QML component, it can be used in custom applications in a similar way and must use a single frame without prefix.
 
@@ -877,7 +877,7 @@ Used in the ToolBar QML component, it can be used in custom applications in a si
     * `center`
 * `hint-stretch-borders`
 
-### widgets/toolbox.svg
+#### widgets/toolbox.svg
 
 Probably a relic from KDE 4.
 
@@ -917,22 +917,21 @@ Probably a relic from KDE 4.
 * `hint-stretch-borders`
 * `hint-compose-over-border`
 
-### widgets/tooltip.svg
+#### widgets/tooltip.svg
 
 Background for tooltips used for instance in the panel taskbar.
 
-See [Background SVG Format]({{< ref "background-svg.md" >}}) for information on the required elements in this file.
+See [Background SVG Format](background-svg.md), for information on the required elements in this file.
 
-### widgets/translucentbackground.svg
+#### widgets/translucentbackground.svg
 
 A standard background image for plasmoids that for their nature are bigger and with not much text. In this case a translucent background looks better.
 
 If this file is not present, plasmoids that use this will use `background.svg` instead.
 
-See [Background SVG Format]({{< ref "background-svg.md" >}}) for information on the required elements in this file.
+See [Background SVG Format](background-svg.md) for information on the required elements in this file.
 
-
-### widgets/viewitem.svg
+#### widgets/viewitem.svg
 
 Controls the background look of selections (results in KRunner, networks in network applet), it can have 4 frame of 9 parts each:
 
@@ -954,29 +953,29 @@ Controls the background look of selections (results in KRunner, networks in netw
     * `center`
 * `hint-tile-center`
 
-## opaque/solid/translucent folders
+### opaque/solid/translucent folders
 
 The folders `opaque/`, `solid/` and `translucent/` contain special versions of some of the theme elements that will be activated under certain conditions and preferred over the corresponding files listed above if present. Only elements that will be rendered as top level window backgrounds should be present in these folders, so the dialogs folder, plus the panel and tooltip backgrounds; the file hierarchy is the same as in the level above.
 
-## opaque/ folder
+### opaque/ folder
 
 Elements in this folder are used when compositing is disabled, which can only be done in the X11 session.
 
 Since top-level windows will be shaped according to the transparency of the SVG and window shapes don't support alpha-blending, if the SVG has rounded borders, those borders should have a shape that doesn't require anti-aliasing, like the following example.
 
-{{< figure src="No_composite_plasma_svg.jpg" caption="This is how a border of the Plasma \"opaque\" background SVGs should appear when it has a rounded border (since the window shape won't have antialiasing the outer contour must not have rounded lines)." >}}
+\{{< figure src="No\_composite\_plasma\_svg.jpg" caption="This is how a border of the Plasma "opaque" background SVGs should appear when it has a rounded border (since the window shape won't have antialiasing the outer contour must not have rounded lines)." >\}}
 
-## solid/ folder
+### solid/ folder
 
 Elements in this folder will be used when compositing is available, but elements should not be rendered transparent.
 
 For example, if a panel is configured to use adaptive opacity and a maximized window is present, then an opaque version of the panel is used rather than a transparent version.
 
-## translucent/ folder
+### translucent/ folder
 
-Elements in this folder will be used when the KWin *Background Contrast* effect is enabled. When it is possible to blur the background of the window, the graphics can be more transparent, keeping the window text readable.
+Elements in this folder will be used when the KWin _Background Contrast_ effect is enabled. When it is possible to blur the background of the window, the graphics can be more transparent, keeping the window text readable.
 
-## icons/ folder
+### icons/ folder
 
 In the folder `icons/`, there are SVG files that contain scalable icons for use with application status items (for example, icons in the system tray).
 
@@ -996,7 +995,6 @@ Some of the most common icons:
 * `system.svg`
 * [More...](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/src/desktoptheme/breeze/icons)
 
-{% hint style="warning" %}Deprecated in Plasma 6
-The use of special icons provided by the Plasma theme to be used in the system tray has been [deprecated](https://invent.kde.org/plasma/plasma-desktop/-/issues/82) and tray icons now come from the icon theme. See [the reasoning for the change](https://pointieststick.com/2023/08/12/how-all-this-icon-stuff-is-going-to-work-in-plasma-6/) for details.
-
+{% hint style="warning" %}
+Deprecated in Plasma 6 The use of special icons provided by the Plasma theme to be used in the system tray has been [deprecated](https://invent.kde.org/plasma/plasma-desktop/-/issues/82) and tray icons now come from the icon theme. See [the reasoning for the change](https://pointieststick.com/2023/08/12/how-all-this-icon-stuff-is-going-to-work-in-plasma-6/) for details.
 {% endhint %}
