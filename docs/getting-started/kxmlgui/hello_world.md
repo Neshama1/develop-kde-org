@@ -87,7 +87,8 @@ int main (int argc, char *argv[])
     }
 }
 ```
-![](../../../content/docs/getting-started/kxmlgui/hello_world/hello\_world.webp)
+
+![](../../../content/docs/getting-started/kxmlgui/hello\_world/hello\_world.webp)
 
 Our popup box is a [KMessageBox](docs:kwidgetsaddons;KMessageBox), which has primarily two buttons: a [PrimaryAction](docs:kwidgetsaddons;KMessageBox::PrimaryAction), which usually serves as a confirmation button, and a [SecondaryAction](docs:kwidgetsaddons;KMessageBox::SecondaryAction), which usually portrays a different action, like a cancel or discard button. The popup box uses the KMessageBox class, the primary action uses a custom [KGuiItem](docs:kwidgetsaddons;KGuiItem) with the text "Hello", and the secondary action uses [KStandardGuiItem::cancel()](docs:kwidgetsaddons;KStandardGuiItem::cancel).
 
@@ -176,7 +177,7 @@ int main (int argc, char *argv[])
 }
 ```
 
-![](../../../content/docs/getting-started/kxmlgui/hello_world/hello\_world\_complete.webp)
+![](../../../content/docs/getting-started/kxmlgui/hello\_world/hello\_world\_complete.webp)
 
 For your application to be localized, we must first prepare our code so that it can be adapted to various languages and regions without engineering changes: this process is called [internationalization](https://doc.qt.io/qt-6/internationalization.html). KDE uses [Ki18n](docs:ki18n) for that, which provides [KLocalizedString](docs:ki18n;KLocalizedString).
 
@@ -273,7 +274,51 @@ In order to run our project, we need a build system in place to compile and link
 
 Create a file named `CMakeLists.txt` in the same directory as `main.cpp` with this content:
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/hello\_world/CMakeLists.txt" highlight="cmake" >\}}
+```cmake
+cmake_minimum_required(VERSION 3.20)
+
+project(helloworld)
+
+set(QT_MIN_VERSION "6.6.0")
+set(KF_MIN_VERSION "6.0.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(FeatureSummary)
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Core    # QCommandLineParser, QStringLiteral
+    Widgets # QApplication
+)
+
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+    CoreAddons      # KAboutData
+    I18n            # KLocalizedString
+    WidgetsAddons   # KMessageBox
+)
+
+add_executable(helloworld)
+
+target_sources(helloworld
+    PRIVATE
+    main.cpp
+)
+
+target_link_libraries(helloworld
+    Qt6::Widgets
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::WidgetsAddons
+)
+
+install(TARGETS helloworld ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 The [`find_package()`](https://cmake.org/cmake/help/latest/command/find\_package.html) function locates the package that you ask it for (in this case ECM, Qt6, or KF6) and sets some variables describing the location of the package's headers and libraries. [ECM](https://api.kde.org/ecm/), or Extra CMake Modules, is required to import special CMake files and functions for building KDE applications.
 
