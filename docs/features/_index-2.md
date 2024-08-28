@@ -45,13 +45,29 @@ For every other data that your application needs to restore a session, you have 
 
 Furthermore, the function [queryClose()](docs:kxmlgui;KMainWindow::queryClose) could be interesting for you. This function is called always before the window is closed, either by the user or indirectly by the session manager. (Note that this is not the case for a call of [QApplication::quit()](https://doc.qt.io/qt-5/qcoreapplication.html#quit) because this function will exit the event loop without causing a close event for the main windows. It will even not destroy them.) Typically, here you can warn the user that the application or some windows have unsaved data on close or logout (example: show a dialog with the buttons "Save changes" and "Discard changes"). However, for session management it isn't nice to need a user interaction before closing, so you better avoid this. Note that it is not determined if `saveProperties()` is called before or after `queryClose()`!
 
-{% hint style="info" %}Note To save your application-wide properties (data that is only needed once per application, and not for each main window instance) reimplement [saveGlobalProperties()](docs:kxmlgui;KMainWindow::saveGlobalProperties) and its counterpart [readGlobalProperties()](docs:kxmlgui;KMainWindow::saveGlobalProperties). Normally, you don't need these functions. {% endhint %}
+{% hint style="info" %}
+Note To save your application-wide properties (data that is only needed once per application, and not for each main window instance) reimplement \[saveGlobalProperties()]\(docs:kxmlgui;KMainWindow::saveGlobalProperties) and its counterpart \[readGlobalProperties()]\(docs:kxmlgui;KMainWindow::saveGlobalProperties). Normally, you don't need these functions.
+{% endhint %}
 
 ### Add session management support to your main() function
 
 While [KMainWindow::saveProperties()](docs:kxmlgui;KMainWindow::saveProperties) (and [KMainWindow::queryClose()](docs:kxmlgui;KMainWindow::queryClose) will be called automatically, [KMainWindow::readProperties()](docs:kxmlgui;KMainWindow::readProperties) will not. You have to add some code to your main() function to add session restoring.
 
-\{{< highlight cpp "linenos=table" >\}} QApplication app; if (app.isSessionRestored()) { kRestoreMainWindows(); } else { // create default application as usual // example: MyWindow \* window = new MyWindow(); // The function will replace '#' with numbers that are // unique within the application: window->setObjectName("MyWindow#"); window->show(); } return app.exec(); \{{< /highlight >\}}
+```cpp
+QApplication app;
+if (app.isSessionRestored()) {
+  kRestoreMainWindows<MyWindow>();
+} else {
+  // create default application as usual
+  // example:
+  MyWindow * window = new MyWindow();
+  // The function will replace '#' with numbers that are
+  // unique within the application:
+  window->setObjectName("MyWindow#");
+  window->show();
+}
+return app.exec();
+```
 
 [kRestoreMainWindows<>()](docs:kxmlgui;KXMLGUI\_Session::kRestoreMainWindows) will create (on the heap) as many instances of your main windows as have existed in the last session and call [KMainWindow::restore()](docs:kxmlgui;KMainWindow::restore) with the correct arguments. Note that also `QWidget::show()` is called implicitly.
 
@@ -61,7 +77,27 @@ With this you can easily restore all top-level windows of your application.
 
 It is also possible to restore different types of top-level windows (each derived from KMainWindow, of course) within one application. Imagine you have three classes of main windows: childMW1, childMW2 and childMW3:
 
-\{{< highlight cpp "linenos=table" >\}} KApplication app; if ( app.isSessionRestored() ) { kRestoreMainWindows< childMW1, childMW2, childMW3 >(); } else { // create default application as usual // example: childMW1\* window1 = new childMW1(); childMW2\* window2 = new childMW2(); childMW3\* window3 = new childMW3(); // The function will replace '#' with numbers that are // unique within the application: window1->setObjectName("type1mainWindow#"); window2->setObjectName("type2mainWindow#"); window3->setObjectName("type3mainWindow#"); window1->show(); window2->show(); window3->show(); } return app.exec(); \{{< /highlight >\}}
+```cpp
+KApplication app;
+if ( app.isSessionRestored() ) {
+  kRestoreMainWindows< childMW1, childMW2, childMW3 >();
+} else {
+  // create default application as usual
+  // example:
+  childMW1* window1 = new childMW1();
+  childMW2* window2 = new childMW2();
+  childMW3* window3 = new childMW3();
+  // The function will replace '#' with numbers that are
+  // unique within the application:
+  window1->setObjectName("type1mainWindow#");
+  window2->setObjectName("type2mainWindow#");
+  window3->setObjectName("type3mainWindow#");
+  window1->show();
+  window2->show();
+  window3->show();
+}
+return app.exec();
+```
 
 #### Appendix: Architecture of the KDE session manager
 
