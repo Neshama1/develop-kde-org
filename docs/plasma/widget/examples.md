@@ -3,26 +3,23 @@ title: Examples
 weight: 8
 aliases:
   - /docs/plasma/widget/examples/
-description: Resizable popup, clock, bundle icon and other simple examples
+description: >-
+  Resizable popup, clock, bundle icon and other simple examples. There are also
+  several examples in the plasma-framework repo:
 ---
 
 # Examples
 
-There are also several examples in the `plasma-framework` repo:\
-[https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets](https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets)
+{% embed url="https://invent.kde.org/plasma/libplasma/-/tree/master/examples/applets" %}
 
 ### Configurable icon
-
-\{{< sections >\}} \{{< section-left >\}}
 
 To get your panel icon to be configurable like the [Application Launcher widget](https://invent.kde.org/plasma/plasma-desktop/-/tree/master/applets/kickoff/package/contents/ui) we need to:
 
 * Create a new string config key (`plasmoid.configuration.icon`)
-* Set \[`Plasmoid.icon`]\(\{{< ref "properties.md#plasmoidicon" >\}}) to `plasmoid.configuration.icon`
+* Set `Plasmoid.icon` to `plasmoid.configuration.icon`
 * Copy the icon selector control from the Application Launcher widget to a reusable `ConfigIcon.qml` file.
 * Add a `ConfigIcon` button to our `ConfigGeneral.qml` tab, and bind it to a `cfg_icon` property.
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 contents/config/main.xml
 
@@ -161,11 +158,9 @@ ConfigModel {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### Configurable panel widget width/height
 
-\{{< sections >\}} \{{< section-left >\}} While the user can resize the popup window temporarily with `Alt+RightClick+Drag`, it will reset when the user relogs. To allow the user to permanently configure the popup size in a panel widget, or the size of the compact view in the panel, we'll need a store the width/height in the config.
+While the user can resize the popup window temporarily with `Alt+RightClick+Drag`, it will reset when the user relogs. To allow the user to permanently configure the popup size in a panel widget, or the size of the compact view in the panel, we'll need a store the width/height in the config.
 
 So we change to our hardcoded sizes:
 
@@ -204,8 +199,6 @@ Next we register the config keys and their default values in the `config/main.xm
 Then create a configuration form in `ui/configGeneral.qml`. We use [`SpinBox`](https://doc.qt.io/qt-5/qml-qtquick-controls2-spinbox.html) and set the max value to [the maximum signed integer value in QML](https://stackoverflow.com/questions/41378583/qml-highest-number-float-integer-possible).
 
 Lastly we register the General config tab in `config/config.qml`.
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 contents/ui/main.qml
 
@@ -308,11 +301,9 @@ ConfigModel {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### Time DataSource
 
-\{{< sections >\}} \{{< section-left >\}} An extremely simple example of this can be found in the "fuzzy clock" widget in the `kdeplasma-addons` repo ([link](https://invent.kde.org/plasma/kdeplasma-addons/-/blob/master/applets/fuzzy-clock/package/contents/ui/main.qml)).
+An extremely simple example of this can be found in the "fuzzy clock" widget in the `kdeplasma-addons` repo ([link](https://invent.kde.org/plasma/kdeplasma-addons/-/blob/master/applets/fuzzy-clock/package/contents/ui/main.qml)).
 
 The `new Date()` should be familiar if you come from a javascript background. We could use a Timer with the Date type, but we want to precisely sync all clock widgets so they all show the same time on all screens. This is where Plasma's DataEngines come in. They are used to share data between widgets. There are [various dataengines](https://invent.kde.org/plasma/plasma-workspace/-/tree/master/dataengines) for notifications, plugged in usb drives (hotplug), and event the weather data so it only has to fetch the data once to show it in all widgets on each screen.
 
@@ -321,8 +312,6 @@ To use the "time" data engine, we use [`PlasmaCore.DataSource`](https://invent.k
 We also tell the data engine to align these updates to the next minute. If we want to modify this to update every second, we'd change the interval to `interval: 1000` (1 second), then remove the `intervalAlignment` assignment since there isn't an "AlignToSecond", just a [PlasmaCore.Types.NoAlignment](docs:plasma-framework;Plasma::Types::IntervalAlignment).
 
 A clock can then use Qt's `Qt.formatTime(currentDateTime)` to display the time in a human readable format. You can read more about that function on the Qt documentation for [`Qt.formatDateTime(...)`](http://doc.qt.io/qt-5/qml-qtqml-qt.html#formatDateTime-method).
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 contents/ui/main.qml
 
@@ -368,11 +357,7 @@ Item {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### Solar DataSource
-
-\{{< sections >\}} \{{< section-left >\}}
 
 Solar is part of the "time" dataengine. It provides the sun's [Azimuth](https://en.wikipedia.org/wiki/Azimuth), [Zenith](https://en.wikipedia.org/wiki/Zenith), and "Corrected Elevation" for a longitude and latitude at a specific time of day.
 
@@ -386,8 +371,6 @@ Solar is part of the "time" dataengine. It provides the sun's [Azimuth](https://
 Examples:
 
 * The [EnvCanada Weather Source uses](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion\_envcan.cpp#L733) the Solar dataengine to check if the "Corrected Elevation" [is below zero](https://invent.kde.org/plasma/plasma-workspace/-/blame/master/dataengines/weather/ions/envcan/ion\_envcan.cpp#L1627) to start using nighttime icons.
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 [![](../../../content/docs/plasma/widget/plasmaengineexplorer-solar.png)](../../../content/docs/plasma/widget/plasmaengineexplorer-solar.png)
 
@@ -406,7 +389,7 @@ Examples:
 
 ### Avoid widget resize on text change
 
-\{{< sections >\}} \{{< section-left >\}} We use [`TextMetrics`](https://doc.qt.io/qt-5/qml-qtquick-textmetrics.html) to calculate the size of the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) label when it is the widest/maximum value of `100%`. \{{< /section-left >\}} \{{< section-right >\}}
+We use [`TextMetrics`](https://doc.qt.io/qt-5/qml-qtquick-textmetrics.html) to calculate the size of the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) label when it is the widest/maximum value of `100%`. \{{< /section-left >\}} \{{< section-right >\}}
 
 contents/ui/main.qml
 
@@ -474,7 +457,3 @@ Item {
     }
 }
 ```
-
-\{{< /section-right >\}} \{{< /sections >\}}
-
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}
