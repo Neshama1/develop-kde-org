@@ -16,7 +16,7 @@ SVG files are, in fact, XML files. For example, a blue rectangle would be writte
 
 Which when opened in Inkscape looks like this:
 
-{{< figure src="rect.webp" >}}
+![](../../../content/docs/plasma/theme/theme-svg/rect.webp)
 
 You can easily edit the contents of SVG files by opening them with a plain text editor or an XML editor as well. This will be needed to apply custom colors later on, like accent colors.
 
@@ -55,7 +55,7 @@ Plasma effectively does not care about the placement of elements in an SVG. You 
 
 Despite Plasma not caring about element placement, it is a good idea to place elements neatly next to each other where it makes sense to make the life of the designer (and any future contributor) easier. For example:
 
-{{< figure src="elements.webp" >}}
+![](../../../content/docs/plasma/theme/theme-svg/elements.webp)
 
 ## Position and meaning of element IDs in Plasma SVG files {#element-id-positions}
 
@@ -94,15 +94,15 @@ When setting an element ID in Inkscape, you will also need to set its label, whi
 
 In order for sizes to be detected correctly for Plasma Style SVGs, we need to use pixels for each [user unit](https://wiki.inkscape.org/wiki/Units_In_Inkscape) with an SVG scale factor of 1. This can done in `File -> Document Properties`, in the "Display" tab.
 
-{{< figure src="document-properties-display.webp" class="text-center" >}}
+![](../../../content/docs/plasma/theme/theme-svg/document-properties-display.webp)
 
 To make editing the SVG files easier, we will need to use a grid and make it so our cursor will snap to the grid. To do so, first go to the Grids tab in Document Properties, select "Rectangular Grid", then click on "New".
 
-{{< figure src="document-properties-grids.webp" class="text-center" >}}
+![](../../../content/docs/plasma/theme/theme-svg/document-properties-grids.webp)
 
 Then, toggle snapping on by going to the small Snap Controls Bar on the top right of Inkscape and clicking on the magnet button. If you do not see this bar, make sure it is enabled under `View -> Show/Hide -> Snap Controls Bar`.
 
-{{< figure src="snap-controls.webp" class="text-center" >}}
+![](../../../content/docs/plasma/theme/theme-svg/snap-controls.webp)
 
 ### Inkscape Extensions
 
@@ -128,4 +128,4 @@ As mentioned in the [Hints and Tips]({{< ref "quickstart.md#hints-and-tips" >}})
 
 To avoid this from happening whenever you need to resize an SVG element with the Inkscape Selection tool, you should disable Stroke Scaling. This can be done by clicking the left button of the Tool Controls Bar at the top right of the Inkscape window. If you do not see this bar, make sure it is enabled under `View -> Show/Hide -> Tool Controls Bar`.
 
-{{< figure src="stroke-button.webp" class="text-center" >}}
+![](../../../content/docs/plasma/theme/theme-svg/stroke-button.webp)
