@@ -38,15 +38,50 @@ simplemdviewer
 
 Create a `simplemdviewer/pyproject.toml` to tell the Python build tools what is needed to build our project:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/pyproject.toml" highlight="toml" >\}}
+```toml
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+```
 
 Create a `simplemdviewer/setup.py` to call `setuptools`:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/setup.py" highlight="python" >\}}
+```python
+from setuptools import setup
+setup()
+```
 
 Add a new `simplemdviewer/setup.cfg` to describe the application:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/setup.cfg" highlight="ini" >\}}
+```ini
+[metadata]
+name = org.kde.simplemdviewer
+version = 0.1
+url = https://mydomain.org/simplemdviewer
+author= Example Author
+author_email = example@author.org
+maintainer = Example Author
+maintainer_email = example@author.org
+description = A simple markdown viewer
+long_description = file: README.md
+long_description_content_type = text/markdown
+classifiers =
+    Development Status :: 5 - Production/Stable
+    License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+    Intended Audience :: End Users/Desktop
+    Topic :: Utilities
+    Programming Language :: Python
+    Operating System :: POSIX :: Linux
+keywords= viewer converter markdown
+
+[options]
+packages = simplemdviewer
+package_dir =
+    simplemdviewer = src
+include_package_data = True
+install_requires =
+    markdown
+```
 
 In the `metadata` section we have provided information about the application.
 
@@ -66,7 +101,11 @@ It is good to have a `README.md` file as well.
 
 Create a `simplemdviewer/README.md`:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/README.txt" highlight="markdown" >\}}
+```markdown
+# Simple Markdown Viewer
+
+A simple Markdown viewer created with Kirigami, QML and Python.
+```
 
 Another important piece is the license of our project. Create a `simplemdviewer/LICENSE.txt` and add the text of the [license](https://www.gnu.org/licenses/gpl-3.0.txt) of our project.
 
@@ -74,7 +113,9 @@ Apart from the Python stuff, we have to add the QML code to the distribution pac
 
 Create a `simplemdviewer/MANIFEST.in` file with the following contents:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/MANIFEST.in" highlight="qml" >\}}
+```qml
+include src/qml/*.qml
+```
 
 ### App metadata
 
@@ -86,11 +127,128 @@ Some last pieces and we are ready to build. We are going to add:
 
 Create a new `simplemdviewer/org.kde.simplemdviewer.desktop`. This file is used to show our Markdown Viewer in application menus/launchers.
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/org.kde.simplemdviewer.desktop" highlight="bash" >\}}
+```bash
+[Desktop Entry]
+Name=Simple Markdown Viewer
+Name[ca]=Visualitzador senzill de Markdown
+Name[cs]=Jednoduché prohlížení souborů Markdown
+Name[eo]=Simpla Markdown-Vidilo
+Name[es]=Sencillo visor de Markdown
+Name[fr]=Afficheur simple pour langage « Markdown »
+Name[it]=Visore Markdown semplice
+Name[ja]=シンプルな Markdown ビューアー
+Name[nl]=Eenvoudige Markdown-viewer
+Name[sl]=Preprosti ogledovalnik Markdown
+Name[sv]=Enkel Markdown-visning
+Name[tr]=Basit Markdown Görüntüleyicisi
+Name[uk]=Простий переглядач Markdown
+Name[x-test]=xxSimple Markdown Viewerxx
+Name[zh_TW]=簡單 Markdown 檢視器
+GenericName=Markdown Viewer
+GenericName[ca]=Visualitzador de Markdown
+GenericName[cs]=Prohlížeč souborů Markdown
+GenericName[eo]=Markdown-Vidilo
+GenericName[es]=Visor de Markdown
+GenericName[fr]=Afficheur pour langage « Markdown »
+GenericName[it]=Visore Markdown
+GenericName[ja]=Markdown ビューアー
+GenericName[nl]=Markdown-viewer
+GenericName[sl]=Ogledovalnik Markdown
+GenericName[sv]=Markdown-visning
+GenericName[tr]=Markdown Görüntüleyicisi
+GenericName[uk]=Переглядач Markdown
+GenericName[x-test]=xxMarkdown Viewerxx
+GenericName[zh_TW]=Markdown 檢視器
+Comment=A simple Markdown viewer application
+Comment[ca]=Una aplicació senzilla de visualització de Markdown
+Comment[cs]=Jednoduchá aplikace pro prohlížení souborů Markdown
+Comment[eo]=Simpla Markdown-vidila aplikaĵo
+Comment[es]=Una sencilla aplicación de visor de Markdown
+Comment[fr]=Une application d'afficheur pour langage « Markdown »
+Comment[it]=L'applicazione di un visore Markdown semplice
+Comment[ja]=シンプルな Markdown ビューアーアプリケーション
+Comment[nl]=Een eenvoudige toepassing als Markdown-viewer
+Comment[sl]=Aplikacija preprostega ogledovalnika Markdown
+Comment[sv]=Ett enkelt Markdown-visningsprogram
+Comment[tr]=Basit bir Markdown görüntüleyici uygulama
+Comment[uk]=Проста програма для перегляду Markdown
+Comment[x-test]=xxA simple Markdown viewer applicationxx
+Comment[zh_TW]=一個簡單的 Markdown 檢視器應用程式
+Version=1.0
+Exec=simplemdviewer
+Icon=org.kde.simplemdviewer
+Type=Application
+Terminal=false
+Categories=Office;
+X-KDE-FormFactor=desktop;tablet;handset;
+```
 
 Add a new `simplemdviewer/org.kde.simplemdviewer.metainfo.xml`. This file is used to show the application in app stores.
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/org.kde.simplemdviewer.metainfo.xml" highlight="xml" >\}}
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.simplemdviewer</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Simple Markdown Viewer</name>
+  <name xml:lang="ca">Visualitzador senzill de Markdown</name>
+  <name xml:lang="cs">Jednoduché prohlížení souborů Markdown</name>
+  <name xml:lang="eo">Simpla Markdown-Vidilo</name>
+  <name xml:lang="es">Sencillo visor de Markdown</name>
+  <name xml:lang="fr">Afficheur simple pour langage « Markdown »</name>
+  <name xml:lang="it">Visore Markdown semplice</name>
+  <name xml:lang="ja">シンプルな Markdown ビューアー</name>
+  <name xml:lang="nl">Eenvoudige Markdown-viewer</name>
+  <name xml:lang="sl">Enostavni ogledovalnik Markdown</name>
+  <name xml:lang="sv">Enkel Markdown-visning</name>
+  <name xml:lang="tr">Basit Markdown Görüntüleyicisi</name>
+  <name xml:lang="uk">Простий переглядач Markdown</name>
+  <name xml:lang="x-test">xxSimple Markdown Viewerxx</name>
+  <name xml:lang="zh-TW">簡單 Markdown 檢視器</name>
+  <summary>A simple markdown viewer application</summary>
+  <summary xml:lang="ca">Una aplicació senzilla de visualització de Markdown</summary>
+  <summary xml:lang="eo">Simpla markdown-spektila aplikaĵo</summary>
+  <summary xml:lang="es">Una sencilla aplicación de visor markdown</summary>
+  <summary xml:lang="fr">Une application d'afficheur simple pour langage « Markdown »</summary>
+  <summary xml:lang="it">L'applicazione di un visore Markdown semplice</summary>
+  <summary xml:lang="ja">シンプルな markdown ビューアーアプリケーション</summary>
+  <summary xml:lang="nl">Een eenvoudige toepassing als Markdown-viewer</summary>
+  <summary xml:lang="sl">Aplikacija enostavnega ogledovalnika Markdown</summary>
+  <summary xml:lang="sv">Ett enkelt Markdown-visningsprogram</summary>
+  <summary xml:lang="tr">Basit bir Markdown görüntüleyici uygulama</summary>
+  <summary xml:lang="uk">Проста програма для перегляду Markdown</summary>
+  <summary xml:lang="x-test">xxA simple markdown viewer applicationxx</summary>
+  <summary xml:lang="zh-TW">一個簡單的 Markdown 檢視器應用程式</summary>
+  <description>
+    <p>Simple Markdown Viewer is a showcase application for QML with Python development</p>
+    <p xml:lang="ca">El visualitzador senzill de Markdown és una aplicació per a presentar el desenvolupament del QML amb el Python</p>
+    <p xml:lang="eo">Simple Markdown Viewer estas montra aplikaĵo por QML kun Python-evoluo</p>
+    <p xml:lang="es">Sencillo visor de Markdown es una aplicación de demostración para QML con desarrollo en Python</p>
+    <p xml:lang="fr">Un afficheur simple pour langage « Markdown » est une application majeure pour QML pour les développement sous Python</p>
+    <p xml:lang="it">Visore Markdown semplice è un'applicazione dimostrativa per QML nello sviluppo in Python</p>
+    <p xml:lang="ja">シンプルな Markdown ビューアーは Python 開発による QML のサンプルアプリケーションです。</p>
+    <p xml:lang="nl">Eenvoudige Markdown-viewer is een uitstelkast voor QML met Python ontwikkeling</p>
+    <p xml:lang="sl">Enostavni ogledovalnik Markdown je predstavitvena aplikacija za razvoj QML s Pythonom</p>
+    <p xml:lang="sv">Enkel Markdown-visning är ett förevisningsprogram för QML med Python-utveckling</p>
+    <p xml:lang="tr">Basit Markdown Görüntüleyicisi, Python ile QML geliştirmek için bir vitrin uygulamadır</p>
+    <p xml:lang="uk">Проста програма для перегляду Markdown є прикладом програми для розробки з QML за допомогою Python</p>
+    <p xml:lang="x-test">xxSimple Markdown Viewer is a showcase application for QML with Python developmentxx</p>
+    <p xml:lang="zh-TW">《簡單 Markdown 檢視器》是用來示範 QML 與 Python 併用開發的應用程式</p>
+  </description>
+  <url type="homepage">https://mydomain.org/simplemdviewer</url>
+  <releases>
+    <release version="0.1" date="2022-02-25">
+      <description>
+        <p>First release</p>
+      </description>
+    </release>
+  </releases>
+  <provides>
+    <binary>simplemdviewer</binary>
+  </provides>
+</component>
+```
 
 For this tutorial the well known Markdown icon is okay.
 
@@ -109,17 +267,107 @@ Now we have to let `setup.cfg` know about the new files. Let’s also provide an
 
 Update `simplemdviewer/setup.cfg` to:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/setup-2.cfg" highlight="ini" >\}}
+```ini
+[metadata]
+name = org.kde.simplemdviewer
+version = 0.1
+url = https://mydomain.org/simplemdviewer
+author= Example Author
+author_email = example@author.org
+maintainer = Example Author
+maintainer_email = example@author.org
+description = A simple markdown viewer
+long_description = file: README.md
+long_description_content_type = text/markdown
+classifiers =
+    Development Status :: 5 - Production/Stable
+    License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+    Intended Audience :: End Users/Desktop
+    Topic :: Utilities
+    Programming Language :: Python
+    Operating System :: POSIX :: Linux
+keywords= viewer converter markdown
+
+[options]
+packages = simplemdviewer
+package_dir =
+    simplemdviewer = src
+include_package_data = True
+install_requires =
+    markdown
+
+[options.data_files]
+share/applications =
+    org.kde.simplemdviewer.desktop
+share/icons/hicolor/scalable/apps =
+    org.kde.simplemdviewer.svg
+share/metainfo =
+     org.kde.simplemdviewer.metainfo.xml
+
+[options.entry_points]
+console_scripts =
+    simplemdviewer = simplemdviewer.simplemdviewer_app:main
+```
 
 The last step is to tinker with the way we import modules.
 
-Update `simplemdviewer/src/simplemdviewer_app.py` to:
+Update `simplemdviewer/src/simplemdviewer_app.py` to
 
-\{{< tabset-qt >\}} \{{< tab-qt tabName="PyQt6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/simplemdviewer\_app-3.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< tab-qt tabName="PySide6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyside-app/src/simplemdviewer\_app-3.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< /tabset-qt >\}}
+{% tabs %}
+{% tab title="PySide6" %}
+```python
+#!/usr/bin/env python3
+
+import os
+import sys
+import signal
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import QUrl
+from PySide6.QtQml import QQmlApplicationEngine
+
+# from md_converter import MdConverter
+from simplemdviewer.md_converter import MdConverter  # noqa: F401
+
+
+def main():
+    """Initializes and manages the application execution"""
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine()
+
+    """Needed to close the app with Ctrl+C"""
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+    """Needed to get proper KDE style outside of Plasma"""
+    if not os.environ.get("QT_QUICK_CONTROLS_STYLE"):
+        os.environ["QT_QUICK_CONTROLS_STYLE"] = "org.kde.desktop"
+
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    url = QUrl(f"file://{base_path}/qml/main.qml")
+    engine.load(url)
+
+    if len(engine.rootObjects()) == 0:
+        quit()
+
+    app.exec()
+
+
+if __name__ == "__main__":
+    main()
+```
+{% endtab %}
+
+{% tab title="PyQt6" %}
+
+{% endtab %}
+{% endtabs %}
 
 Create a `__main__.py` file into the `src/` directory. Now that there's a module, this tells the build tools what's the main function, the entrypoint for running the application.
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/**main**.py" highlight="python" >\}}
+```python
+from . import simplemdviewer_app
+
+simplemdviewer_app.main()
+```
 
 ### Calling the app
 
