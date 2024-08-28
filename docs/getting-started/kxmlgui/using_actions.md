@@ -12,7 +12,7 @@ description: How to add actions to the menus and toolbars.
 
 This tutorial introduces the concept of actions. Actions are a unified way of supplying the user with ways to interact with your program.
 
-For example, if we wanted to let the user of our \[main window tutorial]\(\{{< ref "main\_window.md" >\}}) clear the text box by clicking a button in the toolbar, from an option in the File menu or through a keyboard shortcut, it could all be done with one [QAction](docs:qtwidgets;QAction).
+For example, if we wanted to let the user of our [main window tutorial](main\_window.md) clear the text box by clicking a button in the toolbar, from an option in the File menu or through a keyboard shortcut, it could all be done with one [QAction](docs:qtwidgets;QAction).
 
 ![](../../../content/docs/getting-started/kxmlgui/using\_actions.webp)
 
@@ -169,7 +169,9 @@ Besides having the action in the toolbar, it can also be added to the menubar. H
 
 Change the 'version' attribute of the `<gui>` tag if you changed the .rc file since the last install to force a system cache update. Be sure it is an integer, if you use a decimal value, it will not work, and you will get no warning about it.
 
-{% hint style="warning" %}Warning The version attribute must always be an integer number. {% endhint %}
+{% hint style="warning" %}
+Warning The version attribute must always be an integer number.
+{% endhint %}
 
 Some notes on the interaction between code and the .rc file: menus appear automatically and should have a `<text/>` child tag unless they refer to standard menus. Actions need to be created manually and inserted into the `actionCollection()` using the same name as in the .rc file. Actions can be hidden or disabled, whereas menus can't.
 
