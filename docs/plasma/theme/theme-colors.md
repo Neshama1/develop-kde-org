@@ -12,7 +12,7 @@ It is possible to apply colors from the color scheme to an SVG. The Plasma Style
 
 By creating an element of any size with an element ID of `hint-apply-color-scheme` and not shipping a `colors` file with your theme, the rendered SVG gets converted to monochrome and colorized by the window background color.
 
-![Editing xml directly](../../../content/docs/plasma/theme/EditingSvgIcon.png)
+![Editing xml directly](../../../content/docs/plasma/theme/theme-colors/EditingSvgIcon.png)
 
 The second option, writing CSS in the SVG file, allows for a more flexible customization. The SVG must have a `<style>` element with `id="current-color-scheme"` usually at the beginning of the file and inside a `<defs>` element. Do not confuse this with the `style=` attribute. You might see something similar to this:
 
