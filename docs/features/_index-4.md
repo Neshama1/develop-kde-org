@@ -11,7 +11,20 @@ description: Let your application show up in the Launcher and in application men
 
 In order for your application to show up in menus and/or be automatically associated with MIME types in file browsers, you need to provide a `.desktop` file like follows:
 
-\{{< highlight ini >\}} \[Desktop Entry] Type=Application Exec=your-app %u TryExec=your-app MimeType=application/x-your-mime-type; Icon=some-icon X-DocPath=yourapp/index.html Terminal=false Name=Your App GenericName=Some Generic Name Comment=Short Description Of Your App Categories=Qt;KDE; \{{< /highlight >\}}
+```ini
+[Desktop Entry]
+Type=Application
+Exec=your-app %u
+TryExec=your-app
+MimeType=application/x-your-mime-type;
+Icon=some-icon
+X-DocPath=yourapp/index.html
+Terminal=false
+Name=Your App
+GenericName=Some Generic Name
+Comment=Short Description Of Your App
+Categories=Qt;KDE;
+```
 
 Take a look at the [.desktop Freedesktop Spec](http://standards.freedesktop.org/desktop-entry-spec/latest/) to find out more about the key/value pairs above.
 
