@@ -57,10 +57,10 @@ simplemdviewer/
         └── main.qml
 ```
 
-{% hint style="success" %}Tip
+{% hint style="success" %}
+Tip
 
 To quickly generate this folder structure, just run: `mkdir -p simplemdviewer/src/qml/`
-
 {% endhint %}
 
 ### Development
@@ -89,16 +89,133 @@ It’s time to write some code. At first the application will consist of two fil
 
 Create a new directory `simplemdviewer/src/` and add a new `simplemdviewer_app.py` file in this directory:
 
-\{{< tabset-qt >\}} \{{< tab-qt tabName="PyQt6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/simplemdviewer\_app.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< tab-qt tabName="PySide6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyside-app/src/simplemdviewer\_app.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< /tabset-qt >\}}
+{% tabs %}
+{% tab title="PySide6" %}
+```python
+#!/usr/bin/env python3
+
+import os
+import sys
+import signal
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import QUrl
+from PySide6.QtQml import QQmlApplicationEngine
+
+
+def main():
+    """Initializes and manages the application execution"""
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine()
+
+    """Needed to close the app with Ctrl+C"""
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+    """Needed to get proper KDE style outside of Plasma"""
+    if not os.environ.get("QT_QUICK_CONTROLS_STYLE"):
+        os.environ["QT_QUICK_CONTROLS_STYLE"] = "org.kde.desktop"
+
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    url = QUrl(f"file://{base_path}/qml/main.qml")
+    engine.load(url)
+
+    if len(engine.rootObjects()) == 0:
+        quit()
+
+    app.exec()
+
+
+if __name__ == "__main__":
+    main()
+```
+{% endtab %}
+
+{% tab title="PyQt6" %}
+```python
+```
+{% endtab %}
+{% endtabs %}
 
 We have just created a [QGuiApplication](https://doc.qt.io/qtforpython-6/PySide6/QtGui/QGuiApplication.html#PySide6.QtGui.QGuiApplication) object that initializes the application and contains the main event loop. The [QQmlApplicationEngine](https://doc.qt.io/qtforpython-6/PySide6/QtQml/QQmlApplicationEngine.html#PySide6.QtQml.QQmlApplicationEngine) object loads the `main.qml` file.
 
 Create a new `src/qml/main.qml` file that specifies the UI of the application:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/main.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Controls as Controls
+import org.kde.kirigami as Kirigami
+import QtQuick.Layouts
 
-{% hint style="warning" %}Warning
-Older distributions such as Debian or Ubuntu LTS that do not have an up-to-date Kirigami might require lowering the Kirigami import version from `3.20` to `3.15` to run. {% endhint %}
+Kirigami.ApplicationWindow {
+    id: root
+
+    title: qsTr("Simple Markdown viewer")
+
+    minimumWidth: Kirigami.Units.gridUnit * 20
+    minimumHeight: Kirigami.Units.gridUnit * 20
+    width: minimumWidth
+    height: minimumHeight
+
+    pageStack.initialPage: initPage
+
+    Component {
+        id: initPage
+
+        Kirigami.Page {
+            title: qsTr("Markdown Viewer")
+
+            ColumnLayout {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
+                Controls.TextArea {
+                    id: sourceArea
+
+                    placeholderText: qsTr("Write some Markdown code here")
+                    wrapMode: Text.WrapAnywhere
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: Kirigami.Units.gridUnit * 5 
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+
+                    Controls.Button {
+                        text: qsTr("Format")
+
+                        onClicked: formattedText.text = sourceArea.text
+                    }
+
+                    Controls.Button {
+                        text: qsTr("Clear")
+
+                        onClicked: {
+                            sourceArea.text = ""
+                            formattedText.text = ""
+                        }
+                    }
+                } 
+
+                Text {
+                    id: formattedText
+
+                    textFormat: Text.RichText
+                    wrapMode: Text.WordWrap
+                    text: sourceArea.text
+
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: Kirigami.Units.gridUnit * 5
+                }
+            }
+    	}
+    }
+}
+```
+
+{% hint style="warning" %}
+Warning Older distributions such as Debian or Ubuntu LTS that do not have an up-to-date Kirigami might require lowering the Kirigami import version from \`3.20\` to \`3.15\` to run.
+{% endhint %}
 
 We have just created a new QML-Kirigami-Python application. Run it:
 
@@ -122,7 +239,47 @@ OK, let’s add some Python logic: a simple Markdown converter in a Python, [QOb
 
 * Create a new `md_converter.py` file in the `simplemdviewer` directory:
 
-\{{< tabset-qt >\}} \{{< tab-qt tabName="PyQt6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/md\_converter.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< tab-qt tabName="PySide6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyside-app/src/md\_converter.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< /tabset-qt >\}}
+{% tabs %}
+{% tab title="PySide6" %}
+```python
+from markdown import markdown
+from PySide6.QtCore import QObject, Signal, Slot, Property
+from PySide6.QtQml import QmlElement
+
+QML_IMPORT_NAME = "org.kde.simplemdviewer"
+QML_IMPORT_MAJOR_VERSION = 1
+
+
+@QmlElement
+class MdConverter(QObject):
+    """A simple markdown converter"""
+
+    sourceTextChanged = Signal()
+
+    def __init__(self, _source_text=""):
+        super().__init__()
+        self._source_text = _source_text
+
+    @Property(str, notify=sourceTextChanged)
+    def sourceText(self):
+        return self._source_text
+
+    @sourceText.setter
+    def sourceText(self, val):
+        self._source_text = val
+        self.sourceTextChanged.emit()
+
+    @Slot(result=str)
+    def mdFormat(self):
+        return markdown(self._source_text)
+```
+{% endtab %}
+
+{% tab title="PyQt6" %}
+```python
+```
+{% endtab %}
+{% endtabs %}
 
 The `MdConverter` class contains the `_source_text` member variable. The `sourceText` property exposes `_source_text` to the QML system through the `readSourceText()` getter and the `setSourceText()` setter functions in PyQt. In PySide, Python-like setters and getters are used for this purpose.
 
@@ -138,13 +295,136 @@ It is worth noting that in PySide, the Python decorator `@QmlElement`, along wit
 
 Update the `simplemdviewer_app.py` file to:
 
-\{{< tabset-qt >\}} \{{< tab-qt tabName="PyQt6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/simplemdviewer\_app-2.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< tab-qt tabName="PySide6" >\}} \{{< readfile file="/content/docs/getting-started/python/pyside-app/src/simplemdviewer\_app-2.py" highlight="python" >\}} \{{< /tab-qt >\}} \{{< /tabset-qt >\}}
+{% tabs %}
+{% tab title="PySide6" %}
+```python
+#!/usr/bin/env python3
+
+import os
+import sys
+import signal
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import QUrl
+from PySide6.QtQml import QQmlApplicationEngine
+
+from md_converter import MdConverter  # noqa: F401
+
+
+def main():
+    """Initializes and manages the application execution"""
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine()
+
+    """Needed to close the app with Ctrl+C"""
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+    """Needed to get proper KDE style outside of Plasma"""
+    if not os.environ.get("QT_QUICK_CONTROLS_STYLE"):
+        os.environ["QT_QUICK_CONTROLS_STYLE"] = "org.kde.desktop"
+
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    url = QUrl(f"file://{base_path}/qml/main.qml")
+    engine.load(url)
+
+    if len(engine.rootObjects()) == 0:
+        quit()
+
+    app.exec()
+
+
+if __name__ == "__main__":
+    main()
+```
+{% endtab %}
+
+{% tab title="PyQt6" %}
+
+{% endtab %}
+{% endtabs %}
 
 In PyQt, the `qmlRegisterType()` function has registered the `MdConverter` type in the QML system, in the library `org.kde.simplemdviewer`, version 1.0. In PySide, this registration is done in the file where the class is defined i.e. `md_converter.py` through the `@QmlElement` decorator. The import name and version of `MdConverter` type is set through the variables `QML_IMPORT_NAME` and `QML_IMPORT_MAJOR_VERSION`. Finally, the Python import `from md_converter import MdConverter` in PySide's `simplemdviewer_app.py` takes care of making Python and QML engine aware of the `@QmlElement` decorator.
 
 Change `main.qml` to:
 
-\{{< readfile file="/content/docs/getting-started/python/pyqt-app/src/main-2.qml" highlight="qml" >\}}
+```qml
+import QtQuick
+import QtQuick.Controls as Controls
+import org.kde.kirigami as Kirigami
+import QtQuick.Layouts
+import org.kde.simplemdviewer 1.0
+
+Kirigami.ApplicationWindow {
+    id: root
+
+    title: qsTr("Simple Markdown viewer")
+
+    minimumWidth: Kirigami.Units.gridUnit * 20
+    minimumHeight: Kirigami.Units.gridUnit * 20
+    width: minimumWidth
+    height: minimumHeight
+
+    pageStack.initialPage: initPage
+
+    Component {
+        id: initPage
+
+        Kirigami.Page {
+            title: qsTr("Markdown Viewer")
+
+            MdConverter {
+                id: mdconverter
+
+                sourceText: sourceArea.text
+            }
+  
+            ColumnLayout {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
+                Controls.TextArea {
+                    id: sourceArea
+
+                    placeholderText: qsTr("Write some Markdown code here")
+                    wrapMode: Text.WrapAnywhere
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: Kirigami.Units.gridUnit * 5 
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+
+                    Controls.Button {
+                        text: qsTr("Format")
+
+                        onClicked: formattedText.text = mdconverter.mdFormat()
+                    }
+
+                    Controls.Button {
+                        text: qsTr("Clear")
+
+                        onClicked: {
+                            sourceArea.text = ""
+                            formattedText.text = ""
+                        }
+                    }
+                } 
+
+                Text {
+                    id: formattedText
+
+                    textFormat: Text.RichText
+                    wrapMode: Text.WordWrap
+
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: Kirigami.Units.gridUnit * 5
+                }
+            }
+    	}
+    }
+}
+```
 
 The updated QML code:
 
