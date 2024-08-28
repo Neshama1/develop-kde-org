@@ -88,4 +88,4 @@ So, the current dialer client implementation is going to be based on the ModemMa
 
 Session daemons on the user-land level could be used to interact with other parts of the user environment and provide a unified API for GUI applications.
 
-To provide actual developer libraries (environment- and language-specific) is out of the scope for any session-side telephony daemon. The D-Bus API exported via session bus enabling [QML declarative plugin as library side](../../../../content/docs/packaging/plasma-mobile/telephony/qml-declarative-plugin-layer/) to handle it.
+To provide actual developer libraries (environment- and language-specific) is out of the scope for any session-side telephony daemon. The D-Bus API exported via session bus enabling [QML declarative plugin as library side](\_index-3.md) to handle it.
