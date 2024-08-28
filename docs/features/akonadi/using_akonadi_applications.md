@@ -25,7 +25,7 @@ We can kick-start the application by using **KAppTemplate**, which can be found 
 
 First, we select the Kirigami Application in the _Qt_ → _Graphical_ section of the program. We can then give our project a name and continue through the following pages of the wizard to complete the template creation.
 
-![KAppTemplate with Kirigami Application selected](../../../content/docs/features/akonadi/kapptemplate.png)
+![KAppTemplate with Kirigami Application selected](../../../content/docs/features/akonadi/using_akonadi_applications/kapptemplate.png)
 
 A look at the generated project's top level directory shows us the following files:
 
@@ -344,7 +344,7 @@ The next component is the actual UI of the mail folder selector page:
     }
 ```
 
-![Screenshot of a tree view of mail folders](../../../content/docs/features/akonadi/folderpage.png)
+![Screenshot of a tree view of mail folders](../../../content/docs/features/akonadi/using_akonadi_applications/folderpage.png)
 
 {% hint style="info" %}
 Note
@@ -495,7 +495,7 @@ And finally, the last component displays the list of emails.
 
 \{{< snippet file="features/akonadi/using\_akonadi\_applications/src/contents/ui/main.qml" part="maillist" lang="qml" >\}}
 
-![List of emails](../../../content/docs/features/akonadi/maillist.png)
+![List of emails](../../../content/docs/features/akonadi/using_akonadi_applications/maillist.png)
 
 ### Making the Model Faster
 
@@ -734,7 +734,7 @@ The mail viewer component is also a `Kirigami.ScrollablePage`, and we use a Text
         }
 ```
 
-![Mail view](../../../content/docs/features/akonadi/mailview.png)
+![Mail view](../../../content/docs/features/akonadi/using_akonadi_applications/mailview.png)
 
 ### Downloading the project
 
