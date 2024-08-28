@@ -11,7 +11,7 @@ description: How to add a theme to KMines.
 
 ### Introduction
 
-This short tutorial will show you how to add a theme to KMines. It is assumed that you already have a working dev environment, you are familiar with building KDE software using \[kdesrc-build]\(\{{< ref "kdesrc-build-setup" >\}}), and you are able to use a vector editing program such as Inkscape and a raster editing program such as Krita to create and export images. You should already have a local copy of the KMines source via `kdesrc-build kmines`. By the end of this tutorial, you will know what is necessary to create a KMines theme, and how to include them in the KMines source code.
+This short tutorial will show you how to add a theme to KMines. It is assumed that you already have a working dev environment, you are familiar with building KDE software using [kdesrc-build](../../getting-started/building/index-5.md), and you are able to use a vector editing program such as Inkscape and a raster editing program such as Krita to create and export images. You should already have a local copy of the KMines source via `kdesrc-build kmines`. By the end of this tutorial, you will know what is necessary to create a KMines theme, and how to include them in the KMines source code.
 
 ### Components of a KMines theme
 
