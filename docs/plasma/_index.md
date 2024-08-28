@@ -15,7 +15,7 @@ Plasma is very modular, made up of themable widgets that can be added, removed, 
 
 ### **Global Theme**
 
-Formerly called a "Look and Feel", it bundles a \[Panel Layout Template]\(\{{< ref "#panel-layout-template" >\}}), an \[Icon Theme]\(\{{< ref "#icon-theme" >\}}), a \[Plasma Style]\(\{{< ref "#plasma-style" >\}}) (and its \[Color Scheme]\(\{{< ref "#color-scheme" >\}})), a \[Task Switcher]\(\{{< ref "#task-switcher" >\}}), a \[Splash Screen]\(\{{< ref "#splash-screen" >\}}), a lock screen theme, or any combination thereof.
+Formerly called a "Look and Feel", it bundles a [Panel Layout Template](\_index.md#panel-layout-template), an [Icon Theme](\_index.md#icon-theme), a [Plasma Style](\_index.md#plasma-style) (and its [Color Scheme](\_index.md#color-scheme), a [Task Switcher](\_index.md#task-switcher), a [Splash Screen](\_index.md#splash-screen), a lock screen theme, or any combination thereof.
 
 * System/Default: `/usr/share/plasma/look-and-feel/` ([GitLab](https://invent.kde.org/plasma/plasma-workspace/-/tree/master/lookandfeel))
 * User Installed: `~/.local/share/plasma/look-and-feel/` ([KDE Store Category](https://store.kde.org/browse/cat/121/order/latest/))
