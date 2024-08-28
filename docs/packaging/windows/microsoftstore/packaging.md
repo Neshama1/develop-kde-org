@@ -14,7 +14,7 @@ description: Learn how to package your applications for the Microsoft Store
 
 This tutorial will guide you in packaging an application for publication in the Microsoft Store.
 
-We assume that you have already set up your project to package and publish a Windows installer. If not then read the tutorial on \[packaging and publishing applications for Windows]\(\{{< ref "../packaging" >\}}). Further, we assume that you are building your application with MSVC. The process for publishing applications built with MinGW in the Microsoft Store is completely different.
+We assume that you have already set up your project to package and publish a Windows installer. If not then read the tutorial on [packaging and publishing applications for Windows](../index.md). Further, we assume that you are building your application with MSVC. The process for publishing applications built with MinGW in the Microsoft Store is completely different.
 
 We continue using [NeoChat](https://invent.kde.org/network/NeoChat) as example.
 
