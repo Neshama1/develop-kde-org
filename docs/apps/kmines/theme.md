@@ -33,7 +33,7 @@ To set an element ID:
 * Enter an ID
 * Click "Set"
 
-![A screenshot showing a selected element and the object properties panel in Inkscape.](../../../content/docs/apps/kmines/ID.png)
+![A screenshot showing a selected element and the object properties panel in Inkscape.](../../../content/docs/apps/kmines/theme/ID.png)
 
 #### List of IDs
 
