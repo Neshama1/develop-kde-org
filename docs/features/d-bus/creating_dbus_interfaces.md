@@ -24,7 +24,24 @@ An interface as seen on the bus can be described using a standard XML format tha
 
 Such XML might look like this example:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/example.xml" highlight="xml" >\}}
+```xml
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.foo.Background">
+    <signal name="backgroundChanged">
+    </signal>
+    <method name="refreshBackground">
+    </method>
+    <method name="currentBackground">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="setBackground">
+      <arg type="b" direction="out"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+  </interface>
+</node>
+```
 
 If one has used a D-Bus application like `qdbus` (terminal) or `qdbusviewer` (graphical) to explore the `org.freedesktop.DBus.Introspectable.Introspect` method, the above might look familiar.
 
@@ -36,7 +53,32 @@ Fortunately there are ways to automate the process so that it's hardly noticeabl
 
 We will be using the example of an interface that lets the user set the background wallpaper and query the current settings. We will be providing three methods in this interface, which can be seen in the following class definition:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/defining\_methods.cpp" highlight="cpp" >\}}
+```cpp
+#include <QObject>
+
+class Background : QObject
+{
+    Q_OBJECT
+
+    public:
+        Background(QObject* parent);
+
+        void doNotExportToDBus();
+        
+        void refreshBackground();
+        QString currentBackground();
+
+    Q_SIGNALS:
+        void doNotExportThisSignal();
+        void backgroundChanged();
+
+    public Q_SLOTS:
+        bool setBackground(QString name);
+
+    protected Q_SLOTS:
+        void dbusCanNotSeeMe();
+};
+```
 
 Next we need to mark which of the above methods we wish to expose via D-Bus. Fortunately, this is quite simple with the following options available to us:
 
@@ -49,16 +91,39 @@ Next we need to mark which of the above methods we wish to expose via D-Bus. For
 
 We can also combine the above as we wish. To achieve the desired results from the above example, we need to adjust the class definition accordingly:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/exports.cpp" highlight="cpp" >\}}
+```cpp
+#include <QObject>
+class Background : QObject
+{
+    Q_OBJECT
+
+    public:
+        Background(QObject* parent);
+
+        void doNotExportToDBus();
+
+    Q_SIGNALS:
+        void doNotExportThisSignal();
+        Q_SCRIPTABLE void backgroundChanged();
+
+    public Q_SLOTS:
+        void refreshBackground();
+        QString currentBackground();
+        bool setBackground(QString name);
+
+    protected Q_SLOTS:
+        void dbusCanNotSeeMe();
+};
+```
 
 Note how we moved the methods we wish to export to to be public slots and marked the signal we want to export with `Q_SCRIPTABLE`. We will later choose to create an interface that exports all the public slots and all scriptable signals.
 
 We would then go about creating an implementation of this class as defined above.
 
-{% hint style="success" %}Tip
+{% hint style="success" %}
+Tip
 
 When exposing an API to other applications via D-Bus, other applications and users, via scripting, may come to rely on the calls available in the interface. Changing the D-Bus interface can therefore cause breakage for others. For this reason it is recommended to keep compatibility with publicly advertised D-Bus APIs over the lifespan of a major release of your application.
-
 {% endhint %}
 
 #### Naming The Interface
@@ -115,7 +180,24 @@ $> qdbuscpp2xml -M -s background.h -o org.foo.Background.xml
 
 This produces a file named `org.foo.Background.xml` which contains this:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/org.foo.Background.xml" highlight="xml" >\}}
+```xml
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.foo.Background">
+    <signal name="backgroundChanged">
+    </signal>
+    <method name="refreshBackground">
+    </method>
+    <method name="currentBackground">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="setBackground">
+      <arg type="b" direction="out"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+  </interface>
+</node>
+```
 
 This file should be shipped with your project's source distribution.
 
@@ -149,7 +231,7 @@ qt5_add_dbus_adaptor(my_nice_project_SRCS org.foo.Background.xml
 
 This will cause two files, in this case `backgroundadaptor.h` and `backgroundadaptor.cpp`, to be generated in the build directory, built and added to the application at build time. You should not ship these files with your project's source distribution.
 
-The D-Bus XML description file will also be installed. This allows users to examine it as a reference and other applications to use this file to generate interface classes using `qdbusxml2cpp` as seen in the tutorial on [accessing D-Bus interfaces](../../../../docs/features/d-bus/accessing\_dbus\_interfaces/).
+The D-Bus XML description file will also be installed. This allows users to examine it as a reference and other applications to use this file to generate interface classes using `qdbusxml2cpp` as seen in the tutorial on [accessing D-Bus interfaces](accessing\_dbus\_interfaces/).
 
 You can use the generated adaptor to [Instantiating the Interface At Runtime](creating\_dbus\_interfaces.md#the-complex-way)
 
@@ -159,7 +241,18 @@ You can use the generated adaptor to [Instantiating the Interface At Runtime](cr
 
 You can use [`QDBusConnection::registerObject`](https://doc.qt.io/qt-5/qdbusconnection.html#registerObject) to register your class. Normally you'd do this in the constructor of your class, but if you have more than one instance of the same class, you need to ensure there is no DBus path conflict. For a singleton class, you may have something like this in the constructor:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/instantiating\_interface\_simple.cpp" highlight="cpp" >\}}
+```cpp
+#include <QDBusConnection>
+Background::Background(QObject* parent)
+    : QObject(parent)
+{
+    // register DBus object at org.kde.myapp/foobar
+    QDBusConnection::sessionBus().registerService("org.kde.myapp");
+    QDBusConnection::sessionBus().registerObject("/foobar", this, QDBusConnection::ExportScriptableContents);
+
+    ... // the rest of constructor
+} 
+```
 
 In line 6 we register the service path with DBus. This name should not be used by any other project. Note that if you have
 
@@ -178,14 +271,26 @@ However, if you have multiple instances of this class, we need to edit above exa
 
 Now that we have our interface created for us, all we need to do is create it at runtime. We do this by including the generated header file and instantiating an object, as seen in this example:
 
-\{{< readfile file="/content/docs/features/d-bus/creating\_dbus\_interfaces/instantiating\_interface\_complex.cpp" highlight="cpp" >\}}
+```cpp
+#include "background.h"
+#include "backgroundadaptor.h"
+
+Background::Background(QObject* parent)
+    : QObject(parent)
+{
+    new BackgroundAdaptor(this);
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.registerObject("/Background", this);
+    dbus.registerService("org.foo.Background");
+}
+```
 
 Since the generated adaptor is a QObject, when we pass the constructor `this` it not only will be deleted when our Background object is deleted but it will bind itself to `this` for the purposes of forwarding D-Bus calls.
 
 We then need to register our object on the bus by calling `QDBusConnection::registerObject` and expose the interface for others to use by calling `QDBusConnection::registerService`.
 
-{% hint style="success" %}Tip
+{% hint style="success" %}
+Tip
 
 If there will be more than one of the same object created in your application then you will need to register each object with a unique path. If there is no well defined, unique naming scheme for your objects the `this` pointer may come in handy.
-
 {% endhint %}
