@@ -13,7 +13,9 @@ description: Your first window using KDE Frameworks
 
 Your first program shall greet the world with a friendly "Hello World". For that, we will use a [KMessageBox](docs:kwidgetsaddons;KMessageBox) and customize one of its buttons.
 
-{% hint style="info" %}Note To get more information about any class you come across, you can use [KDE's API Reference site](https://api.kde.org/index.html). It can be quickly accessed via KRunner with the `kde:` search keyword (e.g. `kde: KMessageBox`). You may also find it useful to consult Qt's documentation with `qt:`, since much of KDE's Frameworks builds upon it. {% endhint %}
+{% hint style="info" %}
+Note To get more information about any class you come across, you can use \[KDE's API Reference site]\(https://api.kde.org/index.html). It can be quickly accessed via KRunner with the \`kde:\` search keyword (e.g. \`kde: KMessageBox\`). You may also find it useful to consult Qt's documentation with \`qt:\`, since much of KDE's Frameworks builds upon it.
+{% endhint %}
 
 ### Preparation
 
@@ -35,9 +37,13 @@ end module
 
 #### Option 2: Manually
 
-\{{< installpackage fedora="kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kxmlgui-devel kf6-ktextwidgets-devel kf6-kconfigwidgets-devel kf6-kwidgetsaddons-devel kf6-kio-devel kf6-kiconthemes-devel" opensuse="kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kxmlgui-devel kf6-ktextwidgets-devel kf6-kconfigwidgets-devel kf6-kwidgetsaddons-devel kf6-kio-devel kf6-kiconthemes-devel" arch="kcoreaddons ki18n kxmlgui ktextwidgets kconfigwidgets kwidgetsaddons kio kiconthemes"
-
-> \}}
+| [Manjaro](https://software.manjaro.org/package/kcoreaddons), [Arch](https://archlinux.org/packages/?q=kcoreaddons) | <pre><code>sudo pacman -S kcoreaddons ki18n kxmlgui ktextwidgets kconfigwidgets kwidgetsaddons kio kiconthemes
+</code></pre>                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [OpenSUSE](https://software.opensuse.org/package/kf6-kcoreaddons-devel)                                            | <pre><code>sudo zypper install kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kxmlgui-devel kf6-ktextwidgets-devel kf6-kconfigwidgets-devel kf6-kwidgetsaddons-devel kf6-kio-devel kf6-kiconthemes-devel
+</code></pre> |
+| [Fedora](https://packages.fedoraproject.org/pkgs/kf6-kcoreaddons-devel/kf6-kcoreaddons-devel/)                     | <pre><code>sudo dnf install kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kxmlgui-devel kf6-ktextwidgets-devel kf6-kconfigwidgets-devel kf6-kwidgetsaddons-devel kf6-kio-devel kf6-kiconthemes-devel
+</code></pre>    |
 
 ### The Code
 
@@ -45,9 +51,42 @@ end module
 
 All the code we need will be in one file, `main.cpp`. We'll start simple and increment our file as we go further. Create it with the code below:
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/hello\_world/main1.cpp" highlight="cpp" >\}}
+```cpp
+#include <QApplication>
+#include <KMessageBox>
 
-![](../../../content/docs/getting-started/kxmlgui/hello\_world.webp)
+int main (int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    KGuiItem primaryAction(
+        // Content text, Icon
+        QStringLiteral("Hello"), QString(),
+        // Tooltip text
+        QStringLiteral("This is a tooltip"),
+        // WhatsThis text
+        QStringLiteral("This is a WhatsThis help text."));
+
+    auto messageBox = KMessageBox::questionTwoActions(
+        // Parent
+        nullptr,
+        // MessageBox contents
+        QStringLiteral("Hello World"),
+        // MessageBox title
+        QStringLiteral("Hello Title"),
+        // Primary action, Secondary action
+        primaryAction, KStandardGuiItem::cancel());
+
+    if (messageBox == KMessageBox::PrimaryAction)
+    {
+        return EXIT_SUCCESS;
+    }
+    else
+    {
+        return EXIT_FAILURE;
+    }
+}
+```
 
 Our popup box is a [KMessageBox](docs:kwidgetsaddons;KMessageBox), which has primarily two buttons: a [PrimaryAction](docs:kwidgetsaddons;KMessageBox::PrimaryAction), which usually serves as a confirmation button, and a [SecondaryAction](docs:kwidgetsaddons;KMessageBox::SecondaryAction), which usually portrays a different action, like a cancel or discard button. The popup box uses the KMessageBox class, the primary action uses a custom [KGuiItem](docs:kwidgetsaddons;KGuiItem) with the text "Hello", and the secondary action uses [KStandardGuiItem::cancel()](docs:kwidgetsaddons;KStandardGuiItem::cancel).
 
@@ -57,15 +96,84 @@ The first argument of the [KGuiItem](docs:kwidgetsaddons;KGuiItem) constructor i
 
 Now that we have the item needed for our primary action button, we can create our popup with [KMessageBox::questionTwoActions()](docs:kwidgetsaddons;KMessageBox::questionTwoActions). The first argument is the parent widget of the [KMessageBox](docs:kwidgetsaddons;KMessageBox), which is not needed for us here, so we pass `nullptr`. The second argument is the text that will appear inside the message box and above the buttons, in our case, "Hello World". The third is the caption shown in the window's titlebar, "Hello Title". Then, we set our custom [KGuiItem](docs:kwidgetsaddons;KGuiItem), `primaryAction`. Lastly, we add a convenience object with [KStandardGuiItem::cancel()](docs:kwidgetsaddons;KStandardGuiItem::cancel), which returns a ready-made [KGuiItem](docs:kwidgetsaddons;KGuiItem) with localized text and cancel functionality, satisfying the function signature.
 
-{% hint style="warning" %}Important
+{% hint style="warning" %}
+Important
 
 Using a QStringLiteral for strings like `QStringLiteral("Hello World!")` instead of literals like `"Hello World!"` is both a best practice in Qt programming and an expected coding practice in KDE software.
-
 {% endhint %}
 
 #### About and Internationalization
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/hello\_world/main2.cpp" highlight="cpp" emphasize="3-4 8 11-47 50-52 56-57" >\}}
+```cpp
+#include <QApplication>
+#include <KMessageBox>
+#include <KAboutData>
+#include <KLocalizedString>
+
+int main (int argc, char *argv[])
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("tutorial1");
+
+    KAboutData aboutData(
+        // The program name used internally. (componentName)
+        u"helloworld"_s,
+        // A displayable program name string. (displayName)
+        i18n("Hello World tutorial"),
+        // The program version string. (version)
+        u"1.0"_s,
+        // Short description of what the app does. (shortDescription)
+        i18n("Displays a KMessageBox popup"),
+        // The license this code is released under
+        KAboutLicense::GPL,
+        // Copyright Statement (copyrightStatement = QString())
+        i18n("(c) 2024"),
+        // Optional text shown in the About box.
+        // Can contain any information desired. (otherText)
+        i18n("Educational application..."),
+        // The program homepage string. (homePageAddress = QString())
+        u"https://apps.kde.org/someappname/"_s,
+        // The bug report email address
+        // (bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+        u"submit@bugs.kde.org"_s);
+
+    aboutData.addAuthor(
+        // Author full name
+        i18n("John Doe"),
+        // Author role
+        i18n("Tutorial learner"),
+        // Author email
+        u"john.doe@example.com"_s,
+        // Author website
+        u"https://john-doe.example.com"_s,
+        // Username in store.kde.org (for avatar image)
+        u"johndoe"_s);
+
+    KAboutData::setApplicationData(aboutData);
+
+    KGuiItem primaryAction(
+        i18n("Hello"), QString(),
+        i18n("This is a tooltip"),
+        i18n("This is a WhatsThis help text."));
+
+    auto messageBox = KMessageBox::questionTwoActions(
+        nullptr,
+        i18n("Hello World"),
+        i18n("Hello Title"),
+        primaryAction, KStandardGuiItem::cancel());
+
+    if (messageBox == KMessageBox::PrimaryAction)
+    {
+        return EXIT_SUCCESS;
+    }
+    else
+    {
+        return EXIT_FAILURE;
+    }
+}
+```
 
 ![](../../../content/docs/getting-started/kxmlgui/hello\_world\_complete.webp)
 
@@ -75,12 +183,12 @@ We start with a call to [KLocalizedString::setApplicationDomain()](docs:ki18n;KL
 
 More information on internalization can be found in the [programmer's guide for internationalization](https://api.kde.org/frameworks/ki18n/html/prg\_guide.html).
 
-{% hint style="warning" %}Important
+{% hint style="warning" %}
+Important
 
 Since we are about to use many string arguments, instead of writing `QStringLiteral()` 7 times, we can use QString's [operator""\_s](https://doc.qt.io/qt-6/qstring.html#operator-22-22\_s), a shorter notation for [string literals](https://en.cppreference.com/w/cpp/language/string\_literal) special to Qt that does the same thing. This is also where the `using namespace Qt::Literals::StringLiterals;` comes from.
 
 So instead of `QStringLiteral("Hello World!")`, just typing `u"Hello World!"_s` is enough.
-
 {% endhint %}
 
 [KAboutData](docs:kcoreaddons;KAboutData) is a core KDE Frameworks component that stores information about an application, which can then be reused by many other KDE Frameworks components. We instantiate a new [KAboutData](docs:kcoreaddons;KAboutData) object with its fairly complete default constructor and add author information. After all the required information has been set, we call [KAboutData::setApplicationData()](docs:kcoreaddons;KAboutData::setApplicationData) to initialize the properties of the [QApplication ](docs:qtwidgets;QApplication)object.
@@ -91,7 +199,66 @@ One more thing of note is that, if you are using a different system language, th
 
 #### Command line
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/hello\_world/main3.cpp" highlight="cpp" emphasize="2 34-37" >\}}
+```cpp
+#include <QApplication>
+#include <QCommandLineParser>
+#include <KMessageBox>
+#include <KAboutData>
+#include <KLocalizedString>
+
+int main (int argc, char *argv[])
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("tutorial1");
+
+    KAboutData aboutData(
+        u"helloworld"_s,
+        i18n("Hello World tutorial"),
+        u"1.0"_s,
+        i18n("Displays a KMessageBox popup"),
+        KAboutLicense::GPL,
+        i18n("(c) 2024"),
+        i18n("Educational application..."),
+        u"https://apps.kde.org/someappname/"_s,
+        u"submit@bugs.kde.org"_s);
+
+    aboutData.addAuthor(
+        i18n("John Doe"),
+        i18n("Tutorial learner"),
+        u"john.doe@example.com"_s,
+        u"https://john-doe.example.com"_s,
+        u"johndoe"_s);
+
+    KAboutData::setApplicationData(aboutData);
+
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
+    KGuiItem primaryAction(
+        i18n("Hello"), QString(),
+        i18n("This is a tooltip"),
+        i18n("This is a WhatsThis help text."));
+
+    auto messageBox = KMessageBox::questionTwoActions(
+        nullptr,
+        i18n("Hello World"),
+        i18n("Hello Title"),
+        primaryAction, KStandardGuiItem::cancel());
+
+    if (messageBox == KMessageBox::PrimaryAction)
+    {
+        return EXIT_SUCCESS;
+    }
+    else
+    {
+        return EXIT_FAILURE;
+    }
+}
+```
 
 Then we come to [QCommandLineParser](docs:qtcore;QCommandLineParser). This is the class one would use to specify command line flags to open your program with a specific file, for instance. However, in this tutorial, we simply initialize it with the [KAboutData](docs:kcoreaddons;KAboutData) object we created before so we can use the `--version` or `--author` flags that are provided by default by Qt.
 
