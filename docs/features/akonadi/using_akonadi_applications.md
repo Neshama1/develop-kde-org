@@ -13,10 +13,10 @@ description: Displaying and modifying data provided by Akonadi
 
 This tutorial will guide you through the steps of creating an Akonadi application from scratch. This powerful framework allow us to easily display and manipulate personal information management (PIM) data. We will use it to create a simple QML and Kirigami application that will allow the user to view their emails.
 
-{% hint style="warning" %}Warning
+{% hint style="warning" %}
+Warning
 
 This tutorial assumes you have some prior knowledge of [Qt Model/View programming](https://doc.qt.io/qt-5/model-view-programming.html). Akonadi makes heavy use of models and proxy models to display information.
-
 {% endhint %}
 
 ### Preparation
@@ -250,10 +250,10 @@ private:
 };
 ```
 
-{% hint style="info" %}Note
+{% hint style="info" %}
+Note
 
 To work, this example will also require you to implement the getter for the newly created `Q_PROPERTY`.
-
 {% endhint %}
 
 With that, we can now extend the `QuickMail` constructor to also create the models.
@@ -302,20 +302,54 @@ Don't forget to register the `KDescendantsProxyModel` in the `main.cpp` file.
 
 In the QML file located at `src/content/ui/main.qml`, we remove the default mainPageComponent and add the following code instead:
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/contents/ui/main.qml" part="initial" lang="qml" >\}}
+```qml
+    pageStack.initialPage: QuickMail.loading ? loadingPage : mainPageComponent
+
+    Component {
+        id: loadingPage
+        Kirigami.Page {
+            Kirigami.PlaceholderMessage {
+                anchors.centerIn: parent
+                text: i18n("Loading, please wait...")
+            }
+        }
+    }
+```
 
 This will create a small loading page and will react to the loading signal we created previously.
 
 The next component is the actual UI of the mail folder selector page:
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/contents/ui/main.qml" part="mainPage" lang="qml" >\}}
+```qml
+    Component {
+        id: mainPageComponent
+
+        Kirigami.ScrollablePage {
+            title: i18n("KMailQuick")
+
+            ListView {
+                model: QuickMail.descendantsProxyModel
+                delegate: Kirigami.BasicListItem {
+                    text: model.display
+                    leftPadding: Kirigami.Units.gridUnit * model.kDescendantLevel
+                    onClicked: {
+                        QuickMail.loadMailCollection(model.index);
+                        root.pageStack.push(folderPageComponent, {
+                            title: model.display
+                        });
+                    }
+                }
+            }
+        }
+    }
+```
 
 ![Screenshot of a tree view of mail folders](../../../content/docs/features/akonadi/folderpage.png)
 
-{% hint style="info" %}Note
+{% hint style="info" %}
+Note
 
 You can get a better tree view using Kirigami Addons.
-
 {% endhint %}
 
 ### The List of Mails
@@ -409,10 +443,10 @@ QVariant MailModel::data(const QModelIndex &index, int role) const
 }
 ```
 
-{% hint style="warning" %}Note
+{% hint style="warning" %}
+Note
 
 You will also need to implement the constructor and the `roleNames` methods, and then add the file to your CMakeLists.txt configuration, to make this example work.
-
 {% endhint %}
 
 Don't forget to register the `MailModel` in the `main.cpp` file.
@@ -503,19 +537,110 @@ The last (and probably most important) feature in an email viewer is displaying 
 
 To make our code a bit cleaner, we will wrap the mail content inside a new class: `MailWrapper`. This class will be responsible for fetching all the information about the mail we want to display.
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/messagewrapper.h" part="wrapper" lang="cpp" >\}}
+```cpp
+class MessageWrapper : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QString from READ from NOTIFY loaded);
+    Q_PROPERTY(QStringList to READ to NOTIFY loaded);
+    Q_PROPERTY(QStringList cc READ cc NOTIFY loaded);
+    Q_PROPERTY(QString sender READ sender NOTIFY loaded);
+    Q_PROPERTY(QString subject READ subject NOTIFY loaded);
+    Q_PROPERTY(QDateTime date READ date NOTIFY loaded);
+    Q_PROPERTY(QString content READ content NOTIFY loaded);
+public:
+    explicit MessageWrapper(const Akonadi::Item &item, QObject *parent = nullptr);
+
+    QString from() const;
+    QStringList to() const;
+    QStringList cc() const;
+    QString sender() const;
+    QString subject() const;
+    QDateTime date() const;
+    QString content() const;
+
+Q_SIGNALS:
+    void loaded();
+
+private:
+    Akonadi::ItemFetchJob *createFetchJob(const Akonadi::Item &item);
+    Akonadi::Item m_item;
+    KMime::Message::Ptr m_mail;
+};
+```
 
 The constructor of the `MessageWrapper` will fetch the content of the message in case the Item is empty. It's using a [Akonadi::ItemFetchJob](docs:akonadi;Akonadi::ItemFetchJob) that is created inside the `createFetchJob` method. When we get the full item, we emit a `loaded` signal to update the UI.
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/messagewrapper.cpp" part="wrapper" lang="cpp" >\}}
+```cpp
+// src/messagewrapper.cpp
+#include "messagewrapper.h"
+
+#include "quickmail.h"
+
+#include <KLocalizedString>
+#include <Akonadi/KMime/MessageParts>
+#include <Session>
+#include <MailTransportAkonadi/ErrorAttribute>
+#include <ItemFetchJob>
+#include <ItemFetchScope>
+#include <algorithm>
+#include <QDebug>
+
+MessageWrapper::MessageWrapper(const Akonadi::Item &item, QObject *parent)
+    : QObject(parent)
+    , m_item(item)
+{
+    if (!item.isValid() || item.loadedPayloadParts().contains(Akonadi::MessagePart::Body)) {
+        m_mail = item.payload<KMime::Message::Ptr>();
+        Q_EMIT loaded();
+    } else {
+        m_mail = QSharedPointer<KMime::Message>::create();
+        Akonadi::ItemFetchJob *job = createFetchJob(item);
+        connect(job, &Akonadi::ItemFetchJob::result, [this](KJob *job) {
+            if (job->error()) {
+                // TODO
+            } else {
+                auto fetch = qobject_cast<Akonadi::ItemFetchJob *>(job);
+                Q_ASSERT(fetch);
+                if (fetch->items().isEmpty()) {
+                    // TODO display mssage not found error
+                } else {
+                    m_mail = fetch->items().constFirst().payload<KMime::Message::Ptr>();
+                    Q_EMIT loaded();
+                }
+            }
+        });
+    }
+}
+```
 
 In `createFetchJob`, we need to create the [ItemFetchJob](docs:akonadi;Akonadi::ItemFetchJob) and define its scope. The scope specifies which parts of an item should be fetched from Akonadi. We ask for the full payload, the parent collection, and possible related content.
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/messagewrapper.cpp" part="createFetchJob" lang="cpp" >\}}
+```cpp
+Akonadi::ItemFetchJob *MessageWrapper::createFetchJob(const Akonadi::Item &item)
+{
+    auto job = new Akonadi::ItemFetchJob(item, quickMail);
+    job->fetchScope().fetchAllAttributes();
+    job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+    job->fetchScope().fetchFullPayload(true);
+    job->fetchScope().setFetchRelations(true); // needed to know if we have notes or not
+    job->fetchScope().fetchAttribute<MailTransport::ErrorAttribute>();
+    return job;
+}
+```
 
 Reading the content of the mail is then done by calling the appropriate methods from the `KMime::Message`. Similarly, the other properties can be implemented as wrappers around `KMime::Message`. For more details, you can take a look at the [complete implementation](https://invent.kde.org/carlschwan/quickmail/-/blob/master/src/messagewrapper.cpp).
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/messagewrapper.cpp" part="content" lang="cpp" >\}}
+```cpp
+QString MessageWrapper::content() const
+{
+    const auto plain = m_mail->mainBodyPart("text/plain");
+    if (plain) {
+        return plain->decodedText();
+    }
+    return m_mail->textContent()->decodedText();
+}
+```
 
 To make this work, we need to transform the `QuickMail` class into a singleton, since we need to access the session when creating a job.
 
@@ -564,7 +689,50 @@ In the previously included `folderPageComponent`, we can now fill the `onClicked
 
 The mail viewer component is also a `Kirigami.ScrollablePage`, and we use a TextArea component to display the content.
 
-\{{< snippet file="features/akonadi/using\_akonadi\_applications/src/contents/ui/main.qml" part="mail" lang="qml" >\}}
+```qml
+    Component {
+        id: mailComponent
+
+        Kirigami.ScrollablePage {
+            required property var mail
+            title: mail.subject
+
+            ColumnLayout {
+                Kirigami.FormLayout {
+                    Layout.fillWidth: true
+                    Controls.Label {
+                        Kirigami.FormData.label: i18n("From:")
+                        text: mail.from
+                    }
+                    Controls.Label {
+                        Kirigami.FormData.label: i18n("To:")
+                        text: mail.to.join(', ')
+                    }
+                    Controls.Label {
+                        visible: mail.sender !== mail.from && mail.sender.length > 0
+                        Kirigami.FormData.label: i18n("Sender:")
+                        text: mail.sender
+                    }
+                    Controls.Label {
+                        Kirigami.FormData.label: i18n("Date:")
+                        text: mail.date.toLocaleDateString()
+                    }
+                }
+                Kirigami.Separator {
+                    Layout.fillWidth: true
+                }
+                Controls.TextArea {
+                    background: Item {}
+                    textFormat: TextEdit.AutoText
+                    Layout.fillWidth: true
+                    readOnly: true
+                    selectByMouse: true
+                    text: mail.content
+                    wrapMode: Text.Wrap
+                }
+            }
+        }
+```
 
 ![Mail view](../../../content/docs/features/akonadi/mailview.png)
 
