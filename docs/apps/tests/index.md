@@ -1,15 +1,17 @@
 ---
-title: "Appium automation testing"
-description: Learn how to run Appium tests for applications on Linux
+title: Appium automation testing
 weight: 3
 authors:
   - SPDX-FileCopyrightText: 2023 Nitin Tejuja <nitin.tejuja12@gmail.com>
   - SPDX-FileCopyrightText: 2023 Fushan Wen <qydwhotmail@gmail.com>
   - SPDX-FileCopyrightText: 2024 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
 SPDX-License-Identifier: CC-BY-SA-4.0
+description: Learn how to run Appium tests for applications on Linux
 ---
 
-## Introduction
+# Appium automation testing
+
+### Introduction
 
 KDE uses manually triggered unit tests as well as autotests to prevent code changes to our applications from introducing usability issues. Oftentimes, this is not enough for graphical applications, so testing the user interface directly is required. To automate this, KDE uses Appium tests.
 
@@ -17,9 +19,9 @@ KDE uses manually triggered unit tests as well as autotests to prevent code chan
 
 Selenium itself is used to automate testing web applications. Appium derives from it to allow for application testing in multiple platforms and in multiple languages.
 
-Appium does this leverage of multiple platforms and languages by using a *driver*. A driver is a component or interface that acts as a bridge between your test scripts and the application you want to automate. With it, developers can write Selenium-style user interface tests for manipulating the user interface, test accessibility, and measure power consumption.
+Appium does this leverage of multiple platforms and languages by using a _driver_. A driver is a component or interface that acts as a bridge between your test scripts and the application you want to automate. With it, developers can write Selenium-style user interface tests for manipulating the user interface, test accessibility, and measure power consumption.
 
-## The Linux Driver: Selenium AT-SPI {#atspi}
+### The Linux Driver: Selenium AT-SPI <a href="#atspi" id="atspi"></a>
 
 Appium has the ability to automate Linux apps by using the Linux accessibility API [AT-SPI2](https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/). KDE has a driver for this called [Selenium AT-SPI](https://invent.kde.org/sdk/selenium-webdriver-at-spi), a [WebDriver](https://www.w3.org/TR/webdriver/) server for Linux apps that runs the application in a localhost webserver so it can work in non-GUI environments (such as CI jobs), while also being able to run locally in a Wayland compositor (KWin) so the tester can run the tests manually and see the results.
 
@@ -29,22 +31,25 @@ In Qt's case, all you need to do is to follow standard [Qt Accessibility](https:
 
 This tutorial will provide a step-by-step guide to use Selenium AT-SPI to automate system testing of QtQuick applications using Python scripts.
 
-## Installation
+### Installation
 
 This tutorial requires Python 3.8+ which is included by default in most distributions.
 
 Installation of [Accerciser](https://help.gnome.org/users/accerciser/stable/introduction.html.en) (an interactive accessibility explorer) and [Orca](https://help.gnome.org/users/orca/stable/introduction.html.en) (screen reader) are recommended if you want to test accessibility with Appium tests.
 
-{{< installpackage
-    ubuntu="accerciser orca"
-    opensuse="accerciser orca"
-    fedora="accerciser orca"
-    arch="accerciser orca"
->}}
+| [Kubuntu](https://packages.ubuntu.com/search?keywords=accerciser), [KDE Neon](https://build.neon.kde.org/search/?q=accerciser) | <pre><code>sudo apt install accerciser orca
+</code></pre>    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Manjaro](https://software.manjaro.org/package/accerciser), [Arch](https://archlinux.org/packages/?q=accerciser)               | <pre><code>sudo pacman -S accerciser orca
+</code></pre>      |
+| [OpenSUSE](https://software.opensuse.org/package/accerciser)                                                                   | <pre><code>sudo zypper install accerciser orca
+</code></pre> |
+| [Fedora](https://packages.fedoraproject.org/pkgs/accerciser/accerciser/)                                                       | <pre><code>sudo dnf install accerciser orca
+</code></pre>    |
 
-### Building from source
+#### Building from source
 
-[kdesrc-build](https://invent.kde.org/sdk/kdesrc-build) is the recommended tool to build selenium-webdriver-at-spi from source. Learn [how to set up a KDE development environment using kdesrc-build]({{< ref "kdesrc-build-setup" >}}).
+[kdesrc-build](https://invent.kde.org/sdk/kdesrc-build) is the recommended tool to build selenium-webdriver-at-spi from source. Learn [how to set up a KDE development environment using kdesrc-build](../../getting-started/building/index-5.md).
 
 After the development environment is set up, run the command below to build both selenium-webdriver-at-spi and kcalc from source. The command will automatically install all the required dependencies:
 
@@ -68,7 +73,7 @@ kde-builder --run selenium-webdriver-at-spi-run ~/kde/src/selenium-webdriver-at-
 
 You will see a black window titled "KDE Wayland Compositor" running a KCalc window and having a few buttons getting highlighted (very fast!) as they're activated.
 
-{{< figure class="text-center" caption="KCalc running in nested KWin" src="kcalc.avif" >}}
+\{{< figure class="text-center" caption="KCalc running in nested KWin" src="kcalc.avif" >\}}
 
 After the test is complete, the window will close itself automatically, and you can see the test result in the console output.
 
@@ -81,16 +86,19 @@ I, [2023-10-17T20:37:55.194322 #32112]  INFO -- : tests done
 I, [2023-10-17T20:37:55.217687 #32112]  INFO -- : run.rb exiting true
 ```
 
-### Building manually
+#### Building manually
 
 To build Selenium manually, you will need to install its dependencies first:
 
-{{< installpackage
-    ubuntu="extra-cmake-modules libkf5windowsystem-dev libkf5wayland-dev libkpipewire-dev kwin-dev libwayland-dev"
-    opensuse="extra-cmake-modules kwindowsystem-devel kwayland-devel kpipewire-devel kwin5-devel wayland-devel"
-    fedora="extra-cmake-modules kf5-kwindowsystem-devel kf5-kwayland-devel kpipewire-devel kwin-devel wayland-devel"
-    arch="extra-cmake-modules kwindowsystem5 kwayland5 kpipewire kwin wayland"
->}}
+| [Kubuntu](https://packages.ubuntu.com/search?keywords=extra-cmake-modules), [KDE Neon](https://build.neon.kde.org/search/?q=extra-cmake-modules) | <pre><code>sudo apt install extra-cmake-modules libkf5windowsystem-dev libkf5wayland-dev libkpipewire-dev kwin-dev libwayland-dev
+</code></pre>   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Manjaro](https://software.manjaro.org/package/extra-cmake-modules), [Arch](https://archlinux.org/packages/?q=extra-cmake-modules)               | <pre><code>sudo pacman -S extra-cmake-modules kwindowsystem5 kwayland5 kpipewire kwin wayland
+</code></pre>                                       |
+| [OpenSUSE](https://software.opensuse.org/package/extra-cmake-modules)                                                                            | <pre><code>sudo zypper install extra-cmake-modules kwindowsystem-devel kwayland-devel kpipewire-devel kwin5-devel wayland-devel
+</code></pre>     |
+| [Fedora](https://packages.fedoraproject.org/pkgs/extra-cmake-modules/extra-cmake-modules/)                                                       | <pre><code>sudo dnf install extra-cmake-modules kf5-kwindowsystem-devel kf5-kwayland-devel kpipewire-devel kwin-devel wayland-devel
+</code></pre> |
 
 Then clone the repository and build it:
 
@@ -104,18 +112,16 @@ sudo cmake --install build/
 
 This will install it in your host root.
 
-## Running Tests
+### Running Tests
 
-Since this tutorial will focus on test scripts, at first we will be using QML
-code snippets instead of a full project to exemplify their use. First,
-we should see how an Appium test looks like.
+Since this tutorial will focus on test scripts, at first we will be using QML code snippets instead of a full project to exemplify their use. First, we should see how an Appium test looks like.
 
-### Anatomy of an Appium test
+#### Anatomy of an Appium test
 
 Writing an Appium test consists of three things:
 
 * a class that is initialized with Appium options
-* class members that start with the name "test_"
+* class members that start with the name "test\_"
 * an entrypoint
 
 At minimum, an Appium test should contain the following:
@@ -147,22 +153,11 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-The class can have any name you'd like, conventionally using uppercase, and
-it must derive from
-[Python's standard unittest library](https://docs.python.org/3/library/unittest.html).
+The class can have any name you'd like, conventionally using uppercase, and it must derive from [Python's standard unittest library](https://docs.python.org/3/library/unittest.html).
 
-The first class method is like a constructor where we perform some setup and can
-have any name, but it is conventionally called "setUpClass()". `AppiumOptions()`
-provides the default settings for our tests. `set_capability()` takes a
-[Python dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries),
-analogous to [C++ std::map](https://en.cppreference.com/w/cpp/container/map)
-or [Qt's QMap](https://doc.qt.io/qt-6/qmap.html).
+The first class method is like a constructor where we perform some setup and can have any name, but it is conventionally called "setUpClass()". `AppiumOptions()` provides the default settings for our tests. `set_capability()` takes a [Python dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), analogous to [C++ std::map](https://en.cppreference.com/w/cpp/container/map) or [Qt's QMap](https://doc.qt.io/qt-6/qmap.html).
 
-In this case, the first string is the key, the second string is the value.
-The list of keys and values available can be seen in the
-[Appium Documentation for Capabilities](https://appium.io/docs/en/2.0/guides/caps/).
-As can be seen in the documentation, the string "app" used above corresponds
-to the capability "appium:app".
+In this case, the first string is the key, the second string is the value. The list of keys and values available can be seen in the [Appium Documentation for Capabilities](https://appium.io/docs/en/2.0/guides/caps/). As can be seen in the documentation, the string "app" used above corresponds to the capability "appium:app".
 
 The "app" capability points to the application that will be tested, and it can be:
 
@@ -170,45 +165,28 @@ The "app" capability points to the application that will be tested, and it can b
 * The relative path to an executable and optionally its command line parameters (used for autotests when the application is being built).
 * The desktop file that runs the application, without the file path and including the `.desktop` extension.
 
-The second class method functions like a destructor that makes sure the driver
-will quit once the tests are done. It also lets you terminate any other
-external processes you might have started for your tests, like a small
-web server.
+The second class method functions like a destructor that makes sure the driver will quit once the tests are done. It also lets you terminate any other external processes you might have started for your tests, like a small web server.
 
-Next we use some boilerplate code that allows Appium to run at a localhost web
-server at a certain port, passing the options and capabilities we have defined.
-Then, we set a timeout of 10 seconds to allow the test to prepare and run
-the application when it is executed.
+Next we use some boilerplate code that allows Appium to run at a localhost web server at a certain port, passing the options and capabilities we have defined. Then, we set a timeout of 10 seconds to allow the test to prepare and run the application when it is executed.
 
-As mentioned before, we need a class method that starts with the name "test_"
-and that will perform the actual test.
+As mentioned before, we need a class method that starts with the name "test\_" and that will perform the actual test.
 
 Lastly we create the main entrypoint for our test.
 
-### GUI interaction via Appium tests
+#### GUI interaction via Appium tests
 
-For QML applications, interaction with Appium tests is simple and consists
-of two steps:
+For QML applications, interaction with Appium tests is simple and consists of two steps:
 
 1. Defining a property to a QML element that makes it locatable.
 2. Using a Selenium Locator to find that QML element.
 
-The Qt API that is required to make a QML element locatable is
-[Accessible](https://doc.qt.io/qt-6/qml-qtquick-accessible.html). Typically
-what is used is
-[Accessible.name](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#name-prop)
-or [Accessible.description](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#description-prop).
+The Qt API that is required to make a QML element locatable is [Accessible](https://doc.qt.io/qt-6/qml-qtquick-accessible.html). Typically what is used is [Accessible.name](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#name-prop) or [Accessible.description](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#description-prop).
 
-To find that QML element, we'd use the aptly named Appium function
-[find_element()](https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html#selenium.webdriver.remote.webelement.WebElement.find_element),
-to which we pass a
-[Selenium Locator](https://www.selenium.dev/documentation/webdriver/elements/locators/).
+To find that QML element, we'd use the aptly named Appium function [find\_element()](https://www.selenium.dev/selenium/docs/api/py/webdriver\_remote/selenium.webdriver.remote.webelement.html#selenium.webdriver.remote.webelement.WebElement.find\_element), to which we pass a [Selenium Locator](https://www.selenium.dev/documentation/webdriver/elements/locators/).
 
-#### Essential Locators
+**Essential Locators**
 
-The locator that is most commonly used for tests in KDE software is
-[NAME](https://www.selenium.dev/documentation/webdriver/elements/locators/#name).
-It matches the `Accessible.name` set in the QML code.
+The locator that is most commonly used for tests in KDE software is [NAME](https://www.selenium.dev/documentation/webdriver/elements/locators/#name). It matches the `Accessible.name` set in the QML code.
 
 For example, if we have a QtQuick.Controls.Button:
 
@@ -229,8 +207,7 @@ def test_click_button(self) -> None:
     # button.click()
 ```
 
-A string can be directly passed to `find_element()` as well.
-This is useful to access the `Accessible.description` of an element:
+A string can be directly passed to `find_element()` as well. This is useful to access the `Accessible.description` of an element:
 
 ```qml
 Controls.Button {
@@ -246,7 +223,7 @@ def test_click_button(self) -> None:
     self.driver.find_element(by="description", value="A clickable button").click()
 ```
 
-Another particularly useful Appium function we can use is [send_keys()](https://appium.github.io/python-client-sphinx/webdriver.html#webdriver.webelement.WebElement.send_keys), which allows to send keyboard input to the application. With a simple QtQuick.Controls.TextField for example:
+Another particularly useful Appium function we can use is [send\_keys()](https://appium.github.io/python-client-sphinx/webdriver.html#webdriver.webelement.WebElement.send\_keys), which allows to send keyboard input to the application. With a simple QtQuick.Controls.TextField for example:
 
 ```qml
 Controls.TextField {
@@ -263,8 +240,7 @@ def test_input(self) -> None:
     text_input.send_keys("Hello Appium")
 ```
 
-If you need to enter certain non-typable keys, such as Enter/Return, you can
-use [Selenium Keys](https://www.selenium.dev/selenium/docs/api/py/webdriver/selenium.webdriver.common.keys.html) for that:
+If you need to enter certain non-typable keys, such as Enter/Return, you can use [Selenium Keys](https://www.selenium.dev/selenium/docs/api/py/webdriver/selenium.webdriver.common.keys.html) for that:
 
 ```python
 from selenium.webdriver.common.keys import Keys
@@ -277,13 +253,7 @@ def test_dialog_confirm(self) -> None:
     edit_field.send_keys(Keys.ENTER)
 ```
 
-Another commonly used function is
-[get_attribute()](https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html#selenium.webdriver.remote.webelement.WebElement.get_attribute).
-It can be used to determine whether an element currently has an `Accessible`
-attribute such as
-[focused](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#focused-prop) or
-[selected](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#selected-prop)
-enabled.
+Another commonly used function is [get\_attribute()](https://www.selenium.dev/selenium/docs/api/py/webdriver\_remote/selenium.webdriver.remote.webelement.html#selenium.webdriver.remote.webelement.WebElement.get\_attribute). It can be used to determine whether an element currently has an `Accessible` attribute such as [focused](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#focused-prop) or [selected](https://doc.qt.io/qt-6/qml-qtquick-accessible.html#selected-prop) enabled.
 
 ```python
 searchFocused = searchField.get_attribute('focused')
@@ -291,27 +261,21 @@ searchFocused = searchField.get_attribute('focused')
 
 There are many other convenience functions:
 
-* [get_clipboard_text()](https://appium.readthedocs.io/en/latest/en/commands/device/clipboard/get-clipboard/)
-* [double_click()](https://appium.readthedocs.io/en/latest/en/commands/interactions/mouse/doubleclick/)
+* [get\_clipboard\_text()](https://appium.readthedocs.io/en/latest/en/commands/device/clipboard/get-clipboard/)
+* [double\_click()](https://appium.readthedocs.io/en/latest/en/commands/interactions/mouse/doubleclick/)
 * touchscreen [tap()](https://appium.readthedocs.io/en/latest/en/commands/interactions/touch/tap/)
-* mouse [move_to()](https://appium.readthedocs.io/en/latest/en/commands/interactions/mouse/moveto/)
-* [get_screenshot_as_file()](https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver.get_screenshot_as_file)
+* mouse [move\_to()](https://appium.readthedocs.io/en/latest/en/commands/interactions/mouse/moveto/)
+* [get\_screenshot\_as\_file()](https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver.get\_screenshot\_as\_file)
 
-These can be seen at the
-[Appium Commands documentation](https://appium.readthedocs.io/en/latest/en/commands/README/).
+These can be seen at the [Appium Commands documentation](https://appium.readthedocs.io/en/latest/en/commands/README/).
 
-Additional commands specific to using Python scripts can be seen at the
-[Selenium Python documentation](https://selenium-python.readthedocs.io/api.html).
+Additional commands specific to using Python scripts can be seen at the [Selenium Python documentation](https://selenium-python.readthedocs.io/api.html).
 
-#### Other ways to use locators
+**Other ways to use locators**
 
-In the introductory section [The Linux Driver: Selenium AT-SPI](#atspi), you became aware that Linux has a standard driver for handling accessibility. This driver is used, for example, in the Qt and GTK toolkits, and it specifies things such as accessibility IDs or Roles.
+In the introductory section [The Linux Driver: Selenium AT-SPI](index.md#atspi), you became aware that Linux has a standard driver for handling accessibility. This driver is used, for example, in the Qt and GTK toolkits, and it specifies things such as accessibility IDs or Roles.
 
-For the accessibility ID, which serves as a unique identifier for a user
-interface element, we can use the Appium-provided locator
-[ACCESSIBILITY_ID](https://appium.github.io/python-client-sphinx/webdriver.common.html#webdriver.common.appiumby.AppiumBy.ACCESSIBILITY_ID),
-which should match the QML
-[objectName](https://doc.qt.io/qt-6/qml-qtqml-qtobject.html#objectName-prop).
+For the accessibility ID, which serves as a unique identifier for a user interface element, we can use the Appium-provided locator [ACCESSIBILITY\_ID](https://appium.github.io/python-client-sphinx/webdriver.common.html#webdriver.common.appiumby.AppiumBy.ACCESSIBILITY\_ID), which should match the QML [objectName](https://doc.qt.io/qt-6/qml-qtqml-qtobject.html#objectName-prop).
 
 ```qml
 Item {
@@ -326,37 +290,19 @@ def test_click_button(self) -> None:
     self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Button").click()
 ```
 
-The accessibility ID can be used in a generic manner like NAME or "description"
-as shown above, but its primary use is with QtWidgets applications. You can see
-a live example of this in
-[KDebugSettings](https://invent.kde.org/utilities/kdebugsettings/-/blob/master/src/seleniumtests/kdebugsettings.py).
+The accessibility ID can be used in a generic manner like NAME or "description" as shown above, but its primary use is with QtWidgets applications. You can see a live example of this in [KDebugSettings](https://invent.kde.org/utilities/kdebugsettings/-/blob/master/src/seleniumtests/kdebugsettings.py).
 
-While the accessibility ID is a unique identifier, the Role on the other hand
-is a generic identifier for an element *type*, especially used for keyboard
-navigation. It is used to determine how to traverse focus, for example,
-in a menu bar, a tool bar, a check box, and other elements. In code terms,
-this means a QtQuick.Controls.Button and a Kirigami.Action attached to a button
-would share the same role of "push button", as they are both functionally
-buttons.
+While the accessibility ID is a unique identifier, the Role on the other hand is a generic identifier for an element _type_, especially used for keyboard navigation. It is used to determine how to traverse focus, for example, in a menu bar, a tool bar, a check box, and other elements. In code terms, this means a QtQuick.Controls.Button and a Kirigami.Action attached to a button would share the same role of "push button", as they are both functionally buttons.
 
-You can view the available roles in an application by using
-[Accerciser](https://help.gnome.org/users/accerciser/stable/introduction.html.en),
-an application that allows you to explore accessibility properties in other
-programs. KDE also has its own accessibility explorer,
-[Accessibility Inspector](https://apps.kde.org/accessibilityinspector/),
-which has not yet been packaged by distros.
+You can view the available roles in an application by using [Accerciser](https://help.gnome.org/users/accerciser/stable/introduction.html.en), an application that allows you to explore accessibility properties in other programs. KDE also has its own accessibility explorer, [Accessibility Inspector](https://apps.kde.org/accessibilityinspector/), which has not yet been packaged by distros.
 
-To inspect roles in KDE applications, you first need to open Accerciser, and
-then run the desired KDE application by passing the environment variable
-`QT_LINUX_ACCESSIBILITY_ALWAYS_ON`, like so:
+To inspect roles in KDE applications, you first need to open Accerciser, and then run the desired KDE application by passing the environment variable `QT_LINUX_ACCESSIBILITY_ALWAYS_ON`, like so:
 
 ```bash
 QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1 plasma-discover
 ```
 
-Discover for example has a test that first waits for the loading screen to
-vanish before searching for certain user interface elements. To do so, it first
-searches for the "Loading..." label's Role:
+Discover for example has a test that first waits for the loading screen to vanish before searching for certain user interface elements. To do so, it first searches for the "Loading..." label's Role:
 
 ```qml
 Kirigami.Action {
@@ -369,11 +315,7 @@ Kirigami.Action {
 }
 ```
 
-Then it uses the Selenium function
-[invisibility_of_element_located()](https://www.selenium.dev/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html#selenium.webdriver.support.expected_conditions.invisibility_of_element_located)
-together with the Selenium locator
-[CLASS_NAME](https://www.selenium.dev/documentation/webdriver/elements/locators/#class-name)
-to be sure the "Loading..." element is no longer there.
+Then it uses the Selenium function [invisibility\_of\_element\_located()](https://www.selenium.dev/selenium/docs/api/py/webdriver\_support/selenium.webdriver.support.expected\_conditions.html#selenium.webdriver.support.expected\_conditions.invisibility\_of\_element\_located) together with the Selenium locator [CLASS\_NAME](https://www.selenium.dev/documentation/webdriver/elements/locators/#class-name) to be sure the "Loading..." element is no longer there.
 
 ```python
 def test_search_install_uninstall(self):
@@ -383,15 +325,11 @@ def test_search_install_uninstall(self):
     # Rest of code
 ```
 
-### Testing and asserting
+#### Testing and asserting
 
-So far, we have seen how to interact with GUI elements, but we haven't tested
-anything yet.
+So far, we have seen how to interact with GUI elements, but we haven't tested anything yet.
 
-Generally, tests *assert* whether the performed action was successful
-or not. This is done by using the
-[Python unittest module's assert methods](https://docs.python.org/3/library/unittest.html#assert-methods).
-The most common methods are:
+Generally, tests _assert_ whether the performed action was successful or not. This is done by using the [Python unittest module's assert methods](https://docs.python.org/3/library/unittest.html#assert-methods). The most common methods are:
 
 ```python
 # a == b
@@ -408,12 +346,7 @@ assertIn(member,container)
 assertNotIn(member, container)
 ```
 
-A common pattern used in KDE software is to write a `getresults()` function
-that retrieves a property from a certain element. This is useful for when
-multiple UI elements are handled and the result culminates into a single
-element. The standard `calculatortest.py` provided with Selenium AT-SPI
-is an example of this, with the input of multiple calculator keys being probed
-before checking the result in the text field:
+A common pattern used in KDE software is to write a `getresults()` function that retrieves a property from a certain element. This is useful for when multiple UI elements are handled and the result culminates into a single element. The standard `calculatortest.py` provided with Selenium AT-SPI is an example of this, with the input of multiple calculator keys being probed before checking the result in the text field:
 
 ```python
 def getresults(self):
@@ -421,11 +354,7 @@ def getresults(self):
     return displaytext
 ```
 
-Another assert pattern is used to test whether the values you get from
-interacting with the application's UI matches an expected result. This can be
-done with an `assertResult(self, actual, expected)` method. Generally you want
-for the driver to have finished loading and having run the `getresults()` method,
-so a timeout is needed.
+Another assert pattern is used to test whether the values you get from interacting with the application's UI matches an expected result. This can be done with an `assertResult(self, actual, expected)` method. Generally you want for the driver to have finished loading and having run the `getresults()` method, so a timeout is needed.
 
 ```python
 def assertResult(self, actual, expected):
@@ -441,12 +370,7 @@ def test_addition(self):
     self.assertResult(self.getresults(), "8")
 ```
 
-Whenever a test fails, it is customary to take a screenshot of the result so
-that even tests done in the
-[KDE CI](https://community.kde.org/Infrastructure/Continuous_Integration_System)
-can be viewed by developers as downloadable artifacts. This can be achieved with
-[get_screenshot_as_file(filename)](https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver.get_screenshot_as_file)
-in the `tearDownClass()` destructor:
+Whenever a test fails, it is customary to take a screenshot of the result so that even tests done in the [KDE CI](https://community.kde.org/Infrastructure/Continuous\_Integration\_System) can be viewed by developers as downloadable artifacts. This can be achieved with [get\_screenshot\_as\_file(filename)](https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver.get\_screenshot\_as\_file) in the `tearDownClass()` destructor:
 
 ```python
 def tearDownClass(self) -> None:
