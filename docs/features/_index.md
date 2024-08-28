@@ -27,13 +27,19 @@ Cuttlefish allows you to search for icons by name and by category. You can inspe
 
 In a traditional QtWidgets application:
 
-\{{< highlight cpp >\}} QIcon undoicon = QIcon::fromTheme("edit-undo"); \{{< /highlight >\}}
+```cpp
+QIcon undoicon = QIcon::fromTheme("edit-undo");
+```
 
 In a QtQuick application:
 
-\{{< highlight qml >\}} import org.kde.kirigami 2.14 as Kirigami
+```qml
+import org.kde.kirigami 2.14 as Kirigami
 
-Kirigami.Icon { source: "edit-undo" } \{{< /highlight >\}}
+Kirigami.Icon {
+    source: "edit-undo"
+} 
+```
 
 ### Other platforms than Linux
 
@@ -43,4 +49,11 @@ On other platforms, the icon theme is not available.
 
 On Android, you can use the [kirigami\_package\_breeze\_icons()](https://invent.kde.org/frameworks/kirigami/-/blob/master/KF5Kirigami2Macros.cmake#L5) CMake function to package the Breeze icons you are using.
 
-\{{< highlight cmake >\}} if(ANDROID) kirigami\_package\_breeze\_icons(ICONS edit-undo edit-redo ) endif() \{{< /highlight >\}}
+```cmake
+if(ANDROID)
+    kirigami_package_breeze_icons(ICONS
+        edit-undo
+        edit-redo
+    )
+endif()
+```
