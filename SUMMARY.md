@@ -128,7 +128,7 @@
       * [Background SVG format](docs/plasma/theme/background-svg.md)
       * [System and accent colors](docs/plasma/theme/theme-colors.md)
       * [Theme elements reference](docs/plasma/theme/theme-elements.md)
-      * [Porting theme to Plasma 5](docs/plasma/theme/theme-porting-to-plasma5.md)
+      * [Porting themes to Plasma 5](docs/plasma/theme/theme-porting-to-plasma5.md)
       * [Porting themes to Plasma 6](docs/plasma/theme/theme-porting-to-plasma6.md)
     * [Aurorae window decorations](docs/plasma/index.md)
     * [KWin scripting tutorial](docs/plasma/kwin/README.md)
