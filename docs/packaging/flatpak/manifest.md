@@ -1,14 +1,59 @@
 ---
 title: Extending your package
-description: Understand the core components of your manifest.
 weight: 2
 aliases:
   - /docs/flatpak/manifest/
+description: Understand the core components of your manifest.
 ---
+
+# Extending your package
 
 Let's first take a look at our previous manifest to understand what each thing does.
 
-{{< code-toggle prefix="kate" >}}id: org.kde.kate
+{% tabs %}
+{% tab title="json" %}
+```json
+{
+   "command": "kate",
+   "desktop-file-name-suffix": " (Nightly)",
+   "finish-args": [
+      "--share=ipc",
+      "--socket=fallback-x11",
+      "--socket=wayland"
+   ],
+   "id": "org.kde.kate",
+   "modules": [
+      {
+         "buildsystem": "cmake-ninja",
+         "name": "konsole",
+         "sources": [
+            {
+               "type": "git",
+               "url": "https://invent.kde.org/utilities/konsole.git"
+            }
+         ]
+      },
+      {
+         "buildsystem": "cmake-ninja",
+         "name": "kate",
+         "sources": [
+            {
+               "type": "git",
+               "url": "https://invent.kde.org/utilities/kate.git"
+            }
+         ]
+      }
+   ],
+   "runtime": "org.kde.Platform",
+   "runtime-version": "5.15-21.08",
+   "sdk": "org.kde.Sdk"
+}
+```
+{% endtab %}
+
+{% tab title="yaml" %}
+```yaml
+id: org.kde.kate
 runtime: org.kde.Platform
 runtime-version: "5.15-21.08"
 sdk: org.kde.Sdk
@@ -29,7 +74,9 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/utilities/kate.git
-{{< /code-toggle >}}
+```
+{% endtab %}
+{% endtabs %}
 
 If we read the [official flatpak-builder documentation](https://docs.flatpak.org/en/latest/flatpak-builder-command-reference.html), we can see values in parentheses for each property, namely `string`, `boolean`, `integer`, `object`, `array of strings` and `array of objects and strings`.
 
@@ -41,13 +88,13 @@ For array of strings, this would be:
 
 `"Property": [ "String1", "String2", "String3" ]`
 
-wherein [] represents an array.
+wherein \[] represents an array.
 
 For array of objects and strings, this would be something like:
 
 `"Property": ["string1", {"PropertyA": "ValueA", "PropertyB": "ValueB"}]`
 
-wherein inside the [] array, there is a string and an object, the latter being everything inside {}.
+wherein inside the \[] array, there is a string and an object, the latter being everything inside {}.
 
 You must be wary of the correct syntax for each type of property, as this can get confusing pretty fast, especially if you are not well acquainted with JSON syntax.
 
