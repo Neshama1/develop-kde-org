@@ -231,11 +231,11 @@ RowLayout {
 #### Plasmoid.backgroundHints
 
 * `PlasmaCore.Types.DefaultBackground` **(default)** is equal to `StandardBackground`.
-* `PlasmaCore.Types.StandardBackground` The standard background from the theme is drawn. ![](../../../content/docs/plasma/widget/backgroundhint-standard.png)
+* `PlasmaCore.Types.StandardBackground` The standard background from the theme is drawn. ![](../../../content/docs/plasma/widget/properties/backgroundhint-standard.png)
 * `PlasmaCore.Types.TranslucentBackground` An alternate version of the background is drawn, usually more translucent.
-* `PlasmaCore.Types.ShadowBackground` The applet won't have a svg background but a drop shadow of its content done via a shader. The text color will also invert. ![](../../../content/docs/plasma/widget/backgroundhint-shadow.png)
-* `PlasmaCore.Types.NoBackground` This property is used to hide a desktop widget background. An example would be [the Analog Clock widget](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/analog-clock/contents/ui/analogclock.qml#L34). ![](../../../content/docs/plasma/widget/backgroundhint-nobg.png)
-* `PlasmaCore.Types.ConfigurableBackground` Allows the user to toggle between `StandardBackground` and `ShadowBackground`. Note that this is a bit flag to be used with another enum value. ![](../../../content/docs/plasma/widget/backgroundhint-toggle.png)
+* `PlasmaCore.Types.ShadowBackground` The applet won't have a svg background but a drop shadow of its content done via a shader. The text color will also invert. ![](../../../content/docs/plasma/widget/properties/backgroundhint-shadow.png)
+* `PlasmaCore.Types.NoBackground` This property is used to hide a desktop widget background. An example would be [the Analog Clock widget](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/analog-clock/contents/ui/analogclock.qml#L34). ![](../../../content/docs/plasma/widget/properties/backgroundhint-nobg.png)
+* `PlasmaCore.Types.ConfigurableBackground` Allows the user to toggle between `StandardBackground` and `ShadowBackground`. Note that this is a bit flag to be used with another enum value. ![](../../../content/docs/plasma/widget/properties/backgroundhint-toggle.png)
 
 To use `ConfigurableBackground`, combine the flag with another value with the bitwise OR operator `|`.
 
