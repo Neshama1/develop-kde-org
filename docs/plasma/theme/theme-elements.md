@@ -963,7 +963,7 @@ Elements in this folder are used when compositing is disabled, which can only be
 
 Since top-level windows will be shaped according to the transparency of the SVG and window shapes don't support alpha-blending, if the SVG has rounded borders, those borders should have a shape that doesn't require anti-aliasing, like the following example.
 
-\{{< figure src="No\_composite\_plasma\_svg.jpg" caption="This is how a border of the Plasma "opaque" background SVGs should appear when it has a rounded border (since the window shape won't have antialiasing the outer contour must not have rounded lines)." >\}}
+![This is how a border of the Plasma "opaque" background SVGs should appear when it has a rounded border (since the window shape won't have antialiasing the outer contour must not have rounded lines](../../../content/docs/plasma/theme/theme-elements/No\_composite\_plasma\_svg.jpg)
 
 ### solid/ folder
 
