@@ -157,7 +157,7 @@ The users will not even see an option to configure the mouse in System settings.
 
 Run the command `kcmshell5 --list` for a list of available modules and use the format .desktop in the configuration file. In most public access/café environments, one will probably want to lock down almost all control centre modules.
 
-![System settings](../../../content/docs/administration/kiosk/systemsettings.png)
+![System settings](../../../content/docs/administration/kiosk/introduction/systemsettings.png)
 
 ### Closing Remarks
 
