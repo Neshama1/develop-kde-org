@@ -73,7 +73,7 @@ kde-builder --run selenium-webdriver-at-spi-run ~/kde/src/selenium-webdriver-at-
 
 You will see a black window titled "KDE Wayland Compositor" running a KCalc window and having a few buttons getting highlighted (very fast!) as they're activated.
 
-\{{< figure class="text-center" caption="KCalc running in nested KWin" src="kcalc.avif" >\}}
+![](../../../content/docs/apps/tests/appium/kcalc.avif)
 
 After the test is complete, the window will close itself automatically, and you can see the test result in the console output.
 
