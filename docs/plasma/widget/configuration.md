@@ -12,7 +12,7 @@ description: Adding user configured settings to your widget
 
 Every widget by default has a configure action when you right click the widget called `MyWidget Settings...`. By default it will contain a form to set a global shortcut to activate your widget.
 
-![](../../../content/docs/plasma/widget/configwindow.png)
+![](../../../content/docs/plasma/widget/configuration/configwindow.png)
 
 ### contents/config/main.xml
 
@@ -114,7 +114,7 @@ Please note that your should not use `PlasmaComponents.*` controls in the config
 
 `Kirigami.FormLayout` is used to layout the controls in the center of the page. The `Kirigami.FormData.label` attached property is used to place labels in front of the controls. Kirigami labels are optional, so you do not need to use them for CheckBoxes which have their own labels on the right.
 
-![](../../../content/docs/plasma/widget/configgeneral.png)
+![](../../../content/docs/plasma/widget/configuration/configgeneral.png)
 
 contents/ui/configGeneral.qml
 
