@@ -8,12 +8,13 @@ description: Compiling advanced C++ widgets with CMake
 
 ### Compiling With CMake
 
-\{{< sections >\}} \{{< section-left >\}}
+A template can be found in `plasma-framework`:
 
-A template can be found in `plasma-framework`:\
-[`plasma-framework` / `template/qml-plasmoid`](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/templates/qml-plasmoid)
+{% embed url="https://invent.kde.org/frameworks/plasma-framework/-/tree/master/templates/qml-plasmoid" %}
 
-{% hint style="warning" %} Do not reuse the same `Id`/namespace you used with a widget installed with `kpackagetool5`. If a user installed it to their home directory, the code in the home directory will be loaded instead of the code in the root directory. {% endhint %}
+{% hint style="warning" %}
+Do not reuse the same \`Id\`/namespace you used with a widget installed with \`kpackagetool5\`. If a user installed it to their home directory, the code in the home directory will be loaded instead of the code in the root directory.
+{% endhint %}
 
 ```bash
 mkdir -p ~/Code/plasmoid-helloworld2
@@ -32,7 +33,9 @@ You can run all build and test commands in a single line like so:
 (cd ./build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make && sudo make install) && plasmoidviewer -a com.github.zren.helloworld2
 ```
 
-{% hint style="warning" %} You cannot ship a widget that needs to be compiled on the [KDE Store](https://store.kde.org). You will need to publish it in an [Ubuntu PPA](https://help.ubuntu.com/community/PPA), on the [Arch AUR](https://aur.archlinux.org/), or with [OpenSUSE OBS](https://build.opensuse.org/). {% endhint %} \{{< /section-left >\}} \{{< section-right >\}}
+{% hint style="warning" %}
+You cannot ship a widget that needs to be compiled on the \[KDE Store]\(https://store.kde.org). You will need to publish it in an \[Ubuntu PPA]\(https://help.ubuntu.com/community/PPA), on the \[Arch AUR]\(https://aur.archlinux.org/), or with \[OpenSUSE OBS]\(https://build.opensuse.org/).
+{% endhint %}
 
 ```txt
 └── ~/Code/plasmoid-helloworld2/
@@ -60,18 +63,21 @@ find_package(KF5 REQUIRED COMPONENTS
 plasma_install_package(package com.github.zren.helloworld2)
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### Private C++ QML Plugin
 
-Plasma ships with a number of useful QML plugins like \[PlasmaCore]\(\{{< ref "plasma-qml-api.md#plasmacore" >\}}), \[PlasmaComponents]\(\{{< ref "plasma-qml-api.md#plasmacomponents-controls" >\}}), \[PlasmaExtras]\(\{{< ref "plasma-qml-api.md#plasmaextras" >\}}). Your widget might need more complicated models that interact with C++ libraries or File I/O requiring you to create a QML plugin.
+Plasma ships with a number of useful QML plugins like PlasmaCore, PlasmaComponents, PlasmaExtras. Your widget might need more complicated models that interact with C++ libraries or File I/O requiring you to create a QML plugin.
 
 #### Example Plugins
 
-\{{< sections >\}} \{{< section-left >\}} You can find a template in `plasma-framework`:\
-[`plasma-framework` / `template/qml-plasmoid-with-qml-extension`](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/templates/qml-plasmoid-with-qml-extension) \{{< /section-left >\}} \{{< section-right >\}} [Download KDevelop Template](https://invent.kde.org/frameworks/plasma-framework/-/archive/master/plasma-framework-master.zip?path=templates/qml-plasmoid-with-qml-extension) \{{< /section-right >\}} \{{< /sections >\}}
+You can find a template in `plasma-framework`:
 
-\{{< sections >\}} \{{< section-left >\}} The mediaframe widget in `kdeplasma-addons` is a fairly simple example. The plugin has one C++ class to define the plugin, and only defines a single QML Item type.
+{% embed url="https://invent.kde.org/frameworks/plasma-framework/-/tree/master/templates/qml-plasmoid-with-qml-extension" %}
+
+Download KDevelop Template
+
+{% embed url="https://invent.kde.org/frameworks/plasma-framework/-/archive/master/plasma-framework-master.zip?path=templates/qml-plasmoid-with-qml-extension" %}
+
+The mediaframe widget in `kdeplasma-addons` is a fairly simple example. The plugin has one C++ class to define the plugin, and only defines a single QML Item type.
 
 [`kdeplasma-addons` / `applets/mediaframe`](https://invent.kde.org/plasma/kdeplasma-addons/-/tree/master/applets/mediaframe/plugin)
 
@@ -79,7 +85,9 @@ Plasma ships with a number of useful QML plugins like \[PlasmaCore]\(\{{< ref "p
 import org.kde.plasma.private.mediaframe 2.0
 ```
 
-{% hint style="info" %} While KDE puts `.private` in the namespace of these plugins, they can be accessed by any QML widget / application. If you plan on using someone else's "private" plugin, your widget may experience bugs when Plasma updates. {% endhint %}
+{% hint style="info" %}
+While KDE puts \`.private\` in the namespace of these plugins, they can be accessed by any QML widget / application. If you plan on using someone else's "private" plugin, your widget may experience bugs when Plasma updates.
+{% endhint %}
 
 Another example is the "Kicker" plugin for the "Application Menu" widget which is reused by the kickoff "Application Launcher" widget.
 
@@ -89,7 +97,7 @@ import org.kde.plasma.private.kicker 0.1 as Kicker
 
 * [`plasma-workspace` / `applets/kicker/plugin`](https://invent.kde.org/plasma/plasma-workspace/-/tree/master/applets/kicker/plugin)
 * [`plasma-desktop` / `applets/kicker/package/contents/ui/main.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kicker/package/contents/ui/main.qml#L14)
-* [`plasma-desktop` / `applets/kickoff/package/contents/ui/Kickoff.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/Kickoff.qml) \{{< /section-left >\}} \{{< section-right >\}}
+* [`plasma-desktop` / `applets/kickoff/package/contents/ui/Kickoff.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/applets/kickoff/package/contents/ui/Kickoff.qml)
 
 ```txt
 └── ~/Code/plasmoid-mediaframe/
@@ -107,13 +115,11 @@ import org.kde.plasma.private.kicker 0.1 as Kicker
     └── CMakeLists.txt
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### Writing a Plugin
 
-\{{< sections >\}} \{{< section-left >\}} Lets use mediaframe as an example and create our own widget with a plugin.
+Lets use mediaframe as an example and create our own widget with a plugin.
 
-A full copy of this example can be downloaded as a ZIP or cloned from GitHub. \{{< /section-left >\}} \{{< section-right >\}} [Download ZIP](https://github.com/Zren/plasmoid-helloworldplugin/archive/refs/heads/master.zip) or Git Clone
+A full copy of this example can be downloaded as a ZIP or cloned from GitHub. [Download ZIP](https://github.com/Zren/plasmoid-helloworldplugin/archive/refs/heads/master.zip) or Git Clone.
 
 ```bash
 mkdir -p ~/Code
@@ -122,9 +128,7 @@ git clone https://github.com/Zren/plasmoid-helloworldplugin plasmoid-widgetname
 cd ~/Code/plasmoid-widgetname
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
-\{{< sections >\}} \{{< section-left >\}} To start off, let's work out what we want in the QML code. For this simple example, we will import a new `WidgetItem` type, which has a property named `number` and has an [invokable function](https://doc.qt.io/qt-6/qtqml-cppintegration-exposecppattributes.html) called `randomize()` which will set the `number` property to a random number. \{{< /section-left >\}} \{{< section-right >\}}
+To start off, let's work out what we want in the QML code. For this simple example, we will import a new `WidgetItem` type, which has a property named `number` and has an [invokable function](https://doc.qt.io/qt-6/qtqml-cppintegration-exposecppattributes.html) called `randomize()` which will set the `number` property to a random number.
 
 package/contents/ui/main.qml
 
@@ -149,9 +153,7 @@ Item {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
-\{{< sections >\}} \{{< section-left >\}} Before moving on to the C++ code, don't forget to create the `metadata.json`. \{{< /section-left >\}} \{{< section-right >\}}
+Before moving on to the C++ code, don't forget to create the `metadata.json`.&#x20;
 
 package/metadata.json
 
@@ -169,9 +171,7 @@ package/metadata.json
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
-\{{< sections >\}} \{{< section-left >\}} First new things added to our `CMakeLists.txt` is listing all our `.cpp` files that we need to compile. We also define the plugin library name used in the binary filename.
+First new things added to our `CMakeLists.txt` is listing all our `.cpp` files that we need to compile. We also define the plugin library name used in the binary filename.
 
 ```cmake
 set(widgetnameplugin_SRCS
@@ -215,8 +215,6 @@ target_link_libraries(widgetnameplugin
     Qt::Qml
 )
 ```
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 CMakeLists.txt
 
@@ -264,13 +262,11 @@ install(TARGETS widgetnameplugin DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/zr
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/zren/widgetname)
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
-\{{< sections >\}} \{{< section-left >\}} The `qmldir` file is basically the qml plugin metadata file. Since we don't bundle any `.qml` files in the plugin itself [like PlasmaComponents](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/qmldir) does, this will just define the namespace of the plugin and the plugin library name.
+The `qmldir` file is basically the qml plugin metadata file. Since we don't bundle any `.qml` files in the plugin itself [like PlasmaComponents](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/declarativeimports/plasmacomponents3/qmldir) does, this will just define the namespace of the plugin and the plugin library name.
 
 Inside `widgetnameplugin.h` we extend [`QQmlExtensionPlugin`](https://github.com/qt/qtdeclarative/blob/dev/src/qml/qml/qqmlextensionplugin.h) and indicate we implement the `QQmlExtensionInterface` which somehow tells it to call `registerTypes()`.
 
-In the `.cpp` file we register the new QML type. Don't forget to edit the namespace in the assert. \{{< /section-left >\}} \{{< section-right >\}}
+In the `.cpp` file we register the new QML type. Don't forget to edit the namespace in the assert.
 
 plugin/qmldir
 
@@ -311,11 +307,9 @@ void WidgetNamePlugin::registerTypes(const char *uri)
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
+Finally we write our new `WidgetItem` type. In the header file we extend `QObject` and define the `number` property. Since we want do not want the `number` property to be readonly, we define `WRITE` and a setter function. We also define the `numberChanged` signal to `NOTIFY` the GUI when it's modified.
 
-\{{< sections >\}} \{{< section-left >\}} Finally we write our new `WidgetItem` type. In the header file we extend `QObject` and define the `number` property. Since we want do not want the `number` property to be readonly, we define `WRITE` and a setter function. We also define the `numberChanged` signal to `NOTIFY` the GUI when it's modified.
-
-The `randomize()` method needs `Q_INVOKABLE` otherwise it [cannot be called from QML](https://doc.qt.io/qt-6/qtqml-cppintegration-exposecppattributes.html). \{{< /section-left >\}} \{{< section-right >\}}
+The `randomize()` method needs `Q_INVOKABLE` otherwise it [cannot be called from QML](https://doc.qt.io/qt-6/qtqml-cppintegration-exposecppattributes.html).
 
 plugin/widgetitem.h
 
@@ -347,11 +341,9 @@ private:
 };
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
+To make development easier, we've imported [`qDebug()`](https://doc.qt.io/qt-6/qdebug.html#basic-use) which lets us log to the terminal.
 
-\{{< sections >\}} \{{< section-left >\}} To make development easier, we've imported [`qDebug()`](https://doc.qt.io/qt-6/qdebug.html#basic-use) which lets us log to the terminal.
-
-In the setter, we do not emit the signal if the property does not actually change. \{{< /section-left >\}} \{{< section-right >\}}
+In the setter, we do not emit the signal if the property does not actually change.
 
 plugin/widgetitem.cpp
 
@@ -395,11 +387,9 @@ void WidgetItem::randomize()
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
+To compile, install and test this plugin follow the instructions from the previous [Compiling With CMake](c-api.md#compiling-with-cmake) section and the Widget Testing page.
 
-\{{< sections >\}} \{{< section-left >\}} To compile, install and test this plugin follow the instructions from the previous [Compiling With CMake](c-api.md#compiling-with-cmake) section and the \[Widget Testing]\(\{{< ref "testing.md" >\}}) page.
-
-When writing your widget's `README.md`, you'll want to add uninstall instructions as well. \{{< /section-left >\}} \{{< section-right >\}}
+When writing your widget's `README.md`, you'll want to add uninstall instructions as well.
 
 ```bash
 cd ~/Code/plasmoid-widgetname
@@ -412,11 +402,7 @@ plasmoidviewer -a com.github.zren.widgetname
 (cd ./build && sudo make uninstall)
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### plasmoid.nativeInterface
-
-\{{< sections >\}} \{{< section-left >\}}
 
 The `plasmoid.nativeInterface` property allows you to directly access C++ objects or functions in the `Plasma::Applet` instance. You need to extend the `Plasma::Applet` class first however. The `plasmoid.nativeInterface` cannot be accessed by another widget namespace, so this code is private.
 
@@ -427,8 +413,6 @@ See the SystemTray container for an example.
 * [`plasma-workspace`/.../container/systemtraycontainer.h](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/systemtray/container/systemtraycontainer.h)
 * [`plasma-workspace`/.../container/systemtraycontainer.cpp](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/systemtray/container/systemtraycontainer.cpp)
 * [`plasma-workspace`/.../container/package/contents/ui/main.qml](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/systemtray/container/package/contents/ui/main.qml)
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 CMakeLists.txt
 
@@ -494,8 +478,6 @@ private:
 };
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### Containment (SystemTray, Panel, Grouping)
 
 Note:
@@ -527,5 +509,3 @@ target_link_libraries(widgetnameplugin
     KF5::I18n
 )
 ```
-
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}
