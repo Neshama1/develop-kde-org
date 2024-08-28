@@ -117,11 +117,9 @@ The compact representation uses [`DefaultCompactRepresentation.qml`](https://inv
 * Draws the `plasmoid.icon` using a [`Kirigami.Icon`](docs:kirigami2;Icon)
 * Defines a [`MouseArea`](https://doc.qt.io/qt-5/qml-qtquick-mousearea.html) to toggle the `expanded` property which displays the full representation.
 
-https://invent.kde.org/plasma/plasma-desktop/-/blob/master/desktoppackage/contents/applet/CompactApplet.qml
+{% embed url="https://invent.kde.org/plasma/plasma-desktop/-/blob/master/desktoppackage/contents/applet/CompactApplet.qml" %}
 
 #### Plasmoid.fullRepresentation
-
-\{{< sections >\}} \{{< section-left >\}}
 
 If there's enough room (more than [`Plasmoid.switchHeight`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/plasmaquick/appletquickitem.h#L49-50)) then the widget's full representation can be drawn directly in the panel or on the desktop. If you want to force this behaviour you can set [`Plasmoid.preferredRepresentation`](https://invent.kde.org/frameworks/plasma-framework/-/blob/master/src/plasmaquick/appletquickitem.h#L58-61).
 
@@ -138,29 +136,45 @@ In a plasma widget, the full representation will be shown in a [`PlasmaCore.Dial
 
 The dialog's source code can be found in [`CompactApplet.qml`](https://invent.kde.org/plasma/plasma-desktop/-/blob/master/desktoppackage/contents/applet/CompactApplet.qml) to see the exact behavior.
 
-\{{< /section-left >\}} \{{< section-right >\}}
-
 contents/ui/main.qml
 
 ```qml
-{{< readfile file="/content/docs/plasma/widget/snippet/popup-size.qml" >}}
-```
+import QtQuick 2.0
+import QtQuick.Layouts 1.0
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.plasmoid 2.0
 
-\{{< /section-right >\}} \{{< /sections >\}}
+Item {
+    // Always display the compact view.
+    // Never show the full popup view even if there is space for it.
+    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+
+    Plasmoid.fullRepresentation: Item {
+        Layout.minimumWidth: label.implicitWidth
+        Layout.minimumHeight: label.implicitHeight
+        Layout.preferredWidth: 640 * PlasmaCore.Units.devicePixelRatio
+        Layout.preferredHeight: 480 * PlasmaCore.Units.devicePixelRatio
+        
+        PlasmaComponents.Label {
+            id: label
+            anchors.fill: parent
+            text: "Hello World!"
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
+}
+```
 
 #### Plasmoid.icon
 
-\{{< sections >\}} \{{< section-left >\}}
-
-As mentioned in \[the setup widget `metadata.json` section]\(\{{< ref "setup.md#metadatajson" >\}}), by default the plasmoid icon is populated with the `Icon` value in `metadata.json`.
+As mentioned in \[the setup widget [`metadata.json` section](properties.md#metadata.json), by default the plasmoid icon is populated with the `Icon` value in `metadata.json`.
 
 To set a dynamic or user configurable icon, you will need to assign an icon name to `Plasmoid.icon`.
 
 You can search for icon names in the `/usr/share/icon` folder. You can also look for an icon name by right clicking your app launcher widget then editing the icon in its settings. It uses a searchable interface and lists them by category. Plasma's SDK also has the Cuttlefish app ([screenshot](https://cdn.kde.org/screenshots/cuttlefish/cuttlefish.png)) which you can install with `sudo apt install plasma-sdk`.
 
-Also checkout the \[configurable panel icon example]\(\{{< ref "examples.md#configurable-icon" >\}})
-
-\{{< /section-left >\}} \{{< section-right >\}}
+Also checkout the configurable panel icon example
 
 contents/ui/main.qml
 
@@ -182,23 +196,17 @@ Item {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### Plasmoid.configuration
-
-\{{< sections >\}} \{{< section-left >\}}
 
 This property provides access to the values user configurable values. You can easily access config values with `plasmoid.configuration.varName`. By default it populates with the keys and values in `config/main.xml`. You can easily write to `plasmoid.configuration.varName = "value"` to change the value for the user.
 
-Read more about configuration and the config dialog in \[it's section of the tutorial]\(\{{< ref "configuration.md" >\}}).
+Read more about configuration and the config dialog in it's section of the tutorial.
 
 The user's configuration is serialized to `~/.config/plasma-org.kde.plasma.desktop-appletsrc` when the `plasmashell` process terminates and is only loaded at startup.
 
 Since: **KDE Frameworks 5.78**, you can reference the default value of `plasmoid.configuration.varName` with `plasmoid.configuration.varNameDefault`.
 
 Since: **KDE Frameworks 5.89**, the [`KDeclarative::ConfigPropertyMap`](docs:kdeclarative;KDeclarative::ConfigPropertyMap) datatype [was deprecated](https://invent.kde.org/frameworks/plasma-framework/-/commit/6750b75bf02e420630144f2ea1d3f9940a85c0ba) and will eventually change to KConfig's [`KConfigPropertyMap`](docs:kconfig;KConfigPropertyMap).
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 contents/ui/main.qml
 
@@ -220,11 +228,7 @@ RowLayout {
 }
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### Plasmoid.backgroundHints
-
-\{{< sections >\}} \{{< section-left >\}}
 
 * `PlasmaCore.Types.DefaultBackground` **(default)** is equal to `StandardBackground`.
 * `PlasmaCore.Types.StandardBackground` The standard background from the theme is drawn. ![](../../../content/docs/plasma/widget/backgroundhint-standard.png)
@@ -246,8 +250,6 @@ PlasmaCore.IconItem {
     colorGroup: PlasmaCore.ColorScope.colorGroup
 }
 ```
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 contents/ui/main.qml
 
@@ -297,11 +299,9 @@ Item {
 
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 ### metadata.json
 
-The common `metadata.json` properties are covered in the \[setup widget section]\(\{{< ref "setup.md#metadatajson" >\}}).
+The common `metadata.json` properties are covered in the [setup widget section](setup.md).
 
 `metadata.desktop` is the older format while `metadata.json` is the newer replacement format. The `.desktop` file is simpler to script using `kreadconfig5` which is the reason why this tutorial prefers it in certain places like translations.
 
@@ -309,11 +309,7 @@ You can read the generated [C++ API Documentation for `metadata.json`](docs:kcor
 
 #### Name, Description
 
-\{{< sections >\}} \{{< section-left >\}}
-
 These two are based on the standard [XDG desktop file](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html) properties. You can also translate these properties with `Name[fr]`. The translated `Name` is used in the "Add Widgets" list. The `Description` (previously known as `Comment` in the `metadata.desktop`) is only used for the default tooltip subtext when the widget is added to a panel.
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 metadata.json
 
@@ -338,15 +334,9 @@ Comment=Month display with your appointments and events
 Comment[fr]=Vue mensuelle avec vos rendez-vous et évènements
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### Icon
 
-\{{< sections >\}} \{{< section-left >\}}
-
 `Icon` is the icon name associated with the widget. You can search for icon names in the `/usr/share/icon` folder. You can also look for an icon name by right clicking your app launcher widget then editing the icon in its settings. It uses a searchable interface and lists them by category. Plasma's SDK also has the Cuttlefish app which you can install with `sudo apt install plasma-sdk`.
-
-\{{< /section-left >\}} \{{< section-right >\}}
 
 metadata.json
 
@@ -367,11 +357,7 @@ Icon=office-calendar
 
 ![](https://cdn.kde.org/screenshots/cuttlefish/cuttlefish.png)
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### Id
-
-\{{< sections >\}} \{{< section-left >\}}
 
 The `Id` (or `X-KDE-PluginInfo-Name` in `metadata.desktop`) needs to be a unique name, since it's used for the folder name it's installed into. You could use `com.github.zren.helloworld` if you're on github, or use `org.kde.plasma.helloworld` if you are planning on contributing the widget to KDE. You should consider this the widget's namespace.
 
@@ -395,8 +381,6 @@ org.kde.plasma.addons.katesessions
 ...
 ```
 
-\{{< /section-left >\}} \{{< section-right >\}}
-
 ```
 ~/.local/share/plasma/plasmoids/com.github.zren.helloworld/
 /usr/share/plasma/plasmoids/com.github.zren.helloworld/
@@ -418,8 +402,6 @@ metadata.desktop
 [Desktop Entry]
 X-KDE-PluginInfo-Name=com.github.zren.helloworld
 ```
-
-\{{< /section-right >\}} \{{< /sections >\}}
 
 #### Category
 
@@ -465,11 +447,11 @@ This list was taken from: [https://techbase.kde.org/Projects/Plasma/PIG](https:/
 
 #### KPackageStructure
 
-\{{< sections >\}} \{{< section-left >\}}
+`KPackageStructure` is a string to identify the associated [KPackage::PackageStructure](docs:kpackage;KPackage::PackageStructure). For a plasma widget, it should be `Plasma/Applet`.
 
-`KPackageStructure` is a string to identify the associated [KPackage::PackageStructure](docs:kpackage;KPackage::PackageStructure). For a plasma widget, it should be `Plasma/Applet`. {% hint style="info" %}Note In desktop files, the `ServiceTypes` key was defined instead. This key is however deprecated and desktop files will no longer be supported in KF6. To convert a desktop file to json, you can run the `desktoptojson -i metadata.json` command. The `ServiceTypes` -> `KPackageStructure` change must be done manually {% endhint %}
-
-\{{< /section-left >\}} \{{< section-right >\}}
+{% hint style="info" %}
+Note In desktop files, the `ServiceTypes` key was defined instead. This key is however deprecated and desktop files will no longer be supported in KF6. To convert a desktop file to json, you can run the `desktoptojson -i metadata.json` command. The `ServiceTypes` -> `KPackageStructure` change must be done manually
+{% endhint %}
 
 metadata.json
 
@@ -486,17 +468,15 @@ metadata.desktop
 X-KDE-ServiceTypes=Plasma/Applet
 ```
 
-\{{< /section-right >\}} \{{< /sections >\}}
-
 #### X-Plasma-API, X-Plasma-MainScript
-
-\{{< sections >\}} \{{< section-left >\}}
 
 `X-Plasma-API` tells plasma what script engine to use. `declarativeappletscript` is the standard `QML` loader.
 
-`X-Plasma-MainScript` is the entry point of your qml code. The default value is `ui/main.qml`. {% hint style="info" %}Note In Plasma 6, it is no longer possible to specify a custom mainscript. Instead, `ui/main.qml` is used as the entry point. The `X-Plasma-MainScript` entry may be omitted from the metadata in both Plasma 5 and 6. `X-Plasma-API` may also be removed in KF6, but is needed in KF5. {% endhint %}
+`X-Plasma-MainScript` is the entry point of your qml code. The default value is `ui/main.qml`.
 
-\{{< /section-left >\}} \{{< section-right >\}}
+{% hint style="info" %}
+Note In Plasma 6, it is no longer possible to specify a custom mainscript. Instead, \`ui/main.qml\` is used as the entry point. The \`X-Plasma-MainScript\` entry may be omitted from the metadata in both Plasma 5 and 6. \`X-Plasma-API\` may also be removed in KF6, but is needed in KF5.
+{% endhint %}
 
 metadata.json
 
@@ -514,8 +494,6 @@ metadata.desktop
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
 ```
-
-\{{< /section-right >\}} \{{< /sections >\}}
 
 #### X-Plasma-Provides (Alternatives)
 
@@ -624,5 +602,3 @@ X-Plasma-DBusActivationService=org.mpris.MediaPlayer2.*
 ```
 
 [Search `plasma-workspace` for `X-Plasma-DBusActivationService`](https://invent.kde.org/search?utf8=%E2%9C%93\&search=X-Plasma-DBusActivationService\&group\_id=1568\&project\_id=2703\&scope=\&search\_code=true\&snippets=false\&repository\_ref=master\&nav\_source=navbar) for more examples.
-
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}
