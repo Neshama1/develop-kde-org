@@ -280,8 +280,6 @@ KItemModels.KSortFilterProxyModel {
 * Properties `iconUsesPlasmaSVG`, `contextMenu` and `enabledActions` are gone.
 * Port `isEnabled` property to the standard `enabled` one.
 
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}
-
 #### Configuration UI
 
 If the plasmoid ships with a configuration UI this needs to be adjusted. The root item for a configuration page now must be one of the KCM components from the `org.kde.kcmutils` import.

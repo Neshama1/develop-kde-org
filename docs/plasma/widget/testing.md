@@ -176,5 +176,3 @@ PlasmaComponents.Button {
     onClicked: num += 1
 }
 ```
-
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}
