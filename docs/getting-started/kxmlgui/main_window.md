@@ -16,7 +16,7 @@ This tutorial carries on from our \[Hello World project]\(\{{< ref "hello\_world
 
 In the previous tutorial, the program caused a dialog box to pop up. Now we are going to take steps towards creating a functioning application with a more advanced window structure.
 
-![](../../../content/docs/getting-started/kxmlgui/main\_window.webp)
+![](../../../content/docs/getting-started/kxmlgui/main_window/main\_window.webp)
 
 ### KXmlGuiWindow
 
@@ -26,7 +26,25 @@ In order to have a useful [KXmlGuiWindow](docs:kxmlgui;KXmlGuiWindow), we must s
 
 #### mainwindow.h
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/main\_window/mainwindow.h" highlight="cpp" >\}}
+```cpp
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <KXmlGuiWindow>
+
+class KTextEdit;
+
+class MainWindow : public KXmlGuiWindow
+{
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+
+private:
+    KTextEdit *textArea;
+};
+
+#endif // MAINWINDOW_H
+```
 
 First we [subclass](https://en.wikipedia.org/wiki/Inheritance\_\(object-oriented\_programming\)#Subclasses\_and\_superclasses) [KXmlGuiWindow](docs:kxmlgui;KXmlGuiWindow) with `class MainWindow : public KXmlGuiWindow`, then we declare the [constructor](https://en.wikipedia.org/wiki/Constructor\_\(object-oriented\_programming\)) with `MainWindow(QWidget *parent = nullptr);`.
 
@@ -34,7 +52,17 @@ Finally, we declare a pointer to the object that will make up the bulk of our pr
 
 #### mainwindow.cpp
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/main\_window/mainwindow.cpp" highlight="cpp" >\}}
+```cpp
+#include <KTextEdit>
+#include "mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
+{
+    textArea = new KTextEdit();
+    setCentralWidget(textArea);
+    setupGUI();
+}
+```
 
 First, of course, we have to include the header file containing the class declaration.
 
@@ -46,7 +74,51 @@ Finally, [KXmlGuiWindow::setupGUI()](docs:kxmlgui;KXmlGuiWindow::setupGUI) is ca
 
 In order to actually run this window, we need to add a few lines in main.cpp:
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/main\_window/main.cpp" highlight="cpp" emphasize="5 39-42" >\}}
+```cpp
+#include <QApplication>
+#include <QCommandLineParser>
+#include <KAboutData>
+#include <KLocalizedString>
+#include "mainwindow.h"
+
+int main (int argc, char *argv[])
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("mainwindow");
+
+    KAboutData aboutData(
+        u"mainwindow"_s,
+        i18n("Main Window"),
+        u"1.0"_s,
+        i18n("A simple text area"),
+        KAboutLicense::GPL,
+        i18n("(c) 2024"),
+        i18n("Educational application..."),
+        u"https://apps.kde.org/someappname/"_s,
+        u"submit@bugs.kde.org"_s);
+
+    aboutData.addAuthor(
+        i18n("John Doe"),
+        i18n("Tutorial learner"),
+        u"john.doe@example.com"_s,
+        u"https://john-doe.example.com"_s,
+        u"johndoe"_s);
+
+    KAboutData::setApplicationData(aboutData);
+
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
+    MainWindow *window = new MainWindow();
+    window->show();
+
+    return app.exec();
+}
+```
 
 We include our new header file `mainwindow.h`. This lets us create our new `MainWindow` object which we then display near the end of the main function (by default, new window objects are hidden).
 
@@ -56,7 +128,54 @@ The best way to build the program is to use CMake. We add `mainwindow.cpp` to th
 
 #### CMakeLists.txt
 
-\{{< readfile file="/content/docs/getting-started/kxmlgui/main\_window/CMakeLists.txt" highlight="cmake" emphasize="3 24-25 28 30 33 35 39-40 43" >\}}
+```cpp
+cmake_minimum_required(VERSION 3.20)
+
+project(mainwindow)
+
+set(QT_MIN_VERSION "6.6.0")
+set(KF_MIN_VERSION "6.0.0")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(FeatureSummary)
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Core    # QCommandLineParser, QStringLiteral
+    Widgets # QApplication
+)
+
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+    CoreAddons      # KAboutData
+    I18n            # KLocalizedString
+    XmlGui          # KXmlGuiWindow
+    TextWidgets     # KTextEdit
+)
+
+add_executable(mainwindow)
+
+target_sources(mainwindow
+    PRIVATE
+    main.cpp
+    mainwindow.cpp
+)
+
+target_link_libraries(mainwindow
+    Qt6::Widgets
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::XmlGui
+    KF6::TextWidgets
+)
+
+install(TARGETS mainwindow ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+```
 
 ### Running our application
 
