@@ -15,9 +15,13 @@ To use Python together with QML, we can use either [PySide](https://doc.qt.io/qt
 
 You will need Python installed, and that will be the case in any major Linux distribution. But instead of using `pip` to install PySide/PyQt and Kirigami, you will need to install them from your distribution. This ensures PySide/PyQt and Kirigami will have been built for the same Qt version, allowing you to package it easily. Any other dependencies can be installed from `pip` in a [Python virtual environment](https://docs.python.org/3/library/venv.html) later.
 
-\{{< installpackage opensuse="python3-qt6 kf6-kirigami-devel flatpak-builder qqc2-desktop-style AppStream-compose" fedora="python3-pyqt6 kf6-kirigami-devel flatpak-builder qqc2-desktop-style appstream-compose" arch="python-pyqt6 kirigami flatpak-builder qqc2-desktop-style appstream"
-
-> \}}
+| [Manjaro](https://software.manjaro.org/package/python-pyqt6), [Arch](https://archlinux.org/packages/?q=python-pyqt6) | <pre><code>sudo pacman -S python-pyqt6 kirigami flatpak-builder qqc2-desktop-style appstream
+</code></pre>                       |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| [OpenSUSE](https://software.opensuse.org/package/python3-qt6)                                                        | <pre><code>sudo zypper install python3-qt6 kf6-kirigami-devel flatpak-builder qqc2-desktop-style AppStream-compose
+</code></pre> |
+| [Fedora](https://packages.fedoraproject.org/pkgs/python3-pyqt6/python3-pyqt6/)                                       | <pre><code>sudo dnf install python3-pyqt6 kf6-kirigami-devel flatpak-builder qqc2-desktop-style appstream-compose
+</code></pre>  |
 
 ### Structure
 
@@ -222,6 +226,7 @@ We have just created a new QML-Kirigami-Python application. Run it:
 ```bash
 python3 simplemdviewer_app.py
 ```
+
 ![](../../../content/docs/getting-started/python/python-app/simplemdviewer1.webp)
 
 At the moment we have not used any interesting Python stuff. In reality, the application can also run as a standalone QML one:
