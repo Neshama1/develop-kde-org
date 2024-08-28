@@ -300,7 +300,7 @@ You will need to import `PlasmaExtras` to use them.
 
 To be consistent with elsewhere in Plasma, Plasma ships with a couple different Label/Text types with preset default sizes. The first one is [Heading](docs:plasma-framework;org::kde::plasma::extras::Heading) for subsections of texts and the second one is [Paragraph](docs:plasma-framework;org::kde::plasma::extras::Paragraph). Both wraps by default with `Layout.fillWidth: true`.
 
-![Screenshot Paragraph and Heading](../../../content/docs/plasma/widget/paragraphs.png)
+![Screenshot Paragraph and Heading](../../../content/docs/plasma/widget/plasma-qml-api/paragraphs.png)
 
 contents/ui/main.qml
 
@@ -416,7 +416,7 @@ RowLayout {
 * `PlasmaCore.Units.iconSizes.huge` `= 64px`
 * `PlasmaCore.Units.iconSizes.enormous` `= 128px`
 
-![](../../../content/docs/plasma/widget/iconsizes.png)
+![](../../../content/docs/plasma/widget/plasma-qml-api/iconsizes.png)
 
 #### PlasmaCore.Units.shortDuration
 
