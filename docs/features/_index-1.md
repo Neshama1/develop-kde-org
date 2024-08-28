@@ -20,9 +20,9 @@ For this tutorial you will need the following packages:
 
 You can find the installation commands for some distributions below.
 
-\{{< installpackage arch="xorg-xcursorgen"
-
-> \}}
+| [Manjaro](https://software.manjaro.org/package/xorg-xcursorgen), [Arch](https://archlinux.org/packages/?q=xorg-xcursorgen) | <pre><code>sudo pacman -S xorg-xcursorgen
+</code></pre> |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 
 ### Step 00 - Getting Started <a href="#getting-started" id="getting-started"></a>
 
@@ -52,7 +52,8 @@ You must use square images, meaning that they share the same `width` and `height
 
 Make sure to keep the **transparency layer (alpha information)** on your file when saving, or else your cursor will have a square background.
 
-{% hint style="info" %}Image Size Note
+{% hint style="info" %}
+Image Size Note
 
 You can download other cursor themes and inspect then to see some common resolutions. For instance, the default KDE Theme, `Breeze`, uses the following resolutions:
 
@@ -65,7 +66,6 @@ You can download other cursor themes and inspect then to see some common resolut
 * 256x256.
 
 At the end of the day, it's up to you to decide which resolution to use.
-
 {% endhint %}
 
 Once you have created the image file, it's time to draw. It's up to you if you want to draw your cursor now or if you want to do it later. Regardless of your choice, you will need to save your file.
@@ -74,10 +74,10 @@ It's recommended to save the file with a name that will make it easier for you t
 
 For the sake of simplicity, let's proceed with the name `default` as this will represent the default cursor. After you save your file, you should have something like `default.png`.
 
-{% hint style="info" %}Note
+{% hint style="info" %}
+Note
 
 You will need to repeat this step for every other cursor you want to create and/or customize. There is no standard naming scheme that you need to follow, but you should make your cursor filenames descriptive. This will make things much easier later on, when we get to the symlinking step.
-
 {% endhint %}
 
 ### Step 02 - Determining the Cursor hotspot <a href="#determining-the-cursor-hotspot" id="determining-the-cursor-hotspot"></a>
@@ -94,13 +94,13 @@ The origin point (0,0) it's in the **upper-left corner** of the image. The X-axi
 
 With that in mind, when you add an offset of 10 pixels on the X-axis, it will shift the hotspot 10 pixels to the right from the upper-left corner. Likewise, an offset of 5 pixels on the Y-axis will shift the hotspot 5 pixels down from the upper-left corner.
 
-{% hint style="warning" %}Important!
+{% hint style="warning" %}
+Important!
 
 If you have multiple resolutions for your new cursor, you have to do this step for each of them.
-
 {% endhint %}
 
-### Step 03 - Creating the _.cursor_   file <a href="#creating-the-cursor-file" id="creating-the-cursor-file"></a>
+### Step 03 - Creating the _.cursor_ file <a href="#creating-the-cursor-file" id="creating-the-cursor-file"></a>
 
 ***
 
@@ -183,10 +183,10 @@ Let's check an example:
 
 When you execute the above command, it will read the configuration from the `default.cursor` file and generate a new cursor named `default` on your working directory.
 
-{% hint style="info" %}Note
+{% hint style="info" %}
+Note
 
 Repeat steps 01 to 04 for all the different cursors you want to create.
-
 {% endhint %}
 
 ### Step 05 - Creating a theme folder <a href="#creating-a-theme-folder" id="creating-a-theme-folder"></a>
@@ -314,8 +314,6 @@ To make our custom cursors match the cursor states available to the system, we n
 
 </details>
 
->
-
 More often than not, we only need a single cursor file for multiple cursor states. Since the requirement to make our custom cursors match is to have files named after each cursor state, we can use [symlinks](https://en.wikipedia.org/wiki/Symbolic\_link#POSIX\_and\_Unix-like\_operating\_systems).
 
 ***
@@ -338,10 +336,10 @@ Now, your `cursors` folder should have 2 files:
 * `default` : the default cursor file that we generated
 * `left_ptr`: the symlink that we just created.
 
-{% hint style="warning" %}Note
+{% hint style="warning" %}
+Note
 
 This task can/should be scripted, provided that you have a complete list of regular cursor names and their irregular aliases. Note that this step might cause some frustration regarding incomplete lists of cursor name aliases.
-
 {% endhint %}
 
 Now that we have our symlink ready, we can proceed to create the `index.theme` file.
@@ -359,10 +357,10 @@ Name=KoolKursors
 
 However, you can add more information to your `index.theme` file. For instance, you can add comments or make it inherit from other themes.
 
-{% hint style="error" %}Important Requirement
+{% hint style="info" %}
+Important Requirement
 
 The `Name` attribute of the `.theme` file must be **exactly** like the theme folder name. Make sure to double-check that in order to prevent issues.
-
 {% endhint %}
 
 The `index.theme` file should be placed in your main theme folder. Please, create an `index.theme` file with the following contents:
@@ -376,7 +374,8 @@ Inherits=breeze_cursors
 
 With that, you have your `.theme` file setup and ready to proceed.
 
-{% hint style="success" %}Translation Note
+{% hint style="success" %}
+Translation Note
 
 If you want to add translations for multiple languages, you can do so by using language tags like `[en]`, `[de]`, `[fr]`, etc. for each language.
 
@@ -395,7 +394,6 @@ Comment[pt_BR]=Meu próprio tema de cursor.
 If you are interested in the Localization process, please check out the [KDE Localization](https://l10n.kde.org/) main page.
 
 If you just want to check which tag is the appropriate one for your language comment, you can check out all the currently available languages supported by KDE on [this page](https://l10n.kde.org/teams-list.php), alongside their language tag.
-
 {% endhint %}
 
 ### Step 08 - Moving the files <a href="#moving-the-files" id="moving-the-files"></a>
@@ -408,7 +406,8 @@ To test our custom cursors, we need to place the whole `KoolKursors` folder in `
 
 To do that, you can open a file explorer like [Dolphin](https://apps.kde.org/dolphin/) and copy the `KoolKursors` folder to the `~/.local/share/icons` folder.
 
-{% hint style="warning" %}Default icons folder location
+{% hint style="warning" %}
+Default icons folder location
 
 For _**user-specific**_ installation, you should check the following folders:
 
@@ -420,7 +419,6 @@ For _**system-wide**_ installation, you should check
 1. `/usr/share/icons/`
 
 You might still find some themes and cursors that make use of the `~/.icons` folder, but this is no longer recommended. Use `~/.local/share/icons/` instead.
-
 {% endhint %}
 
 ### Step 09 - Applying your custom cursor to your system{#applying-your-custom-cursor}
