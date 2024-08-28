@@ -222,8 +222,7 @@ We have just created a new QML-Kirigami-Python application. Run it:
 ```bash
 python3 simplemdviewer_app.py
 ```
-
-\{{
+![](../../../content/docs/getting-started/python/python-app/simplemdviewer1.webp)
 
 At the moment we have not used any interesting Python stuff. In reality, the application can also run as a standalone QML one:
 
@@ -233,7 +232,7 @@ QT_QUICK_CONTROLS_STYLE=org.kde.desktop qml main.qml
 
 It does not format anything; if we click on "Format" it just spits the unformatted text into a text element.
 
-\{{
+![](../../../content/docs/getting-started/python/python-app/simplemdviewer2.webp)
 
 OK, let’s add some Python logic: a simple Markdown converter in a Python, [QObject](https://doc.qt.io/qtforpython-6/PySide6/QtCore/QObject.html) derivative class.
 
@@ -440,6 +439,6 @@ python3 simplemdviewer_app.py
 
 Play with adding some Markdown text:
 
-\{{
+![](../../../content/docs/getting-started/python/python-app/simplemdviewer3.webp)
 
 Hooray!
