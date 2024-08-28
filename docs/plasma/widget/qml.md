@@ -48,7 +48,7 @@ Rectangle {
 }
 ```
 
-![Teal QML Rectangle](../../../content/docs/plasma/widget/rectangle.png)
+![Teal QML Rectangle](../../../content/docs/plasma/widget/qml/rectangle.png)
 
 ### Items are 0px wide by default
 
@@ -70,13 +70,13 @@ Rectangle { // Unlike everything else, the widget's main item will have a defaul
 }
 ```
 
-![Teal QML Rectangle with invisible green Rectangle](../../../content/docs/plasma/widget/rectangle2.png)
+![Teal QML Rectangle with invisible green Rectangle](../../../content/docs/plasma/widget/qml/rectangle2.png)
 
 ### anchors.fill
 
 In this second example, we make the Green Rectangle resize to the parent item, the Teal Rectangle. This will completely cover the Teal Rectangle so only the Green Rectangle will be visible.
 
-![Green QML Rectangle completely covering the teal rectangle](../../../content/docs/plasma/widget/anchorsfill.png)
+![Green QML Rectangle completely covering the teal rectangle](../../../content/docs/plasma/widget/qml/anchorsfill.png)
 
 contents/ui/main.qml
 
@@ -97,7 +97,7 @@ Rectangle { // Unlike everything else, the widget's main item will have a defaul
 
 In this third example, we anchor the Green Rectangle to the bottom right, and make it half the width & height of the Teal rectangle. So we end up with a rectangle which is 3/4 teal and 1/4 green.
 
-![Green QML Rectangle in bottom right quadrant](../../../content/docs/plasma/widget/anchorsbottom.png)
+![Green QML Rectangle in bottom right quadrant](../../../content/docs/plasma/widget/qml/anchorsbottom.png)
 
 Other ways to use `anchors` properties can be read in the QML Documentation page on [Positioning with Anchors](https://doc.qt.io/qt-5/qtquick-positioning-anchors.html) and the [`Item.anchors` property group](https://doc.qt.io/qt-5/qml-qtquick-item.html#anchors-prop).
 
@@ -127,7 +127,7 @@ This example uses Labels which are just fancy [`Text`](https://doc.qt.io/qt-5/qm
 
 Note that if the `ColumnLayout` is taller than its contents, the children will have spacing between them.
 
-![QML Label above another QML Label](../../../content/docs/plasma/widget/columnlayout.png)
+![QML Label above another QML Label](../../../content/docs/plasma/widget/qml/columnlayout.png)
 
 contents/ui/main.qml
 
@@ -152,7 +152,7 @@ If you want an item to scale to the parent's width, you have the option of setti
 
 Within a [Layout](http://doc.qt.io/qt-5/qml-qtquick-layouts-layout.html) however, the proper way to do so is to use the special property attached to the contents of a Layout, `Layout.fillWidth`. Setting it to `true` will make the item scale to fill up the empty space.
 
-![](../../../content/docs/plasma/widget/layoutfillwidth.png)
+![](../../../content/docs/plasma/widget/qml/layoutfillwidth.png)
 
 The other Layout related properties can be [read here](http://doc.qt.io/qt-5/qml-qtquick-layouts-layout.html).
 
@@ -192,7 +192,7 @@ ColumnLayout {
 
 If you want one item (or several) in a Layout to expand to take up the unused space, you can use `Layout.fillHeight: true`.
 
-![](../../../content/docs/plasma/widget/layoutfillheight.png)
+![](../../../content/docs/plasma/widget/qml/layoutfillheight.png)
 
 contents/ui/main.qml
 
@@ -228,7 +228,7 @@ ColumnLayout {
 
 In the last screenshot you might have noticed how there is still spacing between the items. That's because the default [ColumnLayout.spacing](http://doc.qt.io/qt-5/qml-qtquick-layouts-columnlayout.html#spacing-prop) property is set to `5`. Assigning it to `0` will remove the extra whitespace.
 
-![](../../../content/docs/plasma/widget/layoutspacing.png)
+![](../../../content/docs/plasma/widget/qml/layoutspacing.png)
 
 contents/ui/main.qml
 
@@ -266,7 +266,7 @@ ColumnLayout {
 
 There's also [RowLayout](http://doc.qt.io/qt-5/qml-qtquick-layouts-rowlayout.html) and [GridLayout](http://doc.qt.io/qt-5/qml-qtquick-layouts-gridlayout.html). Lastly there's [Flow](http://doc.qt.io/qt-5/qml-qtquick-flow.html) which will treat its contents as if they all had the CSS `display: inline-block`.
 
-![](../../../content/docs/plasma/widget/rowlayout.png)
+![](../../../content/docs/plasma/widget/qml/rowlayout.png)
 
 contents/ui/main.qml
 
