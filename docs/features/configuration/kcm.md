@@ -303,4 +303,4 @@ source build/prefix.sh
 kcmshell6 kcm_time
 ```
 
-\{{< figure src="../screenshot-kcm.png" caption="The Time KCM running." >\}}
+![](../../../content/docs/features/configuration/screenshot-kcm.png)
