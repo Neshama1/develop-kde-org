@@ -73,7 +73,7 @@ Additionally, elements with a few hint IDs can be used to control the rendering 
   * **`[prefix]`** is optional and depends on the SVG frame. For example, `mask` or `shadow`. A few other Plasma SVGs use some modification of the prefix: lineedit uses `state`, frame uses`3dlook`, listitem uses `typ`.
   * **`[direction]`** is like the above.
 
-\{{< figure src="frame.webp" class="text-center" >\}}
+![](../../../content/docs/plasma/theme/background-svg/frame.webp)
 
 Next there can optionally be another element with an ID **overlay** (or **\[prefix]-overlay** if it applies to a frame with a different prefix). It will be rendered over the frame like a watermark, with the rules given from the following **mutually exclusive** hints:
 
