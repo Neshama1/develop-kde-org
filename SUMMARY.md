@@ -124,7 +124,6 @@
     * [Plasma Style tutorial](docs/plasma/theme/README.md)
       * [Creating a Plasma Style quickstart](docs/plasma/theme/quickstart.md)
       * [Understanding Plasma Styles](docs/plasma/theme/theme-details.md)
-      * [Plasma Style tutorial](docs/plasma/theme/\_index.md)
       * [SVG elements and Inkscape](docs/plasma/theme/theme-svg.md)
       * [Background SVG format](docs/plasma/theme/background-svg.md)
       * [System and accent colors](docs/plasma/theme/theme-colors.md)
