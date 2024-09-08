@@ -8,7 +8,7 @@ description: A rundown of the QML Properties in a widget
 
 ### Plasmoid property group
 
-As discussed in \[the `main.qml` setup widget section]\(\{{< ref "setup.md#contentsuimainqml" >\}}), when you `import org.kde.plasma.plasmoid 2.0`, the main `Item` in your widget will have the `Plasmoid` (with a capital) property group similar to when you `import QtQuick.Layouts 1.0`. This `Plasmoid` [property group](https://doc.qt.io/qt-6/qtqml-syntax-objectattributes.html#grouped-properties) has properties from [`AppletInterface`](docs:plasma-framework;AppletInterface) which inherits a few properties from [`PlasmaQuick::AppletQuickItem`](https://invent.kde.org/plasma/libplasma/-/blob/master/src/plasmaquick/appletquickitem.h).
+As discussed in [the `main.qml` setup widget section](setup.md#contents-ui-main.qml), when you `import org.kde.plasma.plasmoid 2.0`, the main `Item` in your widget will have the `Plasmoid` (with a capital) property group similar to when you `import QtQuick.Layouts 1.0`. This `Plasmoid` [property group](https://doc.qt.io/qt-6/qtqml-syntax-objectattributes.html#grouped-properties) has properties from [`AppletInterface`](docs:plasma-framework;AppletInterface) which inherits a few properties from [`PlasmaQuick::AppletQuickItem`](https://invent.kde.org/plasma/libplasma/-/blob/master/src/plasmaquick/appletquickitem.h).
 
 #### plasmoid context property
 

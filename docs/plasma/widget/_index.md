@@ -6,7 +6,7 @@ aliases:
 description: Learn how to create a KDE Plasma widget.
 ---
 
-# Plasma Widget tutorial
+# How to create a plasmoid
 
 The KDE wiki has a [Getting Started and Hello World](https://techbase.kde.org/Development/Tutorials/Plasma5) tutorial which you can read as well.
 
@@ -38,5 +38,3 @@ sed -i '/^Comment\[/ d' ./metadata.json
 rm ./metadata.desktop
 plasmawindowed com.github.zren.myanalogclock
 ```
-
-\{{< readfile file="/content/docs/plasma/widget/snippet/plasma-doc-style.html" >\}}

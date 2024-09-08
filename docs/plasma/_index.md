@@ -27,7 +27,7 @@ Also called a Desktop Theme or a Plasma Theme, it controls the visual styling of
 
 * System/Default: `/usr/share/plasma/desktoptheme/` ([GitLab](https://invent.kde.org/frameworks/plasma-framework/-/tree/master/src/desktoptheme))
 * User Installed: `~/.local/share/plasma/desktoptheme/` ([KDE Store Category](https://store.kde.org/browse/cat/104/order/latest/))
-* \[Tutorial]\(\{{< ref theme >\}})
+* [Tutorial](theme/)
 
 ### **Color Scheme**
 
@@ -60,7 +60,7 @@ A visual representation of the windows you can switch to with Alt+Tab, written i
 * System/Default: `/usr/share/kwin/tabbox/` ([GitLab](https://invent.kde.org/plasma/kdeplasma-addons/-/tree/master/windowswitchers))
 * User Installed: `~/.local/share/kwin/tabbox/` ([KDE Store Category](https://store.kde.org/browse/cat/211/order/latest/))
 * Can also be bundled in a Global Theme [like Breeze does](https://invent.kde.org/plasma/plasma-workspace/-/blob/master/lookandfeel/contents/windowswitcher/WindowSwitcher.qml).
-* \[Tutorial]\(\{{< ref windowswitcher >\}})
+* [Tutorial](\_index-3.md)
 
 ### **Plasma Widget**
 
@@ -68,7 +68,7 @@ Also known as a Plasmoid, it is an interactive and self-contained piece of funct
 
 * System/Default: `/usr/share/plasma/plasmoids/`
 * User Installed: `~/.local/share/plasma/plasmoids/` ([KDE Store Category](https://store.kde.org/browse/cat/418/order/latest/))
-* \[Tutorial]\(\{{< ref widget >\}})
+* [Tutorial](widget/)
 
 ### **Wallpaper Plugin**
 
@@ -84,7 +84,7 @@ Handles the theme and button style of the window titlebar. A window decoration c
 * System/Default: `/usr/share/aurorae/themes/` (usually empty)
 * User Installed: `~/.local/share/aurorae/themes/` ([KDE Store Category](https://store.kde.org/browse/cat/114/order/latest/))
 * The default [Breeze decoration](https://invent.kde.org/plasma/breeze/-/tree/master/kdecoration) is a C++ plugin implementing the [KDecoration2 API](docs:kdecoration2).
-* Aurorae is a theming engine which allows to create window decorations based on SVGs. \[Tutorial]\(\{{< ref aurorae >\}})
+* Aurorae is a theming engine which allows to create window decorations based on SVGs. [Tutorial](index.md)
 * Aurorae can also load QML-based themes.
 
 ### **KWin Effect**
